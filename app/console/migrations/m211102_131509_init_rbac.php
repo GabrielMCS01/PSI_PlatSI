@@ -1,6 +1,10 @@
 <?php
 
+use console\models\PerfilRule;
+use console\models\UserRule;
 use yii\db\Migration;
+
+
 
 /**
  * Class m211102_131509_init_rbac
@@ -15,6 +19,12 @@ class m211102_131509_init_rbac extends Migration
         $auth = Yii::$app->authManager;
 
         // ------------------------------ USER ---------------------------------------------
+
+        $ruleUser = new UserRule;
+        $rulePerfil = new PerfilRule;
+        $auth->add($ruleUser);
+        $auth->add($rulePerfil);
+
         // add "frontendAccess" permission
         $frontendAccess = $auth->createPermission('frontendAccess');
         $frontendAccess->description = 'Frontend Access';
@@ -28,32 +38,39 @@ class m211102_131509_init_rbac extends Migration
         // add "updateActivity" permission
         $updateActivity = $auth->createPermission('updateActivity');
         $updateActivity->description = 'Update Activity (User logged)';
+        $updateActivity->ruleName = $ruleUser->name;
         $auth->add($updateActivity);
 
         // add "deleteActivity" permission
         $deleteActivity = $auth->createPermission('deleteActivity');
         $deleteActivity->description = 'Delete Activity (User logged)';
+        $deleteActivity->ruleName = $ruleUser->name;
         $auth->add($deleteActivity);
 
         // add "viewActivity" permission
         $viewActivity = $auth->createPermission('viewActivity');
         $viewActivity->description = 'View Activity (User logged)';
+        $viewActivity->ruleName = $ruleUser->name;
         $auth->add($viewActivity);
 
         // add "updateProfile" permission
         $updateProfile = $auth->createPermission('updateProfile');
         $updateProfile->description = 'Update Profile (User logged)';
+        $updateProfile->ruleName = $rulePerfil->name;
         $auth->add($updateProfile);
 
         // add "deleteProfile" permission
         $deleteProfile = $auth->createPermission('deleteProfile');
         $deleteProfile->description = 'Delete Profile (User logged)';
+        $deleteProfile->ruleName = $rulePerfil->name;
         $auth->add($deleteProfile);
 
         // add "viewProfile" permission
         $viewProfile = $auth->createPermission('viewProfile');
         $viewProfile->description = 'View Profile (User logged)';
+        $viewProfile->ruleName = $rulePerfil->name;
         $auth->add($viewProfile);
+
 
         // add "author" role and give him profile and activity roles
         $user = $auth->createRole('user');
