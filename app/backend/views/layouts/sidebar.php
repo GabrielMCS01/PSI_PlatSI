@@ -31,8 +31,8 @@ $user = User::findOne(Yii::$app->user->getId())
             <?php
             echo Menu::widget([
                 'items' => [
-                    ['label' => 'Home', 'icon' => 'home'],
-                    ['label' => 'Utilizadores', 'icon' => 'user'],
+                    ['label' => 'Home', 'url' => ['site/index'], 'icon' => 'home'],
+                    ['label' => 'Utilizadores', 'url' => ['user/index'], 'icon' => 'user'],
                     ['label' => 'Yii2 PROVIDED', 'header' => true],
                     ['label' => 'Login', 'url' => ['site/login'], 'icon' => 'sign-in-alt', 'visible' => Yii::$app->user->isGuest],
                     ['label' => 'Gii',  'icon' => 'file-code', 'url' => ['/gii'], 'target' => '_blank'],
