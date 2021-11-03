@@ -99,10 +99,10 @@ class SiteController extends Controller
             if($auth->checkAccess(Yii::$app->user->getId(), "frontendAccess")){
                 return $this->goBack();
             }else{
+                $message = "Utilizador sem acesso á frontend";
+                echo "<script type='text/javascript'>alert('$message');</script>";
 
                 Yii::$app->user->logout();
-
-                return $this->goHome();
             }
         }
 
