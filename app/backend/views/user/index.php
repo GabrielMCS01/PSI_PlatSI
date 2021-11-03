@@ -16,13 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="card">
                 <div class="card-body">
                     <div class="row mb-2">
-                        <div class="col-md-12">
-                            <?= Html::a('Create User', ['create'], ['class' => 'btn btn-success']) ?>
-                        </div>
                     </div>
-
-
-                    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
                     <?= GridView::widget([
                         'dataProvider' => $dataProvider,
