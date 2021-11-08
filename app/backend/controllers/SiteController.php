@@ -72,6 +72,7 @@ class SiteController extends Controller
      */
     public function actionLogin()
     {
+        $auth = Yii::$app->authManager;
         if (!Yii::$app->user->isGuest) {
             return $this->goHome();
         }
@@ -79,8 +80,15 @@ class SiteController extends Controller
         $this->layout = 'blank';
 
         $model = new LoginForm();
+
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
+            if($auth->checkAccess(Yii::$app->user->getId(), "backendAccess")){
+                return $this->goBack();
+            }else{
+                $message = "Utilizador sem acesso á backend";
+                echo "<script type='text/javascript'>alert('$message');</script>";
+                Yii::$app->user->logout();
+            }
         }
 
         $model->password = '';
