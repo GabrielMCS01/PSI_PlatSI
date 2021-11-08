@@ -13,6 +13,25 @@ O projeto é comum entre várias disciplinas, mas as fases que traçam este proj
 * Iuri Carrasqueiro Nº 2201127
 * Gabriel Silva Nº 2201133
 
+## Preparar a aplicação
+# Criar a base de dados e tabelas
+
+Executar o ficheiro SQL "CriarDB"
+
+# Na pasta APP executar os comandos seguintes:
+
+.\yii migrate --migrationPath=@yii/rbac/migrations
+.\yii migrate
+
+# Criar o primeiro Admin para utilizar a aplicação
+
+Executar o ficheiro SQL "CriarAdmin"
+
+## Com estes passos a aplicação estará pronta a utilizar e com um admin criado para o acesso á backend 
+
+Username: admin
+Password: adminadmin 
+
 ## Imagem da instituição
 
 ![IPL](docs/logoipl.png)
