@@ -27,6 +27,10 @@ Executar o ficheiro SQL "CriarDB"
 
 Executar o ficheiro SQL "CriarAdmin"
 
+# Criar a tabela user_info e a tabela ciclismo
+
+Executar o ficheiro SQL "CriarTabelas"
+
 ## Com estes passos a aplicação estará pronta a utilizar e com um admin criado para o acesso á backend 
 
 Username: admin
