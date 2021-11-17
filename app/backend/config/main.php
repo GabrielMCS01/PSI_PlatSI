@@ -12,7 +12,11 @@ return [
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => ['log'],
-    'modules' => [],
+    'modules' => [
+        'v1' => [
+            'class' => 'app\modules\v1\Module',
+        ],
+    ],
     'components' => [
         'request' => [
             'csrfParam' => '_csrf-backend',
@@ -41,10 +45,15 @@ return [
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
-            'enableStrictParsing' => false,
             'rules' => [
+                ['class' => 'yii\rest\UrlRule', 'controller' => 'v1/user', 'pluralize' => false],
+                ['class' => 'yii\rest\UrlRule', 'controller' => 'v1/userinfo', 'pluralize' => false],
+                ['class' => 'yii\rest\UrlRule', 'controller' => 'v1/ciclismo', 'pluralize' => false],
+                ['class' => 'yii\rest\UrlRule', 'controller' => 'v1/login', 'pluralize' => false],
+                ['class' => 'yii\rest\UrlRule', 'controller' => 'v1/registo', 'pluralize' => false],
             ],
         ],
+
     ],
     'params' => $params,
 ];
