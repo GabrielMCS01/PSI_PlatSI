@@ -2,6 +2,8 @@
 
 namespace app\controllers;
 
-class CiclismoController extends \yii\web\Controller
+use yii\web\Controller;
+
+class CiclismoController extends Controller
 {
 }

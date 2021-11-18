@@ -1,1 +1,3 @@
 https://forum.yiiframework.com/t/how-to-create-a-pretty-url/79879/5
+
+https://www.yiiframework.com/doc/guide/2.0/en/rest-authentication

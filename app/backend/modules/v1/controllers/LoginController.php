@@ -3,6 +3,7 @@
 namespace app\modules\v1\controllers;
 
 use common\models\LoginForm;
+use common\models\User;
 use Yii;
 use yii\rest\ActiveController;
 
@@ -15,29 +16,38 @@ class LoginController extends ActiveController
 
     public function actionLogin()
     {
-        //$auth = Yii::$app->authManager;
+        // Recebe o authManager para verificar as permissões
+        $auth = Yii::$app->authManager;
 
+        // Cria uma instância do LoginForm
         $model = new LoginForm();
 
+        // Recebe o Username e a password inserida
         $model->username = Yii::$app->request->post('username');
         $model->password = Yii::$app->request->post('password');
 
-        if ($model->login()) {
-            /*if($auth->checkAccess(Yii::$app->user->getId(), "frontendAccess")){
-                return $this->goBack();
+        // Valida os dados
+        if($model->login()) {
+            // Verifica se o utilizador tem acesso á aplicação (Frontend)
+            if($auth->checkAccess(Yii::$app->user->getId(), "frontendAccess")){
+                // Recebe o user que acabou de fazer login
+                $user = User::findByUsername($model->username);
+
+                // Gera um token e atribui no verification_token
+                $user->auth_key = Yii::$app->security->generateRandomString();
+                $user->save();
+
+                // Retorna o token
+                return $user->auth_key;
             }else{
-                $message = "Utilizador sem acesso á frontend";
-                echo "<script type='text/javascript'>alert('$message');</script>";
-
-                Yii::$app->user->logout();
-            }*/
-
-
-            return "Banana Entrou";
+                $message = "Utilizador sem acesso á aplicação";
+            }
+        }
+        else{
+            $message = "Utilizador inválido";
         }
 
-        $model->password = '';
-
-        return "Banana não entrou";
+        // Retorna a mensagem de erro
+        return $message;
     }
 }
