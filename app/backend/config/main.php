@@ -19,6 +19,9 @@ return [
     ],
     'components' => [
         'request' => [
+            'parsers' => [
+                'application/json' => 'yii\web\JsonParser',
+            ],
             'csrfParam' => '_csrf-backend',
         ],
         'user' => [
@@ -49,8 +52,16 @@ return [
                 ['class' => 'yii\rest\UrlRule', 'controller' => 'v1/user', 'pluralize' => false],
                 ['class' => 'yii\rest\UrlRule', 'controller' => 'v1/userinfo', 'pluralize' => false],
                 ['class' => 'yii\rest\UrlRule', 'controller' => 'v1/ciclismo', 'pluralize' => false],
-                ['class' => 'yii\rest\UrlRule', 'controller' => 'v1/login', 'pluralize' => false],
-                ['class' => 'yii\rest\UrlRule', 'controller' => 'v1/registo', 'pluralize' => false],
+                ['class' => 'yii\rest\UrlRule', 'controller' => 'v1/login', 'pluralize' => false,
+                    'extraPatterns' => [
+                        'POST login' => 'login', // 'login' é 'actionLogin'
+                    ],
+                ],
+                ['class' => 'yii\rest\UrlRule', 'controller' => 'v1/registo', 'pluralize' => false,
+                    'extraPatterns' => [
+                        'POST signup' => 'signup', // 'signup' é 'actionSignup'
+                    ],
+                ],
             ],
         ],
 
