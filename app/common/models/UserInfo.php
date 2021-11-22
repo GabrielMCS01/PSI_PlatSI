@@ -8,7 +8,6 @@ use Yii;
  * This is the model class for table "user_info".
  *
  * @property int $id
- * @property resource $imagem
  * @property string $primeiro_nome
  * @property string $ultimo_nome
  * @property string|null $data_nascimento
@@ -32,8 +31,7 @@ class UserInfo extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['imagem', 'primeiro_nome', 'ultimo_nome', 'user_id'], 'required'],
-            [['imagem'], 'string'],
+            [['primeiro_nome', 'ultimo_nome', 'user_id'], 'required'],
             [['data_nascimento'], 'safe'],
             [['user_id'], 'integer'],
             [['primeiro_nome', 'ultimo_nome'], 'string', 'max' => 30],
@@ -49,7 +47,6 @@ class UserInfo extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'imagem' => 'Imagem',
             'primeiro_nome' => 'Primeiro Nome',
             'ultimo_nome' => 'Ultimo Nome',
             'data_nascimento' => 'Data Nascimento',

@@ -14,6 +14,16 @@ class LoginController extends ActiveController
 {
     public $modelClass = 'common\models\LoginForm';
 
+    public function actions()
+    {
+        return array_merge(parent::actions(), [
+            'create' => null, // Disable POST
+            'view' => null, // Disable GET
+            'update' => null, // Disable PUT
+            'delete' => null, // Disable DELETE
+        ]);
+    }
+
     public function actionLogin()
     {
         // Recebe o authManager para verificar as permissões

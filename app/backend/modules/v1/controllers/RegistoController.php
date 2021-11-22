@@ -13,6 +13,16 @@ class RegistoController extends ActiveController
 {
     public $modelClass = 'frontend\models\SignupForm';
 
+    public function actions()
+    {
+        return array_merge(parent::actions(), [
+            'create' => null, // Disable POST
+            'view' => null, // Disable GET
+            'update' => null, // Disable PUT
+            'delete' => null, // Disable DELETE
+        ]);
+    }
+
     public function actionSignup(){
         $model = new SignupForm();
 

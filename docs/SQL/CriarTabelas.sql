@@ -2,7 +2,6 @@ USE projectdb;
 
 CREATE TABLE IF NOT EXISTS user_info(
 		id INT UNSIGNED AUTO_INCREMENT,
-        imagem BLOB NOT NULL,
         primeiro_nome VARCHAR(30) NOT NULL,
         ultimo_nome VARCHAR(30) NOT NULL,
         data_nascimento DATE,
