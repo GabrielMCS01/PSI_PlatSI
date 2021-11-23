@@ -3,7 +3,6 @@
 namespace app\modules\v1\controllers;
 
 use common\models\User;
-use common\models\UserInfo;
 use Yii;
 use yii\filters\auth\QueryParamAuth;
 use yii\rest\ActiveController;
@@ -14,7 +13,6 @@ use yii\rest\ActiveController;
 class UserController extends ActiveController
 {
     public $modelClass = 'common\models\User';
-    public $modelUserInfo = 'common\models\Userinfo';
 
     public function behaviors()
     {
@@ -40,26 +38,9 @@ class UserController extends ActiveController
 
     // Mostra o próprio utilizador
     public function actionView($id){
-        // Recebe o authManager para verificar as permissões
-        $auth = Yii::$app->authManager;
         $user = User::findOne($id);
 
-        // Verifica se o utilizador tem acesso á aplicação (Frontend)
-        /*if($auth->checkAccess(Yii::$app->user->getId(), "frontendAccess")){
-            // Verifica se o utilizador que acede é o mesmo que este está a chamar os dados
-            if(Yii::$app->user->getId() == $id) {
-                // Recebe o utilizador com o login feito
-                $user = User::findOne($id);
-
-                return $user;
-            }
-            else{
-                return "O utilizador não tem permissões para visualizar outros utilizadores";
-            }
-        }else{
-            return "Utilizador sem acesso á aplicação";
-        }*/
-
+        // Verifica se o utilizador que acede é o mesmo que este está a chamar os dados
         if(Yii::$app->user->can('viewProfile', ['user' => $user])){
             return $user;
         }
@@ -70,68 +51,43 @@ class UserController extends ActiveController
 
     // Atualiza o próprio utilizador
     public function actionUpdate($id){
-        // Recebe o authManager para verificar as permissões
-        $auth = Yii::$app->authManager;
+        $user = User::findOne($id);
 
         // Verifica se o utilizador tem acesso á aplicação (Frontend)
-        if($auth->checkAccess(Yii::$app->user->getId(), "frontendAccess")){
-            // Verifica se o utilizador que acede é o mesmo que este está a chamar os dados
-            if(Yii::$app->user->getId() == $id) {
-                // Recebe o user com o login feito
-                $user = User::findOne($id);
+        if(Yii::$app->user->can('updateProfile', ['user' => $user])) {
+            // Recebe os dados enviados e atualiza-os
+            // Verificar se o email é válido
+            $user->username = Yii::$app->request->post('username');
+            $user->userinfo->primeiro_nome = Yii::$app->request->post('primeiro_nome');
+            $user->userinfo->ultimo_nome = Yii::$app->request->post('ultimo_nome');
+            $user->userinfo->data_nascimento = Yii::$app->request->post('data_nascimento');
 
-                // Recebe as outras informações do utilizador encontrado anteriormente
-                $userinfo = $user->userinfo;
+            // Guarda as alterações do utilizador e das informações deste
+            $user->save();
+            $user->userinfo->save();
 
-                // Recebe os dados enviados e atualiza-os
-                // Verificar se o email é válido
-                $user->username = Yii::$app->request->post('username');
-                $userinfo->primeiro_nome = Yii::$app->request->post('primeiro_nome');
-                $userinfo->ultimo_nome = Yii::$app->request->post('ultimo_nome');
-                $userinfo->data_nascimento = Yii::$app->request->post('data_nascimento');
-
-                $user->save();
-                $userinfo->save();
-
-                return $userinfo;
-            }
-            else{
-                return "O utilizador não tem permissões para atualizar outros utilizadores";
-            }
-        }else{
-            return "Utilizador sem acesso á aplicação";
+            return $user;
         }
+        else return "O utilizador não tem permissões para atualizar outros utilizadores";
     }
 
-
-    // Mostra o proprio utilizador
+    // Apaga o utilizador com o login feito
     public function actionDelete($id){
-        // Recebe o authManager para verificar as permissões
-        $auth = Yii::$app->authManager;
+        $user = User::findOne($id);
 
         // Verifica se o utilizador tem acesso á aplicação (Frontend)
-        if($auth->checkAccess(Yii::$app->user->getId(), "frontendAccess")){
-            // Verifica se o utilizador que acede é o mesmo que este está a chamar os dados
-            if(Yii::$app->user->getId() == $id) {
-                // Apaga o utilizador com o login feito
-                $user = User::findOne($id);
-                $userinfo = $user->userinfo;
+        if(Yii::$app->user->can('deleteProfile', ['user' => $user])) {
+            // Apaga os dados da chave estrangeira
+            $user->userinfo->delete();
+            $user->delete();
 
-                $userinfo->delete();
-                $user->delete();
+            $user = null;
 
-                $user = null;
-                $userinfo = null;
-
-                if ($user == null && $userinfo == null) return "Utilizador apagado com sucesso";
-                else return "Erro ao apagar utilizador";
-
-            }
-            else{
-                return "O utilizador não tem permissões para apagar outros utilizadores";
-            }
-        }else{
-            return "Utilizador sem acesso á aplicação";
+            if ($user == null) return "Utilizador apagado com sucesso";
+            else return "Erro ao apagar utilizador";
+        }
+        else{
+            return "O utilizador não tem permissões para apagar outros utilizadores";
         }
     }
 }
