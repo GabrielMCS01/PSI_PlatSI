@@ -42,9 +42,10 @@ class UserController extends ActiveController
     public function actionView($id){
         // Recebe o authManager para verificar as permissões
         $auth = Yii::$app->authManager;
+        $user = User::findOne($id);
 
         // Verifica se o utilizador tem acesso á aplicação (Frontend)
-        if($auth->checkAccess(Yii::$app->user->getId(), "frontendAccess")){
+        /*if($auth->checkAccess(Yii::$app->user->getId(), "frontendAccess")){
             // Verifica se o utilizador que acede é o mesmo que este está a chamar os dados
             if(Yii::$app->user->getId() == $id) {
                 // Recebe o utilizador com o login feito
@@ -57,6 +58,13 @@ class UserController extends ActiveController
             }
         }else{
             return "Utilizador sem acesso á aplicação";
+        }*/
+
+        if(Yii::$app->user->can('viewProfile', ['user' => $user])){
+            return $user;
+        }
+        else{
+            return "O utilizador não tem permissões para visualizar outros utilizadores";
         }
     }
 

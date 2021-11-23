@@ -10,6 +10,6 @@ class PerfilRule extends Rule
 
     public function execute($user, $item, $params)
     {
-        return isset($params['activity']) ? $params['activity']->id == $user : false;
+        return isset($params['user']) ? $params['user']->id == $user : false;
     }
 }
