@@ -70,6 +70,10 @@ http://localhost/PSI_PlatSI/app/backend/web/v1/ciclismo/3?access-token=qehVRdbce
 
 
 
+// Apagar um treino do utilizador
+
+
+
 
 
 

@@ -36,6 +36,7 @@ class CiclismoController extends ActiveController
         return $actions;
     }
 
+    // Cria um Treino para o utilizador
     public function actionCreate(){
         $ciclismo = new Ciclismo();
 
@@ -49,6 +50,7 @@ class CiclismoController extends ActiveController
         $ciclismo->data_treino = Yii::$app->request->post('data_treino');
         $ciclismo->user_id = Yii::$app->user->getId();
 
+        // Se a validação dos dados for TRUE guarda os dados caso contrário emite um erro
         if ($ciclismo->validate()){
             $ciclismo->save();
             return "Treino criado com sucesso";
@@ -60,12 +62,12 @@ class CiclismoController extends ActiveController
     public function actionView($id){
         $treino = Ciclismo::findOne($id);
 
-        // Verifica se o utilizador que acede é o mesmo que este está a chamar os dados
+        // Verifica se o utilizador que acede é o mesmo que este está a ser chamado nos dados
         if(Yii::$app->user->can('viewActivity', ['activity' => $treino])){
             return $treino;
         }
         else{
-            return "O utilizador não tem permissões para as visualizar atividades de outros utilizadores";
+            return "O utilizador não tem permissões para as visualizar treinos de outros utilizadores";
         }
     }
 
@@ -78,47 +80,39 @@ class CiclismoController extends ActiveController
     }
 
 
-/*
-    // Atualiza o próprio utilizador
+    // Atualiza um treino do User
     public function actionUpdate($id){
-        $user = User::findOne($id);
+        $treino = Ciclismo::findOne($id);
 
-        // Verifica se o utilizador tem acesso á aplicação (Frontend)
-        if(Yii::$app->user->can('updateProfile', ['user' => $user])) {
+        // Verifica se o utilizador que acede é o mesmo que este está a ser chamado nos dados
+        if(Yii::$app->user->can('updateActivity', ['activity' => $treino])) {
             // Recebe os dados enviados e atualiza-os
-            // Verificar se o email é válido
-            $user->username = Yii::$app->request->post('username');
-            $user->userinfo->primeiro_nome = Yii::$app->request->post('primeiro_nome');
-            $user->userinfo->ultimo_nome = Yii::$app->request->post('ultimo_nome');
-            $user->userinfo->data_nascimento = Yii::$app->request->post('data_nascimento');
+            $treino->nome_percurso = Yii::$app->request->post('nome_percurso');
 
             // Guarda as alterações do utilizador e das informações deste
-            $user->save();
-            $user->userinfo->save();
+            $treino->save();
 
-            return $user;
+            return $treino;
         }
-        else return "O utilizador não tem permissões para atualizar outros utilizadores";
+        else return "O utilizador não tem permissões para atualizar treinos de outros utilizadores";
     }
 
-    // Apaga o utilizador com o login feito
+    // Apaga um treino do utilizador com o login feito
     public function actionDelete($id){
-        $user = User::findOne($id);
+        $treino = Ciclismo::findOne($id);
 
-        // Verifica se o utilizador tem acesso á aplicação (Frontend)
-        if(Yii::$app->user->can('deleteProfile', ['user' => $user])) {
-            // Apaga os dados da chave estrangeira
-            $user->userinfo->delete();
-            $user->delete();
+        // Verifica se o utilizador que acede é o mesmo que este está a ser chamado nos dados
+        if(Yii::$app->user->can('deleteActivity', ['activity' => $treino])) {
 
-            $user = null;
+            $treino->delete();
 
-            if ($user == null) return "Utilizador apagado com sucesso";
-            else return "Erro ao apagar utilizador";
+            $treino = null;
+
+            if ($treino == null) return "Treino apagado com sucesso";
+            else return "Erro ao apagar treino";
         }
         else{
-            return "O utilizador não tem permissões para apagar outros utilizadores";
+            return "O utilizador não tem permissões para apagar treinos de outros utilizadores";
         }
     }
-*/
 }
