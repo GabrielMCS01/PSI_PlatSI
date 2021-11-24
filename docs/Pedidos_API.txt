@@ -67,11 +67,15 @@ http://localhost/PSI_PlatSI/app/backend/web/v1/ciclismo/3?access-token=qehVRdbce
 
 
 // Alterar um treino do utilizador
+http://localhost/PSI_PlatSI/app/backend/web/v1/ciclismo/1?access-token=oZQXCn71JJwRz29H0zpLoszDe5RA7mvs
 
+{
+    "nome_percurso": "Percurso dos percusos"
+}
 
 
 // Apagar um treino do utilizador
-
+http://localhost/PSI_PlatSI/app/backend/web/v1/ciclismo/1?access-token=oZQXCn71JJwRz29H0zpLoszDe5RA7mvs
 
 
 
