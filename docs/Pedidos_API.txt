@@ -1,0 +1,76 @@
+// MUDAR O ACCESS TOKEN CONFORME O UTILIZADOR (FAZER LOGIN)
+// Tem de saber apenas o ID do utilizador para fazer aqui os testes
+
+// ----------------------------------------- USER --------------------------------------------------------------
+
+// Ver o perfil do utilizador
+http://localhost/PSI_PlatSI/app/backend/web/v1/user/3?access-token=n1b488X6nVVZHu_vp9vUwqIUfe0ra9HS
+
+
+// Criar um utilizador
+http://localhost/PSI_PlatSI/app/backend/web/v1/registo/signup
+
+{
+    "username": "teste",
+    "email": "teste@gmail.com",
+    "password": "123456789"
+}
+
+
+// Login do Utilizador
+http://localhost/PSI_PlatSI/app/backend/web/v1/login/login
+
+{
+    "username": "teste",
+    "password": "123456789"
+}
+
+
+// Alterar os dados do utilizador
+http://localhost/PSI_PlatSI/app/backend/web/v1/user/13?access-token=nAo3VV3aPGb_jbHOu7At8tB_Fw124yuG
+
+{   
+    "username": "Teste",
+    "primeiro_nome": "User",
+    "ultimo_nome": "Teste",
+    "data_nascimento": "2002-02-20"
+}
+
+
+// Apagar o Utilizador
+http://localhost/PSI_PlatSI/app/backend/web/v1/user/13?access-token=nAo3VV3aPGb_jbHOu7At8tB_Fw124yuG
+
+
+
+--------------------------------------------- Ciclismo ----------------------------------------------------
+
+
+// Cria um treino
+// O id do user com o token é atribuido automaticamente ao treino
+http://localhost/PSI_PlatSI/app/backend/web/v1/ciclismo?access-token=nAo3VV3aPGb_jbHOu7At8tB_Fw124yuG
+
+{
+    "nome_percurso": "Percurso de teste",
+    "duracao": "02:36:03",
+    "distancia": 150,
+    "velocidade_media": 50,
+    "velocidade_maxima": 75,
+    "data_treino": "18:20:01"
+}
+
+// Visualizar todos os treinos do utilizador
+http://localhost/PSI_PlatSI/app/backend/web/v1/ciclismo?access-token=qehVRdbceCClDtx4aKjgNY_cowVBhJMb
+
+
+// Visualizar um treino do utilizador
+http://localhost/PSI_PlatSI/app/backend/web/v1/ciclismo/3?access-token=qehVRdbceCClDtx4aKjgNY_cowVBhJMb
+
+
+// Alterar um treino do utilizador
+
+
+
+
+
+
+

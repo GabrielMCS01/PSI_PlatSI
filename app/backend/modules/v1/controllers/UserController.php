@@ -40,7 +40,7 @@ class UserController extends ActiveController
     public function actionView($id){
         $user = User::findOne($id);
 
-        // Verifica se o utilizador que acede é o mesmo que este está a chamar os dados
+        // Verifica se o utilizador que acede é o mesmo que este está a chamar os dados e se tem a permissão
         if(Yii::$app->user->can('viewProfile', ['user' => $user])){
             return $user;
         }
@@ -53,7 +53,7 @@ class UserController extends ActiveController
     public function actionUpdate($id){
         $user = User::findOne($id);
 
-        // Verifica se o utilizador tem acesso á aplicação (Frontend)
+        // Verifica se o user tem a permissão para fazer atualizações e se está a alterar o seu próprio perfil
         if(Yii::$app->user->can('updateProfile', ['user' => $user])) {
             // Recebe os dados enviados e atualiza-os
             // Verificar se o email é válido
@@ -75,7 +75,7 @@ class UserController extends ActiveController
     public function actionDelete($id){
         $user = User::findOne($id);
 
-        // Verifica se o utilizador tem acesso á aplicação (Frontend)
+        // Verifica se o user tem a permissão para apagar perfis e se está a apagar o seu próprio perfil
         if(Yii::$app->user->can('deleteProfile', ['user' => $user])) {
             // Apaga os dados da chave estrangeira
             $user->userinfo->delete();

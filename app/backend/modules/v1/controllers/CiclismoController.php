@@ -65,8 +65,16 @@ class CiclismoController extends ActiveController
             return $treino;
         }
         else{
-            return "O utilizador não tem permissões para visualizar atividades de outros utilizadores";
+            return "O utilizador não tem permissões para as visualizar atividades de outros utilizadores";
         }
+    }
+
+    // Mostra todos os treinos do próprio utilizador
+    public function actionIndex(){
+        // Recebe todos os treino onde o User_id do user que faz o pedido
+        $treino = Ciclismo::find()->where(['user_id' => Yii::$app->user->id])->all();
+
+        return $treino;
     }
 
 

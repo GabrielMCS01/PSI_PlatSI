@@ -53,12 +53,6 @@ class m211102_131509_init_rbac extends Migration
         $viewActivity->ruleName = $ruleUser->name;
         $auth->add($viewActivity);
 
-        // add "viewUserActivity" permission
-        $viewUserActivity = $auth->createPermission('viewUserActivity');
-        $viewUserActivity->description = 'View user Activity (User logged)';
-        $viewUserActivity->ruleName = $rulePerfil->name;
-        $auth->add($viewUserActivity);
-
         // add "updateProfile" permission
         $updateProfile = $auth->createPermission('updateProfile');
         $updateProfile->description = 'Update Profile (User logged)';
@@ -89,7 +83,6 @@ class m211102_131509_init_rbac extends Migration
         $auth->addChild($user, $updateProfile);
         $auth->addChild($user, $deleteProfile);
         $auth->addChild($user, $viewProfile);
-        $auth->addChild($user, $viewUserActivity);
         // ---------------------------- USER --------------------------------------
 
         // ---------------------------- ADMIN -------------------------------------

@@ -16,6 +16,7 @@ class UserRule extends Rule
      */
     public function execute($user, $item, $params)
     {
-        return isset($params['activity']) ? $params['activity']->userID == $user : false;
+        // Verifica se o treino tem o ID do USER que está a fazer o pedido
+        return isset($params['activity']) ? $params['activity']->user_id == $user : false;
     }
 }
