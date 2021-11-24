@@ -55,7 +55,7 @@ http://localhost/PSI_PlatSI/app/backend/web/v1/ciclismo?access-token=nAo3VV3aPGb
     "distancia": 150,
     "velocidade_media": 50,
     "velocidade_maxima": 75,
-    "data_treino": "18:20:01"
+    "data_treino": "2021-11-24 16:20:25"
 }
 
 // Visualizar todos os treinos do utilizador

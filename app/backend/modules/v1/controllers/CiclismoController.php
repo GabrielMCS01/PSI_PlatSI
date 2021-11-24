@@ -47,7 +47,7 @@ class CiclismoController extends ActiveController
         $ciclismo->velocidade_maxima = Yii::$app->request->post('velocidade_maxima');
         $ciclismo->velocidade_grafico = Yii::$app->request->post('velocidade_grafico');
         $ciclismo->rota = Yii::$app->request->post('rota');
-        $ciclismo->data_treino = Yii::$app->request->post('data_treino');
+        $ciclismo->data_treino = Yii::$app->formatter->asDateTime('now', 'yyyy-MM-dd HH-mm-ss');
         $ciclismo->user_id = Yii::$app->user->getId();
 
         // Se a validação dos dados for TRUE guarda os dados caso contrário emite um erro
