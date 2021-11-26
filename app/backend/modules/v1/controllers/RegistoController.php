@@ -2,6 +2,7 @@
 
 namespace app\modules\v1\controllers;
 
+use common\models\UserInfo;
 use frontend\models\SignupForm;
 use Yii;
 use yii\rest\ActiveController;
@@ -29,6 +30,8 @@ class RegistoController extends ActiveController
         $model->username = Yii::$app->request->post('username');
         $model->email = Yii::$app->request->post('email');
         $model->password = Yii::$app->request->post('password');
+        $model->primeiro_nome = Yii::$app->request->post('primeiro_nome');
+        $model->ultimo_nome = Yii::$app->request->post('ultimo_nome');
 
         if ($model->signup()) {
             return "Utilizador criado com sucesso";

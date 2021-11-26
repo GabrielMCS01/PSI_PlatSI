@@ -11,9 +11,11 @@ http://localhost/PSI_PlatSI/app/backend/web/v1/user/3?access-token=n1b488X6nVVZH
 http://localhost/PSI_PlatSI/app/backend/web/v1/registo/signup
 
 {
-    "username": "teste",
-    "email": "teste@gmail.com",
-    "password": "123456789"
+    "username": "test",
+    "email": "test@gmail.com",
+    "password": "123456789",
+    "primeiro_nome": "Gabriel",
+    "ultimo_nome": "Iuri"
 }
 
 
