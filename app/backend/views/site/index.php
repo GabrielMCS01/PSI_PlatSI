@@ -5,6 +5,8 @@ use hail812\adminlte\widgets\Ribbon;
 use hail812\adminlte\widgets\SmallBox;
 use yii\helpers\Html;
 
+/* @var $numUsers  */
+/* @var $numTreinos  */
 $this->title = Yii::$app->name;
 $this->params['breadcrumbs'] = [['label' => $this->title]];
 ?>
@@ -39,7 +41,7 @@ $this->params['breadcrumbs'] = [['label' => $this->title]];
         <div class="col-md-4 col-sm-6 col-12">
             <?= InfoBox::widget([
                 'text' => 'Nº de sessões de treino',
-                'number' => '11',
+                'number' => $numTreinos,
                 'icon' => 'fas fa-bicycle',
                 /*'progress' => [
                     'width' => '70%',
@@ -52,12 +54,12 @@ $this->params['breadcrumbs'] = [['label' => $this->title]];
     <div class="row">
         <div class="col-lg-4 col-md-6 col-sm-6 col-12">
             <?= SmallBox::widget([
-                'title' => '2',
+                'title' => $numUsers,
                 'text' => 'Utilizadores Registados',
                 'icon' => 'fas fa-user-plus',
                 'theme' => 'gradient-success',
                 'linkText' => 'Ver os utilizadores',
-                'linkUrl' => 'index.php?r=user%2Findex',
+                'linkUrl' => 'user/index',
             ]) ?>
         </div>
     </div>

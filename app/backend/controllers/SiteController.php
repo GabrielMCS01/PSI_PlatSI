@@ -2,7 +2,9 @@
 
 namespace backend\controllers;
 
+use common\models\Ciclismo;
 use common\models\LoginForm;
+use common\models\User;
 use Yii;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
@@ -62,7 +64,27 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        // ------------------------ Retorna o numero total de Utilizadores ------------------
+        $numUsers = 0;
+        $auth = Yii::$app->authManager;
+
+        // Recebe todos os utilizadores
+        $users = User::find()->all();
+        foreach ($users as $user) {
+            // Se o utilizador tiver acesso á Frontend soma +1
+            if($auth->checkAccess($user->getId(), "frontendAccess")){
+                $numUsers++;
+            }
+        }
+        // -------------------------------------------------------------------------------
+        // ------------------------- Nº de Sessões de Treino -----------------------------
+        $treinos = Ciclismo::find()->all();
+        $numTreinos = sizeof($treinos);
+
+
+        // Retorna a view index com todos os dados para os widgets
+        return $this->render('index', ['numUsers' => $numUsers, 'numTreinos' => $numTreinos
+        ]);
     }
 
     /**
