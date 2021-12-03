@@ -64,12 +64,15 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        // ------------------------ Retorna o numero total de Utilizadores ------------------
+        $treinos = Ciclismo::find()->all();
+        $users = User::find()->all();
+
+        // ------------------------ Retorna o número total de Utilizadores ------------------
         $numUsers = 0;
         $auth = Yii::$app->authManager;
 
         // Recebe todos os utilizadores
-        $users = User::find()->all();
+
         foreach ($users as $user) {
             // Se o utilizador tiver acesso á Frontend soma +1
             if($auth->checkAccess($user->getId(), "frontendAccess")){
@@ -78,13 +81,38 @@ class SiteController extends Controller
         }
         // -------------------------------------------------------------------------------
         // ------------------------- Nº de Sessões de Treino -----------------------------
-        $treinos = Ciclismo::find()->all();
         $numTreinos = sizeof($treinos);
+        // -----------------------------------------------------------------------------------
+        // ------ Função que faz o cálculo de todos os campos de cada atributo ---------------
+        $velMediaTotal = 0;
+        $distanciaTotal = 0;
+        $tempoTotal = 0;
 
+        // Distancia, Velocidade media e tempo total dos treinos
+        foreach ($treinos as $treino){
+            $velMediaTotal += $treino->velocidade_media;
+            $distanciaTotal += $treino->distancia;
+            $tempoTotal += $treino->duracao;
+        }
+
+        // ------------------------ Velocidade Média dos treinos ----------------------------
+        // Numero de treinos a dividir pela velocidade média total
+        if ($velMediaTotal != 0){
+            $velMedia = round(($velMediaTotal / $numTreinos), 2);
+        }
+        else $velMedia = 0;
+
+        // -----------------------------------------------------------------------------------
+        // -------------------------- Distância total dos treinos ----------------------------
+        $distancia = $distanciaTotal / 1000;
+        $distancia = round($distancia, 3);
+
+        // Tempo tem de ser convertido para Horas, dias, semanas ETC
+        //$tempoTotal
 
         // Retorna a view index com todos os dados para os widgets
         return $this->render('index', ['numUsers' => $numUsers, 'numTreinos' => $numTreinos
-        ]);
+        , 'velMedia' => $velMedia, 'distancia' => $distancia, 'tempoTotal' => $tempoTotal]);
     }
 
     /**

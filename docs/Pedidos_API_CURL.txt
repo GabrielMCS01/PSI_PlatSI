@@ -61,15 +61,15 @@ curl --location --request DELETE 'http://localhost/PSI_PlatSI/app/backend/web/v1
 // Cria um treino
 // O id do user com o token é atribuido automaticamente ao treino
 
-curl --location --request POST 'http://localhost/PSI_PlatSI/app/backend/web/v1/ciclismo?access-token=oZQXCn71JJwRz29H0zpLoszDe5RA7mvs' \
+curl --location --request POST 'http://localhost/PSI_PlatSI/app/backend/web/v1/ciclismo?access-token=atoqdyBf24cbVItKHQnyhjC0UG5ZAoil' \
 --header 'Content-Type: application/json' \
+--header 'Cookie: _csrf-backend=18369061612cb8b2f91e3cca6be8929612cf36f8a34081a2f412d6bc472bfbf1a%3A2%3A%7Bi%3A0%3Bs%3A13%3A%22_csrf-backend%22%3Bi%3A1%3Bs%3A32%3A%22i-gB2j8DhaF4sufF3qWyKUe02lhVBmGe%22%3B%7D' \
 --data-raw '{
     "nome_percurso": "Percurso de teste",
-    "duracao": "02:36:03",
-    "distancia": 150,
-    "velocidade_media": 50,
-    "velocidade_maxima": 75,
-    "data_treino": "2021-11-24 16:20:25"
+    "duracao": 500,
+    "distancia": 900,
+    "velocidade_media": 10.1,
+    "velocidade_maxima": 20.4
 }'
 
 
