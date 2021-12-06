@@ -5,6 +5,12 @@ use hail812\adminlte\widgets\Ribbon;
 use hail812\adminlte\widgets\SmallBox;
 use yii\helpers\Html;
 
+// Variáveis que veêm do controller
+/* @var $tempoTotal  */
+/* @var $distancia  */
+/* @var $velMedia  */
+/* @var $numUsers  */
+/* @var $numTreinos  */
 $this->title = Yii::$app->name;
 $this->params['breadcrumbs'] = [['label' => $this->title]];
 ?>
@@ -13,14 +19,14 @@ $this->params['breadcrumbs'] = [['label' => $this->title]];
         <div class="col-md-4 col-sm-6 col-12">
             <?= InfoBox::widget([
                 'text' => 'Tempo atividade física',
-                'number' => '10:24:36 H',
+                'number' => $tempoTotal . " s",
                 'icon' => 'far fa-clock',
             ]) ?>
         </div>
         <div class="col-md-4 col-sm-6 col-12">
             <?= InfoBox::widget([
                 'text' => 'Quilometros Percorridos',
-                'number' => '231 KM',
+                'number' => $distancia . " KM",
                //  'theme' => 'success',
                 'icon' => 'fas fa-road',
             ]) ?>
@@ -28,7 +34,7 @@ $this->params['breadcrumbs'] = [['label' => $this->title]];
         <div class="col-md-4 col-sm-6 col-12">
             <?= InfoBox::widget([
                 'text' => 'Velocidade média',
-                'number' => '20,94 Km/h',
+                'number' => $velMedia . " Km/h",
              //   'theme' => 'gradient-warning',
                 'icon' => 'fas fa-tachometer-alt',
             ]) ?>
@@ -39,7 +45,7 @@ $this->params['breadcrumbs'] = [['label' => $this->title]];
         <div class="col-md-4 col-sm-6 col-12">
             <?= InfoBox::widget([
                 'text' => 'Nº de sessões de treino',
-                'number' => '11',
+                'number' => $numTreinos,
                 'icon' => 'fas fa-bicycle',
                 /*'progress' => [
                     'width' => '70%',
@@ -52,12 +58,12 @@ $this->params['breadcrumbs'] = [['label' => $this->title]];
     <div class="row">
         <div class="col-lg-4 col-md-6 col-sm-6 col-12">
             <?= SmallBox::widget([
-                'title' => '2',
+                'title' => $numUsers,
                 'text' => 'Utilizadores Registados',
                 'icon' => 'fas fa-user-plus',
                 'theme' => 'gradient-success',
                 'linkText' => 'Ver os utilizadores',
-                'linkUrl' => 'index.php?r=user%2Findex',
+                'linkUrl' => 'user/index',
             ]) ?>
         </div>
     </div>

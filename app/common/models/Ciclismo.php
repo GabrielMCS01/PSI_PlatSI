@@ -9,8 +9,8 @@ use Yii;
  *
  * @property int $id
  * @property string|null $nome_percurso
- * @property string $duracao
- * @property float $distancia
+ * @property int $duracao
+ * @property int $distancia
  * @property float $velocidade_media
  * @property float $velocidade_maxima
  * @property string|null $velocidade_grafico
@@ -37,10 +37,10 @@ class Ciclismo extends \yii\db\ActiveRecord
     {
         return [
             [['duracao', 'distancia', 'velocidade_media', 'velocidade_maxima', 'user_id'], 'required'],
-            [['duracao', 'data_treino'], 'safe'],
-            [['distancia', 'velocidade_media', 'velocidade_maxima'], 'number'],
+            [['duracao', 'distancia', 'user_id'], 'integer'],
+            [['velocidade_media', 'velocidade_maxima'], 'number'],
             [['velocidade_grafico', 'rota'], 'string'],
-            [['user_id'], 'integer'],
+            [['data_treino'], 'safe'],
             [['nome_percurso'], 'string', 'max' => 50],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
         ];
