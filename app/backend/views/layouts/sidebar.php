@@ -11,7 +11,7 @@ $user = User::findOne(Yii::$app->user->getId())
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="<?= Url::home()?>" class="brand-link">
-        <img src="../assets/ciclodias_logo_transparent.png" alt="<?= Yii::$app->name?>" class="brand-image img-circle" style="opacity: .8">
+        <img src="<?= Url::to('@web/img/ciclodias.png');?>" alt="<?= Yii::$app->name?>" class="brand-image img-circle" style="opacity: .8">
         <span class="brand-text font-weight-light"><?= Yii::$app->name?></span>
     </a>
 
