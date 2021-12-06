@@ -8,7 +8,7 @@ $this->title = Yii::$app->name;
 
     <div class="jumbotron text-center bg-transparent">
         
-        <img src="../assets/ciclodias_logo_transparent.png" width="200px">
+        <img src="/../../assets/ciclodias_logo_transparent.png" width="200px">
         <h1 class="display-4">Bem-Vindo ao Ciclodias</h1>
 
         <p class="lead">Aplicação de monitorização de exercicio fisico</p>
