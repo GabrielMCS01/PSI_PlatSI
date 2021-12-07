@@ -77,10 +77,10 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        $velocidademax = Ciclismo::find()->orderBy(['velocidade_maxima' => SORT_DESC])->all();
+        $velocidademed = Ciclismo::find()->groupBy(['user_id'])->orderBy(['velocidade_media' => SORT_DESC])->all();
 
 
-        return $this->render('index', ['velocidademax' => $velocidademax]);
+        return $this->render('index', ['velocidademed' => $velocidademed]);
     }
 
     /**
