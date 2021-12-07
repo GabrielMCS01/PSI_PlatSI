@@ -1,24 +1,27 @@
 <?php
 
+namespace common\utils;
+
 class Converter
 {
     public static function secondsToHours($time){
 
-        $hours = $time/3600;
+        $hours = intval($time/3600 ,10 );
+
+        $minutes = 0;
+        $seconds = 0;
 
         if($time % 3600 != 0 ){
-            $minutes = $time % 3600 / 60;
+            $minutes = intval($time % 3600 / 60, 10);
         }
 
         if($time % 60 != 0){
             $seconds = $time % 60;
         }
 
-        $hours = number_format($hours , 2);
-        $minutes = number_format($minutes, 2);
-        $seconds = number_format($seconds, 2);
 
-        $string = $hours.':'.$minutes.':'.$seconds.' h';
+
+        $string = sprintf('%02d',$hours).':'. sprintf('%02d',$minutes).':'. sprintf('%02d',$seconds).' h';
 
         return $string;
     }
