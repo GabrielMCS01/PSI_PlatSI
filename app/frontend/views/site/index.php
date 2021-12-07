@@ -4,9 +4,12 @@
 /* @var $velocidademed  */
 /* @var $distancias  */
 /* @var $tempos  */
+
+use common\utils\Converter;
 use yii\helpers\Url;
 
 $this->title = Yii::$app->name;
+
 ?>
 <div class="site-index">
 
