@@ -79,8 +79,10 @@ class SiteController extends Controller
     {
         $velocidademed = Ciclismo::find()->groupBy(['user_id'])->orderBy(['velocidade_media' => SORT_DESC])->all();
 
+        $distancias = Ciclismo::find()->groupBy(['user_id'])->orderBy(['distancia' => SORT_DESC])->all();
 
-        return $this->render('index', ['velocidademed' => $velocidademed]);
+
+        return $this->render('index', ['velocidademed' => $velocidademed, 'distancias' => $distancias]);
     }
 
     /**
