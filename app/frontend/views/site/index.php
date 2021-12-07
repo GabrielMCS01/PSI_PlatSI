@@ -45,7 +45,7 @@ $this->title = Yii::$app->name;
                 <h3>TOP 10 - Velocidade Média</h3>
                 <ol>
                     <?php foreach ($velocidademax as $velocidade){?>
-                    <li><?=$velocidade->user->username?> - <?= $velocidade->velocidade_maxima?></li>
+                    <li><?=$velocidade->user->username?> - <?= $velocidade->velocidade_maxima?> Km/h</li>
                     <?php }?>
                 </ol>
             </div>
