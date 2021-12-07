@@ -1,7 +1,7 @@
 <?php
 
 /* @var $this yii\web\View */
-
+/* @var $velocidademax  */
 use yii\helpers\Url;
 
 $this->title = Yii::$app->name;
@@ -44,10 +44,9 @@ $this->title = Yii::$app->name;
             <div class="col-lg-4">
                 <h3>TOP 10 - Velocidade Média</h3>
                 <ol>
-                    <li>Iuri - 24.42 km/h</li>
-                    <li>Gabriel - 23.72 km/h</li>
-                    <li>Fábio - 19.64 km/h</li>
-                    <li>...</li>
+                    <?php foreach ($velocidademax as $velocidade){?>
+                    <li><?=$velocidade->user->username?> - <?= $velocidade->velocidade_maxima?></li>
+                    <?php }?>
                 </ol>
             </div>
         </div>

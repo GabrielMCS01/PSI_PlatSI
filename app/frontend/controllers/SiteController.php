@@ -2,6 +2,7 @@
 
 namespace frontend\controllers;
 
+use common\models\Ciclismo;
 use frontend\models\ResendVerificationEmailForm;
 use frontend\models\VerifyEmailForm;
 use Yii;
@@ -76,7 +77,10 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        $velocidademax = Ciclismo::find()->orderBy(['velocidade_maxima' => SORT_DESC])->all();
+
+
+        return $this->render('index', ['velocidademax' => $velocidademax]);
     }
 
     /**
