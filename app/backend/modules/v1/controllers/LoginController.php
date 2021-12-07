@@ -46,10 +46,13 @@ class LoginController extends ActiveController
                 // Gera um token e atribui no verification_token
                 $user->auth_key = Yii::$app->security->generateRandomString();
                 $user->save();
-
-                $json = array("success" => "true", "token" => $user->auth_key);
                 // Retorna o token
-                return json_encode($json);
+
+                $login = new Login();
+                $login->success = true;
+                $login->token = $user->auth_key;
+
+                return json_encode($login);
             }else{
                 $message = "Utilizador sem acesso á aplicação";
             }
@@ -61,4 +64,12 @@ class LoginController extends ActiveController
         // Retorna a mensagem de erro
         return $message;
     }
+
+
+}
+
+class Login{
+
+    public $success;
+    public $token;
 }
