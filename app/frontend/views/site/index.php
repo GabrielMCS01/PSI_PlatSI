@@ -2,6 +2,7 @@
 
 /* @var $this yii\web\View */
 /* @var $velocidademed  */
+/* @var $distancias  */
 use yii\helpers\Url;
 
 $this->title = Yii::$app->name;
@@ -24,10 +25,9 @@ $this->title = Yii::$app->name;
             <div class="col-lg-4">
                 <h3>TOP 10 - Distancia</h3>
                 <ol>
-                    <li>Gabriel - 45.72 km</li>
-                    <li>Iuri - 34.98 km</li>
-                    <li>Dias - 12.64 km</li>
-                    <li>...</li>
+                    <?php foreach ($distancias as $distancia){?>
+                    <li><?= $distancia->user->username?> - <?= $distancia->distancia/1000?> km</li>
+                    <?php }?>
                 </ol>
 
             </div>
