@@ -48,9 +48,9 @@ class LoginController extends ActiveController
                 $user->save();
 
                 $json = array("success" => "true", "token" => $user->auth_key);
-                $json = json_encode($json);
+                $jsons = json_encode($json, JSON_PRETTY_PRINT);
                 // Retorna o token
-                return $json;
+                return $jsons;
             }else{
                 $message = "Utilizador sem acesso á aplicação";
             }
