@@ -71,6 +71,7 @@ class SiteController extends Controller
     }
 
     /**
+     *
      * Displays homepage.
      *
      * @return mixed
@@ -81,8 +82,10 @@ class SiteController extends Controller
 
         $distancias = Ciclismo::find()->groupBy(['user_id'])->orderBy(['distancia' => SORT_DESC])->all();
 
+        $tempos = Ciclismo::find()->groupBy(['user_id'])->orderBy(['duracao' => SORT_DESC])->all();
 
-        return $this->render('index', ['velocidademed' => $velocidademed, 'distancias' => $distancias]);
+
+        return $this->render('index', ['velocidademed' => $velocidademed, 'distancias' => $distancias, 'tempos' => $tempos]);
     }
 
     /**

@@ -3,6 +3,7 @@
 /* @var $this yii\web\View */
 /* @var $velocidademed  */
 /* @var $distancias  */
+/* @var $tempos  */
 use yii\helpers\Url;
 
 $this->title = Yii::$app->name;
@@ -34,10 +35,9 @@ $this->title = Yii::$app->name;
             <div class="col-lg-4">
                 <h3>TOP 10 - Tempo</h3>
                 <ol>
-                    <li>Fabio - 02:45:12 h</li>
-                    <li>Gabriel - 01:52:51 h</li>
-                    <li>Dias - 00:56:23 h</li>
-                    <li>...</li>
+                    <?php foreach ($tempos as $tempo){?>
+                    <li><?= $tempo->user->username?> - <?= Converter::secondsToHours($tempo->duracao)?></li>
+                    <?php }?>
                 </ol>
 
             </div>
