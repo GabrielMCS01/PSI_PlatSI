@@ -49,8 +49,8 @@ class LoginController extends ActiveController
                 // Retorna o token
 
                 $login = new Login();
-                $login->success = true;
-                $login->token = $user->auth_key;
+                $login->success = "true";
+                $login->token = ''.$user->auth_key.'';
 
                 return json_encode($login);
             }else{
