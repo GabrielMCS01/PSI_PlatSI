@@ -51,6 +51,9 @@ class LoginController extends ActiveController
                 $login = new Login();
                 $login->success = true;
                 $login->token = $user->auth_key;
+                $login->id = $user->id;
+                $login->primeiro_nome = $user->userinfo->primeiro_nome;
+                $login->ultimo_nome = $user->userinfo->ultimo_nome;
 
                 return $login;
             }else{
@@ -72,4 +75,7 @@ class Login{
 
     public $success;
     public $token;
+    public $id;
+    public $primeiro_nome;
+    public $ultimo_nome;
 }
