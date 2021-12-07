@@ -1,5 +1,6 @@
 <?php
 
+use common\utils\Converter;
 use hail812\adminlte\widgets\InfoBox;
 use hail812\adminlte\widgets\Ribbon;
 use hail812\adminlte\widgets\SmallBox;
@@ -19,7 +20,7 @@ $this->params['breadcrumbs'] = [['label' => $this->title]];
         <div class="col-md-4 col-sm-6 col-12">
             <?= InfoBox::widget([
                 'text' => 'Tempo atividade física',
-                'number' => $tempoTotal . " s",
+                'number' => Converter::secondsToHours($tempoTotal),
                 'icon' => 'far fa-clock',
             ]) ?>
         </div>
