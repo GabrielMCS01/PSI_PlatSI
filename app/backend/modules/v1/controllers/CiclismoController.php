@@ -2,7 +2,9 @@
 
 namespace app\modules\v1\controllers;
 
+use app\modules\v1\models\ResponseSync;
 use common\models\Ciclismo;
+use phpDocumentor\Reflection\Types\Array_;
 use Yii;
 use yii\db\StaleObjectException;
 use yii\filters\auth\QueryParamAuth;
@@ -126,19 +128,21 @@ class CiclismoController extends ActiveController
         $ids = Yii::$app->request->post("ids");
         $treinos = Yii::$app->request->post("treinos");
 
-
+        $response = new ResponseSync();
         foreach ($ids as $id){
             $edit = true;
             if(Ciclismo::findOne($id) != null){
                 foreach ($treinos as $treino){
-                    if($treino->id == $id){
+                    if($treino["id"] == $id){
                         $ciclismo = Ciclismo::findOne($id);
 
-                        $ciclismo->nome_percurso = $treino->nome_percurso;
+                        $ciclismo->nome_percurso = $treino["nome_percurso"];
 
                         $ciclismo->save(true);
 
-                       $edit = false;
+                        $response->ids[$id] = -1;
+
+                        $edit = false;
                     }
                 }
                 if($edit) {
@@ -146,6 +150,7 @@ class CiclismoController extends ActiveController
 
                     try {
                         $ciclismo->delete();
+                        $response->ids[$id] = -1;
                     } catch (StaleObjectException $e) {
 
                     } catch (\Throwable $e) {
@@ -154,18 +159,21 @@ class CiclismoController extends ActiveController
                 }
             }else{
                 foreach ($treinos as $treino) {
-                    if ($treino->id == $id) {
+                    if ($treino["id"] == $id) {
                         $ciclismo = new Ciclismo();
 
-                        $ciclismo->nome_percurso = $treino->nome_percurso;
-                        $ciclismo->duracao = $treino->duracao;
-                        $ciclismo->distancia = $treino->distancia;
-                        $ciclismo->velocidade_media = $treino->velocidade_media;
-                        $ciclismo->velocidade_maxima = $treino->velocidade_maxima;
-                        $ciclismo->velocidade_grafico = $treino->velocidade_grafico ;
-                        $ciclismo->rota = $treino->rota;
+                        $ciclismo->nome_percurso = $treino["nome_percurso"];
+                        $ciclismo->duracao = $treino["duracao"];
+                        $ciclismo->distancia = $treino["distancia"];
+                        $ciclismo->velocidade_media = $treino["velocidade_media"];
+                        $ciclismo->velocidade_maxima = $treino["velocidade_maxima"];
+                        $ciclismo->velocidade_grafico = null;
+                        $ciclismo->rota = null;
                         $ciclismo->data_treino =Yii::$app->formatter->asDateTime('now', 'yyyy-MM-dd HH-mm-ss');
                         $ciclismo->user_id = Yii::$app->user->getId();
+
+
+                        $response->ids[$id] = $ciclismo->id;
 
                         $ciclismo->save(true);
                     }
@@ -174,7 +182,7 @@ class CiclismoController extends ActiveController
 
         }
 
-        return "success";
+        return $response;
 
     }
 }
