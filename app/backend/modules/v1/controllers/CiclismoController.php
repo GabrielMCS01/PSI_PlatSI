@@ -4,6 +4,7 @@ namespace app\modules\v1\controllers;
 
 use common\models\Ciclismo;
 use Yii;
+use yii\db\StaleObjectException;
 use yii\filters\auth\QueryParamAuth;
 use yii\rest\ActiveController;
 
@@ -114,5 +115,66 @@ class CiclismoController extends ActiveController
         else{
             return "O utilizador não tem permissões para apagar treinos de outros utilizadores";
         }
+    }
+
+
+    /**
+     * @throws \yii\base\InvalidConfigException
+     */
+    public function actionSync(){
+
+        $ids = Yii::$app->request->post("ids");
+        $treinos = Yii::$app->request->post("treinos");
+
+
+        foreach ($ids as $id){
+            $edit = true;
+            if(Ciclismo::findOne($id) != null){
+                foreach ($treinos as $treino){
+                    if($treino->id == $id){
+                        $ciclismo = Ciclismo::findOne($id);
+
+                        $ciclismo->nome_percurso = $treino->nome_percurso;
+
+                        $ciclismo->save(true);
+
+                       $edit = false;
+                    }
+                }
+                if($edit) {
+                    $ciclismo = Ciclismo::findOne($id);
+
+                    try {
+                        $ciclismo->delete();
+                    } catch (StaleObjectException $e) {
+
+                    } catch (\Throwable $e) {
+
+                    }
+                }
+            }else{
+                foreach ($treinos as $treino) {
+                    if ($treino->id == $id) {
+                        $ciclismo = new Ciclismo();
+
+                        $ciclismo->nome_percurso = $treino->nome_percurso;
+                        $ciclismo->duracao = $treino->duracao;
+                        $ciclismo->distancia = $treino->distancia;
+                        $ciclismo->velocidade_media = $treino->velocidade_media;
+                        $ciclismo->velocidade_maxima = $treino->velocidade_maxima;
+                        $ciclismo->velocidade_grafico = $treino->velocidade_grafico ;
+                        $ciclismo->rota = $treino->rota;
+                        $ciclismo->data_treino =Yii::$app->formatter->asDateTime('now', 'yyyy-MM-dd HH-mm-ss');
+                        $ciclismo->user_id = Yii::$app->user->getId();
+
+                        $ciclismo->save(true);
+                    }
+                }
+            }
+
+        }
+
+        return "success";
+
     }
 }
