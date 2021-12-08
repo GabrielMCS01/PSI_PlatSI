@@ -2,6 +2,7 @@
 
 namespace app\modules\v1\controllers;
 
+use app\modules\v1\models\ResponsePerfil;
 use common\models\User;
 use Yii;
 use yii\filters\auth\QueryParamAuth;
@@ -42,7 +43,19 @@ class UserController extends ActiveController
 
         // Verifica se o utilizador que acede é o mesmo que este está a chamar os dados e se tem a permissão
         if(Yii::$app->user->can('viewProfile', ['user' => $user])){
-            return $user;
+
+            $response = new ResponsePerfil();
+
+            $response->primeiro_nome = $user->userinfo->primeiro_nome;
+            $response->ultimo_nome = $user->userinfo->ultimo_nome;
+            $response->data_nascimento = $user->userinfo->data_nascimento
+            /*if($user->userinfo->data_nascimento == null){
+                $response->data_nascimento = null;
+
+            }*/
+
+            return $response;
+            //return $user;
         }
         else{
             return "O utilizador não tem permissões para visualizar outros utilizadores";
