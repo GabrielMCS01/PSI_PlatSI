@@ -50,7 +50,7 @@ class UserController extends ActiveController
 
             $response->primeiro_nome = $user->userinfo->primeiro_nome;
             $response->ultimo_nome = $user->userinfo->ultimo_nome;
-            if($user-userinfo->data_nascimento == null){
+            if($user->userinfo->data_nascimento == null){
                 $response->data_nascimento = "nulo";
             }else {
                 $response->data_nascimento = $user->userinfo->data_nascimento;
