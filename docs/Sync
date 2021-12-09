@@ -1,0 +1,18 @@
+localhost/project/app/backend/web/v1/ciclismo/sync?access-token=f0taSX6srVBKfV44n3l6FL9XdEfuBxJ4
+
+
+{
+    "ids":[1, 2, 5],
+    "treinos":[{
+    	"id": 5
+	    "nome_percurso": "Percurso de teste de sync",
+    	"duracao": "02:36:03",
+    	"distancia": 150,
+    	"velocidade_media": 50,
+    	"velocidade_maxima": 75
+		},{
+    	"id": 1
+	    "nome_percurso": "Percurso de teste de sync edicao",
+		}
+    ]
+}
