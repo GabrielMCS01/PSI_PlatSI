@@ -35,6 +35,7 @@ class UserController extends ActiveController
         $actions['create'] = null;
         $actions['index'] = null;
 
+
         return $actions;
     }
 
@@ -49,8 +50,11 @@ class UserController extends ActiveController
 
             $response->primeiro_nome = $user->userinfo->primeiro_nome;
             $response->ultimo_nome = $user->userinfo->ultimo_nome;
-            $response->data_nascimento = $user->userinfo->data_nascimento;
-
+            if($user-userinfo->data_nascimento == null){
+                $response->data_nascimento = "nulo";
+            }else {
+                $response->data_nascimento = $user->userinfo->data_nascimento;
+            }
             return $response;
         }
         else{
