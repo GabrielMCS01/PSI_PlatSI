@@ -2,6 +2,7 @@
 
 namespace app\modules\v1\controllers;
 
+use app\modules\v1\models\ResponseCreateCiclismo;
 use app\modules\v1\models\ResponseSync;
 use common\models\Ciclismo;
 use phpDocumentor\Reflection\Types\Array_;
@@ -53,12 +54,17 @@ class CiclismoController extends ActiveController
         $ciclismo->data_treino = Yii::$app->formatter->asDateTime('now', 'yyyy-MM-dd HH-mm-ss');
         $ciclismo->user_id = Yii::$app->user->getId();
 
+        $response =  new ResponseCreateCiclismo();
         // Se a validação dos dados for TRUE guarda os dados caso contrário emite um erro
         if ($ciclismo->validate()){
             $ciclismo->save();
-            return "Treino criado com sucesso";
+            $response->success = true;
+            return $response;
         }
-        else return "Ocorreu um erro a criar o treino";
+        else {
+            $response->success = false;
+            return $response;
+        }
     }
 
     // Mostra um treino do próprio utilizador
