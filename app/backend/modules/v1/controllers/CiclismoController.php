@@ -49,8 +49,8 @@ class CiclismoController extends ActiveController
         $ciclismo->distancia = Yii::$app->request->post('distancia');
         $ciclismo->velocidade_media = Yii::$app->request->post('velocidade_media');
         $ciclismo->velocidade_maxima = Yii::$app->request->post('velocidade_maxima');
-        $ciclismo->velocidade_grafico = Yii::$app->request->post('velocidade_grafico');
-        $ciclismo->rota = Yii::$app->request->post('rota');
+        //$ciclismo->velocidade_grafico = Yii::$app->request->post('velocidade_grafico');
+        //$ciclismo->rota = Yii::$app->request->post('rota');
         $ciclismo->data_treino = Yii::$app->formatter->asDateTime('now', 'yyyy-MM-dd HH-mm-ss');
         $ciclismo->user_id = Yii::$app->user->getId();
 
