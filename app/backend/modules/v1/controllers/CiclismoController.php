@@ -131,6 +131,7 @@ class CiclismoController extends ActiveController
      */
     public function actionSync(){
 
+        /*
         $treinos = Yii::$app->request->post("treinos");
 
         foreach ($treinos as $treino){
@@ -152,6 +153,8 @@ class CiclismoController extends ActiveController
         $treino = Ciclismo::find()->where(['user_id' => Yii::$app->user->id])->all();
 
         return $treino;
+*/
 
+        return "Giga";
     }
 }
