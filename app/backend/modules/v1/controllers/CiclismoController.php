@@ -131,64 +131,27 @@ class CiclismoController extends ActiveController
      */
     public function actionSync(){
 
-        $ids = Yii::$app->request->post("ids");
-        $treinos = Yii::$app->request->post("treinos");
+        $treinos = Yii::$app->request->post(["treinos"]);
 
-        $response = new ResponseSync();
-        foreach ($ids as $id){
-            $edit = true;
-            if(Ciclismo::findOne($id) != null){
-                foreach ($treinos as $treino){
-                    if($treino["id"] == $id){
-                        $ciclismo = Ciclismo::findOne($id);
+        foreach ($treinos as $treino){
+            $ciclismo = new Ciclismo();
 
-                        $ciclismo->nome_percurso = $treino["nome_percurso"];
+            $ciclismo->nome_percurso = $treino["nome_percurso"];
+            $ciclismo->duracao = $treino["duracao"];
+            $ciclismo->distancia = $treino["distancia"];
+            $ciclismo->velocidade_media = $treino["velocidade_media"];
+            $ciclismo->velocidade_maxima = $treino["velocidade_maxima"];
+            $ciclismo->velocidade_grafico = null;
+            $ciclismo->rota = null;
+            $ciclismo->data_treino =Yii::$app->formatter->asDateTime('now', 'yyyy-MM-dd HH-mm-ss');
+            $ciclismo->user_id = Yii::$app->user->getId();
 
-                        $ciclismo->save(true);
-
-                        $response->ids[$id] = -1;
-
-                        $edit = false;
-                    }
-                }
-                if($edit) {
-                    $ciclismo = Ciclismo::findOne($id);
-
-                    try {
-                        $ciclismo->delete();
-                        $response->ids[$id] = -1;
-                    } catch (StaleObjectException $e) {
-
-                    } catch (\Throwable $e) {
-
-                    }
-                }
-            }else{
-                foreach ($treinos as $treino) {
-                    if ($treino["id"] == $id) {
-                        $ciclismo = new Ciclismo();
-
-                        $ciclismo->nome_percurso = $treino["nome_percurso"];
-                        $ciclismo->duracao = $treino["duracao"];
-                        $ciclismo->distancia = $treino["distancia"];
-                        $ciclismo->velocidade_media = $treino["velocidade_media"];
-                        $ciclismo->velocidade_maxima = $treino["velocidade_maxima"];
-                        $ciclismo->velocidade_grafico = null;
-                        $ciclismo->rota = null;
-                        $ciclismo->data_treino =Yii::$app->formatter->asDateTime('now', 'yyyy-MM-dd HH-mm-ss');
-                        $ciclismo->user_id = Yii::$app->user->getId();
-
-
-                        $response->ids[$id] = $ciclismo->id;
-
-                        $ciclismo->save(true);
-                    }
-                }
-            }
-
+            $ciclismo->save(true);
         }
 
-        return $response;
+        $treino = Ciclismo::find()->where(['user_id' => Yii::$app->user->id])->all();
+
+        return $treino;
 
     }
 }
