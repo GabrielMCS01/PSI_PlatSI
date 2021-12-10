@@ -132,7 +132,7 @@ class CiclismoController extends ActiveController
     public function actionSync(){
 
 
-        $treinos = json_decode(Yii::$app->request->post("treinos"));
+        $treinos = Yii::$app->request->post();
 
         foreach ($treinos as $treino){
             $ciclismo = new Ciclismo();
