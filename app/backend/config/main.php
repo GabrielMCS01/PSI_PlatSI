@@ -65,7 +65,7 @@ return [
                 ['class' => 'yii\rest\UrlRule', 'controller' => 'v1/ciclismo', 'pluralize' => false,
                     'extraPatterns' => [
                       'POST sync' => 'sync', // 'sync' é 'actionSync'
-                        
+
                     ],
                 ],
                 ['class' => 'yii\rest\UrlRule', 'controller' => 'v1/login', 'pluralize' => false,
