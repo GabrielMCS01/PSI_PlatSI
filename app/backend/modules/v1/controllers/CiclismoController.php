@@ -60,6 +60,8 @@ class CiclismoController extends ActiveController
             return $ciclismo;
         }
         else {
+            $ciclismo->id = -1;
+            return $ciclismo;
         }
     }
 
