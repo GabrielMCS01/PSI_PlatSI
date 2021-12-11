@@ -54,16 +54,12 @@ class CiclismoController extends ActiveController
         $ciclismo->data_treino = Yii::$app->formatter->asDateTime('now', 'yyyy-MM-dd HH-mm-ss');
         $ciclismo->user_id = Yii::$app->user->getId();
 
-        $response =  new ResponseCreateCiclismo();
         // Se a validação dos dados for TRUE guarda os dados caso contrário emite um erro
         if ($ciclismo->validate()){
             $ciclismo->save();
-            $response->success = true;
-            return $response;
+            return $ciclismo;
         }
         else {
-            $response->success = false;
-            return $response;
         }
     }
 
