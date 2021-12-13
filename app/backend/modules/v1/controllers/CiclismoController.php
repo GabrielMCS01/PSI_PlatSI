@@ -4,6 +4,7 @@ namespace app\modules\v1\controllers;
 
 use app\modules\v1\models\ResponseCreateCiclismo;
 use app\modules\v1\models\ResponseSync;
+use app\modules\v1\models\ResponseUpdateCiclismo;
 use common\models\Ciclismo;
 use phpDocumentor\Reflection\Types\Array_;
 use Yii;
@@ -99,7 +100,9 @@ class CiclismoController extends ActiveController
             // Guarda as alterações do utilizador e das informações deste
             $treino->save();
 
-            return $treino;
+            $response = new ResponseUpdateCiclismo();
+            $response->success = true;
+            return $response;
         }
         else return "O utilizador não tem permissões para atualizar treinos de outros utilizadores";
     }
