@@ -80,7 +80,7 @@ class SiteController extends Controller
     {
         $velocidademed = Ciclismo::find()->groupBy(['user_id'])->orderBy(['velocidade_media' => SORT_DESC])->all();
 
-        $distancias = Ciclismo::find()->orderBy(['distancia' => SORT_DESC])->groupBy(['user_id', 'distancia'])->all();
+        $distancias = Ciclismo::find()->max('distancia')->orderBy(['distancia' => SORT_DESC])->groupBy(['user_id'])->all();
 
         $tempos = Ciclismo::find()->groupBy(['user_id'])->orderBy(['duracao' => SORT_DESC])->all();
 
