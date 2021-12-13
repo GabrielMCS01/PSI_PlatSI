@@ -22,6 +22,8 @@ AppAsset::register($this);
     <?php $this->registerCsrfMetaTags() ?>
     <link rel="icon" href="<?=Url::to('@web/img/ciclodias.png')?>" type="image/x-icon">
     <title><?= Html::encode($this->title) ?></title>
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css' rel='stylesheet' />
     <?php $this->head() ?>
 </head>
 <body class="d-flex flex-column h-100">
