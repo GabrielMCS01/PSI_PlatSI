@@ -9,7 +9,6 @@ use common\utils\Converter;
 use yii\helpers\Url;
 
 $this->title = Yii::$app->name;
-var_dump($distancias);
 ?>
 <div class="site-index">
 

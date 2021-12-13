@@ -78,11 +78,11 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        $velocidademed = Ciclismo::find()->groupBy(['user_id'])->orderBy(['velocidade_media' => SORT_DESC])->all();
+        $velocidademed = Ciclismo::find()->select(['user_id', 'MAX(velocidade_media) as velocidade_media'])->orderBy(['MAX(velocidade_media)' => SORT_DESC])->groupBy(['user_id'])->all();
 
         $distancias = Ciclismo::find()->select(['user_id', 'MAX(distancia) as distancia'])->orderBy(['MAX(distancia)' => SORT_DESC])->groupBy(['user_id'])->all();
 
-        $tempos = Ciclismo::find()->groupBy(['user_id'])->orderBy(['duracao' => SORT_DESC])->all();
+        $tempos = Ciclismo::find()->select(['user_id', 'MAX(duracao) as duracao'])->orderBy(['MAX(duracao)' => SORT_DESC])->groupBy(['user_id'])->all();
 
 
         return $this->render('index', ['velocidademed' => $velocidademed, 'distancias' => $distancias, 'tempos' => $tempos]);
