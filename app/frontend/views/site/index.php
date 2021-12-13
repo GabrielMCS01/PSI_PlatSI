@@ -5,6 +5,7 @@
 /* @var $distancias  */
 /* @var $tempos  */
 
+use common\models\Ciclismo;
 use common\utils\Converter;
 use yii\helpers\Url;
 
@@ -29,8 +30,8 @@ $this->title = Yii::$app->name;
             <div class="col-lg-4">
                 <h3>TOP 10 - Distancia</h3>
                 <ol>
-                    <?php foreach ($distancias as $distancia){?>
-                    <li><?= $distancia->user->username?> - <?= $distancia->distancia?> km</li>
+                    <?php foreach (Ciclismo::find()->select(['user_id', 'MAX(distancia) as distancias'])->orderBy(['MAX(distancia)' => SORT_DESC])->groupBy(['user_id'])->all() as $distancia){?>
+                    <li><?= $distancia->user->username?> - <?= $distancia->distancias?> km</li>
                     <?php }?>
                 </ol>
 
