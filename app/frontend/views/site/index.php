@@ -31,7 +31,6 @@ $this->title = Yii::$app->name;
                 <ol>
                     <?php foreach ($distancias as $distancia){?>
                             <li> <?= $distancia?></li>
-                    <li><?= $distancia->user->username?> - <?= round($distancia->distancias/1000, 2)?> km</li>
                     <?php }?>
                 </ol>
 
