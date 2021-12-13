@@ -2,6 +2,7 @@
 
 namespace app\modules\v1\controllers;
 
+use app\modules\v1\models\ResponseRegisto;
 use common\models\UserInfo;
 use frontend\models\SignupForm;
 use Yii;
@@ -33,11 +34,16 @@ class RegistoController extends ActiveController
         $model->primeiro_nome = Yii::$app->request->post('primeiro_nome');
         $model->ultimo_nome = Yii::$app->request->post('ultimo_nome');
 
+
+        $response = new ResponseRegisto();
+
         if ($model->signup()) {
-            return "Utilizador criado com sucesso";
+            $response->success = true;
+            return $response;
         }
 
-        return "Erro ao criar utilizador";
+        $response->success = false;
+        return $response;
     }
 
 }

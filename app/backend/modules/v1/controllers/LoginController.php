@@ -2,6 +2,7 @@
 
 namespace app\modules\v1\controllers;
 
+use app\modules\v1\models\ResponseLogin;
 use common\models\LoginForm;
 use common\models\User;
 use Yii;
@@ -48,7 +49,7 @@ class LoginController extends ActiveController
                 $user->save();
                 // Retorna o token
 
-                $login = new Login();
+                $login = new ResponseLogin();
                 $login->success = true;
                 $login->token = $user->auth_key;
                 $login->id = $user->id;
@@ -71,11 +72,3 @@ class LoginController extends ActiveController
 
 }
 
-class Login{
-
-    public $success;
-    public $token;
-    public $id;
-    public $primeiro_nome;
-    public $ultimo_nome;
-}

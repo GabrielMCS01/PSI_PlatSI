@@ -2,6 +2,8 @@
 
 namespace app\modules\v1\controllers;
 
+use app\modules\v1\models\ResponsePerfil;
+use app\modules\v1\models\ResponseUpdatePerfil;
 use common\models\User;
 use Yii;
 use yii\filters\auth\QueryParamAuth;
@@ -33,6 +35,7 @@ class UserController extends ActiveController
         $actions['create'] = null;
         $actions['index'] = null;
 
+
         return $actions;
     }
 
@@ -42,7 +45,17 @@ class UserController extends ActiveController
 
         // Verifica se o utilizador que acede é o mesmo que este está a chamar os dados e se tem a permissão
         if(Yii::$app->user->can('viewProfile', ['user' => $user])){
-            return $user;
+
+            $response = new ResponsePerfil();
+
+            $response->primeiro_nome = $user->userinfo->primeiro_nome;
+            $response->ultimo_nome = $user->userinfo->ultimo_nome;
+            if($user->userinfo->data_nascimento == null){
+                $response->data_nascimento = "nulo";
+            }else {
+                $response->data_nascimento = $user->userinfo->data_nascimento;
+            }
+            return $response;
         }
         else{
             return "O utilizador não tem permissões para visualizar outros utilizadores";
@@ -57,16 +70,23 @@ class UserController extends ActiveController
         if(Yii::$app->user->can('updateProfile', ['user' => $user])) {
             // Recebe os dados enviados e atualiza-os
             // Verificar se o email é válido
-            $user->username = Yii::$app->request->post('username');
             $user->userinfo->primeiro_nome = Yii::$app->request->post('primeiro_nome');
             $user->userinfo->ultimo_nome = Yii::$app->request->post('ultimo_nome');
-            $user->userinfo->data_nascimento = Yii::$app->request->post('data_nascimento');
+            $date = strtotime(Yii::$app->request->post('data_nascimento'));
+            $user->userinfo->data_nascimento = date("Y-m-d", $date);
 
+            $response = new ResponseUpdatePerfil();
             // Guarda as alterações do utilizador e das informações deste
-            $user->save();
-            $user->userinfo->save();
+            if($user->validate() && $user->userinfo->validate()) {
+                $user->save();
+                $user->userinfo->save();
 
-            return $user;
+                $response->success = true;
+            }else{
+                $response->success = false;
+            }
+
+            return $response;
         }
         else return "O utilizador não tem permissões para atualizar outros utilizadores";
     }
