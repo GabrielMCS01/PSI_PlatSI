@@ -61,9 +61,10 @@ class UserController extends Controller
 
         var_dump($user_info);
         var_dump($role_name);
-        return $this->render('view', [
+        /*return $this->render('view', [
             'model' => $this->findModel($id), 'role_name' => $role_name, 'user_info' => $user_info
-        ]);
+        ]);*/
+        return;
     }
 
     /**
