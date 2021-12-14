@@ -24,20 +24,20 @@ $this->params['breadcrumbs'][] = $this->title;
         <br>
         <div class="row">
             <div class="col-lg-3">
+                <br>
             </div>
             <div class="col-lg-3">
-                <ul>
-                    <li><strong>Tempo: </strong><?= Converter::secondsToHours($model->duracao)?></li>
-                    <li><strong>Distancia: </strong><?= $model->duracao?></li>
-                </ul>
-            </div>
-            <div class="col-lg-6">
-                <ul>
-                    <li><strong>Velocidade Média: </strong> <?=$model->velocidade_media?></li>
-                    <li><strong>Velocidade Máxima: </strong><?=$model->velocidade_maxima?></li>
-                </ul>
+                    <strong>Tempo: </strong><?= Converter::secondsToHours($model->duracao)?>
+                    <br>
+                    <strong>Distancia: </strong><?= $model->duracao?>
             </div>
             <div class="col-lg-3">
+                    <strong>Velocidade Média: </strong> <?=$model->velocidade_media?>
+                    <br>
+                    <strong>Velocidade Máxima: </strong><?=$model->velocidade_maxima?>
+            </div>
+            <div class="col-lg-3">
+                <br>
             </div>
         </div>
     </div>

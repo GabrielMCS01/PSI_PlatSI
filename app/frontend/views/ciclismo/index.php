@@ -19,16 +19,15 @@ $this->params['breadcrumbs'][] = $this->title;
         <h5><?=$ciclismo->data_treino?></h5>
         <div class="row">
             <div class="col-lg-6">
-            <ul>
-                <li><strong>Tempo: </strong><?= Converter::secondsToHours($ciclismo->duracao)?></li>
-                <li><strong>Distancia: </strong><?= $ciclismo->duracao?></li>
+                <strong>Tempo: </strong><?= Converter::secondsToHours($ciclismo->duracao)?>
+                <br>
+                <strong>Distancia: </strong><?= $ciclismo->duracao?>
             </ul>
             </div>
             <div class="col-lg-6">
-                <ul>
-                    <li><strong>Velocidade Média: </strong> <?=$ciclismo->velocidade_media?></li>
-                    <li><strong>Velocidade Máxima: </strong><?=$ciclismo->velocidade_maxima?></li>
-                </ul>
+                    <strong>Velocidade Média: </strong> <?=$ciclismo->velocidade_media?>
+                    <br>
+                    <strong>Velocidade Máxima: </strong><?=$ciclismo->velocidade_maxima?>
             </div>
         </div>
     </div>
