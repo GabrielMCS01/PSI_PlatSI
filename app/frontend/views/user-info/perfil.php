@@ -4,9 +4,12 @@
 /* @var $form yii\bootstrap4\ActiveForm */
 /* @var $model \common\models\UserInfo */
 
+use kartik\dialog\Dialog;
+use yii\bootstrap4\BootstrapAsset;
 use yii\bootstrap4\Html;
 use yii\bootstrap4\ActiveForm;
 use yii\jui\DatePicker;
+use kartik\dialog\DialogAsset;
 
 $this->title = 'Perfil';
 $this->params['breadcrumbs'][] = $this->title;
@@ -32,10 +35,16 @@ $this->params['breadcrumbs'][] = $this->title;
                 ]) ?>
 
                 <div class="form-group">
-                    <?= Html::submitButton('Guardar Alterações', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
+                    <?= Html::submitButton('Guardar Alterações', ['class' => 'btn btn-primary', 'name' => 'update-button']) ?>
                 </div>
                 <?php ActiveForm::end(); ?>
-                <?= Html::button('Apagar', ['class' => 'btn btn-danger', 'name' => 'login-button']) ?>
+                <?= Dialog::widget(['overrideYiiConfirm' => true]);?>
+                <?=Html::a(
+                    'Delete',
+                    ['/user-info/delete'],
+                    [
+                        'data-confirm' => 'Deseja apagar este perfil?',
+                        'class' => 'btn btn-danger'])?>
             </div>
         </div>
     </div>
