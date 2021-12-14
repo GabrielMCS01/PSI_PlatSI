@@ -44,6 +44,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     ['/user-info/delete'],
                     [
                         'data-confirm' => 'Deseja apagar este perfil?',
+                        'data-method' => 'post',
                         'class' => 'btn btn-danger'])?>
             </div>
         </div>
