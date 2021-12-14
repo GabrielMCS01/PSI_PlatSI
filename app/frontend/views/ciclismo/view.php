@@ -23,7 +23,9 @@ $this->params['breadcrumbs'][] = $this->title;
         <div id='map' style='height: 300px;'></div>
         <br>
         <div class="row">
-            <div class="col-lg-6">
+            <div class="col-lg-3">
+            </div>
+            <div class="col-lg-3">
                 <ul>
                     <li><strong>Tempo: </strong><?= Converter::secondsToHours($model->duracao)?></li>
                     <li><strong>Distancia: </strong><?= $model->duracao?></li>
@@ -34,6 +36,8 @@ $this->params['breadcrumbs'][] = $this->title;
                     <li><strong>Velocidade Média: </strong> <?=$model->velocidade_media?></li>
                     <li><strong>Velocidade Máxima: </strong><?=$model->velocidade_maxima?></li>
                 </ul>
+            </div>
+            <div class="col-lg-3">
             </div>
         </div>
     </div>
