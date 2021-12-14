@@ -3,9 +3,11 @@
 use common\utils\Converter;
 use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\widgets\LinkPager;
 
 /* @var $this yii\web\View */
-/* @var this $ciclismos */
+/* @var $ciclismos */
+/* @var $pagination */
 
 $this->title = 'Historico';
 $this->params['breadcrumbs'][] = $this->title;
@@ -32,6 +34,8 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
     </div>
     <?php }?>
+
+    <?= LinkPager::widget(['pagination' => $pagination]) ?>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <?php /*GridView::widget([

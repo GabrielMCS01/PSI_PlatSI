@@ -5,6 +5,7 @@ namespace frontend\controllers;
 use common\models\Ciclismo;
 use app\models\CiclismoSearch;
 use Yii;
+use yii\data\Pagination;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -49,7 +50,12 @@ class CiclismoController extends Controller
 
         $ciclismos = Ciclismo::find()->where(['user_id' => Yii::$app->user->getId()])->all();
 
-        return $this->render('index', ["ciclismos" => $ciclismos]);
+
+        $pagination = new Pagination(['defaultPageSize' => 10, 'totalCount' => count($ciclismos),]);
+
+        $ciclismos = Ciclismo::find()->where(['user_id' => Yii::$app->user->getId()])->offset($pagination->offset)->limit($pagination->limit)->all();
+
+        return $this->render('index', ["ciclismos" => $ciclismos, "pagination" => $pagination]);
     }
 
     /**
