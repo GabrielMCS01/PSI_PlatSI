@@ -6,6 +6,9 @@ use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\User */
+/* @var $role_name */
+/* @var $user_info */
+
 
 $this->title = "Users: $model->id";
 $this->params['breadcrumbs'][] = ['label' => 'Users', 'url' => ['index']];
@@ -34,18 +37,22 @@ YiiAsset::register($this);
                             'id',
                             'username',
                             [
-                                'label' => 'Data de Nascimento',
-                                'value' => $model->userinfo->data_nascimento,
+                                'label' => 'Primeiro Nome',
+                                'value' => $user_info->primeiro_nome,
                             ],
-                            //'auth_key',
-                            //'password_hash',
-                            //'password_reset_token',
+                            [
+                                'label' => 'Ultimo Nome',
+                                'value' => $user_info->ultimo_nome,
+                            ],
+                            [
+                                'label' => 'Data de Nascimento',
+                                'value' => $user_info->data_nascimento,
+                            ],
                             'email:email',
-                            //'status',
-                            //'created_at',
-                            //'updated_at',
-                            //'verification_token'
-                            'role_name',
+                            [
+                                'label' => 'Tipo de Utilizador',
+                                'value' => $role_name,
+                            ],
                         ],
                     ]) ?>
                 </div>

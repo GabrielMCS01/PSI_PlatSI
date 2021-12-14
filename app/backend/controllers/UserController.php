@@ -3,6 +3,7 @@
 namespace backend\controllers;
 
 use common\models\AuthAssignment;
+use common\models\UserInfo;
 use Yii;
 use common\models\User;
 use common\models\UserSearch;
@@ -54,12 +55,12 @@ class UserController extends Controller
     public function actionView($id)
     {
         $auth_model = AuthAssignment::find()->where(['user_id' => $id])->one();
+        $role_name = $auth_model->item_name;
 
-        $model = $this->findModel($id);
-        $model->role_name = $auth_model->item_name;
+        $user_info = UserInfo::find()->where(['user_id' => $id])->one();
 
         return $this->render('view', [
-            'model' => $model
+            'model' => $this->findModel($id), 'role_name' => $role_name, 'user_info' => $user_info
         ]);
     }
 
