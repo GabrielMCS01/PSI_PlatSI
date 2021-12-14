@@ -23,7 +23,7 @@ YiiAsset::register($this);
                         <?= Html::a('Delete', ['delete', 'id' => $model->id], [
                             'class' => 'btn btn-danger',
                             'data' => [
-                                'confirm' => 'Are you sure you want to delete this item?',
+                                'confirm' => 'Pretende apagar este utilizador?',
                                 'method' => 'post',
                             ],
                         ]) ?>
@@ -33,14 +33,14 @@ YiiAsset::register($this);
                         'attributes' => [
                             'id',
                             'username',
-                            'auth_key',
-                            'password_hash',
-                            'password_reset_token',
+                            //'auth_key',
+                            //'password_hash',
+                            //'password_reset_token',
                             'email:email',
                             'status',
-                            'created_at',
-                            'updated_at',
-                            'verification_token',
+                            //'created_at',
+                            //'updated_at',
+                            //'verification_token',
                         ],
                     ]) ?>
                 </div>
