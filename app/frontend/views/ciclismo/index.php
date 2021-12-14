@@ -1,9 +1,9 @@
 <?php
 
 use common\utils\Converter;
+use yii\bootstrap4\LinkPager;
 use yii\helpers\Html;
 use yii\grid\GridView;
-use yii\widgets\LinkPager;
 
 /* @var $this yii\web\View */
 /* @var $ciclismos */
