@@ -2,6 +2,7 @@
 
 namespace app\modules\v1\controllers;
 
+use app\modules\v1\models\ResponseDeletePerfil;
 use app\modules\v1\models\ResponsePerfil;
 use app\modules\v1\models\ResponseUpdatePerfil;
 use common\models\User;
@@ -103,8 +104,12 @@ class UserController extends ActiveController
 
             $user = null;
 
-            if ($user == null) return "Utilizador apagado com sucesso";
-            else return "Erro ao apagar utilizador";
+            $response = new ResponseDeletePerfil();
+
+            if ($user == null) $response->success = true;
+            else $response->success = false;
+
+            return $response;
         }
         else{
             return "O utilizador não tem permissões para apagar outros utilizadores";

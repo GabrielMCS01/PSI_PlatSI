@@ -3,6 +3,7 @@
 namespace app\modules\v1\controllers;
 
 use app\modules\v1\models\ResponseCreateCiclismo;
+use app\modules\v1\models\ResponseDeleteCiclismo;
 use app\modules\v1\models\ResponseSync;
 use app\modules\v1\models\ResponseUpdateCiclismo;
 use common\models\Ciclismo;
@@ -118,8 +119,11 @@ class CiclismoController extends ActiveController
 
             $treino = null;
 
-            if ($treino == null) return "Treino apagado com sucesso";
-            else return "Erro ao apagar treino";
+            $response = new ResponseDeleteCiclismo();
+
+            if ($treino == null) $response->success = true ;
+            else $response->success = false;
+            return $response;
         }
         else{
             return "O utilizador não tem permissões para apagar treinos de outros utilizadores";
