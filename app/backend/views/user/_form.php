@@ -12,8 +12,8 @@ use yii\bootstrap4\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, '')->dropdownList([
-        [10 => "Admin", 9 => 'Item B', 'c' => 'Item C']
+    <?= $form->field($model, 'item_name')->dropdownList([
+        ['Admin' => 'Administrador', 'User' => 'Utilizador']
     ]) ?>
 
     <div class="form-group">

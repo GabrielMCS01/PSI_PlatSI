@@ -33,14 +33,19 @@ YiiAsset::register($this);
                         'attributes' => [
                             'id',
                             'username',
+                            [
+                                'label' => 'Data de Nascimento',
+                                'value' => $model->userinfo->data_nascimento,
+                            ],
                             //'auth_key',
                             //'password_hash',
                             //'password_reset_token',
                             'email:email',
-                            'status',
+                            //'status',
                             //'created_at',
                             //'updated_at',
-                            //'verification_token',
+                            //'verification_token'
+                            'role_name',
                         ],
                     ]) ?>
                 </div>
