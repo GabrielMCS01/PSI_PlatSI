@@ -59,8 +59,6 @@ class UserController extends Controller
 
         $user_info = UserInfo::find()->where(['user_id' => $id])->one();
 
-        var_dump($user_info);
-        var_dump($role_name);
         return $this->render('view', [
             'model' => $this->findModel($id), 'role_name' => $role_name, 'user_info' => $user_info
         ]);
@@ -95,8 +93,16 @@ class UserController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        $auth_model = AuthAssignment::find()->where(['user_id' => $id])->one();
+
+        $user_info = UserInfo::find()->where(['user_id' => $id])->one();
+
+        // Receber cada post individualmente (variaveis e atribuir aos devidos models)
+        if ($model->load(Yii::$app->request->post())) {
+
+            if($model->save()){
+                return $this->redirect(['view', 'id' => $model->id, 'auth_model' => $auth_model, 'user_info' => $user_info]);
+            }
         }
 
         return $this->render('update', [
