@@ -98,8 +98,6 @@ class SiteController extends Controller
         $auth = Yii::$app->authManager;
 
         if (!Yii::$app->user->isGuest) {
-
-
             return $this->goHome();
         }
 
