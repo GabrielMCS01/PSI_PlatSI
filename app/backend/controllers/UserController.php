@@ -3,6 +3,7 @@
 namespace backend\controllers;
 
 use common\models\AuthAssignment;
+use common\models\AuthItem;
 use common\models\UserInfo;
 use Yii;
 use common\models\User;
@@ -93,6 +94,7 @@ class UserController extends Controller
     {
         $model = $this->findModel($id);
 
+        $roles = AuthItem::find()->select(['name'])->where(['type' => 1])->all();
         $auth_model = AuthAssignment::find()->where(['user_id' => $id])->one();
         $role_name = $auth_model->item_name;
 
@@ -103,15 +105,8 @@ class UserController extends Controller
 
             $user_info->load(Yii::$app->request->post());
             $auth_model->load(Yii::$app->request->post());
-            
-            switch ($auth_model->item_name){
-                case 0: $auth_model->item_name = 'admin';
-                    break;
-                case 1: $auth_model->item_name = 'moderator';
-                    break;
-                case 2: $auth_model->item_name = 'user';
-                    break;
-            }
+
+            $auth_model->item_name = $roles[$auth_model->item_name]->name;
 
             if($auth_model->save() && $user_info->save()){
                 return $this->redirect(['view', 'id' => $model->id]);
