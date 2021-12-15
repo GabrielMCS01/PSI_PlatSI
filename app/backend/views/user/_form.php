@@ -12,14 +12,14 @@ use yii\jui\DatePicker;
 /* @var $auth_model */
 
 $tipos_user = ['admin', 'moderador', 'user'];
-$tipo_user_selected = 2;
+$tipo_user_selected = 1;
 
 if ($role_name == 'admin'){
-    $tipo_user_selected = 'admin';
+    $tipo_user_selected = 0;
 } elseif ($role_name == 'moderator'){
-    $tipo_user_selected = 'moderator';
+    $tipo_user_selected = 1;
 } elseif ($role_name == 'user'){
-    $tipo_user_selected = 'user';
+    $tipo_user_selected = 2;
 }
 ?>
 
