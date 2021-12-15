@@ -7,17 +7,18 @@ use yii\jui\DatePicker;
 /* @var $this yii\web\View */
 /* @var $model common\models\User */
 /* @var $form yii\bootstrap4\ActiveForm */
+/* @var $roles */
 /* @var $role_name */
 /* @var $user_info */
 /* @var $auth_model */
 
-$tipos_user = [0 => 'admin', 1 => 'user'];
 $tipo_user_selected = 1;
 
-if ($role_name == 'admin'){
-    $tipo_user_selected = 0;
-} elseif ($role_name == 'user'){
-    $tipo_user_selected = 1;
+for ($i = 0; $i < count($roles); $i++){
+    if($roles[$i]->name == $role_name){
+        $tipo_user_selected = $i;
+    }
+    $tipos_user[$i] = $roles[$i]->name;
 }
 ?>
 
