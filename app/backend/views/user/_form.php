@@ -37,7 +37,7 @@ if ($role_name == 'admin'){
         'dateFormat' => 'yyyy-MM-dd',
     ]); ?>
 
-    <?= $form->field($auth_model, 'item_name')->dropDownList([$tipo_user_selected => ['Selected'=> true]], $tipos_user);?>
+    <?= $form->field($auth_model, 'item_name')->dropDownList($tipos_user, [$tipo_user_selected => ['Selected'=> true]]);?>
 
     <div class="form-group">
         <?= Html::submitButton('Guardar Alterações', ['class' => 'btn btn-success']) ?>
