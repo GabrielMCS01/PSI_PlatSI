@@ -29,6 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             'email:email',
                             [
                                 'label' => 'Tipo de Utilizador',
+                                'attribute' => 'item_name',
                                 'value' => function($data){
                                     return $data->authassignment->item_name;
                                 },
@@ -47,10 +48,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         'pager' => [
                             'class' => 'yii\bootstrap4\LinkPager',
                         ]
-                    ]);
-                    var_dump($dataProvider);?>
-
-
+                    ]); ?>
                 </div>
                 <!--.card-body-->
             </div>
