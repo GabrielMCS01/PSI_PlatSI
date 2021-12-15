@@ -12,7 +12,6 @@ use yii\jui\DatePicker;
 /* @var $auth_model */
 
 $tipos_user = [0 => 'admin', 1 => 'moderador', 2 => 'user'];
-$tipos_user = \yii\helpers\ArrayHelper::map($tipos_user, 'id' , 'item_name');
 $tipo_user_selected = 1;
 
 if ($role_name == 'admin'){
