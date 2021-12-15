@@ -1,5 +1,7 @@
 <?php
 
+use common\models\DeleteCommentRule;
+use common\models\DeletePostRule;
 use console\models\PerfilRule;
 use console\models\UserRule;
 use yii\db\Migration;
@@ -18,18 +20,22 @@ class m211102_131509_init_rbac extends Migration
     {
         $auth = Yii::$app->authManager;
 
-        // ------------------------------ USER ---------------------------------------------
-
+        // ----------------------------------- USER ---------------------------------------------
         $ruleUser = new UserRule;
         $rulePerfil = new PerfilRule;
+        $ruleDeletePost = new DeletePostRule();
+        $ruleDeleteComment = new DeleteCommentRule();
         $auth->add($ruleUser);
         $auth->add($rulePerfil);
+        $auth->add($ruleDeletePost);
+        $auth->add($ruleDeleteComment);
 
         // add "frontendAccess" permission
         $frontendAccess = $auth->createPermission('frontendAccess');
         $frontendAccess->description = 'Frontend Access';
         $auth->add($frontendAccess);
 
+        // ----------------------- ACTIVITY ------------------------------
         // add "createActivity" permission
         $createActivity = $auth->createPermission('createActivity');
         $createActivity->description = 'Create a Activity';
@@ -53,6 +59,7 @@ class m211102_131509_init_rbac extends Migration
         $viewActivity->ruleName = $ruleUser->name;
         $auth->add($viewActivity);
 
+        // ----------------------- PROFILE ---------------------------
         // add "updateProfile" permission
         $updateProfile = $auth->createPermission('updateProfile');
         $updateProfile->description = 'Update Profile (User logged)';
@@ -71,6 +78,34 @@ class m211102_131509_init_rbac extends Migration
         $viewProfile->ruleName = $rulePerfil->name;
         $auth->add($viewProfile);
 
+        // ------------------------ POSTS ---------------------------
+        // add "createPost" permission
+        $createPost = $auth->createPermission('createPost');
+        $createPost->description = 'Create Post (User logged)';
+        $auth->add($createPost);
+
+        // add "updatePost" permission
+        $updatePost = $auth->createPermission('updatePost');
+        $updatePost->description = 'Update Post (User logged)';
+        $auth->add($updatePost);
+
+        // add "deletePost" permission
+        $deletePost = $auth->createPermission('deletePost');
+        $deletePost->description = 'Delete Post (User logged) (Moderator can delete Posts made by any User)';
+        $deletePost->ruleName = $ruleDeletePost->name;
+        $auth->add($deletePost);
+
+        // ------------------------ COMMENTS -------------------------
+        // add "updateComment" permission
+        $updateComment = $auth->createPermission('updateComment');
+        $updateComment->description = 'Update Comment (User logged)';
+        $auth->add($updateComment);
+
+        // add "deletePost" permission
+        $deleteComment = $auth->createPermission('deleteComment');
+        $deleteComment->description = 'Delete Comment (User logged) (Moderator can delete Comments made by any User)';
+        $deleteComment->ruleName = $ruleDeleteComment->name;
+        $auth->add($deleteComment);
 
         // add "author" role and give him profile and activity roles
         $user = $auth->createRole('user');
@@ -83,6 +118,12 @@ class m211102_131509_init_rbac extends Migration
         $auth->addChild($user, $updateProfile);
         $auth->addChild($user, $deleteProfile);
         $auth->addChild($user, $viewProfile);
+        $auth->addChild($user, $createPost);
+        $auth->addChild($user, $updatePost);
+        $auth->addChild($user, $deletePost);
+        $auth->addChild($user, $updateComment);
+        $auth->addChild($user, $deleteComment);
+
         // ---------------------------- USER --------------------------------------
 
         // ---------------------------- ADMIN -------------------------------------
@@ -96,6 +137,14 @@ class m211102_131509_init_rbac extends Migration
         $auth->add($admin);
         $auth->addChild($admin, $backendAccess);
         // --------------------------- ADMIN ---------------------------------------
+
+        // -------------------------- MODERADOR ------------------------------------
+        // add "moderador" role
+        $moderador = $auth->createRole('moderador');
+        $auth->add($moderador);
+        $auth->addChild($moderador, $user);
+
+        // -------------------------- MODERADOR ------------------------------------
     }
 
     /**

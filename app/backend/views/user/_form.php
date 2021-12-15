@@ -19,14 +19,14 @@ use yii\jui\DatePicker;
 
     <?= $form->field($user_info, 'ultimo_nome')->textInput(); ?>
 
-    <?= $form->field($model, 'data_nascimento')->widget(DatePicker::classname(), [
+    <?= $form->field($user_info, 'data_nascimento')->widget(DatePicker::classname(), [
         'language' => 'pt',
         'options' => ['class' => 'form-control'],
         'dateFormat' => 'yyyy-MM-dd',
     ]) ?>
 
     <?= $form->field($auth_model, 'item_name')->dropdownList([
-        ['Admin' => 'Administrador', 'User' => 'Utilizador']])->select($auth_model->item_name); ?>
+        ['Admin' => 'Administrador', 'Moderador' => 'Moderador' ,'User' => 'Utilizador']])->select($auth_model->item_name); ?>
 
     <div class="form-group">
         <?= Html::submitButton('Guardar Alterações', ['class' => 'btn btn-success']) ?>
