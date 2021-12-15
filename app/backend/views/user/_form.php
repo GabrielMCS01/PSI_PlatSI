@@ -37,9 +37,9 @@ if ($role_name == 'admin'){
         'dateFormat' => 'yyyy-MM-dd',
     ]); ?>
 
-    <? var_dump($tipo_user_selected);
-        var_dump($tipos_user);
-        var_dump($auth_model);?>
+    <?= var_dump($tipo_user_selected);
+        echo var_dump($tipos_user);
+        echo var_dump($auth_model);?>
     <?= $form->field($auth_model, 'item_name')->dropDownList($tipos_user, [$tipo_user_selected => ['Selected'=> true]]);?>
 
     <div class="form-group">
