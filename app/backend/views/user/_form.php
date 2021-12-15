@@ -26,7 +26,23 @@ use yii\jui\DatePicker;
     ]) ?>
 
     <?= $form->field($auth_model, 'item_name')->dropdownList([
-        ['Admin' => 'Administrador', 'Moderador' => 'Moderador' ,'User' => 'Utilizador']])->select($auth_model->item_name); ?>
+        'options' => \common\models\AuthItem::find()->where(['type' => 1])->all()]);
+            /*'Administrador'
+                ['value' => 'Admin',
+                if ($auth_model->item_name == 'Admin'){
+                    'selected' => true;
+                }],
+
+                /*'options' => [
+         $company_id => [
+            'selected' => 'selected',
+            'label' => 'test'
+        ]*/
+
+
+
+           /* 'Moderador' => 'Moderador',
+            'User' => 'Utilizador']]);*/ ?>
 
     <div class="form-group">
         <?= Html::submitButton('Guardar Alterações', ['class' => 'btn btn-success']) ?>
