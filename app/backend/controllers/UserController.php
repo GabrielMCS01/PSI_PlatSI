@@ -45,7 +45,7 @@ class UserController extends Controller
 
         $i = 0;
         foreach ($roles as $role){
-            $usersTypes = AuthAssignment::find()->where(['name' => $role])->all();
+            $usersTypes = AuthAssignment::find()->where(['item_name' => $role])->all();
             $j = 0;
             foreach ($usersTypes as $userID){
                 foreach ($users as $user){
