@@ -23,7 +23,6 @@ $this->title = Yii::$app->name;
     </div>
 
     <div class="body-content">
-
         <div class="row">
             <div class="col-lg-4">
                 <h3>TOP 10 - Distancia</h3>
