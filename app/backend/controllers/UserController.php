@@ -56,12 +56,12 @@ class UserController extends Controller
     public function actionView($id)
     {
         $auth_model = AuthAssignment::find()->where(['user_id' => $id])->one();
-        $role_name = $this->authassigment->item_name;
+        //$role_name = $this->authassigment->item_name;
 
         $user_info = UserInfo::find()->where(['user_id' => $id])->one();
 
         return $this->render('view', [
-            'model' => $this->findModel($id), 'role_name' => $role_name, 'user_info' => $user_info
+            'model' => $this->findModel($id), /*'role_name' => $role_name,*/ 'user_info' => $user_info
         ]);
 
     }
