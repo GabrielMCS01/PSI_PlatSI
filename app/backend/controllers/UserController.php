@@ -106,8 +106,8 @@ class UserController extends Controller
             $user_info->primeiro_nome = Yii::$app->request->post("primeiro_nome");
             $user_info->ultimo_nome = Yii::$app->request->post("ultimo_nome");
             $user_info->data_nascimento = Yii::$app->request->post("data_nascimento");
-
-            $auth_model->item_name = $tipos_user[Yii::$app->request->post("item_name")];
+            var_dump($user_info);
+            $auth_model->item_name = Yii::$app->request->post("item_name");
 
             if($model->save() && $auth_model->save() && $user_info->save()){
                 return $this->redirect(['view', 'id' => $model->id]);
