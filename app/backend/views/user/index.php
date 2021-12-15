@@ -29,7 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             'email:email',
                             [
                                 'label' => 'Tipo de Utilizador',
-                                'value' => $dataProvider->authassignment->item_name,
+                                'value' => $searchModel->authassignment->item_name,
                             ],
                             //'auth_key',
                             //'password_hash',
