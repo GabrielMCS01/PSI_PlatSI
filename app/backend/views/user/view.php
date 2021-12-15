@@ -10,8 +10,8 @@ use yii\widgets\DetailView;
 /* @var $user_info */
 
 
-$this->title = "Users: $model->id";
-$this->params['breadcrumbs'][] = ['label' => 'Users', 'url' => ['index']];
+$this->title = "User: $model->username";
+$this->params['breadcrumbs'][] = ['label' => 'User', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 YiiAsset::register($this);
 ?>

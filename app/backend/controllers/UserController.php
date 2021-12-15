@@ -98,15 +98,20 @@ class UserController extends Controller
         $user_info = UserInfo::find()->where(['user_id' => $id])->one();
 
         // Receber cada post individualmente (variaveis e atribuir aos devidos models)
-        if ($model->load(Yii::$app->request->post())) {
+        if (Yii::$app->request->isPost) {
+            $user_info->primeiro_nome = Yii::$app->request->post("primeiro_nome");
+            $user_info->ultimo_nome = Yii::$app->request->post("ultimo_nome");
+            $user_info->data_nascimento = Yii::$app->request->post("data_nascimento");
 
-            if($model->save()){
-                return $this->redirect(['view', 'id' => $model->id, 'auth_model' => $auth_model, 'user_info' => $user_info]);
+            $auth_model->item_name = Yii::$app->request->post("item_name");
+
+            if($model->save() && $auth_model->save() && $user_info->save()){
+                return $this->redirect(['view', 'id' => $model->id]);
             }
         }
 
         return $this->render('update', [
-            'model' => $model,
+            'model' => $model, 'auth_model' => $auth_model, 'user_info' => $user_info
         ]);
     }
 
