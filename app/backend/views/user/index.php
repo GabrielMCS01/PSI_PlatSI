@@ -33,11 +33,12 @@ for ($i = 0; $i < count($roles); $i++){
                             'username',
                             'email:email',
                             [
-                                'filter' => $tipos_user,
                                 'label' => 'Tipo de Utilizador',
                                 'value' => function($data){
                                     return $data->authassignment->item_name;
                                 },
+                                'filterInputOptions' => ['prompt' => 'Todos os Roles', 'class' => 'form-control', 'id' => null],
+                                'filter' => $tipos_user,
                             ],
                             //'auth_key',
                             //'password_hash',
