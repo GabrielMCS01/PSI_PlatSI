@@ -38,12 +38,14 @@ class UserController extends Controller
      */
     public function actionIndex()
     {
+        $roles = AuthItem::find()->select(['name'])->where(['type' => 1])->all();
         $searchModel = new UserSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'roles' => $roles,
         ]);
     }
 

@@ -6,9 +6,14 @@ use yii\grid\GridView;
 /* @var $this yii\web\View */
 /* @var $searchModel common\models\UserSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
+/* @var $roles */
 
 $this->title = 'Utilizadores';
 $this->params['breadcrumbs'][] = $this->title;
+
+for ($i = 0; $i < count($roles); $i++){
+    $tipos_user[$i] = $roles[$i]->name;
+}
 ?>
 <div class="container-fluid">
     <div class="row">
@@ -28,8 +33,8 @@ $this->params['breadcrumbs'][] = $this->title;
                             'username',
                             'email:email',
                             [
+                                'filter' => $tipos_user,
                                 'label' => 'Tipo de Utilizador',
-                                'attribute' => 'item_name',
                                 'value' => function($data){
                                     return $data->authassignment->item_name;
                                 },
