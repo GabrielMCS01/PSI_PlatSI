@@ -51,7 +51,7 @@ YiiAsset::register($this);
                             'email:email',
                             [
                                 'label' => 'Tipo de Utilizador',
-                                'value' => $role_name,
+                                'value' => $model->authassignment->item_name,
                             ],
                         ],
                     ]) ?>

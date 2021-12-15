@@ -27,6 +27,10 @@ $this->params['breadcrumbs'][] = $this->title;
                             'id',
                             'username',
                             'email:email',
+                            [
+                                'label' => 'Tipo de Utilizador',
+                                'value' => $dataProvider->authassignment->item_name,
+                            ],
                             //'auth_key',
                             //'password_hash',
                             //'password_reset_token',

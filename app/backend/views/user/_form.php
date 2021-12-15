@@ -34,10 +34,7 @@ for ($i = 0; $i < count($roles); $i++){
         'language' => 'pt',
         'options' => ['class' => 'form-control'],
         'dateFormat' => 'yyyy-MM-dd',
-    ]);
-
-    var_dump($tipos_user);?>
-
+    ]); ?>
 
     <?= $form->field($auth_model, 'item_name')->dropDownList($tipos_user, ['options' => [$tipo_user_selected => ['Selected'=> true]]]);?>
 

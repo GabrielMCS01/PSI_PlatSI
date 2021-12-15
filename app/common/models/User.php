@@ -214,4 +214,9 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return $this->hasOne(UserInfo::className(), ['user_id' => 'id']);
     }
+
+    public function getAuthassignment()
+    {
+        return $this->hasOne(AuthAssignment::className(), ['user_id' => 'id']);
+    }
 }
