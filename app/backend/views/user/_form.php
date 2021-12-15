@@ -19,7 +19,7 @@ use yii\bootstrap4\ActiveForm;
     <?= $form->field($user_info, 'data_nascimento')->textInput(); ?>
 
     <?= $form->field($auth_model, 'item_name')->dropdownList([
-        ['Admin' => 'Administrador', 'User' => 'Utilizador']]) ?>
+        ['Admin' => 'Administrador', 'User' => 'Utilizador']]); ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
