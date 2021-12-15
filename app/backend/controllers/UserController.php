@@ -94,6 +94,7 @@ class UserController extends Controller
         $model = $this->findModel($id);
 
         $auth_model = AuthAssignment::find()->where(['user_id' => $id])->one();
+        $role_name = $auth_model->item_name;
 
         $user_info = UserInfo::find()->where(['user_id' => $id])->one();
 
@@ -111,7 +112,7 @@ class UserController extends Controller
         }
 
         return $this->render('update', [
-            'model' => $model, 'auth_model' => $auth_model, 'user_info' => $user_info
+            'model' => $model, 'auth_model' => $auth_model ,'role_name' => $role_name, 'user_info' => $user_info
         ]);
     }
 

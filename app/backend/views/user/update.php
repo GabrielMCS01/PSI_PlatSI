@@ -2,8 +2,9 @@
 
 /* @var $this yii\web\View */
 /* @var $model common\models\User */
-/* @var $auth_model */
+/* @var $role_name */
 /* @var $user_info */
+/* @var $auth_model */
 
 $this->title = 'Atualizar Utilizador: ' . $model->username;
 $this->params['breadcrumbs'][] = ['label' => 'User', 'url' => ['index']];
@@ -17,7 +18,7 @@ $this->params['breadcrumbs'][] = 'Update';
             <div class="row">
                 <div class="col-md-12">
                     <?=$this->render('_form', [
-                        'model' => $model, 'auth_model' => $auth_model, 'user_info' => $user_info
+                        'model' => $model, 'auth_model' => $auth_model, 'role_name' => $role_name, 'user_info' => $user_info
                     ]) ?>
                 </div>
             </div>
