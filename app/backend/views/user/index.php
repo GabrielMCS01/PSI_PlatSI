@@ -27,10 +27,10 @@ $this->params['breadcrumbs'][] = $this->title;
                             'id',
                             'username',
                             'email:email',
-                            [
+                            /*[
                                 'label' => 'Tipo de Utilizador',
                                 'value' => $searchModel->authassignment->item_name,
-                            ],
+                            ],*/
                             //'auth_key',
                             //'password_hash',
                             //'password_reset_token',
@@ -45,7 +45,8 @@ $this->params['breadcrumbs'][] = $this->title;
                         'pager' => [
                             'class' => 'yii\bootstrap4\LinkPager',
                         ]
-                    ]); ?>
+                    ]);
+                    var_dump($dataProvider);?>
 
 
                 </div>
