@@ -11,7 +11,7 @@ use yii\jui\DatePicker;
 /* @var $user_info */
 /* @var $auth_model */
 
-$tipos_user = array('admin', 'moderador', 'user');
+$tipos_user = ['admin', 'moderador', 'user'];
 $tipo_user_selected = 2;
 
 if ($role_name == 'admin'){
@@ -37,8 +37,7 @@ if ($role_name == 'admin'){
         'dateFormat' => 'yyyy-MM-dd',
     ]); ?>
 
-    <?= $form->field($auth_model, 'item_name')->dropDownList($tipos_user)
-        ,['options' =>  [$tipo_user_selected => ['Selected'=>'selected']]];?>
+    <?= $form->field($auth_model, 'item_name')->dropDownList($tipos_user, [$tipo_user_selected => ['Selected'=> true]]);?>
 
     <div class="form-group">
         <?= Html::submitButton('Guardar Alterações', ['class' => 'btn btn-success']) ?>
