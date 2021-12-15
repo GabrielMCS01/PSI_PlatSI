@@ -10,7 +10,16 @@ use yii\jui\DatePicker;
 /* @var $auth_model */
 /* @var $user_info */
 
-$tipos_user = array('Admin', 'Moderador', 'User');
+$tipos_user = array('admin', 'moderador', 'user');
+$tipo_user_selected = -1;
+
+if ($auth_model->item_name == 'admin'){
+    $tipo_user_selected = 0;
+} elseif ($auth_model->item_name == 'moderator'){
+    $tipo_user_selected = 1;
+} elseif ($auth_model->item_name == 'user'){
+    $tipo_user_selected = 2;
+}
 ?>
 
 <div class="user-form">
@@ -25,9 +34,9 @@ $tipos_user = array('Admin', 'Moderador', 'User');
         'language' => 'pt',
         'options' => ['class' => 'form-control'],
         'dateFormat' => 'yyyy-MM-dd',
-    ]) ?>
+    ]); ?>
 
-    <?= $form->field($auth_model, 'item_name')->dropDownList($tipos_user, $tipos_user); ?>
+    <?= $form->field($auth_model, 'item_name')->dropDownList($tipos_user, [$tipo_user_selected => ['Selected'=>'selected']]);?>
 
     <div class="form-group">
         <?= Html::submitButton('Guardar Alterações', ['class' => 'btn btn-success']) ?>
