@@ -39,7 +39,6 @@ if ($role_name == 'admin'){
 
     <?= $form->field($auth_model, 'item_name')->dropDownList($tipos_user, ['options' => [$tipo_user_selected => ['Selected'=> true]]]);?>
 
-    <?= var_dump($form)?>
     <div class="form-group">
         <?= Html::submitButton('Guardar Alterações', ['class' => 'btn btn-success']) ?>
     </div>

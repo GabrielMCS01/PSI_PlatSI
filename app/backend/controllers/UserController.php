@@ -100,6 +100,8 @@ class UserController extends Controller
 
         // Receber cada post individualmente (variaveis e atribuir aos devidos models)
         if (Yii::$app->request->isPost) {
+            var_dump(Yii::$app->request->Post("item_name"));
+
             $user_info->primeiro_nome = Yii::$app->request->post("primeiro_nome");
             $user_info->ultimo_nome = Yii::$app->request->post("ultimo_nome");
             $user_info->data_nascimento = Yii::$app->request->post("data_nascimento");
