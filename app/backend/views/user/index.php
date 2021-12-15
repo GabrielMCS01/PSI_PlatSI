@@ -23,8 +23,10 @@ for ($i = 0; $i < count($roles); $i++){
                     <div class="row mb-2">
                     </div>
 
-                    <?= GridView::widget([
-                        'dataProvider' => $dataProvider,
+                    <?php
+                    foreach ($dataProvider as $datas) {
+                        echo GridView::widget([
+                        'dataProvider' => $datas,
                         'filterModel' => $searchModel,
                         'columns' => [
                             ['class' => 'yii\grid\SerialColumn'],
@@ -54,7 +56,8 @@ for ($i = 0; $i < count($roles); $i++){
                         'pager' => [
                             'class' => 'yii\bootstrap4\LinkPager',
                         ]
-                    ]); ?>
+                    ]);
+                    }?>
                 </div>
                 <!--.card-body-->
             </div>

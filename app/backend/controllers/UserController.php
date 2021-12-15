@@ -8,6 +8,7 @@ use common\models\UserInfo;
 use Yii;
 use common\models\User;
 use common\models\UserSearch;
+use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -39,8 +40,36 @@ class UserController extends Controller
     public function actionIndex()
     {
         $roles = AuthItem::find()->select(['name'])->where(['type' => 1])->all();
+
+        $users = User::find()->all();
+
+        $i = 0;
+        foreach ($roles as $role){
+            $usersTypes = AuthAssignment::find()->where(['name' => $role])->all();
+            $j = 0;
+            foreach ($usersTypes as $userID){
+                foreach ($users as $user){
+                    if($userID->user_id == $user->id){
+                        $data[$j] = $user;
+                        $j++;
+                        break;
+                    }
+                }
+            }
+            $datas[$i] = $data;
+            $i++;
+        }
+
+        for($i = 0; $i < count($datas); $i++){
+            $dataProvider[$i] = new ActiveDataProvider([
+                'query' => $datas[$i],
+                'pagination' => [
+                    'pageSize' => 10
+                ]
+            ]);
+        }
+
         $searchModel = new UserSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
