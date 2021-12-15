@@ -100,13 +100,14 @@ class UserController extends Controller
 
         // Receber cada post individualmente (variaveis e atribuir aos devidos models)
         if (Yii::$app->request->isPost) {
+            $tipos_user = [0 => 'admin', 1 => 'moderador', 2 => 'user'];
             var_dump(Yii::$app->request->post("data_nascimento"));
 
             $user_info->primeiro_nome = Yii::$app->request->post("primeiro_nome");
             $user_info->ultimo_nome = Yii::$app->request->post("ultimo_nome");
             $user_info->data_nascimento = Yii::$app->request->post("data_nascimento");
 
-            $auth_model->item_name = Yii::$app->request->post("item_name");
+            $auth_model->item_name = $tipos_user[Yii::$app->request->post("item_name")];
 
             if($model->save() && $auth_model->save() && $user_info->save()){
                 return $this->redirect(['view', 'id' => $model->id]);
