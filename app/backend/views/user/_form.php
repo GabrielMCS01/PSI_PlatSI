@@ -9,6 +9,8 @@ use yii\jui\DatePicker;
 /* @var $form yii\bootstrap4\ActiveForm */
 /* @var $auth_model */
 /* @var $user_info */
+
+$tipos_user = array('Admin', 'Moderador', 'User');
 ?>
 
 <div class="user-form">
@@ -25,24 +27,7 @@ use yii\jui\DatePicker;
         'dateFormat' => 'yyyy-MM-dd',
     ]) ?>
 
-    <?= $form->field($auth_model, 'item_name')->dropdownList([
-        'options' => \common\models\AuthItem::find()->where(['type' => 1])->all()]);
-            /*'Administrador'
-                ['value' => 'Admin',
-                if ($auth_model->item_name == 'Admin'){
-                    'selected' => true;
-                }],
-
-                /*'options' => [
-         $company_id => [
-            'selected' => 'selected',
-            'label' => 'test'
-        ]*/
-
-
-
-           /* 'Moderador' => 'Moderador',
-            'User' => 'Utilizador']]);*/ ?>
+    <?= $form->field($model, 'company_id')->dropDownList($auth_model->item_name, $tipos_user); ?>
 
     <div class="form-group">
         <?= Html::submitButton('Guardar Alterações', ['class' => 'btn btn-success']) ?>
