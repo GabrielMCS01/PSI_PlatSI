@@ -27,10 +27,12 @@ $this->params['breadcrumbs'][] = $this->title;
                             'id',
                             'username',
                             'email:email',
-                            /*[
+                            [
                                 'label' => 'Tipo de Utilizador',
-                                'value' => $this->authassignment->item_name,
-                            ],*/
+                                'value' => function($data){
+                                    return $data->authassignment->item_name;
+                                },
+                            ],
                             //'auth_key',
                             //'password_hash',
                             //'password_reset_token',
