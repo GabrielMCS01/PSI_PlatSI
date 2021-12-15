@@ -27,7 +27,7 @@ $tipos_user = array('Admin', 'Moderador', 'User');
         'dateFormat' => 'yyyy-MM-dd',
     ]) ?>
 
-    <?= $form->field($auth_model, 'item_name')->dropDownList($tipos_user); ?>
+    <?= $form->field($auth_model, 'item_name')->dropDownList($tipos_user, $tipos_user); ?>
 
     <div class="form-group">
         <?= Html::submitButton('Guardar Alterações', ['class' => 'btn btn-success']) ?>
