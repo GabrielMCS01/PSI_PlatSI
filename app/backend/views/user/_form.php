@@ -15,11 +15,11 @@ $tipos_user = ['admin', 'moderador', 'user'];
 $tipo_user_selected = 2;
 
 if ($role_name == 'admin'){
-    $tipo_user_selected = 0;
+    $tipo_user_selected = 'admin';
 } elseif ($role_name == 'moderator'){
-    $tipo_user_selected = 1;
+    $tipo_user_selected = 'moderator';
 } elseif ($role_name == 'user'){
-    $tipo_user_selected = 2;
+    $tipo_user_selected = 'user';
 }
 ?>
 
