@@ -42,8 +42,8 @@ AppAsset::register($this);
         ['label' => 'Home', 'url' => ['/site/index']],
     ];
     if (Yii::$app->user->isGuest) {
-        $menuItems[] = ['label' => 'Signup', 'url' => ['/site/signup']];
-        $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
+        $menuItems[] = ['label' => 'Registo', 'url' => ['/site/signup']];
+        $menuItems[] = ['label' => 'Iniciar sessão', 'url' => ['/site/login']];
     } else {
         $menuItems[] = ['label' => 'Histórico', 'url' => ['/ciclismo/index']];
         $menuItems[] = ['label' => 'Feed de noticias'];

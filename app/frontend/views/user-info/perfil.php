@@ -40,7 +40,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <?php ActiveForm::end(); ?>
                 <?= Dialog::widget(['overrideYiiConfirm' => true]);?>
                 <?=Html::a(
-                    'Delete',
+                    'Remover Perfil',
                     ['/user-info/delete'],
                     [
                         'data-confirm' => 'Deseja apagar este perfil?',
