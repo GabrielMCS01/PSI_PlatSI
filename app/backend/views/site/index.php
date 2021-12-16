@@ -44,7 +44,7 @@ $this->params['breadcrumbs'] = [['label' => "Informações da aplicação Ciclod
     <div class="row">
         <div class="col-md-4 col-sm-6 col-12">
             <?= InfoBox::widget([
-                'text' => 'Numero de sessões de treino',
+                'text' => 'Sessões de treino',
                 'number' => $numTreinos,
                 'icon' => 'fas fa-bicycle',
                 /*'progress' => [
@@ -59,10 +59,10 @@ $this->params['breadcrumbs'] = [['label' => "Informações da aplicação Ciclod
         <div class="col-lg-4 col-md-6 col-sm-6 col-12">
             <?= SmallBox::widget([
                 'title' => $numUsers,
-                'text' => 'Numero de Utilizadores Registados',
+                'text' => 'Utilizadores Registados',
                 'icon' => 'fas fa-user-plus',
                 'theme' => 'gradient-success',
-                'linkText' => 'Ver os utilizadores',
+                'linkText' => 'Ver todos os utilizadores',
                 'linkUrl' => 'user/index',
             ]) ?>
         </div>

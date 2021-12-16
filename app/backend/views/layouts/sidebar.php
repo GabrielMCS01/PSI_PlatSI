@@ -8,6 +8,12 @@ use yii\helpers\Url;
 $user = User::findOne(Yii::$app->user->getId())
 ?>
 
+<style>
+    i.fa-user-shield {
+        color: white;
+    }
+</style>
+
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="<?= Url::home()?>" class="brand-link">
@@ -20,7 +26,7 @@ $user = User::findOne(Yii::$app->user->getId())
         <!-- Sidebar user panel (optional) -->
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
             <div class="image">
-                <i class="fas fa-user-shield"></i>
+                <i class="fas fa-user-shield fa-2x"></i>
             </div>
             <div class="info">
                 <?= Html::a($user->username, ['user/view', 'id' => $user->id], ['data-method' => 'post', 'class' => 'd-block']); ?>

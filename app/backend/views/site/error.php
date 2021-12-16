@@ -21,7 +21,7 @@ $this->params['breadcrumbs'] = [['label' => $this->title]];
         <p>
             Ocorreu um erro a carregar a página pretendida, esta poderá estar em baixo ou não existir, o link abaixo
             redirecionará para a página principal
-            <?= Html::a(' Menu Principal', Yii::$app->homeUrl); ?>
+            <?= Html::a(', (Menu Principal)', Yii::$app->homeUrl); ?>
         </p>
     </div>
 </div>
