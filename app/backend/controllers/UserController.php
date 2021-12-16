@@ -41,7 +41,7 @@ class UserController extends Controller
     {
         $roles = AuthItem::find()->select(['name'])->where(['type' => 1])->all();
 
-        $users = User::find()->all();
+ /*       $users = User::find()->all();
 
         $i = 0;
         foreach ($roles as $role){
@@ -58,11 +58,11 @@ class UserController extends Controller
             }
             $datas[$i] = $data;
             $i++;
-        }
+        }*/
 
-        for($i = 0; $i < count($datas); $i++){
+        for($i = 0; $i < count($roles); $i++){
             $dataProvider[$i] = new ActiveDataProvider([
-                'query' => $datas[$i],
+                'query' => User::find()->innerJoin(['auth_assignment'], 'user.id = auth_assignment.user_id')->where(['auth_assignment.item_name' => $roles[$i]]),
                 'pagination' => [
                     'pageSize' => 10
                 ]
