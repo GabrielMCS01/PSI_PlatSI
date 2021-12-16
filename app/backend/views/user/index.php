@@ -26,9 +26,9 @@ for ($i = 0; $i < count($roles); $i++){
                     <?php
                     $i = 0;
 
-                    foreach ($dataProvider as $datas) {
-                        echo $tipos_user[$i];
-
+                    foreach ($dataProvider as $datas) { ?>
+                        <h3><?=$tipos_user[$i]?></h3>
+                        <?php
                         echo GridView::widget([
                         'dataProvider' => $datas,
                         'filterModel' => $searchModel,
