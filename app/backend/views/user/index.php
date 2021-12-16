@@ -27,7 +27,7 @@ for ($i = 0; $i < count($roles); $i++){
                     $i = 0;
 
                     foreach ($dataProvider as $datas) { ?>
-                        <h3 autocapitalize="on"><strong><?=$tipos_user[$i]?>s</strong></h3>
+                        <h3 style="text-transform: capitalize;"><strong><?=$tipos_user[$i]?>s</strong></h3>
                         <?php
                         echo GridView::widget([
                         'dataProvider' => $datas,
