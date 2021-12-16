@@ -1,7 +1,7 @@
 <?php
 
-use common\models\DeleteCommentRule;
-use common\models\DeletePostRule;
+use console\models\DeleteCommentRule;
+use console\models\DeletePostRule;
 use console\models\PerfilRule;
 use console\models\UserRule;
 use yii\db\Migration;
