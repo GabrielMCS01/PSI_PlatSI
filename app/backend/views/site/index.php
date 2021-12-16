@@ -11,6 +11,10 @@ use yii\helpers\Html;
 /* @var $velMedia  */
 /* @var $numUsers  */
 /* @var $numTreinos  */
+/* @var $numPublicacoes  */
+/* @var $numGostos  */
+/* @var $numComentarios  */
+
 $this->title = Yii::$app->name;
 $this->params['breadcrumbs'] = [['label' => "Informações da aplicação Ciclodias"]];
 ?>
@@ -51,6 +55,30 @@ $this->params['breadcrumbs'] = [['label' => "Informações da aplicação Ciclod
                     'width' => '70%',
                     'description' => '70% Increase in 30 Days'
                 ]*/
+            ]) ?>
+        </div>
+        <div class="col-md-4 col-sm-6 col-12">
+            <?= InfoBox::widget([
+                'text' => 'Nº de Publicações',
+                'number' => $numPublicacoes,
+                'icon' => 'fas fa-blog',
+            ]) ?>
+        </div>
+        <div class="col-md-4 col-sm-6 col-12">
+            <?= InfoBox::widget([
+                'text' => 'Nº de gostos nas publicações',
+                'number' => $numGostos,
+                'icon' => 'fas fa-thumbs-up',
+            ]) ?>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4 col-sm-6 col-12">
+            <?= InfoBox::widget([
+                'text' => 'Nº de comentários nas publicações',
+                'number' => $numComentarios,
+                'icon' => 'fas fa-comments',
             ]) ?>
         </div>
     </div>

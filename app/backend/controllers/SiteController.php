@@ -3,7 +3,10 @@
 namespace backend\controllers;
 
 use common\models\Ciclismo;
+use common\models\Comentario;
+use common\models\Gosto;
 use common\models\LoginForm;
+use common\models\Publicacao;
 use common\models\User;
 use Yii;
 use yii\filters\VerbFilter;
@@ -64,30 +67,35 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
+        $publicacoes = Publicacao::find()->all();
+        $gostos = Gosto::find()->all();
+        $comentarios = Comentario::find()->all();
         $treinos = Ciclismo::find()->all();
         $users = User::find()->all();
 
-        // ------------------------ Retorna o número total de Utilizadores ------------------
         $numUsers = 0;
+        $velMediaTotal = 0;
+        $distanciaTotal = 0;
+        $tempoTotal = 0;
+
+        // ------------------------ Retorna o número total de Utilizadores ------------------
         $auth = Yii::$app->authManager;
 
         // Recebe todos os utilizadores
-
         foreach ($users as $user) {
             // Se o utilizador tiver acesso á Frontend soma +1
             if($auth->checkAccess($user->getId(), "frontendAccess")){
                 $numUsers++;
             }
         }
-        // -------------------------------------------------------------------------------
-        // ------------------------- Nº de Sessões de Treino -----------------------------
-        $numTreinos = sizeof($treinos);
-        // -----------------------------------------------------------------------------------
-        // ------ Função que faz o cálculo de todos os campos de cada atributo ---------------
-        $velMediaTotal = 0;
-        $distanciaTotal = 0;
-        $tempoTotal = 0;
 
+        // --------------------------- Número total --------------------------------------
+        $numTreinos = sizeof($treinos);
+        $numPublicacoes = sizeof($publicacoes);
+        $numGostos = sizeof($gostos);
+        $numComentarios = sizeof($comentarios);
+
+        // ------ Função que faz o cálculo de todos os campos de cada atributo ---------------
         // Distancia, Velocidade media e tempo total dos treinos
         foreach ($treinos as $treino){
             $velMediaTotal += $treino->velocidade_media;
@@ -102,7 +110,6 @@ class SiteController extends Controller
         }
         else $velMedia = 0;
 
-        // -----------------------------------------------------------------------------------
         // -------------------------- Distância total dos treinos ----------------------------
         $distancia = $distanciaTotal / 1000;
         $distancia = round($distancia, 3);
@@ -111,8 +118,9 @@ class SiteController extends Controller
         //$tempoTotal
 
         // Retorna a view index com todos os dados para os widgets
-        return $this->render('index', ['numUsers' => $numUsers, 'numTreinos' => $numTreinos
-        , 'velMedia' => $velMedia, 'distancia' => $distancia, 'tempoTotal' => $tempoTotal]);
+        return $this->render('index', ['numUsers' => $numUsers, 'numTreinos' => $numTreinos,
+            'velMedia' => $velMedia, 'distancia' => $distancia, 'tempoTotal' => $tempoTotal,
+            'numPublicacoes' => $numPublicacoes, 'numGostos' => $numGostos, 'numComentarios' => $numComentarios]);
     }
 
     /**
