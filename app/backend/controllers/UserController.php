@@ -62,7 +62,7 @@ class UserController extends Controller
 
         for($i = 0; $i < count($roles); $i++){
             $dataProvider[$i] = new ActiveDataProvider([
-                'query' => User::find()->innerJoin(['auth_assignment'], 'user.id = auth_assignment.user_id')->where(['auth_assignment.item_name' => $roles[$i]]),
+                'query' => User::find()->innerJoin(['auth_assignment'], 'user.id = auth_assignment.user_id')->where(['auth_assignment.item_name' => $roles[$i]])->orderBy(['user.id' => SORT_ASC])  ,
                 'pagination' => [
                     'pageSize' => 10
                 ]
