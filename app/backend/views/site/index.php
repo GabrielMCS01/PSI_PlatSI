@@ -59,14 +59,14 @@ $this->params['breadcrumbs'] = [['label' => "Informações da aplicação Ciclod
         </div>
         <div class="col-md-4 col-sm-6 col-12">
             <?= InfoBox::widget([
-                'text' => 'Nº de Publicações',
+                'text' => 'Publicações',
                 'number' => $numPublicacoes,
                 'icon' => 'fas fa-blog',
             ]) ?>
         </div>
         <div class="col-md-4 col-sm-6 col-12">
             <?= InfoBox::widget([
-                'text' => 'Nº de gostos nas publicações',
+                'text' => 'Gostos nas publicações',
                 'number' => $numGostos,
                 'icon' => 'fas fa-thumbs-up',
             ]) ?>
@@ -76,7 +76,7 @@ $this->params['breadcrumbs'] = [['label' => "Informações da aplicação Ciclod
     <div class="row">
         <div class="col-md-4 col-sm-6 col-12">
             <?= InfoBox::widget([
-                'text' => 'Nº de comentários nas publicações',
+                'text' => 'Comentários nas publicações',
                 'number' => $numComentarios,
                 'icon' => 'fas fa-comments',
             ]) ?>
