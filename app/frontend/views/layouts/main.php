@@ -46,7 +46,7 @@ AppAsset::register($this);
         $menuItems[] = ['label' => 'Iniciar sessão', 'url' => ['/site/login']];
     } else {
         $menuItems[] = ['label' => 'Histórico', 'url' => ['/ciclismo/index']];
-        $menuItems[] = ['label' => 'Feed de noticias'];
+        $menuItems[] = ['label' => 'Feed de noticias' , 'url' => ['/publicacao/index']];
         $menuItems[] = ['label' => 'Perfil', 'url' => ['/user-info/perfil']];
         $menuItems[] = '<li>'
             . Html::beginForm(['/site/logout'], 'post', ['class' => 'form-inline'])

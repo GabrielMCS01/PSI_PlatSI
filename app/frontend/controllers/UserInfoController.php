@@ -2,6 +2,7 @@
 
 namespace frontend\controllers;
 
+use common\models\User;
 use common\models\UserInfo;
 use Yii;
 use yii\filters\VerbFilter;
@@ -36,6 +37,22 @@ class UserInfoController extends \yii\web\Controller
                 'model' => $model,
             ]);
         }
+    }
+
+    public function actionDelete(){
+        $user = User::findOne(Yii::$app->user->getId());
+
+        $user->userinfo->delete();
+        $user->delete();
+
+        $user = User::findOne(Yii::$app->user->getId());
+
+        if($user == null){
+            Yii::$app->user->logout();
+            return $this->goHome();
+        }
+
+        return $this->actionPerfil();
     }
 
 }
