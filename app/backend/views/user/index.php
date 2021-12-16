@@ -60,8 +60,9 @@ for ($i = 0; $i < count($roles); $i++){
                         'pager' => [
                             'class' => 'yii\bootstrap4\LinkPager',
                         ]
-                    ]);
-                    $i++;
+                    ]);?>
+                    <br>
+                    <?$i++;
                     }?>
                 </div>
                 <!--.card-body-->
