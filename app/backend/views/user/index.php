@@ -24,7 +24,11 @@ for ($i = 0; $i < count($roles); $i++){
                     </div>
 
                     <?php
+                    $i = 0;
+
                     foreach ($dataProvider as $datas) {
+                        echo $tipos_user[$i];
+
                         echo GridView::widget([
                         'dataProvider' => $datas,
                         'filterModel' => $searchModel,
@@ -34,14 +38,14 @@ for ($i = 0; $i < count($roles); $i++){
                             'id',
                             'username',
                             'email:email',
-                            [
+                            /*[
                                 'label' => 'Tipo de Utilizador',
                                 'value' => function($data){
                                     return $data->authassignment->item_name;
                                 },
                                 'filterInputOptions' => ['prompt' => 'Todos os Roles', 'class' => 'form-control', 'id' => null],
                                 'filter' => $tipos_user,
-                            ],
+                            ],*/
                             //'auth_key',
                             //'password_hash',
                             //'password_reset_token',
@@ -57,6 +61,7 @@ for ($i = 0; $i < count($roles); $i++){
                             'class' => 'yii\bootstrap4\LinkPager',
                         ]
                     ]);
+                    $i++;
                     }?>
                 </div>
                 <!--.card-body-->
