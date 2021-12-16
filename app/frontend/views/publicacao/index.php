@@ -69,7 +69,7 @@ $this->registerJs("
 
     as $publicacao) { ?>
     <div class="jumbotron text-center">
-        <h3><?= Html::a($publicacao->ciclismo->nome_percurso, ['ciclismo/view', 'id' => $publicacao->ciclismo->id], ['data-method' => 'post', 'class' => 'd-block']); ?></h3>
+        <h3><?= $publicacao->ciclismo->nome_percurso ?></h3>
         <h5><?= $publicacao->ciclismo->data_treino ?></h5>
         <div id='map' style='height: 300px;'>
             <script>
@@ -152,30 +152,25 @@ $this->registerJs("
         <?php Pjax::begin(['id' => 'my_pjax']);
         $options = ['pjax-container' => 'my_pjax', 'like-url' => Url::to(['gosto/gosto', 'id' => $publicacao->id]), 'class' => 'fas fa-heart pjax-like-link'];
         if (Gosto::find()->where(['publicacao_id' => $publicacao->id, 'user_id' => Yii::$app->user->getId()])->one() != null) {
-            echo "<script>console.log('bonjour')</script>";
             Html::addCssStyle($options, 'color: red;');
         }
         ?>
         <div class="row">
-            <div class="col-lg-9"
-            "><br></div>
-        <div class="col-lg-1 text-right">
-            <?= Html::a('', false, $options); ?></div>
-        <div class="col-lg-2 text-right"><?= Html::a('Ver Comentarios', false, ['class' => 'btn btn-primary']) ?></div>
+            <div class="col-lg-3">
+                <h5>Publicado por: <strong><?= $publicacao->ciclismo->user->username ?></strong></h5>
+            </div>
+            <div class="col-lg-6">
+                <br>
+            </div>
+            <div class="col-lg-1 text-right">
+                <?= Html::a('', false, $options); ?></div>
+            <div class="col-lg-2 text-right">
+                <?= Html::a('Ver Comentarios', ['comentario/indexpost', 'id' => $publicacao->id], ['class' => 'btn btn-primary']) ?>
+            </div>
+        </div>
+        <?php Pjax::end(); ?>
     </div>
-    <?php Pjax::end(); ?>
 </div>
-    </div>
-
 <?php } ?>
 </div>
 
-<script>
-    function myFunction(x) {
-        //x.classList.toggle("fa-thumbs-down");
-        if (x.style.color == "red") {
-            x.style.color = "black";
-        } else {
-            x.style.color = "red";
-        }
-    }</script>
