@@ -22,8 +22,8 @@ YiiAsset::register($this);
             <div class="row">
                 <div class="col-md-12">
                     <p>
-                        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-                        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
+                        <?= Html::a('Atualizar', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+                        <?= Html::a('Remover', ['delete', 'id' => $model->id], [
                             'class' => 'btn btn-danger',
                             'data' => [
                                 'confirm' => 'Pretende apagar este utilizador?',

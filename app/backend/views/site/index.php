@@ -2,7 +2,6 @@
 
 use common\utils\Converter;
 use hail812\adminlte\widgets\InfoBox;
-use hail812\adminlte\widgets\Ribbon;
 use hail812\adminlte\widgets\SmallBox;
 use yii\helpers\Html;
 
@@ -13,13 +12,13 @@ use yii\helpers\Html;
 /* @var $numUsers  */
 /* @var $numTreinos  */
 $this->title = Yii::$app->name;
-$this->params['breadcrumbs'] = [['label' => $this->title]];
+$this->params['breadcrumbs'] = [['label' => "Informações da aplicação Ciclodias"]];
 ?>
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-4 col-sm-6 col-12">
             <?= InfoBox::widget([
-                'text' => 'Tempo atividade física',
+                'text' => 'Tempo de atividade física',
                 'number' => Converter::secondsToHours($tempoTotal),
                 'icon' => 'far fa-clock',
             ]) ?>
@@ -45,7 +44,7 @@ $this->params['breadcrumbs'] = [['label' => $this->title]];
     <div class="row">
         <div class="col-md-4 col-sm-6 col-12">
             <?= InfoBox::widget([
-                'text' => 'Nº de sessões de treino',
+                'text' => 'Numero de sessões de treino',
                 'number' => $numTreinos,
                 'icon' => 'fas fa-bicycle',
                 /*'progress' => [
@@ -60,7 +59,7 @@ $this->params['breadcrumbs'] = [['label' => $this->title]];
         <div class="col-lg-4 col-md-6 col-sm-6 col-12">
             <?= SmallBox::widget([
                 'title' => $numUsers,
-                'text' => 'Utilizadores Registados',
+                'text' => 'Numero de Utilizadores Registados',
                 'icon' => 'fas fa-user-plus',
                 'theme' => 'gradient-success',
                 'linkText' => 'Ver os utilizadores',

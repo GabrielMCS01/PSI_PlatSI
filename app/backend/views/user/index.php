@@ -11,6 +11,7 @@ use yii\grid\GridView;
 $this->title = 'Utilizadores';
 $this->params['breadcrumbs'][] = $this->title;
 
+// Insere os nomes das roles no array tipos_users
 for ($i = 0; $i < count($roles); $i++){
     $tipos_user[$i] = $roles[$i]->name;
 }
