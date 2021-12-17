@@ -25,7 +25,7 @@ $this->title = Yii::$app->name;
     <div class="body-content">
         <div class="row">
             <div class="col-lg-4">
-                <h3>TOP 10 - Distancia</h3>
+                <h3>TOP 10 - Distância</h3>
                 <ol>
                     <?php foreach ($distancias as $distancia){?>
                     <li><?= $distancia->user->username?> - <?= round($distancia->distancia/1000, 2)?> km</li>
@@ -34,7 +34,7 @@ $this->title = Yii::$app->name;
 
             </div>
             <div class="col-lg-4">
-                <h3>TOP 10 - Tempo</h3>
+                <h3>TOP 10 - Duração</h3>
                 <ol>
                     <?php foreach ($tempos as $tempo){?>
                     <li><?= $tempo->user->username?> - <?= Converter::secondsToHours($tempo->duracao)?></li>

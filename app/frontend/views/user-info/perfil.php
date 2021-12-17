@@ -17,8 +17,9 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="site-login">
         <h1><?= Html::encode($this->title) ?></h1>
 
-        <p>Username: <?= Html::encode($model->user->username)?></p>
-        <p>Email: <?= Html::encode($model->user->email)?></p>
+        <br>
+        <p>Username: <strong><?= Html::encode($model->user->username)?></strong></p>
+        <p>Email: <strong><?= Html::encode($model->user->email)?></strong></p>
 
         <div class="row">
             <div class="col-lg-5">
