@@ -52,7 +52,7 @@ class CiclismoController extends ActiveController
         $ciclismo->velocidade_media = Yii::$app->request->post('velocidade_media');
         $ciclismo->velocidade_maxima = Yii::$app->request->post('velocidade_maxima');
         //$ciclismo->velocidade_grafico = Yii::$app->request->post('velocidade_grafico');
-        //$ciclismo->rota = Yii::$app->request->post('rota');
+        $ciclismo->rota = Yii::$app->request->post('rota');
         $ciclismo->data_treino = Yii::$app->formatter->asDateTime('now', 'yyyy-MM-dd HH-mm-ss');
         $ciclismo->user_id = Yii::$app->user->getId();
 
@@ -114,7 +114,6 @@ class CiclismoController extends ActiveController
 
         // Verifica se o utilizador que acede é o mesmo que este está a ser chamado nos dados
         if(Yii::$app->user->can('deleteActivity', ['activity' => $treino])) {
-
             $treino->delete();
 
             $treino = null;
@@ -134,9 +133,8 @@ class CiclismoController extends ActiveController
     /**
      * @throws \yii\base\InvalidConfigException
      */
+    // Permite fazer a sincronização dos treinos da DB local (SQLITE) com a DB da API
     public function actionSync(){
-
-
         $treinos = Yii::$app->request->post();
 
         foreach ($treinos as $treino){
@@ -148,7 +146,7 @@ class CiclismoController extends ActiveController
             $ciclismo->velocidade_media = $treino["velocidade_media"];
             $ciclismo->velocidade_maxima = $treino["velocidade_maxima"];
             $ciclismo->velocidade_grafico = null;
-            $ciclismo->rota = null;
+            $ciclismo->rota = $treino["rota"];
             $ciclismo->data_treino =Yii::$app->formatter->asDateTime('now', 'yyyy-MM-dd HH-mm-ss');
             $ciclismo->user_id = Yii::$app->user->getId();
 
