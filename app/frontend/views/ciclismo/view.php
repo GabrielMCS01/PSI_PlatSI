@@ -12,6 +12,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Historico', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
+<script src="https://requirejs.org/docs/release/2.3.5/minified/require.js"></script>
 <div class="ciclismo-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
@@ -43,6 +44,7 @@ $this->params['breadcrumbs'][] = $this->title;
     </div>
 </div>
 <script>
+    var polyline = require('@mapbox/polyline');
     mapboxgl.accessToken = 'pk.eyJ1IjoiaXVyaWNhcnJhcyIsImEiOiJja3V3aDJrZWEwNjhuMm5xd3hqNHRuODdiIn0.Yztl8wZEMrxIlkEVwt1zgw';
     const map = new mapboxgl.Map({
         container: 'map',
