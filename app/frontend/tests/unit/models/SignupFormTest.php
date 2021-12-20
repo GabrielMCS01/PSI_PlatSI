@@ -2,10 +2,11 @@
 
 namespace frontend\tests\unit\models;
 
+use Codeception\Test\Unit;
 use common\fixtures\UserFixture;
 use frontend\models\SignupForm;
 
-class SignupFormTest extends \Codeception\Test\Unit
+class SignupFormTest extends Unit
 {
     /**
      * @var \frontend\tests\UnitTester
@@ -26,47 +27,40 @@ class SignupFormTest extends \Codeception\Test\Unit
     public function testCorrectSignup()
     {
         $model = new SignupForm([
-            'username' => 'some_username',
-            'email' => 'some_email@example.com',
-            'password' => 'some_password',
+            'username' => 'test0',
+            'email' => 'test0@mail.com',
+            'password' => '1234567890',
+            'primeiro_nome' => 'user',
+            'ultimo_nome' => 'teste'
         ]);
 
         $user = $model->signup();
         expect($user)->true();
 
-        /** @var \common\models\User $user */
-        $user = $this->tester->grabRecord('common\models\User', [
-            'username' => 'some_username',
-            'email' => 'some_email@example.com',
-            'status' => \common\models\User::STATUS_INACTIVE
-        ]);
-
-        $this->tester->seeEmailIsSent();
-
-        $mail = $this->tester->grabLastSentEmail();
-
-        expect($mail)->isInstanceOf('yii\mail\MessageInterface');
-        expect($mail->getTo())->hasKey('some_email@example.com');
-        expect($mail->getFrom())->hasKey(\Yii::$app->params['supportEmail']);
-        expect($mail->getSubject())->equals('Account registration at ' . \Yii::$app->name);
-        expect($mail->toString())->stringContainsString($user->verification_token);
+        $this->tester->seeInDatabase('user', ['username' => 'test0']);
     }
 
     public function testNotCorrectSignup()
     {
         $model = new SignupForm([
-            'username' => 'troy.becker',
-            'email' => 'nicolas.dianna@hotmail.com',
-            'password' => 'some_password',
+            'username' => 'test0',
+            'email' => 'test0.com',
+            'password' => '1234567',
+            'primeiro_nome' => 'notuser',
+            'ultimo_nome' => '123'
         ]);
 
         expect_not($model->signup());
+
         expect_that($model->getErrors('username'));
         expect_that($model->getErrors('email'));
+        expect_that($model->getErrors('password'));
 
         expect($model->getFirstError('username'))
-            ->equals('This username has already been taken.');
+            ->equals('Este nome de utilizador já foi criado anteriormente, utilize outro.');
         expect($model->getFirstError('email'))
-            ->equals('This email address has already been taken.');
+            ->equals('Este endereço de email já está a ser utilizado por outro utilizador.');
+        expect($model->getFirstError('password'))
+            ->equals('A palavra-passe tem que ter pelo menos 8 caracteres.');
     }
 }
