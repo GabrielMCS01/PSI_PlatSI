@@ -44,8 +44,7 @@ $this->params['breadcrumbs'][] = $this->title;
 </div>
 <script>
 
-    import polyline from "@mapbox/polyline";
-
+    var polyline = require('@mapbox/polyline');
     mapboxgl.accessToken = 'pk.eyJ1IjoiaXVyaWNhcnJhcyIsImEiOiJja3V3aDJrZWEwNjhuMm5xd3hqNHRuODdiIn0.Yztl8wZEMrxIlkEVwt1zgw';
     const map = new mapboxgl.Map({
         container: 'map',
