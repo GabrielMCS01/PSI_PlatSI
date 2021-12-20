@@ -73,7 +73,6 @@ $this->registerJs("
         <h5><?= $publicacao->ciclismo->data_treino ?></h5>
         <div id='map' style='height: 300px;'>
             <script>
-                var polyline = require('@mapbox/polyline');
 
                 var divElts = document.getElementById("map");
                 divElts.setAttribute('id', "map" + <?=$publicacao->id?>);
