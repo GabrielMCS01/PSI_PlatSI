@@ -86,7 +86,7 @@ $this->registerJs("
                     zoom: 14
                 }).on('load', () => {
 
-                    var array = polyline.decode(<?= $publicacao->ciclismo->rota?>, 6);
+                    var array = polyline.decode('<?= $publicacao->ciclismo->rota?>', 6);
                     map[<?= $publicacao->id?>].addSource('id' + j, {
                         'type': 'geojson',
                         'data': {

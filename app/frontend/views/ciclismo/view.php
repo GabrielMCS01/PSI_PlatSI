@@ -54,7 +54,7 @@ $this->params['breadcrumbs'][] = $this->title;
     });
 
     map.on('load', () => {
-        var array = polyline.decode(<?= $model->rota?>, 6);
+        var array = polyline.decode('<?= $model->rota?>', 6);
         map.addSource('route', {
             'type': 'geojson',
             'data': {
