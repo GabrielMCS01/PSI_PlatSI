@@ -52,7 +52,7 @@ $this->registerJsFile("@web/@mapbox/polyline/src/polyline.js", ['depends' => [\y
     </div>
 </div>
 <script>
-    if(<?= $model->rota?> != null) {
+    if('<?= $model->rota?>' != null) {
         mapboxgl.accessToken = 'pk.eyJ1IjoiaXVyaWNhcnJhcyIsImEiOiJja3V3aDJrZWEwNjhuMm5xd3hqNHRuODdiIn0.Yztl8wZEMrxIlkEVwt1zgw';
         const map = new mapboxgl.Map({
             container: 'map',
