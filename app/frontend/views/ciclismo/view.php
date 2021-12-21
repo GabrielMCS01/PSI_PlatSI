@@ -25,7 +25,7 @@ $this->registerJsFile("@web/@mapbox/polyline/src/polyline.js", ['depends' => [\y
         <br>
         <div id='map' style='height: 300px;'>
             <?php
-            if($model->rota == null){
+            if($model->rota == ""){
                 echo "<p>SEM ROTA</p>";
             }
             ?>
@@ -53,7 +53,7 @@ $this->registerJsFile("@web/@mapbox/polyline/src/polyline.js", ['depends' => [\y
 </div>
 <script>
     console.log('<?= $model->rota?>');
-    if('<?= $model->rota?>' != null) {
+    if('<?= $model->rota?>' != "") {
         mapboxgl.accessToken = 'pk.eyJ1IjoiaXVyaWNhcnJhcyIsImEiOiJja3V3aDJrZWEwNjhuMm5xd3hqNHRuODdiIn0.Yztl8wZEMrxIlkEVwt1zgw';
         const map = new mapboxgl.Map({
             container: 'map',
