@@ -90,6 +90,15 @@ $this->registerJs("
                         }).on('load', () => {
 
                             var geoJSON = polyline.toGeoJSON('<?= $publicacao->ciclismo->rota?>', 6);
+
+                            var getCenter = polyline.decode('<?= $publicacao->ciclismo->rota?>', 6);
+
+                            var index = getCenter.length/2 ;
+                            var centerPoint = getCenter[index.toFixed(0)];
+
+
+                            map[<?= $publicacao->id?>].setCenter([centerPoint[1], centerPoint[0]], null);
+
                             map[<?= $publicacao->id?>].addSource('id' + j, {
                                 'type': 'geojson',
                                 'data': geoJSON
