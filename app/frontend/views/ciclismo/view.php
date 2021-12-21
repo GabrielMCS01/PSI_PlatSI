@@ -50,7 +50,7 @@ $this->registerJsFile("@web/@mapbox/polyline/src/polyline.js", ['depends' => [\y
     const map = new mapboxgl.Map({
         container: 'map',
         style: 'mapbox://styles/mapbox/streets-v11',
-        center: [ 39.091996, -9.259802 ],
+        center: [39.091996, -9.259802],
         zoom: 14
     });
 
@@ -59,16 +59,13 @@ $this->registerJsFile("@web/@mapbox/polyline/src/polyline.js", ['depends' => [\y
 
         var featureCollection = [];
 
-        for(var point in array){
-            featureCollection.push({
-                "type": "Feature",
-                "geometry": {
-                    "type": "Point",
-                    "coordinates": array[point]
-                },
-                "properties": {}
-            });
-        }
+        const allPoints = array.map(point => ({
+            type: 'Feature',
+            geometry: {
+                type: 'Point',
+                coordinates: point
+            }
+        }));
 
 
         map.addSource('route', {
@@ -78,7 +75,7 @@ $this->registerJsFile("@web/@mapbox/polyline/src/polyline.js", ['depends' => [\y
                 'properties': {},
                 'geometry': {
                     'type': 'LineString',
-                    'coordinates': array.toString()
+                    'coordinates': allPoints
 
                 }
             }
