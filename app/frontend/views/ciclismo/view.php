@@ -23,7 +23,13 @@ $this->registerJsFile("@web/@mapbox/polyline/src/polyline.js", ['depends' => [\y
         <h3><?= $model->nome_percurso;?></h3>
         <h5><?=$model->data_treino?></h5>
         <br>
-        <div id='map' style='height: 300px;'></div>
+        <div id='map' style='height: 300px;'>
+            <?php
+            if($model->rota == null){
+                echo "<p>SEM ROTA</p>";
+            }
+            ?>
+        </div>
         <br>
         <div class="row">
             <div class="col-lg-3">
@@ -46,37 +52,38 @@ $this->registerJsFile("@web/@mapbox/polyline/src/polyline.js", ['depends' => [\y
     </div>
 </div>
 <script>
-    mapboxgl.accessToken = 'pk.eyJ1IjoiaXVyaWNhcnJhcyIsImEiOiJja3V3aDJrZWEwNjhuMm5xd3hqNHRuODdiIn0.Yztl8wZEMrxIlkEVwt1zgw';
-    const map = new mapboxgl.Map({
-        container: 'map',
-        style: 'mapbox://styles/mapbox/streets-v11',
-        center: [-9.259802, 39.091996],
-        zoom: 13
-    });
-
-    map.on('load', () => {
-        var array = polyline.toGeoJSON('<?= $model->rota?>', 6);
-
-
-
-        map.addSource('route', {
-            'type': 'geojson',
-            'data': array
-            }
-        );
-        map.addLayer({
-            'id': 'route',
-            'type': 'line',
-            'source': 'route',
-            'layout': {
-                'line-join': 'round',
-                'line-cap': 'round'
-            },
-            'paint': {
-                'line-color': '#F00',
-                'line-width': 8
-            }
+    if(<?= $model->rota?> != null) {
+        mapboxgl.accessToken = 'pk.eyJ1IjoiaXVyaWNhcnJhcyIsImEiOiJja3V3aDJrZWEwNjhuMm5xd3hqNHRuODdiIn0.Yztl8wZEMrxIlkEVwt1zgw';
+        const map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/mapbox/streets-v11',
+            center: [-9.259802, 39.091996],
+            zoom: 13
         });
-        console.log(array);
-    });
+
+        map.on('load', () => {
+            var array = polyline.toGeoJSON('<?= $model->rota?>', 6);
+
+
+            map.addSource('route', {
+                    'type': 'geojson',
+                    'data': array
+                }
+            );
+            map.addLayer({
+                'id': 'route',
+                'type': 'line',
+                'source': 'route',
+                'layout': {
+                    'line-join': 'round',
+                    'line-cap': 'round'
+                },
+                'paint': {
+                    'line-color': '#F00',
+                    'line-width': 8
+                }
+            });
+            console.log(array);
+        });
+    }
 </script>
