@@ -50,7 +50,7 @@ $this->registerJsFile("@web/@mapbox/polyline/src/polyline.js", ['depends' => [\y
     const map = new mapboxgl.Map({
         container: 'map',
         style: 'mapbox://styles/mapbox/streets-v11',
-        center: array[0],
+        center: [30, 50],
         zoom: 14
     });
 
