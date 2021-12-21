@@ -12,7 +12,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Historico', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 
-$this->registerJsFile("@web/node_modules/@mapbox/polyline/index.js", ['depends' => [\yii\web\JqueryAsset::className()]]);
+$this->registerJsFile("@npm/@mapbox/polyline/index.js", ['depends' => [\yii\web\JqueryAsset::className()]]);
 ?>
 
 <div class="ciclismo-view">
