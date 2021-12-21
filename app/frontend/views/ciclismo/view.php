@@ -12,7 +12,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Historico', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 
-$this->registerJsFile(Yii::$app->request->baseUrl . '/node_modules/@mapbox/polyline/index.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
+$this->registerJsFile("@web/node_modules/@mapbox/polyline/index.js", ['depends' => [\yii\web\JqueryAsset::className()]]);
 ?>
 
 <div class="ciclismo-view">
@@ -46,7 +46,7 @@ $this->registerJsFile(Yii::$app->request->baseUrl . '/node_modules/@mapbox/polyl
     </div>
 </div>
 <script>
-    
+
     mapboxgl.accessToken = 'pk.eyJ1IjoiaXVyaWNhcnJhcyIsImEiOiJja3V3aDJrZWEwNjhuMm5xd3hqNHRuODdiIn0.Yztl8wZEMrxIlkEVwt1zgw';
     const map = new mapboxgl.Map({
         container: 'map',
