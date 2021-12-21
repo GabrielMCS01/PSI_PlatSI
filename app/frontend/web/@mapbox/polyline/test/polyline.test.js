@@ -1,7 +1,7 @@
 'use strict';
 
 var test = require('tap').test,
-    polyline = require('../');
+    polyline = require('../src/polyline');
 
 test('polyline', function(t) {
     var example = [[38.5, -120.2], [40.7, -120.95], [43.252, -126.453]],

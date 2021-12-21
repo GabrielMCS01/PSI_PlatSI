@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 const meow = require('meow');
-const polyline = require('../');
+const polyline = require('../src/polyline');
 
 const cli = meow(
   `
