@@ -5,3 +5,8 @@ modules:
     enabled:
         - Yii2:
             part: fixtures
+        - Asserts
+        - Db:
+            dsn: 'mysql:host=localhost;dbname=projectdb'
+            user: 'root'
+            password: ''

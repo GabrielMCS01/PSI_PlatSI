@@ -22,46 +22,43 @@ class LoginFormTest extends \Codeception\Test\Unit
      */
     public function _fixtures()
     {
-        return [
-            'user' => [
-                'class' => UserFixture::className(),
-                'dataFile' => codecept_data_dir() . 'user.php'
-            ]
-        ];
+
     }
 
     public function testLoginNoUser()
     {
         $model = new LoginForm([
-            'username' => 'not_existing_username',
-            'password' => 'not_existing_password',
+            'username' => '',
+            'password' => '',
         ]);
 
-        expect('model should not login user', $model->login())->false();
-        expect('user should not be logged in', Yii::$app->user->isGuest)->true();
+        expect_not($model->login());
+        expect_that(Yii::$app->user->isGuest);
     }
 
     public function testLoginWrongPassword()
     {
         $model = new LoginForm([
-            'username' => 'bayer.hudson',
-            'password' => 'wrong_password',
+            'username' => 'admin',
+            'password' => '123456789',
         ]);
 
-        expect('model should not login user', $model->login())->false();
-        expect('error message should be set', $model->errors)->hasKey('password');
-        expect('user should not be logged in', Yii::$app->user->isGuest)->true();
+        expect_not($model->login());
+
+        expect($model->getFirstError('password'))
+            ->equals('Palavra-passe Incorreta');
+
+        expect_that(Yii::$app->user->isGuest);
     }
 
     public function testLoginCorrect()
     {
         $model = new LoginForm([
-            'username' => 'bayer.hudson',
-            'password' => 'password_0',
+            'username' => 'admin',
+            'password' => 'adminadmin',
         ]);
 
-        expect('model should login user', $model->login())->true();
-        expect('error message should not be set', $model->errors)->hasntKey('password');
-        expect('user should be logged in', Yii::$app->user->isGuest)->false();
+        expect_that($model->login());
+        expect_not(Yii::$app->user->isGuest);
     }
 }

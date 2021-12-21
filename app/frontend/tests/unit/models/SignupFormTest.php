@@ -13,15 +13,9 @@ class SignupFormTest extends Unit
      */
     protected $tester;
 
-
     public function _before()
     {
-        $this->tester->haveFixtures([
-            'user' => [
-                'class' => UserFixture::className(),
-                'dataFile' => codecept_data_dir() . 'user.php'
-            ]
-        ]);
+
     }
 
     public function testCorrectSignup()
@@ -35,19 +29,20 @@ class SignupFormTest extends Unit
         ]);
 
         $user = $model->signup();
-        expect($user)->true();
 
-        $this->tester->seeInDatabase('user', ['username' => 'test0']);
+        $this->assertEquals('test0', $user->getUsername());
+
+        $this->tester->seeRecord('common\models\User', ['email' => 'test0@mail.com']);
     }
 
     public function testNotCorrectSignup()
     {
         $model = new SignupForm([
-            'username' => 'test0',
+            'username' => '',
             'email' => 'test0.com',
-            'password' => '1234567',
-            'primeiro_nome' => 'notuser',
-            'ultimo_nome' => '123'
+            'password' => '123456',
+            'primeiro_nome' => '',
+            'ultimo_nome' => ''
         ]);
 
         expect_not($model->signup());
@@ -55,12 +50,46 @@ class SignupFormTest extends Unit
         expect_that($model->getErrors('username'));
         expect_that($model->getErrors('email'));
         expect_that($model->getErrors('password'));
+        expect_that($model->getErrors('primeiro_nome'));
+        expect_that($model->getErrors('ultimo_nome'));
+    }
+
+    public function testDuplicatedSignup()
+    {
+        $model = new SignupForm([
+            'username' => 'test0',
+            'email' => 'test0@mail.com',
+            'password' => '1234567890',
+            'primeiro_nome' => 'user',
+            'ultimo_nome' => 'teste'
+        ]);
+
+        $user = $model->signup();
+
+        $this->assertEquals('test0', $user->getUsername());
+
+        $this->tester->seeRecord('common\models\User', ['email' => 'test0@mail.com']);
+
+
+        $model = new SignupForm([
+            'username' => 'test0',
+            'email' => 'test0@mail.com',
+            'password' => '1234567890',
+            'primeiro_nome' => 'user',
+            'ultimo_nome' => 'teste'
+        ]);
+
+        expect_not($model->signup());
+
+        expect_that($model->getErrors('username'));
+        expect_that($model->getErrors('email'));
+        expect_not($model->getErrors('password'));
+        expect_not($model->getErrors('primeiro_nome'));
+        expect_not($model->getErrors('ultimo_nome'));
 
         expect($model->getFirstError('username'))
-            ->equals('Este nome de utilizador já foi criado anteriormente, utilize outro.');
+            ->equals('Este nome de utilizador já foi registado.');
         expect($model->getFirstError('email'))
-            ->equals('Este endereço de email já está a ser utilizado por outro utilizador.');
-        expect($model->getFirstError('password'))
-            ->equals('A palavra-passe tem que ter pelo menos 8 caracteres.');
+            ->equals('Este email já foi registado.');
     }
 }
