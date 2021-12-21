@@ -17,6 +17,7 @@ $this->title = 'Publicações';
 $this->params['breadcrumbs'][] = $this->title;
 FontAwesomeAsset::register($this);
 
+$this->registerJsFile("@web/@mapbox/polyline/src/polyline.js", ['depends' => [\yii\web\JqueryAsset::className()]]);
 
 $this->registerJs("
      console.log('henlo');
@@ -73,7 +74,6 @@ $this->registerJs("
         <h5><?= $publicacao->ciclismo->data_treino ?></h5>
         <div id='map' style='height: 300px;'>
             <script>
-
                 var divElts = document.getElementById("map");
                 divElts.setAttribute('id', "map" + <?=$publicacao->id?>);
                 mapboxgl.accessToken = 'pk.eyJ1IjoiaXVyaWNhcnJhcyIsImEiOiJja3V3aDJrZWEwNjhuMm5xd3hqNHRuODdiIn0.Yztl8wZEMrxIlkEVwt1zgw';
@@ -84,17 +84,10 @@ $this->registerJs("
                     zoom: 14
                 }).on('load', () => {
 
-                    var array = polyline.decode('<?= $publicacao->ciclismo->rota?>', 6);
+                    var geoJSON = polyline.toGeoJSON('<?= $publicacao->ciclismo->rota?>', 6);
                     map[<?= $publicacao->id?>].addSource('id' + j, {
                         'type': 'geojson',
-                        'data': {
-                            'type': 'Feature',
-                            'properties': {},
-                            'geometry': {
-                                'type': 'LineString',
-                                'coordinates': array
-                            }
-                        }
+                        'data': geoJSON
                     });
                     map[<?= $publicacao->id?>].addLayer({
                         'id': 'id' + j,
