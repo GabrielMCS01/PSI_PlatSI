@@ -1,11 +1,13 @@
 <?php
 
 use common\utils\Converter;
+use kartik\dialog\Dialog;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Ciclismo */
+/* @var $publicar */
 
 $this->title = $model->nome_percurso;
 $this->params['breadcrumbs'][] = ['label' => 'Historico', 'url' => ['index']];
@@ -47,6 +49,18 @@ $this->registerJsFile("@web/@mapbox/polyline/src/polyline.js", ['depends' => [\y
             </div>
             <div class="col-lg-3">
                 <br>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-10"><br></div>
+            <div class="col-lg-2 text-right">
+                <?= Dialog::widget(['overrideYiiConfirm' => true]);?>
+                <?php
+                if ($publicar) {
+                    echo Html::a("Publicar", ['publicacao/create', 'id' => $model->id], ['data-confirm' => 'Deseja publicar esta sessão de treino?', 'class' => 'btn btn-primary']);
+                }else{
+                    echo Html::a("Publicado", ['publicacao/create', 'id' => $model->id], ['class' => 'btn btn-primary', 'disabled' => 'disabled']);
+                }?>
             </div>
         </div>
     </div>

@@ -4,6 +4,7 @@ namespace frontend\controllers;
 
 use common\models\Ciclismo;
 use app\models\CiclismoSearch;
+use common\models\Publicacao;
 use Yii;
 use yii\data\Pagination;
 use yii\web\Controller;
@@ -66,8 +67,12 @@ class CiclismoController extends Controller
      */
     public function actionView($id)
     {
+        $publicar = true;
+        if(Publicacao::find()->where(['ciclismo_id' => $id])->one() != null){
+            $publicar = false;
+        }
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $this->findModel($id), 'publicar' => $publicar
         ]);
     }
 
