@@ -81,7 +81,7 @@ $this->registerJsFile("@web/@mapbox/polyline/src/polyline.js", ['depends' => [\y
 
             var index = getCenter.length/2;
 
-            map.center: [getCenter[index][1], getCenter[index][0]];
+            map.center =  [getCenter[index][1], getCenter[index][0]];
             map.addSource('route', {
                     'type': 'geojson',
                     'data': array
