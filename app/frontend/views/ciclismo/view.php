@@ -77,8 +77,11 @@ $this->registerJsFile("@web/@mapbox/polyline/src/polyline.js", ['depends' => [\y
 
         map.on('load', () => {
             var array = polyline.toGeoJSON('<?= $model->rota?>', 6);
+            var getCenter = polyline.decode('<?= $model->rota?>', 6);
 
+            var index = getCenter.length/2;
 
+            map.center: [getCenter[index][1], getCenter[index][0]];
             map.addSource('route', {
                     'type': 'geojson',
                     'data': array
