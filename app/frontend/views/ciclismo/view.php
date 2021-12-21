@@ -46,12 +46,12 @@ $this->registerJsFile("@web/@mapbox/polyline/src/polyline.js", ['depends' => [\y
     </div>
 </div>
 <script>
-
+    var array = polyline.decode('<?= $model->rota?>', 6);
     mapboxgl.accessToken = 'pk.eyJ1IjoiaXVyaWNhcnJhcyIsImEiOiJja3V3aDJrZWEwNjhuMm5xd3hqNHRuODdiIn0.Yztl8wZEMrxIlkEVwt1zgw';
     const map = new mapboxgl.Map({
         container: 'map',
         style: 'mapbox://styles/mapbox/streets-v11',
-        center: [-122.486052, 37.830348],
+        center: array[0],
         zoom: 14
     });
 
