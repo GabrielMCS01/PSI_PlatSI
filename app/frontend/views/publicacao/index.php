@@ -151,5 +151,5 @@ $this->registerJs("
     </div>
 </div>
 <?php } ?>
-</div>
+
 
