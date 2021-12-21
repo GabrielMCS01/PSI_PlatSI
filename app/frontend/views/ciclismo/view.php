@@ -46,7 +46,6 @@ $this->registerJsFile("@web/@mapbox/polyline/src/polyline.js", ['depends' => [\y
     </div>
 </div>
 <script>
-    var array = polyline.decode('<?= $model->rota?>', 6);
     mapboxgl.accessToken = 'pk.eyJ1IjoiaXVyaWNhcnJhcyIsImEiOiJja3V3aDJrZWEwNjhuMm5xd3hqNHRuODdiIn0.Yztl8wZEMrxIlkEVwt1zgw';
     const map = new mapboxgl.Map({
         container: 'map',
@@ -79,7 +78,7 @@ $this->registerJsFile("@web/@mapbox/polyline/src/polyline.js", ['depends' => [\y
                 'properties': {},
                 'geometry': {
                     'type': 'LineString',
-                    'coordinates': [array]
+                    'coordinates': array.entries()
 
                 }
             }
