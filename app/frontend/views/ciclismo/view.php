@@ -63,7 +63,7 @@ $this->registerJsFile("@web/@mapbox/polyline/src/polyline.js", ['depends' => [\y
                 'type': 'Feature',
                 'properties': {},
                 'geometry': {
-                    'type': 'LineString',
+                    'type': 'Point',
                     'coordinates': array
                 }
             }
@@ -81,5 +81,6 @@ $this->registerJsFile("@web/@mapbox/polyline/src/polyline.js", ['depends' => [\y
                 'line-width': 8
             }
         });
+        console.log(array);
     });
 </script>
