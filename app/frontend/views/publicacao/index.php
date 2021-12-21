@@ -47,7 +47,6 @@ $this->registerJs("
 
 
 ?>
-<script src="https://requirejs.org/docs/release/2.3.5/minified/require.js"></script>
 <style>
     .fas {
         font-size: 40px;

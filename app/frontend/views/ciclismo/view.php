@@ -12,7 +12,6 @@ $this->params['breadcrumbs'][] = ['label' => 'Historico', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
-<script src="node_modules/@mapbox/polyline"></script>
 
 <div class="ciclismo-view">
 
@@ -45,6 +44,7 @@ $this->params['breadcrumbs'][] = $this->title;
     </div>
 </div>
 <script>
+    var polyline = require('@mapbox/polyline');
     mapboxgl.accessToken = 'pk.eyJ1IjoiaXVyaWNhcnJhcyIsImEiOiJja3V3aDJrZWEwNjhuMm5xd3hqNHRuODdiIn0.Yztl8wZEMrxIlkEVwt1zgw';
     const map = new mapboxgl.Map({
         container: 'map',
