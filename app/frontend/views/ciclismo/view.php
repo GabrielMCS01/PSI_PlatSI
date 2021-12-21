@@ -63,7 +63,7 @@ $this->registerJsFile("@web/@mapbox/polyline/src/polyline.js", ['depends' => [\y
             'type': 'geojson',
             'data': array
             }
-        });
+        );
         map.addLayer({
             'id': 'route',
             'type': 'line',
