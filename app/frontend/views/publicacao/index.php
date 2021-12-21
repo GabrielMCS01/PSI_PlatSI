@@ -73,36 +73,43 @@ $this->registerJs("
         <h3><?= $publicacao->ciclismo->nome_percurso ?></h3>
         <h5><?= $publicacao->ciclismo->data_treino ?></h5>
         <div id='map' style='height: 300px;'>
+            <?php
+            if($publicacao->ciclismo->rota == null){
+                echo "<p>SEM ROTA</p>";
+            }
+            ?>
             <script>
-                var divElts = document.getElementById("map");
-                divElts.setAttribute('id', "map" + <?=$publicacao->id?>);
-                mapboxgl.accessToken = 'pk.eyJ1IjoiaXVyaWNhcnJhcyIsImEiOiJja3V3aDJrZWEwNjhuMm5xd3hqNHRuODdiIn0.Yztl8wZEMrxIlkEVwt1zgw';
-                map[<?= $publicacao->id?>] = new mapboxgl.Map({
-                    container: 'map' + <?= $publicacao->id?>,
-                    style: 'mapbox://styles/mapbox/streets-v11',
-                    center: [-122.486052, 37.830348],
-                    zoom: 14
-                }).on('load', () => {
+                if(<?= $publicacao->ciclismo->rota?> != null) {
+                    var divElts = document.getElementById("map");
+                    divElts.setAttribute('id', "map" + <?=$publicacao->id?>);
+                    mapboxgl.accessToken = 'pk.eyJ1IjoiaXVyaWNhcnJhcyIsImEiOiJja3V3aDJrZWEwNjhuMm5xd3hqNHRuODdiIn0.Yztl8wZEMrxIlkEVwt1zgw';
+                    map[<?= $publicacao->id?>] = new mapboxgl.Map({
+                        container: 'map' + <?= $publicacao->id?>,
+                        style: 'mapbox://styles/mapbox/streets-v11',
+                        center: [-122.486052, 37.830348],
+                        zoom: 14
+                    }).on('load', () => {
 
-                    var geoJSON = polyline.toGeoJSON('<?= $publicacao->ciclismo->rota?>', 6);
-                    map[<?= $publicacao->id?>].addSource('id' + j, {
-                        'type': 'geojson',
-                        'data': geoJSON
+                        var geoJSON = polyline.toGeoJSON('<?= $publicacao->ciclismo->rota?>', 6);
+                        map[<?= $publicacao->id?>].addSource('id' + j, {
+                            'type': 'geojson',
+                            'data': geoJSON
+                        });
+                        map[<?= $publicacao->id?>].addLayer({
+                            'id': 'id' + j,
+                            'type': 'line',
+                            'source': 'id' + j,
+                            'layout': {
+                                'line-join': 'round',
+                                'line-cap': 'round'
+                            },
+                            'paint': {
+                                'line-color': '#F00',
+                                'line-width': 8
+                            }
+                        });
                     });
-                    map[<?= $publicacao->id?>].addLayer({
-                        'id': 'id' + j,
-                        'type': 'line',
-                        'source': 'id' + j,
-                        'layout': {
-                            'line-join': 'round',
-                            'line-cap': 'round'
-                        },
-                        'paint': {
-                            'line-color': '#F00',
-                            'line-width': 8
-                        }
-                    });
-                });
+                }
             </script>
         </div>
         <br>
