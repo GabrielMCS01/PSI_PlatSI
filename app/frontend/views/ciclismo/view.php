@@ -78,8 +78,8 @@ $this->registerJsFile("@web/@mapbox/polyline/src/polyline.js", ['depends' => [\y
                 'type': 'Feature',
                 'properties': {},
                 'geometry': {
-                    'type': 'FeatureCollection',
-                    'features': featureCollection
+                    'type': 'LineString',
+                    'coordinates': [array]
 
                 }
             }
