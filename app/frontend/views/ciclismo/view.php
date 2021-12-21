@@ -79,8 +79,8 @@ $this->registerJsFile("@web/@mapbox/polyline/src/polyline.js", ['depends' => [\y
             var array = polyline.toGeoJSON('<?= $model->rota?>', 6);
             var getCenter = polyline.decode('<?= $model->rota?>', 6);
 
-            var index = getCenter.length/2;
-            var centerPoint = getCenter[index];
+            var index = getCenter.length/2 ;
+            var centerPoint = getCenter[index.toFixed(0)];
 
             console.log(getCenter);
             console.log(index);
