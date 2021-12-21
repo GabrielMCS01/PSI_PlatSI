@@ -11,6 +11,8 @@ $this->title = $model->nome_percurso;
 $this->params['breadcrumbs'][] = ['label' => 'Historico', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
+
+
 ?>
 
 <div class="ciclismo-view">
@@ -44,7 +46,8 @@ $this->params['breadcrumbs'][] = $this->title;
     </div>
 </div>
 <script>
-    var requirejs = require('requirejs');
+    import requirejs from "requirejs";
+
     var polyline = requirejs('@mapbox/polyline');
     mapboxgl.accessToken = 'pk.eyJ1IjoiaXVyaWNhcnJhcyIsImEiOiJja3V3aDJrZWEwNjhuMm5xd3hqNHRuODdiIn0.Yztl8wZEMrxIlkEVwt1zgw';
     const map = new mapboxgl.Map({
