@@ -50,8 +50,8 @@ $this->registerJsFile("@web/@mapbox/polyline/src/polyline.js", ['depends' => [\y
     const map = new mapboxgl.Map({
         container: 'map',
         style: 'mapbox://styles/mapbox/streets-v11',
-        center: [-9.259802, 39.091996],
-        zoom: 14
+        center: [39.091996, -9.259802],
+        zoom: 13
     });
 
     map.on('load', () => {
@@ -75,7 +75,7 @@ $this->registerJsFile("@web/@mapbox/polyline/src/polyline.js", ['depends' => [\y
                 'properties': {},
                 'geometry': {
                     'type': 'LineString',
-                    'coordinates': allPoints
+                    'coordinates': array
 
                 }
             }
