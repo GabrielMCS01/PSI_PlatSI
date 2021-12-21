@@ -78,7 +78,7 @@ class PublicacaoController extends Controller
         $model->createtime = Yii::$app->formatter->asDateTime('now', 'yyyy-MM-dd HH-mm-ss');
         $model->save();
 
-        $this->actionIndex();
+        return $this->actionIndex();
     }
 
     /**
