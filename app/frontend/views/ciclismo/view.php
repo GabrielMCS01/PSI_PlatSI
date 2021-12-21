@@ -80,8 +80,13 @@ $this->registerJsFile("@web/@mapbox/polyline/src/polyline.js", ['depends' => [\y
             var getCenter = polyline.decode('<?= $model->rota?>', 6);
 
             var index = getCenter.length/2;
+            var centerPoint = getCenter[index];
 
-            map.setCenter([getCenter[index][1], getCenter[index][0]], null);
+            console.log(centerPoint);
+            console.log(centerPoint[1]);
+            console.log(centerPoint[0]);
+            
+            map.setCenter([centerPoint[1], centerPoint[0]], null);
             map.addSource('route', {
                     'type': 'geojson',
                     'data': array
