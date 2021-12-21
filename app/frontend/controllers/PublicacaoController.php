@@ -78,7 +78,14 @@ class PublicacaoController extends Controller
         $model->createtime = Yii::$app->formatter->asDateTime('now', 'yyyy-MM-dd HH-mm-ss');
         $model->save();
 
-        return $this->actionIndex();
+
+        $publicar = true;
+        if(Publicacao::find()->where(['ciclismo_id' => $id])->one() != null){
+            $publicar = false;
+        }
+        return $this->render('view', [
+            'model' => $this->findModel($id), 'publicar' => $publicar
+        ]);
     }
 
     /**

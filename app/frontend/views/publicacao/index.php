@@ -3,6 +3,7 @@
 use common\models\Gosto;
 use common\utils\Converter;
 use hail812\adminlte3\assets\FontAwesomeAsset;
+use yii\bootstrap4\LinkPager;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\web\View;
@@ -148,6 +149,7 @@ $this->registerJs("
             <?php Pjax::end(); ?>
         </div>
     <?php } ?>
+    <?= LinkPager::widget(['pagination' => $pagination]) ?>
 </div>
 
 
