@@ -79,13 +79,7 @@ class PublicacaoController extends Controller
         $model->save();
 
 
-        $publicar = true;
-        if(Publicacao::find()->where(['ciclismo_id' => $id])->one() != null){
-            $publicar = false;
-        }
-        return $this->render('view', [
-            'model' => $this->findModel($id), 'publicar' => $publicar
-        ]);
+        $this->redirect(['index']);
     }
 
     /**
