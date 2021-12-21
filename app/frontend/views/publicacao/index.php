@@ -74,12 +74,12 @@ $this->registerJs("
         <h5><?= $publicacao->ciclismo->data_treino ?></h5>
         <div id='map' style='height: 300px;'>
             <?php
-            if($publicacao->ciclismo->rota == null){
+            if($publicacao->ciclismo->rota == ""){
                 echo "<p>SEM ROTA</p>";
             }
             ?>
             <script>
-                if(<?= $publicacao->ciclismo->rota?> != null) {
+                if('<?= $publicacao->ciclismo->rota?>' != "") {
                     var divElts = document.getElementById("map");
                     divElts.setAttribute('id', "map" + <?=$publicacao->id?>);
                     mapboxgl.accessToken = 'pk.eyJ1IjoiaXVyaWNhcnJhcyIsImEiOiJja3V3aDJrZWEwNjhuMm5xd3hqNHRuODdiIn0.Yztl8wZEMrxIlkEVwt1zgw';
