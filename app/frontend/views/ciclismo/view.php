@@ -55,29 +55,13 @@ $this->registerJsFile("@web/@mapbox/polyline/src/polyline.js", ['depends' => [\y
     });
 
     map.on('load', () => {
-        var array = polyline.decode('<?= $model->rota?>', 6);
+        var array = polyline.toGeoJSON('<?= $model->rota?>', 6);
 
-        var featureCollection = [];
-
-        const allPoints = array.map(point => ({
-            type: 'Feature',
-            geometry: {
-                type: 'Point',
-                coordinates: point
-            }
-        }));
 
 
         map.addSource('route', {
             'type': 'geojson',
-            'data': {
-                'type': 'Feature',
-                'properties': {},
-                'geometry': {
-                    'type': 'LineString',
-                    'coordinates': array
-
-                }
+            'data': array
             }
         });
         map.addLayer({
