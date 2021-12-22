@@ -90,7 +90,8 @@ class ComentarioController extends Controller
             $model->publicacao_id = $id;
             $model->user_id = Yii::$app->user->getId();
             $model->createtime = Yii::$app->formatter->asDateTime('now', 'yyyy-MM-dd HH-mm-ss');
-            if ($model->load($this->request->post()) && $model->save()) {
+            $model->content = Yii::$app->request->post('Comentário');
+            if ($model->save()) {
                 return $this->redirect(['indexpost', 'id' => $id]);
             }
         } else {
