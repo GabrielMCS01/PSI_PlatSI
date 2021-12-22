@@ -3,6 +3,10 @@
 namespace common\tests\unit\models;
 
 use Codeception\Test\Unit;
+use common\models\Ciclismo;
+use common\models\Comentario;
+use common\models\Gosto;
+use common\models\Publicacao;
 use common\models\User;
 
 /**
@@ -56,23 +60,32 @@ class UserTest extends Unit
 
     public function testApagarUser()
     {
-        // Recebe um utilizador
+        // Recebe um utilizador e as suas publicações
         expect_that($user = User::find()->where(['username' => 'test'])->one());
+        expect_that($ciclismosUser = Ciclismo::find()->where(['user_id' => $user->id])->all());
 
         if($user != null){
+            foreach ($ciclismosUser as $treino){
+                Comentario::deleteAll(['publicacao_id' => $treino->publicacaos->id]);
+                Gosto::deleteAll(['publicacao_id' => $treino->publicacaos->id]);
+                Publicacao::deleteAll(['ciclismo_id' => $treino->id]);
+                $treino->delete();
+            }
+            Comentario::deleteAll(['user_id' => $user->id]);
+            Gosto::deleteAll(['user_id' => $user->id]);
             $user->userinfo->delete();
             $user->delete();
             expect_not($user = User::find()->where(['username' => 'test'])->one());
         }
 
-        // Recebe um utilizador
+        // Recebe o moderador e as suas publicações
         expect_that($moderador = User::find()->where(['id' => '3'])->one());
+        expect_not($ciclismosMod = Ciclismo::find()->where(['user_id' => $moderador->id])->all());
 
         if($moderador != null){
             $moderador->userinfo->delete();
             $moderador->delete();
             expect_not($moderador = User::find()->where(['username' => 'moderador'])->one());
         }
-
     }
 }

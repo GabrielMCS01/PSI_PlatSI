@@ -11,3 +11,11 @@ INSERT INTO `user_info` (`primeiro_nome`, `ultimo_nome`, `user_id`) VALUES ('Gab
 INSERT INTO `user` (`id`,`username`,`auth_key`,`password_hash`,`password_reset_token`,`email`,`status`,`created_at`,`updated_at`,`verification_token`) VALUES (3,'moderador','rH2H6lvcOmxEidKvBrJ4XsTyKXc_Qsvi','$2y$13$N2.2hz1DRd6gty8Kl15.Ku6V4q9hCYvRQHKjzlLpLNM8us144V8DG',NULL,'moderador@moderador.com',10,1640176079,1640176079,NULL);
 INSERT INTO `auth_assignment` (`item_name`,`user_id`,`created_at`) VALUES ('moderador','3',1640176079);
 INSERT INTO `user_info` (`primeiro_nome`, `ultimo_nome`, `user_id`) VALUES ('moderador','mod',3);
+
+INSERT INTO ciclismo (id,nome_percurso,duracao,distancia,velocidade_media,velocidade_maxima,data_treino,user_id) VALUES (1,'Percurso de teste',500,900,10.1,20.4,'2021-12-21 14:30:41',2);
+
+INSERT INTO publicacao (id,createtime,ciclismo_id) VALUES (1,'2021-12-22 17:10:00',1);
+
+INSERT INTO comentario (id,content,createtime,publicacao_id,user_id) VALUES (1,'comentário de teste','2021-12-22 17:15:00',1,2);
+
+INSERT INTO gosto (id,publicacao_id,user_id) VALUES (1,1,2);

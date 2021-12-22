@@ -22,9 +22,9 @@ Executar o ficheiro SQL "CriarDB_test"
 Executar o ficheiro SQL "CriarTabelas_test"
 
 
-# Criar um utilizador de cada tipo
+# Cria dados de exemplo para serem utilizados nos testes
 
-Executar o ficheiro SQL "CriarUsers_test"
+Executar o ficheiro SQL "Dados_test"
 
 
 # Build do codecept
