@@ -54,7 +54,7 @@ class ComentarioController extends Controller
         $dataProvider = new ActiveDataProvider([
             'query' => Comentario::find()->where(['publicacao_id' => $id]),
             'pagination' => [
-                'pageSize' => 2,
+                'pageSize' => 10,
             ],
         ]);
 
