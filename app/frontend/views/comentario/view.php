@@ -1,6 +1,7 @@
 <?php
 
 use yii\helpers\Html;
+use yii\helpers\HtmlPurifier;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
