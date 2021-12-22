@@ -53,7 +53,7 @@ class ComentarioController extends Controller
 
         $comentarios = Comentario::find()->where(['publicacao_id' => $id])->all();
 
-        $pagination = new Pagination(['defaultPageSize' => 2, 'totalCount' => count($comentarios),]);
+        $pagination = new Pagination(['defaultPageSize' => 10, 'totalCount' => count($comentarios),]);
 
         $comentarios =  Comentario::find()->where(['publicacao_id' => $id])->offset($pagination->offset)->limit($pagination->limit)->all();
 
@@ -137,6 +137,7 @@ class ComentarioController extends Controller
     {
         $comentario = $this->findModel($id);
         $id = $comentario->publicacao_id;
+        $comentario->delete();
 
         return $this->redirect(['indexpost', 'id' => $id]);
     }
