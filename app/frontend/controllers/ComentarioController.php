@@ -4,6 +4,7 @@ namespace frontend\controllers;
 
 use common\models\Comentario;
 use frontend\models\ComentarioSearch;
+use Yii;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -80,13 +81,16 @@ class ComentarioController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
+    public function actionCreate($id)
     {
         $model = new Comentario();
 
         if ($this->request->isPost) {
+            $model->publicacao_id = $id;
+            $model->user_id = Yii::$app->user->getId();
+            $model->createtime = Yii::$app->formatter->asDateTime('now', 'yyyy-MM-dd HH-mm-ss');
             if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
+                return $this->redirect(['indexpost', 'id' => $id]);
             }
         } else {
             $model->loadDefaultValues();
@@ -94,6 +98,7 @@ class ComentarioController extends Controller
 
         return $this->render('create', [
             'model' => $model,
+            'id' => $id,
         ]);
     }
 
