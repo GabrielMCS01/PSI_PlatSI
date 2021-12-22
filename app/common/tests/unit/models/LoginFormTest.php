@@ -2,6 +2,7 @@
 
 namespace common\tests\unit\models;
 
+use frontend\models\SignupForm;
 use Yii;
 use common\models\LoginForm;
 use common\fixtures\UserFixture;
@@ -36,6 +37,27 @@ class LoginFormTest extends \Codeception\Test\Unit
         expect_that(Yii::$app->user->isGuest);
     }
 
+    public function testLoginCorrect()
+    {
+        $registo = new SignupForm([
+            'username' => 'admin',
+            'email' => 'test@mail.com',
+            'password' => 'adminadmin',
+            'primeiro_nome' => 'user',
+            'ultimo_nome' => 'teste'
+        ]);
+
+        $registo->signup();
+
+        $model = new LoginForm([
+            'username' => 'admin',
+            'password' => 'adminadmin',
+        ]);
+
+        expect_that($model->login());
+        expect_not(Yii::$app->user->isGuest);
+    }
+
     public function testLoginWrongPassword()
     {
         $model = new LoginForm([
@@ -49,16 +71,5 @@ class LoginFormTest extends \Codeception\Test\Unit
             ->equals('Palavra-passe Incorreta');
 
         expect_that(Yii::$app->user->isGuest);
-    }
-
-    public function testLoginCorrect()
-    {
-        $model = new LoginForm([
-            'username' => 'admin',
-            'password' => 'adminadmin',
-        ]);
-
-        expect_that($model->login());
-        expect_not(Yii::$app->user->isGuest);
     }
 }

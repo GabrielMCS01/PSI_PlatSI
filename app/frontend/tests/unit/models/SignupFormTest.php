@@ -33,10 +33,8 @@ class SignupFormTest extends Unit
         $this->assertEquals('test0', $user->getUsername());
 
         $this->tester->seeRecord('common\models\User', ['email' => 'test0@mail.com']);
-    }
 
-    public function testNotCorrectSignup()
-    {
+
         $model = new SignupForm([
             'username' => '',
             'email' => 'test0.com',
@@ -52,24 +50,6 @@ class SignupFormTest extends Unit
         expect_that($model->getErrors('password'));
         expect_that($model->getErrors('primeiro_nome'));
         expect_that($model->getErrors('ultimo_nome'));
-    }
-
-    public function testDuplicatedSignup()
-    {
-        $model = new SignupForm([
-            'username' => 'test0',
-            'email' => 'test0@mail.com',
-            'password' => '1234567890',
-            'primeiro_nome' => 'user',
-            'ultimo_nome' => 'teste'
-        ]);
-
-        $user = $model->signup();
-
-        $this->assertEquals('test0', $user->getUsername());
-
-        $this->tester->seeRecord('common\models\User', ['email' => 'test0@mail.com']);
-
 
         $model = new SignupForm([
             'username' => 'test0',
@@ -91,5 +71,27 @@ class SignupFormTest extends Unit
             ->equals('Este nome de utilizador já foi registado.');
         expect($model->getFirstError('email'))
             ->equals('Este email já foi registado.');
+    }
+
+    public function testNotCorrectSignup()
+    {
+
+    }
+
+    public function testDuplicatedSignup()
+    {
+        $model = new SignupForm([
+            'username' => 'test0',
+            'email' => 'test0@mail.com',
+            'password' => '1234567890',
+            'primeiro_nome' => 'user',
+            'ultimo_nome' => 'teste'
+        ]);
+
+        $user = $model->signup();
+
+        $this->assertEquals('test0', $user->getUsername());
+
+        $this->tester->seeRecord('common\models\User', ['email' => 'test0@mail.com']);
     }
 }

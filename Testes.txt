@@ -1,0 +1,3 @@
+Criar DB projectdb_test
+
+Correr os passos do README so que utilizando .\yii_test
