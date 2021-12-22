@@ -5,10 +5,11 @@ use yii\helpers\Html;
 use yii\helpers\HtmlPurifier;
 use yii\widgets\ListView;
 use yii\widgets\Pjax;
+
 /* @var $this yii\web\View */
 /* @var $pagination */
-/* @var $comentarios  */
-/* @var $id  */
+/* @var $comentarios */
+/* @var $id */
 
 $this->title = 'Comentarios';
 $this->params['breadcrumbs'][] = $this->title;
@@ -22,18 +23,19 @@ $this->params['breadcrumbs'][] = $this->title;
         </p>
 
         <?php Pjax::begin(); ?>
-        <?php foreach ($comentarios as $comentario){?>
-        <br>
-        <h3><strong><?= Html::encode($comentario->user->username) ?></strong></h3>
-        <h5><?= HtmlPurifier::process($comentario->content) ?></h5>
-        <?= Html::encode($comentario->createtime) ?>
-        <?php if (Yii::$app->user->can("deleteCommentModerator", ['comentario' => $comentario])) {
-                echo "Consigo editar";
+        <?php foreach ($comentarios as $comentario) { ?>
+            <br>
+            <h3><strong><?= Html::encode($comentario->user->username) ?></strong></h3>
+            <h5><?= HtmlPurifier::process($comentario->content) ?></h5>
+            <p><?= Html::encode($comentario->createtime) ?></p>
+
+            <?php if (Yii::$app->user->can("deleteCommentModerator", ['comentario' => $comentario])) {
+                echo Html::a("Editar Comentario", ['view', 'id' => $comentario->id], ['class' => 'btn btn-success', 'data-pjax' => 0]);
             }
             ?>
-        <br>
-        <br>
-        <?php }?>
+            <br>
+            <br>
+        <?php } ?>
         <?= LinkPager::widget(['pagination' => $pagination]) ?>
         <?php Pjax::end(); ?>
 
