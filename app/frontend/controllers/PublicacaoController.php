@@ -120,6 +120,7 @@ class PublicacaoController extends Controller
     public function actionDeletec($id){
         $publicacao = Publicacao::find()->where(['ciclismo_id' => $id])->one();
 
+        $publicacao->comentarios->deleteAll();
         $publicacao->delete();
 
         return $this->redirect(['ciclismo/view', 'id' => $id]);
