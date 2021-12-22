@@ -142,12 +142,12 @@ class m211102_131509_init_rbac extends Migration
 
         // -------------------------- MODERADOR ------------------------------------
         // add "deletePostModerator" permission
-        $deletePostModerator = $auth->createPermission('deletePost');
+        $deletePostModerator = $auth->createPermission('deletePostModerator');
         $deletePostModerator->description = 'Delete Post (Moderator can delete Posts made by any User)';
         $auth->add($deletePostModerator);
 
         // add "deleteCommentModerator" permission
-        $deleteCommentModerator = $auth->createPermission('deleteComment');
+        $deleteCommentModerator = $auth->createPermission('deleteCommentModerator');
         $deleteCommentModerator->description = 'Delete Comment (Moderator can delete Comments made by any User)';
         $auth->add($deleteCommentModerator);
 
