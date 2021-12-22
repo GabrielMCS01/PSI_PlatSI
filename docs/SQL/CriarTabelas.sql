@@ -25,4 +25,29 @@ CREATE TABLE IF NOT EXISTS ciclismo(
 		CONSTRAINT fk_ciclismo_id FOREIGN KEY(user_id) REFERENCES user(id)
 ) ENGINE=InnoDB;
 
+CREATE TABLE `publicacao` (
+  `id` int primary key auto_increment,
+  `createtime` datetime default current_timestamp,
+  `ciclismo_id` int unsigned not null,
+  constraint fk_publi_idciclismo foreign key(ciclismo_id) references ciclismo(id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `gosto` (
+  `id` int primary key auto_increment,
+  `publicacao_id` int not null,
+  `user_id` int not null,
+  constraint fk_gosto_idpubli foreign key(publicacao_id) references publicacao(id),
+  constraint fk_gosto_iduser  foreign key(user_id) references user(id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `comentario` (
+  `id` int primary key auto_increment,
+  `content` text NOT NULL,
+  `createtime` datetime default current_timestamp,
+  `publicacao_id` int not null,
+  `user_id` int not null,
+  CONSTRAINT fk_come_idpost FOREIGN KEY(publicacao_id) REFERENCES publicacao(id),
+  constraint fk_come_iduser foreign key(user_id)	references user(id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
  /* VELOCIDADE GRAFICO, ROTA - Colocar NOT NULL no final */
