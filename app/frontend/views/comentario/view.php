@@ -30,7 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
     </p>
 
     <div class="jumbotron text-center">
-        <h4><strong><?= Html::encode($model->user->username) ?></strong></h4>
+        <h4><strong>Comentário de <?= Html::encode($model->user->username) ?></strong></h4>
         <h5><strong>Texto</strong></h5>
         <p><?= HtmlPurifier::process($model->content) ?></p>
         <p><?= Html::encode($model->createtime) ?></p>
