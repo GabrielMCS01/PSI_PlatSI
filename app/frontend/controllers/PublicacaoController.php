@@ -116,6 +116,15 @@ class PublicacaoController extends Controller
         return $this->redirect(['index']);
     }
 
+
+    public function actionDeletec($id){
+        $publicacao = Publicacao::find()->where(['ciclismo_id' => $id])->one();
+
+        $publicacao->delete();
+
+        return $this->redirect(['ciclismo/view', 'id' => $id]);
+
+    }
     /**
      * Finds the Publicacao model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.

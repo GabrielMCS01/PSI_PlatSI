@@ -59,7 +59,7 @@ $this->registerJsFile("@web/@mapbox/polyline/src/polyline.js", ['depends' => [\y
                 if ($publicar) {
                     echo Html::a("Publicar", ['publicacao/create', 'id' => $model->id], ['data-confirm' => 'Deseja publicar esta sessão de treino?', 'class' => 'btn btn-primary']);
                 }else{
-                    echo Html::a("Publicado", null , ['class' => 'btn btn-primary']);
+                    echo Html::a("Publicado", ['publicacao/deletec', 'id' => $model->id] , ['data-confirm' => 'Deseja remover a publicação desta sessão de treino?', 'class' => 'btn btn-primary']);
                 }?>
             </div>
         </div>
