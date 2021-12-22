@@ -23,12 +23,12 @@ class m211102_131509_init_rbac extends Migration
         // ----------------------------------- USER ---------------------------------------------
         $ruleUser = new UserRule;
         $rulePerfil = new PerfilRule;
-        $ruleDeletePost = new DeletePostRule();
-        $ruleDeleteComment = new DeleteCommentRule();
+        $rulePost = new DeletePostRule(); // Post
+        $ruleComment = new DeleteCommentRule(); // Comment
         $auth->add($ruleUser);
         $auth->add($rulePerfil);
-        $auth->add($ruleDeletePost);
-        $auth->add($ruleDeleteComment);
+        $auth->add($rulePost);
+        $auth->add($ruleComment);
 
         // add "frontendAccess" permission
         $frontendAccess = $auth->createPermission('frontendAccess');
@@ -87,24 +87,26 @@ class m211102_131509_init_rbac extends Migration
         // add "updatePost" permission
         $updatePost = $auth->createPermission('updatePost');
         $updatePost->description = 'Update Post (User logged)';
+        $updatePost->ruleName = $rulePost->name;
         $auth->add($updatePost);
 
         // add "deletePost" permission
         $deletePost = $auth->createPermission('deletePost');
-        $deletePost->description = 'Delete Post (User logged) (Moderator can delete Posts made by any User)';
-        $deletePost->ruleName = $ruleDeletePost->name;
+        $deletePost->description = 'Delete Post (User logged)';
+        $deletePost->ruleName = $rulePost->name;
         $auth->add($deletePost);
 
         // ------------------------ COMMENTS -------------------------
         // add "updateComment" permission
         $updateComment = $auth->createPermission('updateComment');
         $updateComment->description = 'Update Comment (User logged)';
+        $updateComment->ruleName = $ruleComment->name;
         $auth->add($updateComment);
 
-        // add "deletePost" permission
+        // add "deleteComment" permission
         $deleteComment = $auth->createPermission('deleteComment');
-        $deleteComment->description = 'Delete Comment (User logged) (Moderator can delete Comments made by any User)';
-        $deleteComment->ruleName = $ruleDeleteComment->name;
+        $deleteComment->description = 'Delete Comment (User logged)';
+        $deleteComment->ruleName = $ruleComment->name;
         $auth->add($deleteComment);
 
         // add "author" role and give him profile and activity roles
@@ -139,11 +141,25 @@ class m211102_131509_init_rbac extends Migration
         // --------------------------- ADMIN ---------------------------------------
 
         // -------------------------- MODERADOR ------------------------------------
+        // add "deletePostModerator" permission
+        $deletePostModerator = $auth->createPermission('deletePost');
+        $deletePostModerator->description = 'Delete Post (Moderator can delete Posts made by any User)';
+        $auth->add($deletePostModerator);
+
+        // add "deleteCommentModerator" permission
+        $deleteCommentModerator = $auth->createPermission('deleteComment');
+        $deleteCommentModerator->description = 'Delete Comment (Moderator can delete Comments made by any User)';
+        $auth->add($deleteCommentModerator);
+
+        $auth->addChild($deletePost, $deletePostModerator);
+        $auth->addChild($deleteComment, $deleteCommentModerator);
+
         // add "moderador" role
         $moderador = $auth->createRole('moderador');
         $auth->add($moderador);
         $auth->addChild($moderador, $user);
-
+        $auth->addChild($moderador, $deletePostModerator);
+        $auth->addChild($moderador, $deleteCommentModerator);
         // -------------------------- MODERADOR ------------------------------------
     }
 
