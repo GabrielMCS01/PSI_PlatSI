@@ -39,16 +39,6 @@ class LoginFormTest extends \Codeception\Test\Unit
 
     public function testLoginCorrect()
     {
-        $registo = new SignupForm([
-            'username' => 'admin',
-            'email' => 'test@mail.com',
-            'password' => 'adminadmin',
-            'primeiro_nome' => 'user',
-            'ultimo_nome' => 'teste'
-        ]);
-
-        $registo->signup();
-
         $model = new LoginForm([
             'username' => 'admin',
             'password' => 'adminadmin',
