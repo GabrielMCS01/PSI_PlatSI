@@ -6,7 +6,7 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model common\models\Comentario */
 
-$this->title = $model->id;
+$this->title = "Comentário de " . $model->user->username;
 $this->params['breadcrumbs'][] = ['label' => 'Comentarios', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
@@ -16,27 +16,23 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?php if(Yii::$app->user->can("UpdateComment", ['comentario' => $model])){?>
-        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?php if (Yii::$app->user->can("UpdateComment", ['comentario' => $model])) { ?>
+            <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
         <?php } ?>
         <?= Html::a('Delete', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
+                'confirm' => 'Deseja remover este comentário?',
                 'method' => 'post',
             ],
         ]) ?>
     </p>
 
-    <?= DetailView::widget([
-        'model' => $model,
-        'attributes' => [
-            'id',
-            'content:ntext',
-            'createtime',
-            'publicacao_id',
-            'user_id',
-        ],
-    ]) ?>
+    <div class="jumbotron text-center">
+        <h4><strong><?= Html::encode($model->user->username) ?></strong></h4>
+        <h5><strong>Texto</strong></h5>
+        <p><?= HtmlPurifier::process($model->content) ?></p>
+        <p><?= Html::encode($model->createtime) ?></p>
+    </div>
 
 </div>
