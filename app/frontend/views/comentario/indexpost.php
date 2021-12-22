@@ -1,11 +1,13 @@
 <?php
 
+use yii\bootstrap4\LinkPager;
 use yii\helpers\Html;
 use yii\widgets\ListView;
 use yii\widgets\Pjax;
 /* @var $this yii\web\View */
-/* @var $searchModel frontend\models\ComentarioSearch */
-/* @var $dataProvider yii\data\ActiveDataProvider */
+/* @var $pagination */
+/* @var $comentarios  */
+/* @var $id  */
 
 $this->title = 'Comentarios';
 $this->params['breadcrumbs'][] = $this->title;
@@ -19,11 +21,15 @@ $this->params['breadcrumbs'][] = $this->title;
         </p>
 
         <?php Pjax::begin(); ?>
-        <?= ListView::widget([
-            'dataProvider' => $dataProvider,
-            'itemView' => '_post',
-        ]) ?>
-
+        <?php foreach ($comentarios as $comentario){?>
+        <br>
+        <h3><strong><?= Html::encode($comentario->user->username) ?></strong></h3>
+        <h5><?= HtmlPurifier::process($comentario->content) ?></h5>
+        <?= Html::encode($comentario->createtime) ?>
+        <br>
+        <br>
+        <?php }?>
+        <?= LinkPager::widget(['pagination' => $pagination]) ?>
         <?php Pjax::end(); ?>
 
     </div>

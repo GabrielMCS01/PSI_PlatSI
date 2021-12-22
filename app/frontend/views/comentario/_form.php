@@ -12,7 +12,7 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'Comentário')->textarea(['rows' => 6]) ?>
+    <?= $form->field($model, 'content')->textarea(['rows' => 6]) ?>
 
     <div class="form-group">
         <?= Html::submitButton('Publicar Comentário', ['class' => 'btn btn-success']) ?>

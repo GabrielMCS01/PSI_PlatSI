@@ -6,6 +6,7 @@ use common\models\Comentario;
 use frontend\models\ComentarioSearch;
 use Yii;
 use yii\data\ActiveDataProvider;
+use yii\data\Pagination;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -49,18 +50,16 @@ class ComentarioController extends Controller
     }
 
     public function actionIndexpost($id){
-        $searchModel = new ComentarioSearch();
 
-        $dataProvider = new ActiveDataProvider([
-            'query' => Comentario::find()->where(['publicacao_id' => $id]),
-            'pagination' => [
-                'pageSize' => 10,
-            ],
-        ]);
+        $comentarios = Comentario::find()->where(['publicacao_id' => $id])->all();
+
+        $pagination = new Pagination(['defaultPageSize' => 2, 'totalCount' => count($comentarios),]);
+
+        $comentarios =  Comentario::find()->where(['publicacao_id' => $id])->offset($pagination->offset)->limit($pagination->limit)->all();
 
         return $this->render('indexpost', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
+            'pagination' => $pagination,
+            'comentarios' => $comentarios,
             'id' => $id,
         ]);
     }
@@ -90,8 +89,7 @@ class ComentarioController extends Controller
             $model->publicacao_id = $id;
             $model->user_id = Yii::$app->user->getId();
             $model->createtime = Yii::$app->formatter->asDateTime('now', 'yyyy-MM-dd HH-mm-ss');
-            $model->content = Yii::$app->request->post('Comentário');
-            if ($model->save()) {
+            if ($model->load($this->request->post()) && $model->save()) {
                 return $this->redirect(['indexpost', 'id' => $id]);
             }
         } else {
