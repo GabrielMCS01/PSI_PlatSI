@@ -114,7 +114,7 @@ class ComentarioController extends Controller
         $model = $this->findModel($id);
 
         if($this->request->isPost) {
-            $model->content = $this->request->post("content") . " (Editado)" . "";
+            $model->content = $this->request->post("content");
             if ($model->save()) {
                 return $this->redirect(['view', 'id' => $model->id]);
             }
