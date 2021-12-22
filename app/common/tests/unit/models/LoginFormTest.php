@@ -2,30 +2,23 @@
 
 namespace common\tests\unit\models;
 
-use frontend\models\SignupForm;
+use Codeception\Test\Unit;
 use Yii;
 use common\models\LoginForm;
-use common\fixtures\UserFixture;
 
 /**
  * Login form test
  */
-class LoginFormTest extends \Codeception\Test\Unit
+class LoginFormTest extends Unit
 {
     /**
      * @var \common\tests\UnitTester
      */
     protected $tester;
-
-
     /**
      * @return array
      */
-    public function _fixtures()
-    {
-
-    }
-
+    // Login sem receber quaisquer dados
     public function testLoginNoUser()
     {
         $model = new LoginForm([
@@ -37,6 +30,7 @@ class LoginFormTest extends \Codeception\Test\Unit
         expect_that(Yii::$app->user->isGuest);
     }
 
+    // Login com dados existentes na DB
     public function testLoginCorrect()
     {
         $model = new LoginForm([
@@ -48,6 +42,7 @@ class LoginFormTest extends \Codeception\Test\Unit
         expect_not(Yii::$app->user->isGuest);
     }
 
+    // Login com palavra-passe errada
     public function testLoginWrongPassword()
     {
         $model = new LoginForm([

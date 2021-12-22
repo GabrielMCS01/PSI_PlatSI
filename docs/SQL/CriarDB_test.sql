@@ -1,3 +1,3 @@
 CREATE DATABASE `projectdb_test`;
 
-USE projectdb;
+USE projectdb_test;

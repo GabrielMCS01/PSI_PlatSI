@@ -3,7 +3,6 @@
 namespace frontend\tests\unit\models;
 
 use Codeception\Test\Unit;
-use common\fixtures\UserFixture;
 use frontend\models\SignupForm;
 
 class SignupFormTest extends Unit
@@ -18,6 +17,7 @@ class SignupFormTest extends Unit
 
     }
 
+    // Registo com dados corretos e não repetidos
     public function testCorrectSignup()
     {
         $model = new SignupForm([
@@ -35,6 +35,7 @@ class SignupFormTest extends Unit
         $this->tester->seeRecord('common\models\User', ['email' => 'test0@mail.com']);
     }
 
+    // Registo com dados incorretos/ em falta
     public function testNotCorrectSignup()
     {
         $model = new SignupForm([
@@ -54,6 +55,7 @@ class SignupFormTest extends Unit
         expect_that($model->getErrors('ultimo_nome'));
     }
 
+    // Cria o mesmo utilizador duas vezes para ter um erro
     public function testDuplicatedSignup()
     {
         $model = new SignupForm([
