@@ -2,6 +2,7 @@
 
 namespace frontend\controllers;
 
+use common\models\Comentario;
 use common\models\Publicacao;
 use app\models\PublicacaoSearch;
 use Yii;
@@ -120,7 +121,14 @@ class PublicacaoController extends Controller
     public function actionDeletec($id){
         $publicacao = Publicacao::find()->where(['ciclismo_id' => $id])->one();
 
-        $publicacao->comentarios->delete();
+        Comentario::deleteAll(['publicacao_id' => $publicacao->id]);
+
+        /*$comentarios = Comentario::find()->where(['publicacao_id' => $publicacao->id])->all();
+
+        foreach ($comentarios as $comentario){
+            $comentario->deleteAll();
+        }*/
+
         $publicacao->delete();
 
         return $this->redirect(['ciclismo/view', 'id' => $id]);
