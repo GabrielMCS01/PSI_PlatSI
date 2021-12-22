@@ -1,3 +1,28 @@
-Criar DB projectdb_test
+------------------------------------------------------------------------------
+# No ficheiro common/config/test-local.php
 
-Correr os passos do README so que utilizando .\yii_test
+# colar esta linha de código dentro de DB
+
+'dsn' => 'mysql:host=127.0.0.1;dbname=projectdb_test',
+------------------------------------------------------------------------------
+
+# Criar a base de dados
+
+Executar o ficheiro SQL "CriarDB_test"
+
+
+# Na pasta APP executar os comandos seguintes:
+
+.\yii_test migrate --migrationPath=@yii/rbac/migrations
+.\yii_test migrate
+
+
+# Criar as tabelas da aplicação
+
+Executar o ficheiro SQL "CriarTabelas_test"
+
+
+# Criar um utilizador de cada tipo
+
+Executar o ficheiro SQL "CriarUsers_test"
+

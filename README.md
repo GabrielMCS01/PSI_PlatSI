@@ -23,7 +23,7 @@ Executar o ficheiro SQL "CriarDB"
 .\yii migrate --migrationPath=@yii/rbac/migrations
 .\yii migrate
 
-# Criar a tabela user_info e a tabela ciclismo
+# Criar as tabelas da aplicação
 
 Executar o ficheiro SQL "CriarTabelas"
 

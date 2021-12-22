@@ -70,6 +70,7 @@ class SignupFormTest extends Unit
 
         $this->tester->seeRecord('common\models\User', ['email' => 'test0@mail.com']);
 
+        // Criado pela segunda vez para dar o erro
         $model = new SignupForm([
             'username' => 'test0',
             'email' => 'test0@mail.com',
