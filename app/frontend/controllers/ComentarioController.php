@@ -61,6 +61,7 @@ class ComentarioController extends Controller
         return $this->render('indexpost', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'id' => $id,
         ]);
     }
     /**
