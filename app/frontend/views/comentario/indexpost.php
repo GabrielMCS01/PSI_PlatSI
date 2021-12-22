@@ -22,7 +22,6 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= ListView::widget([
             'dataProvider' => $dataProvider,
             'itemView' => '_post',
-            'pager' => \yii\bootstrap4\LinkPager::className(),
         ]) ?>
 
         <?php Pjax::end(); ?>
