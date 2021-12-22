@@ -21,7 +21,6 @@ $this->params['breadcrumbs'][] = $this->title;
             <?= Html::a('Criar Comentario', ['create', 'id' => $id], ['class' => 'btn btn-success']) ?>
         </p>
 
-        <?php Pjax::begin(); ?>
         <?php foreach ($comentarios as $comentario){?>
         <br>
         <h3><strong><?= Html::encode($comentario->user->username) ?></strong></h3>
@@ -30,6 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <br>
         <br>
         <?php }?>
+        <?php Pjax::begin(); ?> 
         <?= LinkPager::widget(['pagination' => $pagination]) ?>
         <?php Pjax::end(); ?>
 
