@@ -5,6 +5,7 @@ use yii\helpers\HtmlPurifier;
 
 ?>
 <div class="post">
+    <br>
     <h3><strong><?= Html::encode($model->user->username) ?></strong></h3>
     <h5><?= HtmlPurifier::process($model->content) ?></h5>
     <?= Html::encode($model->createtime) ?>
