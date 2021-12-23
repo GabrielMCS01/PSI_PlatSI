@@ -47,6 +47,9 @@ AppAsset::register($this);
     } else {
         $menuItems[] = ['label' => 'Histórico', 'url' => ['/ciclismo/index']];
         $menuItems[] = ['label' => 'Feed de noticias' , 'url' => ['/publicacao/index']];
+        if(Yii::$app->user->can("deleteCommentModerator")){
+            $menuItems[] = ['label' => 'Comentários', 'url' => ['/comentario/index']];
+        }
         $menuItems[] = ['label' => 'Perfil', 'url' => ['/user-info/perfil']];
         $menuItems[] = '<li>'
             . Html::beginForm(['/site/logout'], 'post', ['class' => 'form-inline'])
