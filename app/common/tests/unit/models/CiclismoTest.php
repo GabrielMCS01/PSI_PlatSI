@@ -7,7 +7,6 @@ use common\models\Ciclismo;
 use common\models\Comentario;
 use common\models\Gosto;
 use common\models\Publicacao;
-use common\models\User;
 
 /**
  * UserTest test
@@ -22,6 +21,7 @@ class CiclismoTest extends Unit
      * @return array
      */
 
+    // Testes para criar treinos
     public function testCreateTreino()
     {
         // Treino criado corretamente
@@ -42,8 +42,7 @@ class CiclismoTest extends Unit
 
         expect_that($treino->velocidade_media == 9.92);
         // -------------------------------------------------------------------------------------
-
-        // Treino criado com dados incorretos
+        // Tenta criar Treino com dados incorretos
         $model = new Ciclismo([
             'nome_percurso' => '',
             'duracao' => 12.1, // Valor Inteiro
@@ -59,45 +58,58 @@ class CiclismoTest extends Unit
         expect_that($model->getErrors('user_id'));
     }
 
-     public function testViewAllTreino()
-     {
-         $treinos = Ciclismo::find()->where(['user_id' => 2])->all();
+    // Testes para visualizar todos os treinos de um utilizador
+    public function testViewAllTreino()
+    {
+        $treinos = Ciclismo::find()->where(['user_id' => 2])->all();
 
-         foreach ($treinos as $treino){
-             expect_not($treino->user_id != 2);
-         }
+        foreach ($treinos as $treino) {
+            expect_not($treino->user_id != 2);
+        }
 
-         expect_not(Ciclismo::find()->where(['user_id' => 3])->all());
-     }
+        expect_not(Ciclismo::find()->where(['user_id' => 3])->all());
+    }
 
-     public function testEditTreino()
-     {
-         // Testa se recebe o utilizador da DB e modifica-o localmente
-         $treino = Ciclismo::find()->where(['id' => 1])->one();
+    // Testes para visualizar um treino do utilizador
+    public function testViewTreino()
+    {
+        $treino = Ciclismo::find()->where(['user_id' => 2])->one();
 
-         $treino->nome_percurso = 'nome trocado';
+        expect_not($treino->user_id != 2);
 
-         expect_that($treino->nome_percurso == 'nome trocado');
-         expect_that($treino->nome_percurso != 'Percurso de teste');
-         // --------------------------------------------------------------
-         // Atualiza o user na DB e recebe de novo o user da DB
-         expect_that($treino->save());
+        expect_not(Ciclismo::find()->where(['user_id' => 3])->one());
+    }
 
-         $treinoAtualizado = Ciclismo::find()->where(['nome_percurso' => 'nome trocado'])->one();
+    // Testes para editar um treino do utilizador
+    public function testEditTreino()
+    {
+        // Testa se recebe o treino da DB e modifica-o localmente
+        $treino = Ciclismo::find()->where(['id' => 1])->one();
 
-         expect_that($treinoAtualizado->nome_percurso == 'nome trocado');
-         expect_that($treinoAtualizado->velocidade_media == 10.1);
-     }
+        $treino->nome_percurso = 'nome trocado';
 
-     public function testApagarTreino()
-     {
-         expect_that($ciclismo = Ciclismo::find()->where(['id' => 1])->one());
+        expect_that($treino->nome_percurso == 'nome trocado');
+        expect_that($treino->nome_percurso != 'Percurso de teste');
+        // --------------------------------------------------------------
+        // Atualiza o treino na DB e recebe de novamente o treino da DB
+        expect_that($treino->save());
 
-         if (Publicacao::find()->where(['ciclismo_id' => $ciclismo->id])->one() == true) {
-             Comentario::deleteAll(['publicacao_id' => $ciclismo->publicacao->id]);
-             Gosto::deleteAll(['publicacao_id' => $ciclismo->publicacao->id]);
-             Publicacao::deleteAll(['ciclismo_id' => $ciclismo->id]);
-         }
-         expect_that($ciclismo->delete());
-     }
+        $treinoAtualizado = Ciclismo::find()->where(['nome_percurso' => 'nome trocado'])->one();
+
+        expect_that($treinoAtualizado->nome_percurso == 'nome trocado');
+        expect_that($treinoAtualizado->velocidade_media == 10.1);
+    }
+
+    // Testes para apagar um treino do utilizador
+    public function testApagarTreino()
+    {
+        expect_that($ciclismo = Ciclismo::find()->where(['id' => 1])->one());
+
+        if (Publicacao::find()->where(['ciclismo_id' => $ciclismo->id])->one() == true) {
+            Comentario::deleteAll(['publicacao_id' => $ciclismo->publicacao->id]);
+            Gosto::deleteAll(['publicacao_id' => $ciclismo->publicacao->id]);
+            Publicacao::deleteAll(['ciclismo_id' => $ciclismo->id]);
+        }
+        expect_that($ciclismo->delete());
+    }
 }

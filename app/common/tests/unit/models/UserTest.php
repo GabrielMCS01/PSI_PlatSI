@@ -21,6 +21,7 @@ class UserTest extends Unit
     /**
      * @return array
      */
+    // Testes para visualizar um utilizador
     public function testViewUser()
     {
         $user = User::find()->where(['username' => 'test'])->one();
@@ -34,6 +35,7 @@ class UserTest extends Unit
         expect_that($moderador->username == 'moderador');
     }
 
+    // Testes para editar um perfil de utilizador
     public function testEditUser()
     {
         // Testa se recebe o utilizador da DB e modifica-o localmente
@@ -58,6 +60,7 @@ class UserTest extends Unit
         expect_that($userAtualizado->username == 'testModificado');
     }
 
+    // Testes para apagar um perfil do utilizador
     public function testApagarUser()
     {
         // Recebe um utilizador e as suas publicações
