@@ -3,6 +3,7 @@
 use common\models\Gosto;
 use common\utils\Converter;
 use hail812\adminlte3\assets\FontAwesomeAsset;
+use kartik\dialog\Dialog;
 use yii\bootstrap4\LinkPager;
 use yii\helpers\Html;
 use yii\helpers\Url;
@@ -93,7 +94,7 @@ $this->registerJs("
 
                             var getCenter = polyline.decode('<?= $publicacao->ciclismo->rota?>', 6);
 
-                            var index = getCenter.length/2 ;
+                            var index = getCenter.length / 2;
                             var centerPoint = getCenter[index.toFixed(0)];
 
 
@@ -129,9 +130,11 @@ $this->registerJs("
                     </ul>
                 </div>
                 <div class="col-lg-6">
-                    <strong>Velocidade Média: </strong> <?= Converter::velocityConverter($publicacao->ciclismo->velocidade_media) ?>
+                    <strong>Velocidade
+                        Média: </strong> <?= Converter::velocityConverter($publicacao->ciclismo->velocidade_media) ?>
                     <br>
-                    <strong>Velocidade Máxima: </strong><?= Converter::velocityConverter($publicacao->ciclismo->velocidade_maxima) ?>
+                    <strong>Velocidade
+                        Máxima: </strong><?= Converter::velocityConverter($publicacao->ciclismo->velocidade_maxima) ?>
                 </div>
             </div>
             <br>
@@ -152,7 +155,15 @@ $this->registerJs("
                 <div class="col-lg-1 text-right">
                     <?= Html::a('', false, $options); ?></div>
                 <div class="col-lg-2 text-right">
-                    <?= Html::a('Ver Comentarios', ['comentario/indexpost', 'id' => $publicacao->id], ['class' => 'btn btn-primary']) ?>
+                    <?= Html::a('Ver Comentarios', ['comentario/indexpost', 'id' => $publicacao->id], ['class' => 'btn btn-primary', 'data-pjax' => 0]) ?>
+                    <?php Dialog::widget(['overrideYiiConfirm' => true]);
+                    if (Yii::$app->user->can("deletePostModerator", ['publicacao' => $publicacao])) {
+                        echo Html::a("Apagar Publicação", ['delete', 'id' => $publicacao->id], [
+                            'class' => 'btn btn-danger',
+                            'data-confirm' => 'Deseja remover a publicação desta sessão de treino?',
+                            'data-method' => 'post',
+                            'data-pjax' => 0]);
+                    } ?>
                 </div>
             </div>
             <?php Pjax::end(); ?>
