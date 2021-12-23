@@ -8,7 +8,7 @@ $params = array_merge(
 
 return [
     'id' => 'app-backend',
-    'name'=>'Ciclodias',
+    'name' => 'Ciclodias',
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => ['log'],
@@ -22,28 +22,19 @@ return [
             'parsers' => [
                 'application/json' => 'yii\web\JsonParser',
             ],
-            'csrfParam' => '_csrf-backend',
-            'csrfCookie' => [
-            'httpOnly' => true,
-            'path' => '/admin',
-            ],
         ],
         'user' => [
-             'identityClass' => 'common\models\User',
-        'enableAutoLogin' => true,
-        'identityCookie' => [
-            'name' => '_identity-backend',
-            'path' => '/admin',
-            'httpOnly' => true,
-        ],
+            'identityClass' => 'common\models\User',
+            'enableAutoLogin' => true,
+            'identityCookie' => [
+                'name' => '_identity-backend',
+                'httpOnly' => true,
+            ],
         ],
         'session' => [
-        // this is the name of the session cookie used for login on the backend
-        'name' => 'advanced-backend',
-        'cookieParams' => [
-            'path' => '/admin',
+            // this is the name of the session cookie used for login on the backend
+            'name' => 'advanced-backend',
         ],
-    ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
             'targets' => [
@@ -64,7 +55,7 @@ return [
                 ['class' => 'yii\rest\UrlRule', 'controller' => 'v1/userinfo', 'pluralize' => false],
                 ['class' => 'yii\rest\UrlRule', 'controller' => 'v1/ciclismo', 'pluralize' => false,
                     'extraPatterns' => [
-                      'POST sync' => 'sync', // 'sync' é 'actionSync'
+                        'POST sync' => 'sync', // 'sync' é 'actionSync'
 
                     ],
                 ],
