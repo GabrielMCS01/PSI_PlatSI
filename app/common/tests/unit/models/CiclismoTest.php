@@ -93,10 +93,11 @@ class CiclismoTest extends Unit
      {
          expect_that($ciclismo = Ciclismo::find()->where(['id' => 1])->one());
 
-         Comentario::deleteAll(['publicacao_id' => $ciclismo->publicacaos->id]);
-         Gosto::deleteAll(['publicacao_id' => $ciclismo->publicacaos->id]);
-         Publicacao::deleteAll(['ciclismo_id' => $ciclismo->id]);
-
+         if (Publicacao::find()->where(['ciclismo_id' => $ciclismo->id])->one() == true) {
+             Comentario::deleteAll(['publicacao_id' => $ciclismo->publicacao->id]);
+             Gosto::deleteAll(['publicacao_id' => $ciclismo->publicacao->id]);
+             Publicacao::deleteAll(['ciclismo_id' => $ciclismo->id]);
+         }
          expect_that($ciclismo->delete());
      }
 }

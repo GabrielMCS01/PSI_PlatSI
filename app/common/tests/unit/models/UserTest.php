@@ -65,12 +65,16 @@ class UserTest extends Unit
         expect_that($ciclismosUser = Ciclismo::find()->where(['user_id' => $user->id])->all());
 
         if($user != null){
+            // Apaga tudo relativo ás publicações, treinos daquele utilizador (Comentários de outros utilizadores)
             foreach ($ciclismosUser as $treino){
-                Comentario::deleteAll(['publicacao_id' => $treino->publicacaos->id]);
-                Gosto::deleteAll(['publicacao_id' => $treino->publicacaos->id]);
-                Publicacao::deleteAll(['ciclismo_id' => $treino->id]);
+                if (Publicacao::find()->where(['ciclismo_id' => $treino->id])->one() == true) {
+                    Comentario::deleteAll(['publicacao_id' => $treino->publicacao->id]);
+                    Gosto::deleteAll(['publicacao_id' => $treino->publicacao->id]);
+                    Publicacao::deleteAll(['ciclismo_id' => $treino->id]);
+                }
                 $treino->delete();
             }
+            // Apaga tudo o que o utilizador tem relativo a ele
             Comentario::deleteAll(['user_id' => $user->id]);
             Gosto::deleteAll(['user_id' => $user->id]);
             $user->userinfo->delete();
@@ -83,6 +87,18 @@ class UserTest extends Unit
         expect_not($ciclismosMod = Ciclismo::find()->where(['user_id' => $moderador->id])->all());
 
         if($moderador != null){
+            // Apaga tudo relativo ás publicações, treinos daquele utilizador (Comentários de outros utilizadores)
+            foreach ($ciclismosMod as $treinoMod){
+                if (Publicacao::find()->where(['ciclismo_id' => $treinoMod->id])->one() == true) {
+                    Comentario::deleteAll(['publicacao_id' => $treinoMod->publicacao->id]);
+                    Gosto::deleteAll(['publicacao_id' => $treinoMod->publicacao->id]);
+                    Publicacao::deleteAll(['ciclismo_id' => $treinoMod->id]);
+                }
+                $treinoMod->delete();
+            }
+            // Apaga tudo o que o utilizador tem relativo a ele
+            Comentario::deleteAll(['user_id' => $moderador->id]);
+            Gosto::deleteAll(['user_id' => $moderador->id]);
             $moderador->userinfo->delete();
             $moderador->delete();
             expect_not($moderador = User::find()->where(['username' => 'moderador'])->one());

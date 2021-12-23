@@ -31,16 +31,15 @@ class PublicacaoTest extends Unit
 
         $this->assertEquals(2, $model->ciclismo_id);
 
-        // Pesquisa pela publicação acabada de criar e pela que está na DB padrão
-        $pubs = Publicacao::find()->where(['ciclismo_id' => '2'])->all();
+        // Pesquisa pela publicação acabada de criar
+        $pub = Publicacao::find()->where(['ciclismo_id' => '3'])->one();
 
-        foreach ($pubs as $pub) {
-            expect_that($pub->ciclismo->user->id == 9.92);
-        }
+        expect_that($pub->ciclismo->user->id == 4);
+
         // -------------------------------------------------------------------------------------
 
         // Treino criado com dados incorretos
-        $model = new Ciclismo([
+        /*$model = new Ciclismo([
             'nome_percurso' => '',
             'duracao' => 12.1, // Valor Inteiro
             'distancia' => 323.1, // Valor Inteiro
@@ -52,10 +51,10 @@ class PublicacaoTest extends Unit
 
         expect_that($model->getErrors('duracao'));
         expect_that($model->getErrors('distancia'));
-        expect_that($model->getErrors('user_id'));
+        expect_that($model->getErrors('user_id'));*/
     }
 
-     public function testViewAllTreino()
+     /*public function testViewAllTreino()
      {
          $treinos = Ciclismo::find()->where(['user_id' => 2])->all();
 
@@ -94,5 +93,5 @@ class PublicacaoTest extends Unit
          Publicacao::deleteAll(['ciclismo_id' => $ciclismo->id]);
 
          expect_that($ciclismo->delete());
-     }
+     }*/
 }
