@@ -40,17 +40,11 @@ class CiclismoController extends Controller
      */
     public function actionIndex()
     {
-        /*
-        $searchModel = new CiclismoSearch();
-        $dataProvider = $searchModel->search($this->request->queryParams);
-
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);*/
+        if(Yii::$app->user->isGuest){
+            return $this->goHome();
+        }
 
         $ciclismos = Ciclismo::find()->where(['user_id' => Yii::$app->user->getId()])->all();
-
 
         $pagination = new Pagination(['defaultPageSize' => 10, 'totalCount' => count($ciclismos),]);
 
@@ -67,6 +61,10 @@ class CiclismoController extends Controller
      */
     public function actionView($id)
     {
+        if(Yii::$app->user->isGuest){
+            return $this->goHome();
+        }
+
         $publicar = true;
         if(Publicacao::find()->where(['ciclismo_id' => $id])->one() != null){
             $publicar = false;
@@ -76,61 +74,6 @@ class CiclismoController extends Controller
         ]);
     }
 
-    /**
-     * Creates a new Ciclismo model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return mixed
-     */
-    public function actionCreate()
-    {
-        $model = new Ciclismo();
-
-        if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
-            }
-        } else {
-            $model->loadDefaultValues();
-        }
-
-        return $this->render('create', [
-            'model' => $model,
-        ]);
-    }
-
-    /**
-     * Updates an existing Ciclismo model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param int $id ID
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    public function actionUpdate($id)
-    {
-        $model = $this->findModel($id);
-
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        }
-
-        return $this->render('update', [
-            'model' => $model,
-        ]);
-    }
-
-    /**
-     * Deletes an existing Ciclismo model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param int $id ID
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    public function actionDelete($id)
-    {
-        $this->findModel($id)->delete();
-
-        return $this->redirect(['index']);
-    }
 
     /**
      * Finds the Ciclismo model based on its primary key value.

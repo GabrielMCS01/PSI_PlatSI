@@ -40,6 +40,10 @@ class ComentarioController extends Controller
      */
     public function actionIndex()
     {
+        if(Yii::$app->user->isGuest){
+            return $this->goHome();
+        }
+
         $searchModel = new ComentarioSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
@@ -50,6 +54,10 @@ class ComentarioController extends Controller
     }
 
     public function actionIndexpost($id){
+
+        if(Yii::$app->user->isGuest){
+            return $this->goHome();
+        }
 
         $comentarios = Comentario::find()->where(['publicacao_id' => $id])->all();
 
@@ -71,6 +79,10 @@ class ComentarioController extends Controller
      */
     public function actionView($id)
     {
+        if(Yii::$app->user->isGuest){
+            return $this->goHome();
+        }
+
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
@@ -83,6 +95,11 @@ class ComentarioController extends Controller
      */
     public function actionCreate($id)
     {
+        if(Yii::$app->user->isGuest){
+            return $this->goHome();
+        }
+
+
         $model = new Comentario();
 
         if ($this->request->isPost) {
@@ -111,6 +128,11 @@ class ComentarioController extends Controller
      */
     public function actionUpdate($id)
     {
+        if(Yii::$app->user->isGuest){
+            return $this->goHome();
+        }
+
+
         $model = $this->findModel($id);
 
         if($this->request->isPost) {
@@ -135,6 +157,11 @@ class ComentarioController extends Controller
      */
     public function actionDelete($id)
     {
+        if(Yii::$app->user->isGuest){
+            return $this->goHome();
+        }
+
+
         $comentario = $this->findModel($id);
         $id = $comentario->publicacao_id;
         $comentario->delete();

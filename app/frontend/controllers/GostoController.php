@@ -10,7 +10,6 @@ class GostoController extends \yii\web\Controller
 {
     public function actionGosto($id){
         if (Yii::$app->request->isAjax) {
-
             if(Gosto::find()->where(['publicacao_id' => $id, 'user_id' => Yii::$app->user->getId()])->one() == null){
                 $gosto = new Gosto();
                 $gosto->user_id = Yii::$app->user->getId();

@@ -26,6 +26,10 @@ class UserInfoController extends \yii\web\Controller
 
 
     public function actionPerfil(){
+        if(Yii::$app->user->isGuest){
+            return $this->goHome();
+        }
+
         $model = UserInfo::find()->where(["user_id" => Yii::$app->user->getId()])->one();
 
 

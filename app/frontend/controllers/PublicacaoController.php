@@ -40,6 +40,9 @@ class PublicacaoController extends Controller
      */
     public function actionIndex()
     {
+        if(Yii::$app->user->isGuest){
+            return $this->goHome();
+        }
 
         $publicacoes = Publicacao::find()->orderBy(['id' => SORT_DESC])->all();
 
@@ -73,6 +76,10 @@ class PublicacaoController extends Controller
      */
     public function actionCreate($id)
     {
+        if(Yii::$app->user->isGuest){
+            return $this->goHome();
+        }
+
         $model = new Publicacao();
 
         $model->ciclismo_id = $id;
