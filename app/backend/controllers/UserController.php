@@ -39,6 +39,10 @@ class UserController extends Controller
      */
     public function actionIndex()
     {
+        if(Yii::$app->user->isGuest){
+            $this->goHome();
+        }
+
         $roles = AuthItem::find()->select(['name'])->where(['type' => 1])->all();
 
  /*       $users = User::find()->all();
@@ -86,6 +90,10 @@ class UserController extends Controller
      */
     public function actionView($id)
     {
+        if(Yii::$app->user->isGuest){
+            $this->goHome();
+        }
+
         $user_info = UserInfo::find()->where(['user_id' => $id])->one();
 
         return $this->render('view', [
@@ -101,6 +109,7 @@ class UserController extends Controller
      */
     public function actionCreate()
     {
+
         $model = new User();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -121,6 +130,10 @@ class UserController extends Controller
      */
     public function actionUpdate($id)
     {
+        if(Yii::$app->user->isGuest){
+            $this->goHome();
+        }
+
         $model = $this->findModel($id);
 
         $roles = AuthItem::find()->select(['name'])->where(['type' => 1])->all();
