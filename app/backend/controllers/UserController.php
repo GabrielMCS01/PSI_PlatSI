@@ -4,6 +4,10 @@ namespace backend\controllers;
 
 use common\models\AuthAssignment;
 use common\models\AuthItem;
+use common\models\Ciclismo;
+use common\models\Comentario;
+use common\models\Gosto;
+use common\models\Publicacao;
 use common\models\UserInfo;
 use Yii;
 use common\models\User;
@@ -91,7 +95,7 @@ class UserController extends Controller
     public function actionView($id)
     {
         if(Yii::$app->user->isGuest){
-            $this->goHome();
+            return $this->goHome();
         }
 
         $user_info = UserInfo::find()->where(['user_id' => $id])->one();
@@ -131,7 +135,7 @@ class UserController extends Controller
     public function actionUpdate($id)
     {
         if(Yii::$app->user->isGuest){
-            $this->goHome();
+            return $this->goHome();
         }
 
         $model = $this->findModel($id);
@@ -169,9 +173,30 @@ class UserController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $user = User::findOne($id);
 
-        return $this->redirect(['index']);
+        $ciclismos = Ciclismo::find()->where(['user_id' => $user->id])->all();
+
+        foreach ($ciclismos as $ciclismo){
+            if (Publicacao::find()->where(['ciclismo_id' => $ciclismo->id])->one() == true) {
+                Comentario::deleteAll(['publicacao_id' => $ciclismo->publicacao->id]);
+                Gosto::deleteAll(['publicacao_id' => $ciclismo->publicacao->id]);
+                Publicacao::deleteAll(['ciclismo_id' => $ciclismo->id]);
+            }
+            $ciclismo->delete();
+        }
+
+        Comentario::deleteAll(['user_id' => $user->id]);
+        Gosto::deleteAll(['user_id' => $user->id]);
+        $user->userinfo->delete();
+        $user->delete();
+
+        $user = User::findOne($id);
+
+        if($user == null){
+            return $this->redirect(['index']);
+        }
+        return $this->redirect(['view']);
     }
 
     /**
