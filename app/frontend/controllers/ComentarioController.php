@@ -40,16 +40,19 @@ class ComentarioController extends Controller
      */
     public function actionIndex()
     {
-        if(Yii::$app->user->isGuest){
+        if(Yii::$app->user->isGuest || !Yii::$app->user->can("deleteCommentModerator")){
             return $this->goHome();
         }
 
-        $searchModel = new ComentarioSearch();
-        $dataProvider = $searchModel->search($this->request->queryParams);
+        $comentarios = Comentario::find()->all();
+
+        $pagination = new Pagination(['defaultPageSize' => 10, 'totalCount' => count($comentarios)]);
+
+        $comentarios =  Comentario::find()->offset($pagination->offset)->limit($pagination->limit)->all();
 
         return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
+            'pagination' => $pagination,
+            'comentarios' => $comentarios,
         ]);
     }
 
@@ -61,7 +64,7 @@ class ComentarioController extends Controller
 
         $comentarios = Comentario::find()->where(['publicacao_id' => $id])->all();
 
-        $pagination = new Pagination(['defaultPageSize' => 10, 'totalCount' => count($comentarios),]);
+        $pagination = new Pagination(['defaultPageSize' => 10, 'totalCount' => count($comentarios)]);
 
         $comentarios =  Comentario::find()->where(['publicacao_id' => $id])->offset($pagination->offset)->limit($pagination->limit)->all();
 
