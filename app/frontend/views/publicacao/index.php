@@ -148,14 +148,6 @@ $this->registerJs("
             <div class="row">
                 <div class="col-lg-3">
                     <h5>Publicado por: <strong><?= $publicacao->ciclismo->user->username ?></strong></h5>
-                </div>
-                <div class="col-lg-6">
-                    <br>
-                </div>
-                <div class="col-lg-1 text-right">
-                    <?= Html::a('', false, $options); ?></div>
-                <div class="col-lg-2 text-right">
-                    <?= Html::a('Ver Comentarios', ['comentario/indexpost', 'id' => $publicacao->id], ['class' => 'btn btn-primary', 'data-pjax' => 0]) ?>
                     <?php Dialog::widget(['overrideYiiConfirm' => true]);
                     if (Yii::$app->user->can("deletePostModerator", ['publicacao' => $publicacao])) {
                         echo Html::a("Apagar Publicação", ['delete', 'id' => $publicacao->id], [
@@ -164,6 +156,14 @@ $this->registerJs("
                             'data-method' => 'post',
                             'data-pjax' => 0]);
                     } ?>
+                </div>
+                <div class="col-lg-6">
+                    <br>
+                </div>
+                <div class="col-lg-1 text-right">
+                    <?= Html::a('', false, $options); ?></div>
+                <div class="col-lg-2 text-right">
+                    <?= Html::a('Ver Comentarios', ['comentario/indexpost', 'id' => $publicacao->id], ['class' => 'btn btn-primary', 'data-pjax' => 0]) ?>
                 </div>
             </div>
             <?php Pjax::end(); ?>
