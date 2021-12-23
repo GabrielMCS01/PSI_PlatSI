@@ -28,7 +28,7 @@ $this->title = Yii::$app->name;
                 <h3>TOP 10 - Distância</h3>
                 <ol>
                     <?php foreach ($distancias as $distancia){?>
-                    <li><?= $distancia->user->username?> - <?= round($distancia->distancia/1000, 2)?> km</li>
+                    <li><?= $distancia->user->username?> - <?= Converter::distanceConverter($distancia->distancia/1000)?> km</li>
                     <?php }?>
                 </ol>
 
@@ -37,7 +37,7 @@ $this->title = Yii::$app->name;
                 <h3>TOP 10 - Duração</h3>
                 <ol>
                     <?php foreach ($tempos as $tempo){?>
-                    <li><?= $tempo->user->username?> - <?= Converter::secondsToHours($tempo->duracao)?></li>
+                    <li><?= $tempo->user->username?> - <?= Converter::timeConverter($tempo->duracao)?></li>
                     <?php }?>
                 </ol>
 
@@ -46,7 +46,7 @@ $this->title = Yii::$app->name;
                 <h3>TOP 10 - Velocidade Média</h3>
                 <ol>
                     <?php foreach ($velocidademed as $velocidade){?>
-                    <li><?=$velocidade->user->username?> - <?= $velocidade->velocidade_media?> Km/h</li>
+                    <li><?=$velocidade->user->username?> - <?= Converter::velocityConverter($velocidade->velocidade_media)?></li>
                     <?php }?>
                 </ol>
             </div>

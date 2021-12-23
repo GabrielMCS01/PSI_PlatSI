@@ -4,7 +4,7 @@ namespace common\utils;
 
 class Converter
 {
-    public static function secondsToHours($time){
+    public static function timeConverter($time){
 
         $hours = intval($time/3600 ,10 );
 
@@ -31,7 +31,14 @@ class Converter
 
         $distance = $distance / 1000;
 
-        $string = sprintf('%01.2f',$distance);
+        $string = sprintf('%01.2f',$distance) . ' Km';
+
+        return $string;
+    }
+
+    public static function velocityConverter($velocity){
+
+        $string = sprintf('%01.2f',$velocity) . ' Km/h';
 
         return $string;
     }

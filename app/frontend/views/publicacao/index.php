@@ -123,15 +123,15 @@ $this->registerJs("
             <br>
             <div class="row">
                 <div class="col-lg-6">
-                    <strong>Tempo: </strong><?= Converter::secondsToHours($publicacao->ciclismo->duracao) ?>
+                    <strong>Tempo: </strong><?= Converter::timeConverter($publicacao->ciclismo->duracao) ?>
                     <br>
                     <strong>Distancia: </strong><?= Converter::distanceConverter($publicacao->ciclismo->distancia) ?>
                     </ul>
                 </div>
                 <div class="col-lg-6">
-                    <strong>Velocidade Média: </strong> <?= $publicacao->ciclismo->velocidade_media ?>
+                    <strong>Velocidade Média: </strong> <?= Converter::velocityConverter($publicacao->ciclismo->velocidade_media) ?>
                     <br>
-                    <strong>Velocidade Máxima: </strong><?= $publicacao->ciclismo->velocidade_maxima ?>
+                    <strong>Velocidade Máxima: </strong><?= Converter::velocityConverter($publicacao->ciclismo->velocidade_maxima) ?>
                 </div>
             </div>
             <br>

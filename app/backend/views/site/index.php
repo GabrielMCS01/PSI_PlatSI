@@ -23,7 +23,7 @@ $this->params['breadcrumbs'] = [['label' => "Informações da aplicação Ciclod
         <div class="col-md-4 col-sm-6 col-12">
             <?= InfoBox::widget([
                 'text' => 'Tempo de atividade física',
-                'number' => Converter::secondsToHours($tempoTotal),
+                'number' => Converter::timeConverter($tempoTotal),
                 'icon' => 'far fa-clock',
             ]) ?>
         </div>

@@ -38,14 +38,14 @@ $this->registerJsFile("@web/@mapbox/polyline/src/polyline.js", ['depends' => [\y
                 <br>
             </div>
             <div class="col-lg-3">
-                    <strong>Tempo: </strong><?= Converter::secondsToHours($model->duracao)?>
+                    <strong>Tempo: </strong><?= Converter::timeConverter($model->duracao)?>
                     <br>
                     <strong>Distancia: </strong><?= Converter::distanceConverter($model->distancia)?>
             </div>
             <div class="col-lg-3">
-                    <strong>Velocidade Média: </strong> <?=$model->velocidade_media?>
+                    <strong>Velocidade Média: </strong> <?=Converter::velocityConverter($model->velocidade_media)?>
                     <br>
-                    <strong>Velocidade Máxima: </strong><?=$model->velocidade_maxima?>
+                    <strong>Velocidade Máxima: </strong><?=Converter::velocityConverter($model->velocidade_maxima)?>
             </div>
             <div class="col-lg-3">
                 <br>
