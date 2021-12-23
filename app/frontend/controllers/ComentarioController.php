@@ -164,13 +164,25 @@ class ComentarioController extends Controller
             return $this->goHome();
         }
 
-
         $comentario = $this->findModel($id);
         $id = $comentario->publicacao_id;
         $comentario->delete();
 
         return $this->redirect(['indexpost', 'id' => $id]);
     }
+
+    public function actionDeletemoderador($id)
+    {
+        if(Yii::$app->user->isGuest || !Yii::$app->user->can("deleteCommentModerator")){
+            return $this->goHome();
+        }
+
+        $comentario = $this->findModel($id);
+        $comentario->delete();
+
+        return $this->redirect(['index']);
+    }
+
 
     /**
      * Finds the Comentario model based on its primary key value.
