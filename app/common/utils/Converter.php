@@ -25,4 +25,14 @@ class Converter
 
         return $string;
     }
+
+
+    public static function distanceConverter($distance){
+
+        $distance = $distance / 1000;
+
+        $string = sprintf('%01.2f',$distance);
+
+        return $string;
+    }
 }

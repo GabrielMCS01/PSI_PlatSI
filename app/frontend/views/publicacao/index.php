@@ -125,7 +125,7 @@ $this->registerJs("
                 <div class="col-lg-6">
                     <strong>Tempo: </strong><?= Converter::secondsToHours($publicacao->ciclismo->duracao) ?>
                     <br>
-                    <strong>Distancia: </strong><?= $publicacao->ciclismo->distancia ?>
+                    <strong>Distancia: </strong><?= Converter::distanceConverter($publicacao->ciclismo->distancia) ?>
                     </ul>
                 </div>
                 <div class="col-lg-6">

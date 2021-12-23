@@ -23,7 +23,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <div class="col-lg-6">
                     <strong>Tempo: </strong><?= Converter::secondsToHours($ciclismo->duracao) ?>
                     <br>
-                    <strong>Distancia: </strong><?= $ciclismo->distancia ?>
+                    <strong>Distancia: </strong><?= Converter::distanceConverter($ciclismo->distancia) ?>
                     </ul>
                 </div>
                 <div class="col-lg-6">
