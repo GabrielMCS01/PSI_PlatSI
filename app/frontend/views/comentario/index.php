@@ -26,7 +26,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <h5><?= HtmlPurifier::process($comentario->content) ?></h5>
         <p><?= Html::encode($comentario->createtime) ?></p>
 
-        <?= Html::a('Delete', ['delete', 'id' => $comentario->id], [
+        <?= Html::a('Apagar Comentário', ['delete', 'id' => $comentario->id], [
         'class' => 'btn btn-danger',
         'data' => [
             'confirm' => 'Deseja remover este comentário?',
