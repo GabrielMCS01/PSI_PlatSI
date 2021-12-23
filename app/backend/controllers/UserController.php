@@ -40,7 +40,7 @@ class UserController extends Controller
     public function actionIndex()
     {
         if(Yii::$app->user->isGuest){
-            $this->goHome();
+            return $this->goHome();
         }
 
         $roles = AuthItem::find()->select(['name'])->where(['type' => 1])->all();
