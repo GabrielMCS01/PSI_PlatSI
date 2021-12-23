@@ -29,7 +29,7 @@ Executar o ficheiro SQL "CriarTabelas"
 
 # Criar o primeiro Admin para utilizar a aplicação
 
-Executar o ficheiro SQL "CriarAdmin"
+Executar o ficheiro SQL "Dados"
 
 ## Com estes passos a aplicação estará pronta a utilizar e com um admin criado para o acesso á backend 
 
