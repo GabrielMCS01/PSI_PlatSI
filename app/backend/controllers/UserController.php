@@ -77,6 +77,7 @@ class UserController extends Controller
             ]);
         }
 
+
         $searchModel = new UserSearch();
 
         return $this->render('index', [
