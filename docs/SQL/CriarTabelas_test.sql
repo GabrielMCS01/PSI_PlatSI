@@ -28,7 +28,7 @@ CREATE TABLE IF NOT EXISTS ciclismo(
 CREATE TABLE `publicacao` (
   `id` int primary key auto_increment,
   `createtime` datetime default current_timestamp,
-  `ciclismo_id` int unsigned not null,
+  `ciclismo_id` int unsigned not null UNIQUE,
   constraint fk_publi_idciclismo foreign key(ciclismo_id) references ciclismo(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
