@@ -79,9 +79,9 @@ $this->registerJs("
                 }
                 ?>
                 <script>
-                    if ('<?= $publicacao->ciclismo->rota?>' != "") {
                         var divElts = document.getElementById("map");
                         divElts.setAttribute('id', "map" + <?=$publicacao->id?>);
+                        if ('<?= $publicacao->ciclismo->rota?>' != "") {
                         mapboxgl.accessToken = 'pk.eyJ1IjoiaXVyaWNhcnJhcyIsImEiOiJja3V3aDJrZWEwNjhuMm5xd3hqNHRuODdiIn0.Yztl8wZEMrxIlkEVwt1zgw';
                         map[<?= $publicacao->id?>] = new mapboxgl.Map({
                             container: 'map' + <?= $publicacao->id?>,
