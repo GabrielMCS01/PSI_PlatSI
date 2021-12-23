@@ -18,6 +18,7 @@ use Yii;
  * @property string $data_treino
  * @property int $user_id
  *
+ * @property Publicacao $publicacao
  * @property User $user
  */
 class Ciclismo extends \yii\db\ActiveRecord
@@ -63,6 +64,16 @@ class Ciclismo extends \yii\db\ActiveRecord
             'data_treino' => 'Data Treino',
             'user_id' => 'User ID',
         ];
+    }
+
+    /**
+     * Gets query for [[Publicacao]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getPublicacao()
+    {
+        return $this->hasOne(Publicacao::className(), ['ciclismo_id' => 'id']);
     }
 
     /**

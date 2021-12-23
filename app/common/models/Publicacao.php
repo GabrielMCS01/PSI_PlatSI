@@ -34,6 +34,7 @@ class Publicacao extends \yii\db\ActiveRecord
             [['createtime'], 'safe'],
             [['ciclismo_id'], 'required'],
             [['ciclismo_id'], 'integer'],
+            [['ciclismo_id'], 'unique'],
             [['ciclismo_id'], 'exist', 'skipOnError' => true, 'targetClass' => Ciclismo::className(), 'targetAttribute' => ['ciclismo_id' => 'id']],
         ];
     }

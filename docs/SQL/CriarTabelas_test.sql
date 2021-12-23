@@ -1,4 +1,4 @@
-USE projectdb;
+USE projectdb_test;
 
 CREATE TABLE IF NOT EXISTS user_info(
 		id INT UNSIGNED AUTO_INCREMENT,

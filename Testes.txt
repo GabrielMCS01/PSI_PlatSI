@@ -1,0 +1,39 @@
+------------------------------------------------------------------------------
+# No ficheiro common/config/test-local.php
+
+# colar esta linha de código dentro de DB
+
+'dsn' => 'mysql:host=127.0.0.1;dbname=projectdb_test',
+------------------------------------------------------------------------------
+
+# Criar a base de dados
+
+Executar o ficheiro SQL "CriarDB_test"
+
+
+# Na pasta APP executar os comandos seguintes:
+
+.\yii_test migrate --migrationPath=@yii/rbac/migrations
+.\yii_test migrate
+
+
+# Criar as tabelas da aplicação
+
+Executar o ficheiro SQL "CriarTabelas_test"
+
+
+# Cria dados de exemplo para serem utilizados nos testes
+
+Executar o ficheiro SQL "Dados_test"
+
+
+# Build do codecept
+
+./vendor/bin/codecept build
+
+
+# Executar os comandos dos testes Unitários(Pasta APP)
+
+php vendor/bin/codecept run unit -c frontend
+php vendor/bin/codecept run unit -c common
+

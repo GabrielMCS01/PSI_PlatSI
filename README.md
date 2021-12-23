@@ -23,13 +23,13 @@ Executar o ficheiro SQL "CriarDB"
 .\yii migrate --migrationPath=@yii/rbac/migrations
 .\yii migrate
 
-# Criar o primeiro Admin para utilizar a aplicação
-
-Executar o ficheiro SQL "CriarAdmin"
-
-# Criar a tabela user_info e a tabela ciclismo
+# Criar as tabelas da aplicação
 
 Executar o ficheiro SQL "CriarTabelas"
+
+# Criar o primeiro Admin para utilizar a aplicação
+
+Executar o ficheiro SQL "Dados"
 
 ## Com estes passos a aplicação estará pronta a utilizar e com um admin criado para o acesso á backend 
 
