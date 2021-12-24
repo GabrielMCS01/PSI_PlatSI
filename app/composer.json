@@ -21,7 +21,8 @@
         "hail812/yii2-adminlte3": "~1.1",
       "ext-json": "*",
         "yiisoft/yii2-jui": "^2.0",
-        "kartik-v/yii2-dialog": "^1.0"
+        "kartik-v/yii2-dialog": "^1.0",
+        "onmotion/yii2-widget-apexcharts": "^1.0"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",
