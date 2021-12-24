@@ -161,7 +161,7 @@ $this->registerJs("
                     <br>
                 </div>
                 <div class="col-lg-1 text-right">
-                    <?= Html::a('', false, $options); ?></div>
+                    <?= Html::a('', false, $options); ?> <?= Gosto::find()->select("COUNT(*)")->where(["publicacao_id" => $publicacao->id])?></div>
                 <div class="col-lg-2 text-right">
                     <?= Html::a('Ver Comentarios', ['comentario/indexpost', 'id' => $publicacao->id], ['class' => 'btn btn-primary', 'data-pjax' => 0]) ?>
                 </div>
