@@ -8,7 +8,7 @@ use common\models\Gosto;
 use common\models\Publicacao;
 
 /**
- * UserTest test
+ * PublicacaoTest test
  */
 class PublicacaoTest extends Unit
 {
@@ -63,7 +63,11 @@ class PublicacaoTest extends Unit
     public function testViewAllPublicacoes()
     {
         // Pesquisa por todas as publicações
-        expect_that($pubs = Publicacao::find()->all() != null);
+        $pubs = Publicacao::find()->all();
+
+        foreach ($pubs as $pub){
+            expect_that($pub->ciclismo_id != -1);
+        }
     }
 
     // Testes para visualizar uma publicação

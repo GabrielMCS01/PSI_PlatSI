@@ -9,7 +9,7 @@ use common\models\Gosto;
 use common\models\Publicacao;
 
 /**
- * UserTest test
+ * CiclismoTest test
  */
 class CiclismoTest extends Unit
 {
