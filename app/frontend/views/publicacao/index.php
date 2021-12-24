@@ -68,7 +68,9 @@ $this->registerJs("
 <div class="publicacao-index">
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <?php foreach ($publicacoes as $publicacao) { ?>
+    <?php foreach ($publicacoes
+
+                   as $publicacao) { ?>
         <div class="jumbotron text-center">
             <h3><?= $publicacao->ciclismo->nome_percurso ?></h3>
             <h5><?= $publicacao->ciclismo->data_treino ?></h5>
@@ -161,8 +163,12 @@ $this->registerJs("
                 </div>
                 <div class="col-lg-2 text-right">
                     <br>
-                    <?php $gostos = Gosto::find()->where(["publicacao_id" => $publicacao->id])->count();?>
-                    <h6><?=$gostos?> Gostos </h6>
+                    <?php $gostos = Gosto::find()->where(["publicacao_id" => $publicacao->id])->count();
+                    if ($gostos == 1) { ?>
+                        <h6><?= $gostos ?> Gosto </h6>
+                    <?php } else if ($gostos > 1) { ?>
+                        <h6><?= $gostos ?> Gostos </h6>
+                    <?php } ?>
                 </div>
                 <div class="col-lg-1">
                     <?= Html::a('', false, $options); ?>
