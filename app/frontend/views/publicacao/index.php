@@ -157,10 +157,10 @@ $this->registerJs("
                             'data-pjax' => 0]);
                     } ?>
                 </div>
-                <div class="col-lg-5">
+                <div class="col-lg-4">
                     <br>
                 </div>
-                <div class="col-lg-1">
+                <div class="col-lg-2">
                     <?php $gostos = Gosto::find()->where(["publicacao_id" => $publicacao->id])->count();?>
                     <h5><?=$gostos?> Gostos </h5>
                 </div>
