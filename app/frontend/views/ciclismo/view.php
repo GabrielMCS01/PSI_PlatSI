@@ -62,6 +62,7 @@ $this->registerJsFile("@web/@mapbox/polyline/src/polyline.js", ['depends' => [\y
                 } ?>
             </div>
         </div>
+        <br>
         <?php $series = [
             [
                 'name' => 'Entity 1',
