@@ -30,7 +30,7 @@ $this->params['breadcrumbs'] = [['label' => "Informações da aplicação Ciclod
         <div class="col-md-4 col-sm-6 col-12">
             <?= InfoBox::widget([
                 'text' => 'Quilometros Percorridos',
-                'number' => $distancia . " KM",
+                'number' => Converter::distanceConverter($distancia),
                //  'theme' => 'success',
                 'icon' => 'fas fa-road',
             ]) ?>
@@ -38,7 +38,7 @@ $this->params['breadcrumbs'] = [['label' => "Informações da aplicação Ciclod
         <div class="col-md-4 col-sm-6 col-12">
             <?= InfoBox::widget([
                 'text' => 'Velocidade média',
-                'number' => $velMedia . " Km/h",
+                'number' => Converter::velocityConverter($velMedia),
              //   'theme' => 'gradient-warning',
                 'icon' => 'fas fa-tachometer-alt',
             ]) ?>

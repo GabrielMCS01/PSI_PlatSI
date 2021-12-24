@@ -28,7 +28,7 @@ $this->title = Yii::$app->name;
                 <h3>TOP 10 - Distância</h3>
                 <ol>
                     <?php foreach ($distancias as $distancia){?>
-                    <li><?= $distancia->user->username?> - <?= Converter::distanceConverter($distancia->distancia/1000)?> km</li>
+                    <li><?= $distancia->user->username?> - <?= Converter::distanceConverter($distancia->distancia)?></li>
                     <?php }?>
                 </ol>
 

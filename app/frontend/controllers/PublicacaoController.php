@@ -3,6 +3,7 @@
 namespace frontend\controllers;
 
 use common\models\Comentario;
+use common\models\Gosto;
 use common\models\Publicacao;
 use app\models\PublicacaoSearch;
 use Yii;
@@ -119,7 +120,11 @@ class PublicacaoController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $publicacao = Publicacao::find()->where(['ciclismo_id' => $id])->one();
+
+        Comentario::deleteAll(['publicacao_id' => $publicacao->id]);
+        Gosto::deleteAll(['publicacao_id' => $publicacao->id]);
+        $publicacao->delete();
 
         return $this->redirect(['index']);
     }
@@ -129,12 +134,7 @@ class PublicacaoController extends Controller
         $publicacao = Publicacao::find()->where(['ciclismo_id' => $id])->one();
 
         Comentario::deleteAll(['publicacao_id' => $publicacao->id]);
-
-        /*$comentarios = Comentario::find()->where(['publicacao_id' => $publicacao->id])->all();
-
-        foreach ($comentarios as $comentario){
-            $comentario->deleteAll();
-        }*/
+        Gosto::deleteAll(['publicacao_id' => $publicacao->id]);
 
         $publicacao->delete();
 
@@ -157,10 +157,4 @@ class PublicacaoController extends Controller
         throw new NotFoundHttpException('The requested page does not exist.');
     }
 
-    public function actionGosto(){
-        if (Yii::$app->request->isAjax) {
-            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-            return ['success' => true];
-        }
-    }
 }

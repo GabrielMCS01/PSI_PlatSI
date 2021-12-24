@@ -63,10 +63,14 @@ class SiteController extends Controller
     /**
      * Displays homepage.
      *
-     * @return string
+     * @return string|Response
      */
     public function actionIndex()
     {
+        if (Yii::$app->user->isGuest) {
+            return $this->goHome();
+        }
+
         $publicacoes = Publicacao::find()->all();
         $gostos = Gosto::find()->all();
         $comentarios = Comentario::find()->all();

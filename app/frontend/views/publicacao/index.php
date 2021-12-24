@@ -68,7 +68,9 @@ $this->registerJs("
 <div class="publicacao-index">
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <?php foreach ($publicacoes as $publicacao) { ?>
+    <?php foreach ($publicacoes
+
+                   as $publicacao) { ?>
         <div class="jumbotron text-center">
             <h3><?= $publicacao->ciclismo->nome_percurso ?></h3>
             <h5><?= $publicacao->ciclismo->data_treino ?></h5>
@@ -79,9 +81,9 @@ $this->registerJs("
                 }
                 ?>
                 <script>
+                    var divElts = document.getElementById("map");
+                    divElts.setAttribute('id', "map" + <?=$publicacao->id?>);
                     if ('<?= $publicacao->ciclismo->rota?>' != "") {
-                        var divElts = document.getElementById("map");
-                        divElts.setAttribute('id', "map" + <?=$publicacao->id?>);
                         mapboxgl.accessToken = 'pk.eyJ1IjoiaXVyaWNhcnJhcyIsImEiOiJja3V3aDJrZWEwNjhuMm5xd3hqNHRuODdiIn0.Yztl8wZEMrxIlkEVwt1zgw';
                         map[<?= $publicacao->id?>] = new mapboxgl.Map({
                             container: 'map' + <?= $publicacao->id?>,
@@ -157,11 +159,18 @@ $this->registerJs("
                             'data-pjax' => 0]);
                     } ?>
                 </div>
-                <div class="col-lg-6">
-                    <br>
+                <div class="col-lg-5">
                 </div>
-                <div class="col-lg-1 text-right">
-                    <?= Html::a('', false, $options); ?></div>
+                <div class="col-lg-2 text-right">
+                    <?= Html::a('', false, $options); ?>
+
+                    <?php $gostos = Gosto::find()->where(["publicacao_id" => $publicacao->id])->count();
+                    if ($gostos == 1) { ?>
+                        <h6><?= $gostos ?> Gosto </h6>
+                    <?php } else if ($gostos > 1) { ?>
+                        <h6><?= $gostos ?> Gostos </h6>
+                    <?php } ?>
+                </div>
                 <div class="col-lg-2 text-right">
                     <?= Html::a('Ver Comentarios', ['comentario/indexpost', 'id' => $publicacao->id], ['class' => 'btn btn-primary', 'data-pjax' => 0]) ?>
                 </div>
