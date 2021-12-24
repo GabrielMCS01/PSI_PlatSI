@@ -158,13 +158,12 @@ $this->registerJs("
                     } ?>
                 </div>
                 <div class="col-lg-4">
-                    <br>
                 </div>
                 <div class="col-lg-2 text-right">
                     <?php $gostos = Gosto::find()->where(["publicacao_id" => $publicacao->id])->count();?>
-                    <h5><?=$gostos?> Gostos </h5>
+                    <h6><?=$gostos?> Gostos </h6>
                 </div>
-                <div class="col-lg-1 text-right">
+                <div class="col-lg-1>
                     <?= Html::a('', false, $options); ?>
                 </div>
                 <div class="col-lg-2 text-right">
