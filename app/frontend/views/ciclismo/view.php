@@ -94,8 +94,7 @@ $this->registerJsFile("@web/@mapbox/polyline/src/polyline.js", ['depends' => [\y
         ];
         echo \onmotion\apexcharts\ApexchartsWidget::widget([
             'type' => 'bar', // default area
-            'height' => '400', // default 350
-            'width' => '500', // default 100%
+            'height' => '300', // default 350// default 100%
             'chartOptions' => [
                 'chart' => [
                     'toolbar' => [
