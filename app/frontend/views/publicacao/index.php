@@ -159,19 +159,17 @@ $this->registerJs("
                             'data-pjax' => 0]);
                     } ?>
                 </div>
-                <div class="col-lg-4">
+                <div class="col-lg-5">
                 </div>
-                <div class="col-lg-2 text-right">
-                    <br>
+                <div class="col-lg-2">
+                    <?= Html::a('', false, $options); ?>
+
                     <?php $gostos = Gosto::find()->where(["publicacao_id" => $publicacao->id])->count();
                     if ($gostos == 1) { ?>
                         <h6><?= $gostos ?> Gosto </h6>
                     <?php } else if ($gostos > 1) { ?>
                         <h6><?= $gostos ?> Gostos </h6>
                     <?php } ?>
-                </div>
-                <div class="col-lg-1">
-                    <?= Html::a('', false, $options); ?>
                 </div>
                 <div class="col-lg-2 text-right">
                     <?= Html::a('Ver Comentarios', ['comentario/indexpost', 'id' => $publicacao->id], ['class' => 'btn btn-primary', 'data-pjax' => 0]) ?>
