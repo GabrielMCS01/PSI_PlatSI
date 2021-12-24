@@ -80,7 +80,7 @@ class PublicacaoTest extends Unit
         expect_not($pub->ciclismo->user->username == 'test');
     }
 
-    // NAO PODE EDITAR
+    // NÃO PODE EDITAR
 
     // Testes para apagar uma publicação do utilizador
     public function testApagarPublicacao()
