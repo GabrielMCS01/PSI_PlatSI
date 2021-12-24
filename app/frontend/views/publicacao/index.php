@@ -79,9 +79,9 @@ $this->registerJs("
                 }
                 ?>
                 <script>
-                        var divElts = document.getElementById("map");
-                        divElts.setAttribute('id', "map" + <?=$publicacao->id?>);
-                        if ('<?= $publicacao->ciclismo->rota?>' != "") {
+                    var divElts = document.getElementById("map");
+                    divElts.setAttribute('id', "map" + <?=$publicacao->id?>);
+                    if ('<?= $publicacao->ciclismo->rota?>' != "") {
                         mapboxgl.accessToken = 'pk.eyJ1IjoiaXVyaWNhcnJhcyIsImEiOiJja3V3aDJrZWEwNjhuMm5xd3hqNHRuODdiIn0.Yztl8wZEMrxIlkEVwt1zgw';
                         map[<?= $publicacao->id?>] = new mapboxgl.Map({
                             container: 'map' + <?= $publicacao->id?>,
@@ -161,7 +161,9 @@ $this->registerJs("
                     <br>
                 </div>
                 <div class="col-lg-1 text-right">
-                    <?= Html::a('', false, $options); ?> <?= Gosto::find()->select("COUNT(*)")->where(["publicacao_id" => $publicacao->id])?></div>
+                    <?= Html::a('', false, $options); ?>
+                    <?php $gostos = Gosto::find()->select("COUNT(*)")->where(["publicacao_id" => $publicacao->id]);
+                    echo $gostos; ?></div>
                 <div class="col-lg-2 text-right">
                     <?= Html::a('Ver Comentarios', ['comentario/indexpost', 'id' => $publicacao->id], ['class' => 'btn btn-primary', 'data-pjax' => 0]) ?>
                 </div>
