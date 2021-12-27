@@ -27,9 +27,9 @@ $this->title = Yii::$app->name;
             <div class="col-lg-4">
                 <h3>TOP 10 - Distância</h3>
                 <ol>
-                    <?php foreach ($distancias as $distancia){?>
-                    <li><?= $distancia->user->username?> - <?= Converter::distanceConverter($distancia->distancia)?></li>
-                    <?php }?>
+                    <?php //foreach ($distancias as $distancia){?>
+                    <li><?= $distancias->user->username?> - <?= Converter::distanceConverter($distancias->distancia)?></li>
+                    <?php //}?>
                 </ol>
 
             </div>
