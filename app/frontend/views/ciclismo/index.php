@@ -15,6 +15,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="ciclismo-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
+
     <?php foreach ($ciclismos as $ciclismo) { ?>
         <div class="jumbotron text-center">
             <h3><?= Html::a($ciclismo->nome_percurso, ['ciclismo/view', 'id' => $ciclismo->id], ['data-method' => 'post', 'class' => 'd-block']); ?></h3>

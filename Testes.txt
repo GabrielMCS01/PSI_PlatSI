@@ -32,8 +32,11 @@ Executar o ficheiro SQL "Dados_test"
 ./vendor/bin/codecept build
 
 
-# Executar os comandos dos testes Unitários(Pasta APP)
+# Executar os comandos dos testes (Pasta APP)
 
 php vendor/bin/codecept run unit -c frontend
 php vendor/bin/codecept run unit -c common
+
+php vendor/bin/codecept run unit -c backend
+php vendor/bin/codecept run unit -c frontend
 
