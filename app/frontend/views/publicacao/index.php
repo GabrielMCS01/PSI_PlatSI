@@ -68,9 +68,7 @@ $this->registerJs("
 <div class="publicacao-index">
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <?php foreach ($publicacoes
-
-                   as $publicacao) { ?>
+    <?php foreach ($publicacoes as $publicacao) { ?>
         <div class="jumbotron text-center">
             <h3><?= $publicacao->ciclismo->nome_percurso ?></h3>
             <h5><?= $publicacao->ciclismo->data_treino ?></h5>

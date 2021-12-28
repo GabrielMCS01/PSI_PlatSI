@@ -46,6 +46,8 @@ class RegistoCest
         ));
         $I->dontSee('Username cannot be blank.', '.invalid-feedback');
         $I->dontSee('Password cannot be blank.', '.invalid-feedback');
+        $I->dontSee('Primeiro Nome cannot be blank.', '.invalid-feedback');
+        $I->dontSee('Ultimo Nome cannot be blank.', '.invalid-feedback');
         $I->see('Email is not a valid email address.', '.invalid-feedback');
     }
 

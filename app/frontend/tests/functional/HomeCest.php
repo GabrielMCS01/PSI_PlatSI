@@ -6,6 +6,7 @@ use frontend\tests\FunctionalTester;
 
 class HomeCest
 {
+    // Não tem login feito
     public function VerificaLinksTexto(FunctionalTester $I)
     {
         $I->amOnPage(\Yii::$app->homeUrl);
