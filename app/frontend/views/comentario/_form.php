@@ -10,12 +10,12 @@ use yii\widgets\ActiveForm;
 
 <div class="comentario-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin(['id' => 'form-comentario']); ?>
 
     <?= $form->field($model, 'content')->textarea(['rows' => 6]) ?>
 
     <div class="form-group">
-        <?= Html::submitButton('Publicar Comentário', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton('Publicar Comentário', ['class' => 'btn btn-success', 'name' => 'criarcomentario-button']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
