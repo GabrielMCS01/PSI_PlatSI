@@ -37,6 +37,10 @@ Executar o ficheiro SQL "Dados_test"
 php vendor/bin/codecept run unit -c frontend
 php vendor/bin/codecept run unit -c common
 
-php vendor/bin/codecept run unit -c backend
-php vendor/bin/codecept run unit -c frontend
+php vendor/bin/codecept run functional -c backend
+php vendor/bin/codecept run functional -c frontend
+
+php vendor/bin/codecept run acceptance -c frontend
+
+
 
