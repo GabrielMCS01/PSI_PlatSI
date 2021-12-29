@@ -69,9 +69,9 @@ $this->registerJsFile("@web/@mapbox/polyline/src/polyline.js", ['depends' => [\y
             $velocidadeGrafico = json_decode($model->velocidade_grafico);
 
             for($i = 0; $i < count($velocidadeGrafico); $i++){
-                if($i % 30 == 0) {
-                    $index[$i/30] = $i;
-                }
+
+                    $index[$i] = $i;
+
 
             }
 
