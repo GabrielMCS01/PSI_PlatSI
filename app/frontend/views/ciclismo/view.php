@@ -66,31 +66,7 @@ $this->registerJsFile("@web/@mapbox/polyline/src/polyline.js", ['depends' => [\y
         <?php $series = [
             [
                 'name' => 'Entity 1',
-                'data' => [
-                    ['2018-10-04', 4.66],
-                    ['2018-10-05', 5.0],
-                ],
-            ],
-            [
-                'name' => 'Entity 2',
-                'data' => [
-                    ['2018-10-04', 3.88],
-                    ['2018-10-05', 3.77],
-                ],
-            ],
-            [
-                'name' => 'Entity 3',
-                'data' => [
-                    ['2018-10-04', 4.40],
-                    ['2018-10-05', 5.0],
-                ],
-            ],
-            [
-                'name' => 'Entity 4',
-                'data' => [
-                    ['2018-10-04', 4.5],
-                    ['2018-10-05', 4.18],
-                ],
+                'data' => $model->velocidade_grafico,
             ],
         ];
         echo \onmotion\apexcharts\ApexchartsWidget::widget([
@@ -104,7 +80,7 @@ $this->registerJsFile("@web/@mapbox/polyline/src/polyline.js", ['depends' => [\y
                     ],
                 ],
                 'xaxis' => [
-                    'type' => 'datetime',
+                    'type' => 'float',
                     // 'categories' => $categories,
                 ],
                 'plotOptions' => [
