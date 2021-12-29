@@ -2,6 +2,7 @@
 
 use common\utils\Converter;
 use kartik\dialog\Dialog;
+use onmotion\apexcharts\ApexchartsWidget;
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
@@ -63,28 +64,11 @@ $this->registerJsFile("@web/@mapbox/polyline/src/polyline.js", ['depends' => [\y
             </div>
         </div>
         <br>
-        <?php $series = [
-            [
-                'data' => $model->velocidade_grafico,
-            ],
-        ];
-        echo \onmotion\apexcharts\ApexchartsWidget::widget([
+        <?php $series = ['data' => $model->velocidade_grafico];
+        echo ApexchartsWidget::widget([
             'type' => 'line', // default area
             'height' => '300', // default 350// default 100%
             'chartOptions' => [
-                'xaxis' => [
-                    'type' => 'numeric',
-                    // 'categories' => $categories,
-                ],
-                'plotOptions' => [
-                    'bar' => [
-                        'horizontal' => false,
-                        'endingShape' => 'rounded'
-                    ],
-                ],
-                'dataLabels' => [
-                    'enabled' => false
-                ],
                 'stroke' => [
                     'curve' => 'smooth'
                 ],
