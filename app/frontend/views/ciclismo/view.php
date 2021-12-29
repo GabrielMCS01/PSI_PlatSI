@@ -65,20 +65,13 @@ $this->registerJsFile("@web/@mapbox/polyline/src/polyline.js", ['depends' => [\y
         <br>
         <?php $series = [
             [
-                'name' => 'Entity 1',
                 'data' => $model->velocidade_grafico,
             ],
         ];
         echo \onmotion\apexcharts\ApexchartsWidget::widget([
-            'type' => 'bar', // default area
+            'type' => 'line', // default area
             'height' => '300', // default 350// default 100%
             'chartOptions' => [
-                'chart' => [
-                    'toolbar' => [
-                        'show' => true,
-                        'autoSelected' => 'zoom'
-                    ],
-                ],
                 'xaxis' => [
                     'type' => 'numeric',
                     // 'categories' => $categories,
@@ -93,12 +86,7 @@ $this->registerJsFile("@web/@mapbox/polyline/src/polyline.js", ['depends' => [\y
                     'enabled' => false
                 ],
                 'stroke' => [
-                    'show' => true,
-                    'colors' => ['transparent']
-                ],
-                'legend' => [
-                    'verticalAlign' => 'bottom',
-                    'horizontalAlign' => 'left',
+                    'curve' => 'smooth'
                 ],
             ],
             'series' => $series
