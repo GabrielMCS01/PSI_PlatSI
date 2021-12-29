@@ -65,9 +65,14 @@ $this->registerJsFile("@web/@mapbox/polyline/src/polyline.js", ['depends' => [\y
         </div>
         <br>
         <script>console.log(<?= $model->velocidade_grafico?>)</script>
-        <?php $series = $model->velocidade_grafico;
+        <?php $series = [
+            [
+                'name' => 'velocidade',
+                'data' => $model->velocidade_grafico
+            ]
+        ];
         echo ApexchartsWidget::widget([
-                'timeout' => '5000',
+            'timeout' => '5000',
             'type' => 'line', // default area
             'height' => '300', // default 350// default 100%
             'chartOptions' => [
