@@ -80,7 +80,7 @@ $this->registerJsFile("@web/@mapbox/polyline/src/polyline.js", ['depends' => [\y
                     ],
                 ],
                 'xaxis' => [
-                    'type' => 'float',
+                    'type' => 'numeric',
                     // 'categories' => $categories,
                 ],
                 'plotOptions' => [
