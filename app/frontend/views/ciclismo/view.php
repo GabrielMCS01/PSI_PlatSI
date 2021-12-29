@@ -67,6 +67,11 @@ $this->registerJsFile("@web/@mapbox/polyline/src/polyline.js", ['depends' => [\y
         <?php
         if($model->velocidade_grafico != null) {
             $velocidadeGrafico = json_decode($model->velocidade_grafico);
+
+            for($i = 0; $i < count($velocidadeGrafico); $i++){
+                $index[$i] = $i;
+            }
+
             $series = [
                 [
                     'name' => 'velocidade',
@@ -81,7 +86,8 @@ $this->registerJsFile("@web/@mapbox/polyline/src/polyline.js", ['depends' => [\y
                         'curve' => 'smooth'
                     ],
                     'xaxis' => [
-                        'tickAmount' => '10',
+                        'tickAmount' => '30',
+                        'categories' => $index
                     ]
                 ],
                 'series' => $series

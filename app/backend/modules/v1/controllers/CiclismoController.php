@@ -187,7 +187,26 @@ class CiclismoController extends ActiveController
             $ciclismo->data_treino =Yii::$app->formatter->asDateTime('now', 'yyyy-MM-dd HH-mm-ss');
             $ciclismo->user_id = Yii::$app->user->getId();
 
-            $ciclismo->save(true);
+            $bestDistancia = Ciclismo::find()->select(['user_id', 'MAX(distancia) as distancia'])->orderBy(['MAX(distancia)' => SORT_DESC])->groupBy(['user_id'])->one();
+            $bestTempo = Ciclismo::find()->select(['user_id', 'MAX(duracao) as duracao'])->orderBy(['MAX(duracao)' => SORT_DESC])->groupBy(['user_id'])->one();
+            $bestVelocidade = Ciclismo::find()->select(['user_id', 'MAX(velocidade_media) as velocidade_media'])->orderBy(['MAX(velocidade_media)' => SORT_DESC])->groupBy(['user_id'])->one();
+
+
+            if ($ciclismo->validate()) {
+                if ($bestDistancia < $ciclismo->distancia) {
+                    $msg = "Novo recorde de distancia: " . Converter::distanceConverter($ciclismo->distancia) . " por " . $ciclismo->user->username;
+                    $this->FazPublish($msg);
+                }
+                if ($bestTempo < $ciclismo->duracao) {
+                    $msg = "Novo recorde de duração: " . Converter::timeConverter($ciclismo->duracao) . " por " . $ciclismo->user->username;
+                    $this->FazPublish($msg);
+                }
+                if ($bestVelocidade < $ciclismo->velocidade_media) {
+                    $msg = "Novo recorde de velocidade média: " . Converter::velocityConverter($ciclismo->velocidade_media) . " por " . $ciclismo->user->username;
+                    $this->FazPublish($msg);
+                }
+                $ciclismo->save();
+            }
         }
 
         $treino = Ciclismo::find()->where(['user_id' => Yii::$app->user->id])->all();
