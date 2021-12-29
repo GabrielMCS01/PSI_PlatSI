@@ -82,7 +82,7 @@ $this->registerJsFile("@web/@mapbox/polyline/src/polyline.js", ['depends' => [\y
                 'type' => 'line', // default area
                 'height' => '300', // default 350// default 100%
                 'chartOptions' => [
-                    'zoom' => ['enabled' => 'false'],
+                    'zoom' => ['enabled' => false],
                     'stroke' => [
                         'curve' => 'smooth'
                     ],
