@@ -37,7 +37,7 @@ class ComentarioCest
 
         // Preenche o formulário e clica no botão para criar
         $I->fillField('Content', 'Comentario de teste Funcional');
-        $I->click('criarcomentario-button');
+        $I->click('pubcomentario-button');
 
         // Verifica se o comentário foi criado
         $I->SeeRecord('common\models\Comentario', [
@@ -83,4 +83,42 @@ class ComentarioCest
         ]);
     }
 
+    public function EditComentarioTest(FunctionalTester $I)
+    {
+        $I->amLoggedInAs(5); // utilizador com username iuri
+
+        // Página de publicações
+        $I->amOnRoute('publicacao/index'); // Página de Feed de noticias
+        $I->see('Publicações', 'h1');
+        $I->see('Percurso de teste', 'h3');
+        $I->seeLink('Ver Comentarios');
+        $I->click('Ver Comentarios', '#1');
+
+        // Página de comentários da publicação
+        $I->see('Comentarios', 'h1');
+        $I->see('iuri', 'h3');
+        $I->seeLink('Editar Comentario');
+        $I->click('Editar Comentario');
+
+        // Página para ver o comentário
+        $I->see('Comentário de iuri', 'h1');
+        $I->seeLink('Atualizar');
+        $I->click('Atualizar');
+
+        // Página para editar o comentário
+        $I->see('Atualizar comentario', 'h1');
+        // Preenche o formulário e clica no botão para guardar as alterações
+        $I->fillField('Content', 'Comentario de teste Funcional');
+        $I->click('pubcomentario-button');
+
+        // Voltar para a página do comentário
+        $I->see('Comentário de iuri', 'h1');
+
+        // Verifica se o comentário foi editado
+        $I->SeeRecord('common\models\Comentario', [
+            'content' => 'Comentario de teste Funcional (Editado)',
+            'user_id' => 5,
+            'publicacao_id' => 1
+        ]);
+    }
 }

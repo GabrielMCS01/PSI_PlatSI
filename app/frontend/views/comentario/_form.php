@@ -15,7 +15,7 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'content')->textarea(['rows' => 6]) ?>
 
     <div class="form-group">
-        <?= Html::submitButton('Publicar Comentário', ['class' => 'btn btn-success', 'name' => 'criarcomentario-button']) ?>
+        <?= Html::submitButton('Publicar Comentário', ['class' => 'btn btn-success', 'name' => 'pubcomentario-button']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

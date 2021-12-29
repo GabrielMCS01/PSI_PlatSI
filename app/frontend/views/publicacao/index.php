@@ -140,7 +140,7 @@ $this->registerJs("
             <br>
             <br>
             <?php Pjax::begin(['id' => 'my_pjax']);
-            $options = ['pjax-container' => 'my_pjax', 'like-url' => Url::to(['gosto/gosto', 'id' => $publicacao->id]), 'class' => 'fas fa-heart pjax-like-link'];
+            $options = ['pjax-container' => 'my_pjax', 'like-url' => Url::to(['gosto/gosto', 'id' => $publicacao->id]), 'class' => 'fas fa-heart pjax-like-link', 'id' => $publicacao->id];
             if (Gosto::find()->where(['publicacao_id' => $publicacao->id, 'user_id' => Yii::$app->user->getId()])->one() != null) {
                 Html::addCssStyle($options, 'color: red;');
             }
