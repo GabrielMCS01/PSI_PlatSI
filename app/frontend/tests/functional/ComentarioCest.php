@@ -6,7 +6,6 @@ class ComentarioCest
 {
     public function _before(FunctionalTester $I)
     {
-        $I->amLoggedInAs(2); // utilizador com username test
     }
 
     // Modelo para ser mais façil preencher o formulário
@@ -19,6 +18,8 @@ class ComentarioCest
 
     public function CriarComentarioTest(FunctionalTester $I)
     {
+        $I->amLoggedInAs(2); // utilizador com username test
+
         // Página de publicações
         $I->amOnRoute('publicacao/index'); // Página de Feed de noticias
         $I->see('Publicações', 'h1');
@@ -47,6 +48,39 @@ class ComentarioCest
 
         // Retorna á pagina de comentários
         $I->see('Comentarios', 'h1');
+    }
+
+    public function DeleteComentarioTest(FunctionalTester $I)
+    {
+        $I->amLoggedInAs(4); // utilizador com username gabriel
+
+        // Página de publicações
+        $I->amOnRoute('publicacao/index'); // Página de Feed de noticias
+        $I->see('Publicações', 'h1');
+        $I->see('Percurso de teste', 'h3');
+        $I->seeLink('Ver Comentarios');
+        $I->click('Ver Comentarios', '#1');
+
+        // Página de comentários da publicação
+        $I->see('Comentarios', 'h1');
+        $I->see('gabriel', 'h3');
+        $I->seeLink('Editar Comentario');
+        $I->click('Editar Comentario');
+
+        // Página para ver o comentário
+        $I->see('Comentário de gabriel', 'h1');
+        $I->seeLink('Apagar');
+        $I->click('Apagar');
+
+        // Retorna á pagina de comentários
+        $I->see('Comentarios', 'h1');
+
+        // Verifica se o comentário foi criado
+        $I->DontSeeRecord('common\models\Comentario', [
+            'content' => 'comentário de teste',
+            'user_id' => 4,
+            'publicacao_id' => 1
+        ]);
     }
 
 }

@@ -170,7 +170,7 @@ $this->registerJs("
                     <?php } ?>
                 </div>
                 <div class="col-lg-2 text-right">
-                    <?= Html::a('Ver Comentarios', ['comentario/indexpost', 'id' => $publicacao->id], ['class' => 'btn btn-primary', 'data-pjax' => 0]) ?>
+                    <?= Html::a('Ver Comentarios', ['comentario/indexpost', 'id' => $publicacao->id], ['class' => 'btn btn-primary', 'data-pjax' => 0, 'id' => $publicacao->id]) ?>
                 </div>
             </div>
             <?php Pjax::end(); ?>

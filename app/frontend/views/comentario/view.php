@@ -1,5 +1,6 @@
 <?php
 
+use kartik\dialog\Dialog;
 use yii\helpers\Html;
 use yii\helpers\HtmlPurifier;
 use yii\widgets\DetailView;
@@ -18,14 +19,13 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p>
         <?php if (Yii::$app->user->can("UpdateComment", ['comentario' => $model])) { ?>
-            <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+            <?= Html::a('Atualizar', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
         <?php } ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => 'Deseja remover este comentário?',
-                'method' => 'post',
-            ],
+        <?php Dialog::widget(['overrideYiiConfirm' => true]); ?>
+        <?= Html::a('Apagar', ['delete', 'id' => $model->id], [
+                'class' => 'btn btn-danger',
+                'data-confirm' => 'Deseja apagar este comentário?',
+                'data-method' => 'post',
         ]) ?>
     </p>
 
