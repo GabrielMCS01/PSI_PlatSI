@@ -86,7 +86,8 @@ $this->registerJsFile("@web/@mapbox/polyline/src/polyline.js", ['depends' => [\y
                         'curve' => 'smooth'
                     ],
                     'xaxis' => [
-                        'tickInterval' => '30'
+                        'type' => 'numeric',
+                        'tickInterval' => 30
                     ]
                 ],
                 'series' => $series
