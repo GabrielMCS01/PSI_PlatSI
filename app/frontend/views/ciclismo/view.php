@@ -65,10 +65,10 @@ $this->registerJsFile("@web/@mapbox/polyline/src/polyline.js", ['depends' => [\y
         </div>
         <br>
         <?php
-        if($model->velocidade_grafico != null) {
+        if ($model->velocidade_grafico != null) {
             $velocidadeGrafico = json_decode($model->velocidade_grafico);
 
-            for($i = 0; $i < count($velocidadeGrafico); $i++){
+            for ($i = 0; $i < count($velocidadeGrafico); $i++) {
                 $index[$i] = $i;
             }
 
@@ -82,7 +82,14 @@ $this->registerJsFile("@web/@mapbox/polyline/src/polyline.js", ['depends' => [\y
                 'type' => 'line', // default area
                 'height' => '300', // default 350// default 100%
                 'chartOptions' => [
-                    'chart' => ['zoom' => ['enabled' => 'false']],
+                    'chart' => [
+                        'zoom' => [
+                            'enabled' => false,
+                        ],
+                        'toolbar' => [
+                                'show' => false,
+                        ]
+                    ],
                     'stroke' => [
                         'curve' => 'smooth'
                     ],
