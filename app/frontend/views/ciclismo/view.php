@@ -66,10 +66,11 @@ $this->registerJsFile("@web/@mapbox/polyline/src/polyline.js", ['depends' => [\y
         <br>
         <script>console.log(<?= $model->velocidade_grafico?>)</script>
         <?php
-        for($i = 0; $i < $model->velocidade_grafico; $i++){
+        $index = null;
+
+        for($i = 0; $i < count($model->velocidade_grafico); $i++){
             $index[$i] = $i;
         }
-
         $series = [
             [
                 'name' => 'velocidade',
