@@ -67,14 +67,15 @@ $this->registerJsFile("@web/@mapbox/polyline/src/polyline.js", ['depends' => [\y
         <script>console.log(<?= $model->velocidade_grafico?>)</script>
         <?php
         $index = null;
+        $velocidadeGrafico = json_decode($model->velocidade_grafico);
 
-        for($i = 0; $i < count($model->velocidade_grafico); $i++){
+        for($i = 0; $i < count($velocidadeGrafico); $i++){
             $index[$i] = $i;
         }
         $series = [
             [
                 'name' => 'velocidade',
-                'data' => $model->velocidade_grafico
+                'data' => $velocidadeGrafico
             ]
         ];
         echo ApexchartsWidget::widget([
