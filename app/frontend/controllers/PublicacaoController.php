@@ -45,17 +45,36 @@ class PublicacaoController extends Controller
             return $this->goHome();
         }
 
-        $publicacoes = Publicacao::find()->orderBy(['id' => SORT_DESC])->all();
+        $publicacoes = Publicacao::find()->orderBy(['createtime' => SORT_DESC])->all();
 
         $pagination = new Pagination(['defaultPageSize' => 10, 'totalCount' => count($publicacoes),]);
 
-        $publicacoes = Publicacao::find()->orderBy(['id' => SORT_DESC])->offset($pagination->offset)->limit($pagination->limit)->all();
+        $publicacoes = Publicacao::find()->orderBy(['createtime' => SORT_DESC])->offset($pagination->offset)->limit($pagination->limit)->all();
 
         return $this->render('index', [
             "publicacoes" => $publicacoes,
             "pagination" => $pagination,
         ]);
     }
+
+    public function actionIndexuser(){
+
+        if(Yii::$app->user->isGuest){
+            return $this->goHome();
+        }
+
+        $publicacoes = Publicacao::find()->innerJoin(['ciclismo'], 'publicacao.ciclismo_id = ciclismo.id')->where(['ciclismo.user_id' => Yii::$app->user->getId()])->orderBy(['createtime' => SORT_DESC])->all();
+
+        $pagination = new Pagination(['defaultPageSize' => 10, 'totalCount' => count($publicacoes),]);
+
+        $publicacoes = Publicacao::find()->orderBy(['createtime' => SORT_DESC])->offset($pagination->offset)->limit($pagination->limit)->all();
+
+        return $this->render('indexuser', [
+            "publicacoes" => $publicacoes,
+            "pagination" => $pagination,
+        ]);
+    }
+
 
     /**
      * Displays a single Publicacao model.

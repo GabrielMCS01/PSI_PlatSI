@@ -47,6 +47,7 @@ AppAsset::register($this);
     } else {
         $menuItems[] = ['label' => 'Histórico', 'url' => ['/ciclismo/index']];
         $menuItems[] = ['label' => 'Feed de noticias' , 'url' => ['/publicacao/index']];
+        $menuItems[] = ['label' => 'Suas publicações', 'url' => ['/publicacao/indexpost']];
         if(Yii::$app->user->can("deleteCommentModerator")){
             $menuItems[] = ['label' => 'Comentários', 'url' => ['/comentario/index']];
         }
