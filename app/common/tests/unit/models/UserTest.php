@@ -21,6 +21,7 @@ class UserTest extends Unit
     /**
      * @return array
      */
+    // Testes para visualizar um utilizador
     public function testViewUser()
     {
         $user = User::find()->where(['username' => 'test'])->one();
@@ -34,6 +35,32 @@ class UserTest extends Unit
         expect_that($moderador->username == 'moderador');
     }
 
+    // Visualizar todos os tipos de utilizadores (backend)
+    public function testViewAllUser()
+    {
+        // Ver todos os Utilizadores
+        $users = User::find()->innerJoin(['auth_assignment'], 'user.id = auth_assignment.user_id')->where(['item_name' => 'user'])->all();
+
+        foreach ($users as $user){
+            expect_that($user->authassignment->item_name == 'user');
+        }
+
+        // Ver todos os Moderadores
+        $moderadores = User::find()->innerJoin(['auth_assignment'], 'user.id = auth_assignment.user_id')->where(['item_name' => 'moderador'])->all();
+
+        foreach ($moderadores as $mod){
+            expect_that($mod->authassignment->item_name == 'moderador');
+        }
+
+        // Ver todos os Administradores
+        $admins = User::find()->innerJoin(['auth_assignment'], 'user.id = auth_assignment.user_id')->where(['item_name' => 'admin'])->all();
+
+        foreach ($admins as $admin){
+            expect_that($admin->authassignment->item_name == 'admin');
+        }
+    }
+
+    // Testes para editar um perfil de utilizador
     public function testEditUser()
     {
         // Testa se recebe o utilizador da DB e modifica-o localmente
@@ -58,6 +85,7 @@ class UserTest extends Unit
         expect_that($userAtualizado->username == 'testModificado');
     }
 
+    // Testes para apagar um perfil do utilizador
     public function testApagarUser()
     {
         // Recebe um utilizador e as suas publicações

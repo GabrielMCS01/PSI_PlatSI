@@ -8,7 +8,7 @@ use common\models\Gosto;
 use common\models\Publicacao;
 
 /**
- * UserTest test
+ * PublicacaoTest test
  */
 class PublicacaoTest extends Unit
 {
@@ -20,6 +20,7 @@ class PublicacaoTest extends Unit
      * @return array
      */
 
+    // Testes para criar publicações
     public function testCreatePublicacao()
     {
         // Publicação criado corretamente
@@ -37,61 +38,58 @@ class PublicacaoTest extends Unit
         expect_that($pub->ciclismo->user->id == 4);
 
         // -------------------------------------------------------------------------------------
-
-        // Treino criado com dados incorretos
-        /*$model = new Ciclismo([
-            'nome_percurso' => '',
-            'duracao' => 12.1, // Valor Inteiro
-            'distancia' => 323.1, // Valor Inteiro
-            'velocidade_media' => 43,
-            'velocidade_maxima' => 3232,
-            'user_id' => 20]); // Não existe
+        // Tenta criar Publicação com dados incorretos
+        $model = new Publicacao([
+            'createtime' => \Yii::$app->formatter->asDatetime('now', 'yyyy-MM-dd HH-mm-ss'),
+            'ciclismo_id' => 20]); // Este treino não existe na DB de testes
 
         expect_not($model->save());
 
-        expect_that($model->getErrors('duracao'));
-        expect_that($model->getErrors('distancia'));
-        expect_that($model->getErrors('user_id'));*/
+        expect_that($model->getErrors('ciclismo_id'));
     }
 
-     /*public function testViewAllTreino()
-     {
-         $treinos = Ciclismo::find()->where(['user_id' => 2])->all();
+    // Testes para visualizar todas as publicações de um utilizador
+    public function testViewAllPublicacoesUser()
+    {
+        // Pesquisa pelo ID do treino e o ID do treino publicado onde o utilizador que fez o treino tem ID = 2
+        $pubs = Publicacao::find()->innerJoin(['ciclismo'], 'ciclismo.id = publicacao.ciclismo_id')->where(['ciclismo.user_id' => '2'])->all();
 
-         foreach ($treinos as $treino){
-             expect_not($treino->user_id != 2);
-         }
+        foreach ($pubs as $pub){
+            expect_that($pub->ciclismo->user_id == 2);
+        }
+    }
 
-         expect_not(Ciclismo::find()->where(['user_id' => 3])->all());
-     }
+    // Testes para visualizar todas as publicações (Feed Noticias)
+    public function testViewAllPublicacoes()
+    {
+        // Pesquisa por todas as publicações
+        $pubs = Publicacao::find()->all();
 
-     public function testEditTreino()
-     {
-         // Testa se recebe o utilizador da DB e modifica-o localmente
-         $treino = Ciclismo::find()->where(['id' => 1])->one();
+        foreach ($pubs as $pub){
+            expect_that($pub->ciclismo_id != -1);
+        }
+    }
 
-         $treino->nome_percurso = 'nome trocado';
+    // Testes para visualizar uma publicação
+    public function testViewPublicacao()
+    {
+        // Pesquisa pela publicação que pertença ao treino com ID 3
+        $pub = Publicacao::find()->where(['ciclismo_id' => 3])->one();
 
-         expect_that($treino->nome_percurso == 'nome trocado');
-         expect_that($treino->nome_percurso != 'Percurso de teste');
-         // --------------------------------------------------------------
-         // Atualiza o user na DB e recebe de novo o user da DB
-         expect_that($treino->save());
+        expect_that($pub->ciclismo->user->username == 'gabriel');
+        expect_not($pub->ciclismo->user->username == 'test');
+    }
 
-         $treinoAtualizado = Ciclismo::find()->where(['nome_percurso' => 'nome trocado'])->one();
+    // NÃO PODE EDITAR
 
-         expect_that($treinoAtualizado->nome_percurso == 'nome trocado');
-         expect_that($treinoAtualizado->velocidade_media == 10.1);
-     }
+    // Testes para apagar uma publicação do utilizador
+    public function testApagarPublicacao()
+    {
+        expect_that($pub = Publicacao::find()->where(['id' => 1])->one());
 
-     public function testApagarTreino()
-     {
-         expect_that($ciclismo = Ciclismo::find()->where(['id' => 1])->one());
+        Comentario::deleteAll(['publicacao_id' => $pub->id]);
+        Gosto::deleteAll(['publicacao_id' => $pub->id]);
 
-         Comentario::deleteAll(['publicacao_id' => $ciclismo->publicacaos->id]);
-         Gosto::deleteAll(['publicacao_id' => $ciclismo->publicacaos->id]);
-         Publicacao::deleteAll(['ciclismo_id' => $ciclismo->id]);
-
-         expect_that($ciclismo->delete());
-     }*/
+        expect_that($pub->delete());
+    }
 }
