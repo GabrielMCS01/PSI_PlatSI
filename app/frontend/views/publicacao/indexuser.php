@@ -15,7 +15,7 @@ use yii\widgets\Pjax;
 /* @var $publicacoes */
 /* @var $pagination */
 
-$this->title = 'Publicações';
+$this->title = 'Suas Publicações';
 $this->params['breadcrumbs'][] = $this->title;
 FontAwesomeAsset::register($this);
 

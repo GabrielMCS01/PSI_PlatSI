@@ -67,8 +67,8 @@ class PublicacaoController extends Controller
 
         $pagination = new Pagination(['defaultPageSize' => 10, 'totalCount' => count($publicacoes),]);
 
-        $publicacoes = Publicacao::find()->orderBy(['createtime' => SORT_DESC])->offset($pagination->offset)->limit($pagination->limit)->all();
-
+        $publicacoes = Publicacao::find()->innerJoin(['ciclismo'], 'publicacao.ciclismo_id = ciclismo.id')->where(['ciclismo.user_id' => Yii::$app->user->getId()])->orderBy(['createtime' => SORT_DESC])->all();
+        
         return $this->render('indexuser', [
             "publicacoes" => $publicacoes,
             "pagination" => $pagination,
