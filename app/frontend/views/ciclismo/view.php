@@ -100,6 +100,11 @@ $this->registerJsFile("@web/@mapbox/polyline/src/polyline.js", ['depends' => [\y
                         'title' => [
                             'text' => 'Segundos'
                         ]
+                    ],
+                    'yaxis' => [
+                        'title' => [
+                            'text' => 'Km/h'
+                        ]
                     ]
                 ],
                 'series' => $series
