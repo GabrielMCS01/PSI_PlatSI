@@ -23,7 +23,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
         <div class="row">
             <div class="col-lg-5">
-                <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
+                <?php $form = ActiveForm::begin(['id' => 'perfil-form']); ?>
 
                 <?= $form->field($model, 'primeiro_nome')->textInput(['autofocus' => true]) ?>
 

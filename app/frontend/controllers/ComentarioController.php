@@ -27,7 +27,7 @@ class ComentarioController extends Controller
                 'verbs' => [
                     'class' => VerbFilter::className(),
                     'actions' => [
-                        'delete' => ['POST'],
+
                     ],
                 ],
             ]
@@ -66,7 +66,7 @@ class ComentarioController extends Controller
 
         $pagination = new Pagination(['defaultPageSize' => 10, 'totalCount' => count($comentarios)]);
 
-        $comentarios =  Comentario::find()->where(['publicacao_id' => $id])->offset($pagination->offset)->limit($pagination->limit)->all();
+        $comentarios =  Comentario::find()->where(['publicacao_id' => $id])->orderBy(['createtime' => SORT_DESC])->offset($pagination->offset)->limit($pagination->limit)->all();
 
         return $this->render('indexpost', [
             'pagination' => $pagination,
@@ -164,7 +164,7 @@ class ComentarioController extends Controller
             return $this->goHome();
         }
 
-        $comentario = $this->findModel($id);
+        $comentario = Comentario::find()->where(['id' => $id])->one();
         $id = $comentario->publicacao_id;
         $comentario->delete();
 

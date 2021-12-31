@@ -68,9 +68,7 @@ $this->registerJs("
 <div class="publicacao-index">
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <?php foreach ($publicacoes
-
-                   as $publicacao) { ?>
+    <?php foreach ($publicacoes as $publicacao) { ?>
         <div class="jumbotron text-center">
             <h3><?= $publicacao->ciclismo->nome_percurso ?></h3>
             <h5><?= $publicacao->ciclismo->data_treino ?></h5>
@@ -142,7 +140,7 @@ $this->registerJs("
             <br>
             <br>
             <?php Pjax::begin(['id' => 'my_pjax']);
-            $options = ['pjax-container' => 'my_pjax', 'like-url' => Url::to(['gosto/gosto', 'id' => $publicacao->id]), 'class' => 'fas fa-heart pjax-like-link'];
+            $options = ['pjax-container' => 'my_pjax', 'like-url' => Url::to(['gosto/gosto', 'id' => $publicacao->id]), 'class' => 'fas fa-heart pjax-like-link', 'id' => 'gosto'.$publicacao->id];
             if (Gosto::find()->where(['publicacao_id' => $publicacao->id, 'user_id' => Yii::$app->user->getId()])->one() != null) {
                 Html::addCssStyle($options, 'color: red;');
             }
@@ -172,7 +170,7 @@ $this->registerJs("
                     <?php } ?>
                 </div>
                 <div class="col-lg-2 text-right">
-                    <?= Html::a('Ver Comentarios', ['comentario/indexpost', 'id' => $publicacao->id], ['class' => 'btn btn-primary', 'data-pjax' => 0]) ?>
+                    <?= Html::a('Ver Comentarios', ['comentario/indexpost', 'id' => $publicacao->id], ['class' => 'btn btn-primary', 'data-pjax' => 0, 'id' => $publicacao->id]) ?>
                 </div>
             </div>
             <?php Pjax::end(); ?>
