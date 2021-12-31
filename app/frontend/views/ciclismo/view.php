@@ -70,7 +70,7 @@ $this->registerJsFile("@web/@mapbox/polyline/src/polyline.js", ['depends' => [\y
 
             for ($i = 0; $i < count($velocidadeGrafico); $i++) {
                 $index[$i] = $i;
-                $velocidadeGrafico[$i] = round($velocidadeGrafico[$i], 2);
+                $velocidadeGrafico[$i] = round($velocidadeGrafico[$i], 0);
             }
 
 
