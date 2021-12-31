@@ -88,11 +88,11 @@ $this->registerJsFile("@web/@mapbox/polyline/src/polyline.js", ['depends' => [\y
                         ],
                         'toolbar' => [
                                 'show' => false,
-                        ]
-                    ],
-                    'legend' => [
-                        'show' => true,
-                        'position' => 'left'
+                        ],
+                        'legend' => [
+                'show' => true,
+                'position' => 'left'
+            ],
                     ],
                     'stroke' => [
                         'curve' => 'smooth'
