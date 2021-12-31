@@ -81,18 +81,21 @@ $this->registerJsFile("@web/@mapbox/polyline/src/polyline.js", ['depends' => [\y
             echo ApexchartsWidget::widget([
                 'type' => 'line', // default area
                 'height' => '300', // default 350// default 100%
+                'title' => [
+                    'text' => 'Velocidade por segundo'
+                ],
                 'chartOptions' => [
                     'chart' => [
                         'zoom' => [
                             'enabled' => false,
                         ],
                         'toolbar' => [
-                                'show' => false,
+                            'show' => false,
                         ],
                         'legend' => [
-                'show' => true,
-                'position' => 'left'
-            ],
+                            'show' => true,
+                            'position' => 'left'
+                        ],
                     ],
                     'stroke' => [
                         'curve' => 'smooth'
