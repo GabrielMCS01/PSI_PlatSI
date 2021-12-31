@@ -38,12 +38,15 @@ class ComentarioController extends Controller
      * Lists all Comentario models.
      * @return mixed
      */
+    // Página para o moderador gerir todos os comentários dos utilizadores
     public function actionIndex()
     {
+        // Se não tiver login e não tiver as permissões de moderador volta para a página principal
         if(Yii::$app->user->isGuest || !Yii::$app->user->can("deleteCommentModerator")){
             return $this->goHome();
         }
 
+        // Procura todos os comentários e limita a apresentação paar 10 em cada página
         $comentarios = Comentario::find()->all();
 
         $pagination = new Pagination(['defaultPageSize' => 10, 'totalCount' => count($comentarios)]);
@@ -56,12 +59,14 @@ class ComentarioController extends Controller
         ]);
     }
 
+    // Pagina de todos os comentários da publicação
     public function actionIndexpost($id){
-
+        // Se não tiver login volta para a página principal
         if(Yii::$app->user->isGuest){
             return $this->goHome();
         }
 
+        // Procura todos os comentários pelo ID da publicação
         $comentarios = Comentario::find()->where(['publicacao_id' => $id])->all();
 
         $pagination = new Pagination(['defaultPageSize' => 10, 'totalCount' => count($comentarios)]);
@@ -80,6 +85,7 @@ class ComentarioController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
+    // Página para ver um comentário, que permite apagar ou editar
     public function actionView($id)
     {
         if(Yii::$app->user->isGuest){
@@ -96,13 +102,14 @@ class ComentarioController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
+    // Página para criar um comentário
     public function actionCreate($id)
     {
         if(Yii::$app->user->isGuest){
             return $this->goHome();
         }
 
-
+        // Cria um novo comentário e preenche os dados
         $model = new Comentario();
 
         if ($this->request->isPost) {
@@ -129,6 +136,7 @@ class ComentarioController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
+    // Página para atualizar o comentário do utilizador
     public function actionUpdate($id)
     {
         if(Yii::$app->user->isGuest){
@@ -158,6 +166,7 @@ class ComentarioController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
+    // Apaga o comentário do utilizador
     public function actionDelete($id)
     {
         if(Yii::$app->user->isGuest){
@@ -171,6 +180,7 @@ class ComentarioController extends Controller
         return $this->redirect(['indexpost', 'id' => $id]);
     }
 
+    // O moderador apaga o comentário de qualquer utilizador
     public function actionDeletemoderador($id)
     {
         if(Yii::$app->user->isGuest || !Yii::$app->user->can("deleteCommentModerator")){

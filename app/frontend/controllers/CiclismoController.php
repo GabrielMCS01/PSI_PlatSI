@@ -38,8 +38,10 @@ class CiclismoController extends Controller
      * Lists all Ciclismo models.
      * @return mixed
      */
+    // Mostra todos os treinos do utilizador
     public function actionIndex()
     {
+        // Caso não tenha login feita volta á página principal
         if(Yii::$app->user->isGuest){
             return $this->goHome();
         }
@@ -59,6 +61,7 @@ class CiclismoController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
+    // Ver um treino do utilizador
     public function actionView($id)
     {
         if(Yii::$app->user->isGuest){

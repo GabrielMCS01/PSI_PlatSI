@@ -86,6 +86,7 @@ class CiclismoController extends ActiveController
         }
     }
 
+    // Envia uma notificação ao utilizador
     public function FazPublish($msg)
     {
         $server = "ciclodias.duckdns.org";

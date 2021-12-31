@@ -39,6 +39,7 @@ class PublicacaoController extends Controller
      * Lists all Publicacao models.
      * @return mixed
      */
+    // Página de feed de noticias que mostra todas as publicações dos utilizadores
     public function actionIndex()
     {
         if(Yii::$app->user->isGuest){
