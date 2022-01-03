@@ -6,6 +6,6 @@ modules:
             part: [orm, email, fixtures]
         - Asserts
         - Db:
-              dsn: 'mysql:host=localhost;dbname=projectdb'
+              dsn: 'mysql:host=127.0.0.1;dbname=projectdb_test'
               user: 'root'
               password: ''
