@@ -19,6 +19,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <?php Pjax::begin(); ?>
+    <!-- Mostra todos os comentários -->
     <?php foreach ($comentarios as $comentario) { ?>
         <br>
         <h3><strong><?= Html::encode($comentario->user->username) ?></strong>

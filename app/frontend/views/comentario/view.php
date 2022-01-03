@@ -16,9 +16,11 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="comentario-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
-
+    <!-- Mostra detalhadamente um comentário-->
     <p>
-        <?php if (Yii::$app->user->can("UpdateComment", ['comentario' => $model])) { ?>
+        <?php
+        // Caso o comentário seja do próprio utilizador, ele pode editar o comentário
+        if (Yii::$app->user->can("UpdateComment", ['comentario' => $model])) { ?>
             <?= Html::a('Atualizar', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
         <?php } ?>
         <?php Dialog::widget(['overrideYiiConfirm' => true]); ?>

@@ -23,13 +23,16 @@ $this->params['breadcrumbs'][] = $this->title;
         </p>
 
         <?php Pjax::begin(); ?>
+        <!-- Mostra todos os comentários de uma publicação -->
         <?php foreach ($comentarios as $comentario) { ?>
             <br>
             <h3><strong><?= Html::encode($comentario->user->username) ?></strong></h3>
             <h5><?= HtmlPurifier::process($comentario->content) ?></h5>
             <p><?= Html::encode($comentario->createtime) ?></p>
 
-            <?php if (Yii::$app->user->can("deleteCommentModerator", ['comentario' => $comentario])) {
+            <?php
+            //Caso o comentário seja do utilizador ou se o utilizador seja um Moderador, ele pode editar o comentário
+            if (Yii::$app->user->can("deleteCommentModerator", ['comentario' => $comentario])) {
                 echo Html::a("Editar Comentário", ['view', 'id' => $comentario->id], ['class' => 'btn btn-success', 'data-pjax' => 0]);
             }
             ?>
