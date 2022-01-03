@@ -34,6 +34,14 @@ npm install selenium-standalone -g
   selenium-standalone start
 
 
+# Instalação do mosquitto
+
+Windows - https://mosquitto.org/download
+
+# Iniciar mosquitto 
+
+mosquitto
+
 # Build do codecept
 
 ./vendor/bin/codecept build
