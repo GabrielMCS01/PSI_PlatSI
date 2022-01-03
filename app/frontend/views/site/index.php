@@ -25,6 +25,7 @@ $this->title = Yii::$app->name;
     <div class="body-content">
         <div class="row">
             <div class="col-lg-4">
+                <!-- Mostra o top 10 (tabela de classificação) da distância -->
                 <h3>TOP 10 - Distância</h3>
                 <ol>
                     <?php foreach ($distancias as $distancia){?>
@@ -34,6 +35,7 @@ $this->title = Yii::$app->name;
 
             </div>
             <div class="col-lg-4">
+                <!-- Mostra o top 10 (tabela de classificação) da duração -->
                 <h3>TOP 10 - Duração</h3>
                 <ol>
                     <?php foreach ($tempos as $tempo){?>
@@ -43,6 +45,7 @@ $this->title = Yii::$app->name;
 
             </div>
             <div class="col-lg-4">
+                <!-- Mostra o top 10 (tabela de classificação) da velocidade média -->
                 <h3>TOP 10 - Velocidade Média</h3>
                 <ol>
                     <?php foreach ($velocidademed as $velocidade){?>

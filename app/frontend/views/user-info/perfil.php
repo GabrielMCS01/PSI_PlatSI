@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
     <div class="site-login">
         <h1><?= Html::encode($this->title) ?></h1>
-
+        <!-- Mostra as informações do perfil-->
         <br>
         <p>Username: <strong><?= Html::encode($model->user->username)?></strong></p>
         <p>Email: <strong><?= Html::encode($model->user->email)?></strong></p>
@@ -40,6 +40,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 </div>
                 <?php ActiveForm::end(); ?>
                 <?= Dialog::widget(['overrideYiiConfirm' => true]);?>
+                <!-- Link para apagar o perfil-->
                 <?=Html::a(
                     'Remover Perfil',
                     ['/user-info/delete'],

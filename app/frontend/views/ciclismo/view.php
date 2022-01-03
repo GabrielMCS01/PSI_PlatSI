@@ -21,6 +21,7 @@ $this->registerJsFile("@web/@mapbox/polyline/src/polyline.js", ['depends' => [\y
 
     <h1><?= Html::encode($this->title) ?></h1>
 
+    <!-- Mostra os detalhes de um treino-->
     <div class="jumbotron text-center">
         <h3><?= $model->nome_percurso; ?></h3>
         <h5><?= $model->data_treino ?></h5>
@@ -56,6 +57,7 @@ $this->registerJsFile("@web/@mapbox/polyline/src/polyline.js", ['depends' => [\y
             <div class="col-lg-2 text-right">
                 <?= Dialog::widget(['overrideYiiConfirm' => true]); ?>
                 <?php
+                //Cria ou apaga a publicação deste treino
                 if ($publicar) {
                     echo Html::a("Publicar", ['publicacao/create', 'id' => $model->id], ['data-confirm' => 'Deseja publicar esta sessão de treino?', 'class' => 'btn btn-primary']);
                 } else {
@@ -66,13 +68,15 @@ $this->registerJsFile("@web/@mapbox/polyline/src/polyline.js", ['depends' => [\y
         <br>
         <?php
         if ($model->velocidade_grafico != null) {
+
+            //Vai buscar o json que inclui as velocidades a BD
             $velocidadeGrafico = json_decode($model->velocidade_grafico);
 
+            //Cria o index para o eixo na horizontal e arredonda as velocidades para duas casas decimais
             for ($i = 0; $i < count($velocidadeGrafico); $i++) {
                 $index[$i] = $i;
                 $velocidadeGrafico[$i] = round($velocidadeGrafico[$i], 2);
             }
-
 
             $series = [
                 [
@@ -80,6 +84,8 @@ $this->registerJsFile("@web/@mapbox/polyline/src/polyline.js", ['depends' => [\y
                     'data' => $velocidadeGrafico
                 ]
             ];
+
+            //Mostra o gráfico da velocidade
             echo ApexchartsWidget::widget([
                 'type' => 'line', // default area
                 'height' => '300', // default 350// default 100%
@@ -126,9 +132,11 @@ $this->registerJsFile("@web/@mapbox/polyline/src/polyline.js", ['depends' => [\y
         ?>
     </div>
 </div>
+<!-- Mostra o mapa com a rota-->
 <script>
     if ('<?= $model->rota?>' != "") {
         mapboxgl.accessToken = 'pk.eyJ1IjoiaXVyaWNhcnJhcyIsImEiOiJja3V3aDJrZWEwNjhuMm5xd3hqNHRuODdiIn0.Yztl8wZEMrxIlkEVwt1zgw';
+        //Cria o objeto MAP
         const map = new mapboxgl.Map({
             container: 'map',
             style: 'mapbox://styles/mapbox/streets-v11',
@@ -136,20 +144,28 @@ $this->registerJsFile("@web/@mapbox/polyline/src/polyline.js", ['depends' => [\y
             zoom: 13
         });
 
+        //Quando o mapa carregar faz
         map.on('load', () => {
+            //Transforma a string da rota num json de pontos de localização (GeoJSON)
             var array = polyline.toGeoJSON('<?= $model->rota?>', 6);
+
+            //Vai buscar o ponto central da rota para utilizar como ponto de foco do mapa
             var getCenter = polyline.decode('<?= $model->rota?>', 6);
 
             var index = getCenter.length / 2;
             var centerPoint = getCenter[index.toFixed(0)];
 
-
             map.setCenter([centerPoint[1], centerPoint[0]], null);
+
+
+            // Adiciona a informação da rota no mapa
             map.addSource('route', {
                     'type': 'geojson',
                     'data': array
                 }
             );
+
+            //Desenha a linha da rota no mapa
             map.addLayer({
                 'id': 'route',
                 'type': 'line',
@@ -163,7 +179,6 @@ $this->registerJsFile("@web/@mapbox/polyline/src/polyline.js", ['depends' => [\y
                     'line-width': 8
                 }
             });
-            console.log(array);
         });
     }
 </script>
