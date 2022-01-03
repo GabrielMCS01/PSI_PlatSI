@@ -3,7 +3,6 @@
 namespace frontend\controllers;
 
 use common\models\Ciclismo;
-use app\models\CiclismoSearch;
 use common\models\Publicacao;
 use Yii;
 use yii\data\Pagination;
@@ -68,10 +67,12 @@ class CiclismoController extends Controller
             return $this->goHome();
         }
 
+        // Verifica se existe alguma publicação desta sessão de treino
         $publicar = true;
         if(Publicacao::find()->where(['ciclismo_id' => $id])->one() != null){
             $publicar = false;
         }
+
         return $this->render('view', [
             'model' => $this->findModel($id), 'publicar' => $publicar
         ]);

@@ -130,6 +130,7 @@ class PublicacaoController extends Controller
 
         Comentario::deleteAll(['publicacao_id' => $publicacao->id]);
         Gosto::deleteAll(['publicacao_id' => $publicacao->id]);
+
         $publicacao->delete();
 
         return $this->redirect(['index']);

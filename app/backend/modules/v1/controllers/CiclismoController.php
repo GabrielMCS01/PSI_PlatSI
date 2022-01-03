@@ -2,16 +2,12 @@
 
 namespace app\modules\v1\controllers;
 
-use app\modules\v1\models\ResponseCreateCiclismo;
 use app\modules\v1\models\ResponseDeleteCiclismo;
-use app\modules\v1\models\ResponseSync;
 use app\modules\v1\models\ResponseUpdateCiclismo;
 use common\models\Ciclismo;
 use common\utils\Converter;
 use common\utils\phpMQTT;
-use phpDocumentor\Reflection\Types\Array_;
 use Yii;
-use yii\db\StaleObjectException;
 use yii\filters\auth\QueryParamAuth;
 use yii\rest\ActiveController;
 
@@ -62,17 +58,19 @@ class CiclismoController extends ActiveController
         $bestTempo = Ciclismo::find()->select(['user_id', 'MAX(duracao) as duracao'])->orderBy(['MAX(duracao)' => SORT_DESC])->groupBy(['user_id'])->one();
         $bestVelocidade = Ciclismo::find()->select(['user_id', 'MAX(velocidade_media) as velocidade_media'])->orderBy(['MAX(velocidade_media)' => SORT_DESC])->groupBy(['user_id'])->one();
 
-
         // Se a validação dos dados for TRUE guarda os dados caso contrário emite um erro
         if ($ciclismo->validate()){
+            // Compara se a distância do treino é superior que a maior existente na Base de Dados
             if($bestDistancia < $ciclismo->distancia){
                 $msg = "Novo recorde de distancia: " . Converter::distanceConverter($ciclismo->distancia) . " por " . $ciclismo->user->username;
                 $this->FazPublish($msg);
             }
+            // Compara se a duração do treino é superior que a maior existente na Base de Dados
             if($bestTempo < $ciclismo->duracao){
                 $msg = "Novo recorde de duração: " . Converter::timeConverter($ciclismo->duracao) . " por " . $ciclismo->user->username;
                 $this->FazPublish($msg);
             }
+            // Compara se a velocidade média do treino é superior que a maior existente na Base de Dados
             if($bestVelocidade < $ciclismo->velocidade_media){
                 $msg = "Novo recorde de velocidade média: " . Converter::velocityConverter($ciclismo->velocidade_media) . " por " . $ciclismo->user->username;
                 $this->FazPublish($msg);
@@ -86,7 +84,7 @@ class CiclismoController extends ActiveController
         }
     }
 
-    // Envia uma notificação ao utilizador
+    // Envia uma notificação ao utilizador (Recordes de treino)
     public function FazPublish($msg)
     {
         $server = "ciclodias.duckdns.org";

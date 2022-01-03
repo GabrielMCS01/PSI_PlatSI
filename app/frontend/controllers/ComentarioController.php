@@ -3,9 +3,7 @@
 namespace frontend\controllers;
 
 use common\models\Comentario;
-use frontend\models\ComentarioSearch;
 use Yii;
-use yii\data\ActiveDataProvider;
 use yii\data\Pagination;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -46,7 +44,7 @@ class ComentarioController extends Controller
             return $this->goHome();
         }
 
-        // Procura todos os comentários e limita a apresentação paar 10 em cada página
+        // Procura todos os comentários e limita a apresentação para 10 em cada página
         $comentarios = Comentario::find()->all();
 
         $pagination = new Pagination(['defaultPageSize' => 10, 'totalCount' => count($comentarios)]);
@@ -85,7 +83,7 @@ class ComentarioController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    // Página para ver um comentário, que permite apagar ou editar
+    // Página para ver um comentário, permite também apagar ou editá-lo (botões)
     public function actionView($id)
     {
         if(Yii::$app->user->isGuest){
@@ -109,13 +107,15 @@ class ComentarioController extends Controller
             return $this->goHome();
         }
 
-        // Cria um novo comentário e preenche os dados
+        // Cria um comentário e preenche os dados
         $model = new Comentario();
 
+        // Se estiver a receber dados faz
         if ($this->request->isPost) {
             $model->publicacao_id = $id;
             $model->user_id = Yii::$app->user->getId();
             $model->createtime = Yii::$app->formatter->asDateTime('now', 'yyyy-MM-dd HH-mm-ss');
+            // Recebe o comentário escrito na view
             if ($model->load($this->request->post()) && $model->save()) {
                 return $this->redirect(['indexpost', 'id' => $id]);
             }
@@ -143,16 +143,19 @@ class ComentarioController extends Controller
             return $this->goHome();
         }
 
-
+        // Encontra o comentário que será editado
         $model = $this->findModel($id);
 
+        // Se estiver a receber dados faz
         if($this->request->isPost) {
+            // Carrega a mensagem nova
             $model->load($this->request->post());
+            // Adiciona o Editado na nova mensagem
             $model->content = $model->content . ' (Editado)';
+
             if ($model->save()) {
                 return $this->redirect(['view', 'id' => $model->id]);
             }
-
         }
         return $this->render('update', [
             'model' => $model,
@@ -174,22 +177,29 @@ class ComentarioController extends Controller
         }
 
         $comentario = Comentario::find()->where(['id' => $id])->one();
+
+        // Recebe o ID da publicação onde está o comentário
         $id = $comentario->publicacao_id;
+
         $comentario->delete();
 
+        // Volta para a página para visualizar todos os comentários da publicação
         return $this->redirect(['indexpost', 'id' => $id]);
     }
 
     // O moderador apaga o comentário de qualquer utilizador
     public function actionDeletemoderador($id)
     {
+        // Verifica se o user tem permissões de moderador para poder apagar o comentário de qualquer utilizador
         if(Yii::$app->user->isGuest || !Yii::$app->user->can("deleteCommentModerator")){
             return $this->goHome();
         }
 
+        // Encontra o comentário com o ID enviado e apaga-o
         $comentario = $this->findModel($id);
         $comentario->delete();
 
+        // Volta para a página para visualizar todos os comentários
         return $this->redirect(['index']);
     }
 
