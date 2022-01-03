@@ -145,7 +145,7 @@ class PublicacaoController extends Controller
      */
     public function actionDelete($id)
     {
-        $publicacao = Publicacao::find()->where(['ciclismo_id' => $id])->one();
+        $publicacao = Publicacao::find()->where(['id' => $id])->one();
 
         Comentario::deleteAll(['publicacao_id' => $publicacao->id]);
         Gosto::deleteAll(['publicacao_id' => $publicacao->id]);
