@@ -58,17 +58,20 @@ class PublicacaoController extends Controller
         ]);
     }
 
+    // Página das publicações do utilizador com sessão iniciada
     public function actionIndexuser(){
 
         if(Yii::$app->user->isGuest){
             return $this->goHome();
         }
 
+        // Procura pelas publicações que pertençam ao utilizador
         $publicacoes = Publicacao::find()->innerJoin(['ciclismo'], 'publicacao.ciclismo_id = ciclismo.id')->where(['ciclismo.user_id' => Yii::$app->user->getId()])->orderBy(['createtime' => SORT_DESC])->all();
 
         $pagination = new Pagination(['defaultPageSize' => 10, 'totalCount' => count($publicacoes),]);
 
-        $publicacoes = Publicacao::find()->innerJoin(['ciclismo'], 'publicacao.ciclismo_id = ciclismo.id')->where(['ciclismo.user_id' => Yii::$app->user->getId()])->orderBy(['createtime' => SORT_DESC])->all();
+        // Procura pelas publicações que pertençam ao utilizador colocando a paginação correta
+        $publicacoes = Publicacao::find()->innerJoin(['ciclismo'], 'publicacao.ciclismo_id = ciclismo.id')->where(['ciclismo.user_id' => Yii::$app->user->getId()])->orderBy(['createtime' => SORT_DESC])->offset($pagination->offset)->limit($pagination->limit)->all();
 
         return $this->render('indexuser', [
             "publicacoes" => $publicacoes,
@@ -83,6 +86,7 @@ class PublicacaoController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
+    // Página para visualizar uma publicação
     public function actionView($id)
     {
         return $this->render('view', [
@@ -95,6 +99,7 @@ class PublicacaoController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
+    // Cria uma publicação
     public function actionCreate($id)
     {
         if(Yii::$app->user->isGuest){
