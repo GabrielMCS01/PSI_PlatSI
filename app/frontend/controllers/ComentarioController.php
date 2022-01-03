@@ -143,20 +143,23 @@ class ComentarioController extends Controller
             return $this->goHome();
         }
 
-
         $model = $this->findModel($id);
 
-        if($this->request->isPost) {
-            $model->load($this->request->post());
-            $model->content = $model->content . ' (Editado)';
-            if ($model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
-            }
+        if(Yii::$app->user->can("UpdateComment", ['comentario' => $model])) {
+            if ($this->request->isPost) {
+                $model->load($this->request->post());
+                $model->content = $model->content . ' (Editado)';
+                if ($model->save()) {
+                    return $this->redirect(['view', 'id' => $model->id]);
+                }
 
+            }
+            return $this->render('update', [
+                'model' => $model,
+            ]);
+        }else{
+            return $this->goHome();
         }
-        return $this->render('update', [
-            'model' => $model,
-        ]);
     }
 
     /**
@@ -174,10 +177,14 @@ class ComentarioController extends Controller
         }
 
         $comentario = Comentario::find()->where(['id' => $id])->one();
-        $id = $comentario->publicacao_id;
-        $comentario->delete();
 
-        return $this->redirect(['indexpost', 'id' => $id]);
+        if(Yii::$app->user->can("deleteCommentModerator", ['comentario' => $comentario])) {
+            $id = $comentario->publicacao_id;
+            $comentario->delete();
+            return $this->redirect(['indexpost', 'id' => $id]);
+        }else{
+            return $this->goHome();
+        }
     }
 
     // O moderador apaga o comentário de qualquer utilizador
