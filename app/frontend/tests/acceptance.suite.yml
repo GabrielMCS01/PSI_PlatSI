@@ -4,7 +4,7 @@ modules:
     enabled:
         - WebDriver:
             url: http://localhost/project/app/frontend/web/
-            browser: firefox
+            browser: chrome
         - Yii2:
             part: init
             cleanup: false
