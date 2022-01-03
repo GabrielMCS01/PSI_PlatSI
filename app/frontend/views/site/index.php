@@ -17,7 +17,7 @@ $this->title = Yii::$app->name;
         <img src="<?= Url::to('@web/img/ciclodias.png');?>" width="200px">
         <h1 class="display-4">Bem-Vindo ao Ciclodias</h1>
 
-        <p class="lead">Aplicação de monitorização de exercicio fisico</p>
+        <p class="lead">Aplicação de monitorização de exercício físico</p>
 
         <!-- <p><a class="btn btn-lg btn-success" href="http://www.yiiframework.com">Crie uma conta ou inicie sessão</a></p> -->
     </div>

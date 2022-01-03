@@ -69,6 +69,31 @@ return [
                         'POST signup' => 'signup', // 'signup' é 'actionSignup'
                     ],
                 ],
+                ['class' => 'yii\rest\UrlRule', 'controller' => 'v1/publicacao', 'pluralize' => false,
+                    'extraPatterns' => [
+                        'GET user' => 'user', // 'user é 'actionUser'
+                    ],
+                ],
+                ['class' => 'yii\rest\UrlRule', 'controller' => 'v1/gosto', 'pluralize' => false,
+                    'extraPatterns' =>[
+                        'GET numgostospub/{publicacaoid}' => 'numgostospub', // 'numgostospub' e 'actionNumgostospub'
+                        'GET numgostos' => 'numgostos', // 'numgostos' é 'actionNumgostos'
+                        'GET numgostosuser' => 'numgostosuser', // 'numgostosuser' é 'actionNumgostosuser
+                    ],
+                    'tokens' => [
+                        '{id}' => '<id:\\d+>',
+                        '{publicacaoid}' => '<publicacaoid:\\d+>',
+                    ],
+                ],
+                ['class' => 'yii\rest\UrlRule', 'controller' => 'v1/comentario', 'pluralize' => false,
+                    'extraPatterns' =>[
+                      'GET getcomentpub/{publicacaoid}' => 'getcomentpub', // 'getcomentpub' é 'actionGetcomentpub'
+                    ],
+                    'tokens' => [
+                        '{id}' => '<id:\\d+>',
+                        '{publicacaoid}' => '<publicacaoid:\\d+>',
+                    ],
+                ],
             ],
         ],
 

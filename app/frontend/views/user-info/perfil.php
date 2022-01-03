@@ -27,13 +27,13 @@ $this->params['breadcrumbs'][] = $this->title;
 
                 <?= $form->field($model, 'primeiro_nome')->textInput(['autofocus' => true]) ?>
 
-                <?= $form->field($model, 'ultimo_nome')->textInput() ?>
+                <?= $form->field($model, 'ultimo_nome')->textInput()->label('Apelido') ?>
 
                 <?= $form->field($model, 'data_nascimento')->widget(DatePicker::classname(), [
                     'language' => 'pt',
                     'options' => ['class' => 'form-control'],
                     'dateFormat' => 'yyyy-MM-dd',
-                ]) ?>
+                ])->label('Data de Nascimento') ?>
 
                 <div class="form-group">
                     <?= Html::submitButton('Guardar Alterações', ['class' => 'btn btn-primary', 'name' => 'update-button']) ?>

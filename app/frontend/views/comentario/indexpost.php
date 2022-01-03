@@ -11,7 +11,7 @@ use yii\widgets\Pjax;
 /* @var $comentarios */
 /* @var $id */
 
-$this->title = 'Comentarios';
+$this->title = 'Comentários';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
     <div class="comentario-index">
@@ -19,7 +19,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <h1><?= Html::encode($this->title) ?></h1>
 
         <p>
-            <?= Html::a('Criar Comentario', ['create', 'id' => $id], ['class' => 'btn btn-success']) ?>
+            <?= Html::a('Criar Comentário', ['create', 'id' => $id], ['class' => 'btn btn-success']) ?>
         </p>
 
         <?php Pjax::begin(); ?>
@@ -30,7 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <p><?= Html::encode($comentario->createtime) ?></p>
 
             <?php if (Yii::$app->user->can("deleteCommentModerator", ['comentario' => $comentario])) {
-                echo Html::a("Editar Comentario", ['view', 'id' => $comentario->id], ['class' => 'btn btn-success', 'data-pjax' => 0]);
+                echo Html::a("Editar Comentário", ['view', 'id' => $comentario->id], ['class' => 'btn btn-success', 'data-pjax' => 0]);
             }
             ?>
             <br>

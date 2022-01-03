@@ -145,21 +145,24 @@ class ComentarioController extends Controller
 
         // Encontra o comentário que será editado
         $model = $this->findModel($id);
-
+        if(Yii::$app->user->can("UpdateComment", ['comentario' => $model])) {
         // Se estiver a receber dados faz
-        if($this->request->isPost) {
+            if ($this->request->isPost) {
             // Carrega a mensagem nova
-            $model->load($this->request->post());
+                $model->load($this->request->post());
             // Adiciona o Editado na nova mensagem
-            $model->content = $model->content . ' (Editado)';
+                $model->content = $model->content . ' (Editado)';
+                if ($model->save()) {
+                    return $this->redirect(['view', 'id' => $model->id]);
+                }
 
-            if ($model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
             }
+            return $this->render('update', [
+                'model' => $model,
+            ]);
+        }else{
+            return $this->goHome();
         }
-        return $this->render('update', [
-            'model' => $model,
-        ]);
     }
 
     /**
@@ -177,14 +180,15 @@ class ComentarioController extends Controller
         }
 
         $comentario = Comentario::find()->where(['id' => $id])->one();
-
+        if(Yii::$app->user->can("deleteCommentModerator", ['comentario' => $comentario])) {
         // Recebe o ID da publicação onde está o comentário
-        $id = $comentario->publicacao_id;
-
-        $comentario->delete();
-
+            $id = $comentario->publicacao_id;
+            $comentario->delete();
         // Volta para a página para visualizar todos os comentários da publicação
-        return $this->redirect(['indexpost', 'id' => $id]);
+            return $this->redirect(['indexpost', 'id' => $id]);
+        }else{
+            return $this->goHome();
+        }
     }
 
     // O moderador apaga o comentário de qualquer utilizador

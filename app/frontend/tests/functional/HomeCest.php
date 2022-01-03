@@ -11,7 +11,7 @@ class HomeCest
     {
         $I->amOnPage(\Yii::$app->homeUrl);
         $I->see('Bem-Vindo ao Ciclodias', 'h1');
-        $I->see('Aplicação de monitorização de exercicio fisico', 'p');
+        $I->see('Aplicação de monitorização de exercício físico', 'p');
         $I->seeLink('Home');
         $I->seeLink('Registo');
         $I->seeLink('Iniciar sessão');
@@ -26,6 +26,6 @@ class HomeCest
         $I->seeLink('Iniciar sessão');
         $I->click('Iniciar sessão');
         $I->see('Iniciar sessão', 'h1');
-        $I->see('Preencha os campos seguintes com os seus dados de Utilizador:', 'p');
+        $I->see('Preencha os seguintes campos com os seus dados de Utilizador:', 'p');
     }
 }

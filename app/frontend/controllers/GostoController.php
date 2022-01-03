@@ -11,6 +11,11 @@ class GostoController extends Controller
 {
     // Função para colocar ou remover gosto
     public function actionGosto($id){
+
+        if(Yii::$app->user->isGuest){
+            return $this->goHome();
+        }
+
         // Se o pedido for AJAX faz
         if (Yii::$app->request->isAjax) {
             // Se não encontrar nenhum gosto para o utilizador na publicação faz

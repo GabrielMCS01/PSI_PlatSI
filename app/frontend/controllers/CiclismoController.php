@@ -67,15 +67,19 @@ class CiclismoController extends Controller
             return $this->goHome();
         }
 
+        $model = $this->findModel($id);
+        if(Yii::$app->user->can('viewActivity', ['activity' => $model])) {
         // Verifica se existe alguma publicação desta sessão de treino
-        $publicar = true;
-        if(Publicacao::find()->where(['ciclismo_id' => $id])->one() != null){
-            $publicar = false;
+            $publicar = true;
+            if (Publicacao::find()->where(['ciclismo_id' => $id])->one() != null) {
+                $publicar = false;
+            }
+            return $this->render('view', [
+                'model' => $model, 'publicar' => $publicar
+            ]);
+        }else{
+            return $this->goHome();
         }
-
-        return $this->render('view', [
-            'model' => $this->findModel($id), 'publicar' => $publicar
-        ]);
     }
 
 

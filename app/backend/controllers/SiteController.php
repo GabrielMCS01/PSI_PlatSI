@@ -110,13 +110,12 @@ class SiteController extends Controller
         // ------------------------ Velocidade Média dos treinos ----------------------------
         // Numero de treinos a dividir pela velocidade média total
         if ($velMediaTotal != 0){
-            $velMedia = round(($velMediaTotal / $numTreinos), 2);
+            $velMedia = $velMediaTotal / $numTreinos;
         }
         else $velMedia = 0;
 
         // -------------------------- Distância total dos treinos ----------------------------
-        $distancia = $distanciaTotal / 1000;
-        $distancia = round($distancia, 3);
+        $distancia = $distanciaTotal;
 
         // Tempo tem de ser convertido para Horas, dias, semanas ETC
         //$tempoTotal

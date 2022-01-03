@@ -12,13 +12,13 @@ class PublicacaoCest
     public function EliminarPublicacaoTest(FunctionalTester $I)
     {
         $I->amOnRoute('ciclismo/index'); // Página de histórico
-        $I->see('Historico', 'h1');
+        $I->see('Histórico', 'h1');
         $I->seeLink('Percurso de teste');
         $I->click('Percurso de teste');
 
         // Página do treino
         $I->see('Percurso de Teste', 'h1');
-        $I->see('Distancia: 0.90 Km');
+        $I->see('Distância: 0.90 Km');
         $I->see('Velocidade Média: 10.10 Km/h');
         $I->see('SEM ROTA', 'p');
 
@@ -35,13 +35,13 @@ class PublicacaoCest
     public function CriarPublicacaoTest(FunctionalTester $I)
     {
         $I->amOnRoute('ciclismo/index'); // Página de histórico
-        $I->see('Historico', 'h1');
+        $I->see('Histórico', 'h1');
         $I->seeLink('Percurso para testes');
         $I->click('Percurso para testes');
 
         // Página do treino
         $I->see('Percurso para testes', 'h1');
-        $I->see('Distancia: 4.02 Km');
+        $I->see('Distância: 4.02 Km');
         $I->see('Velocidade Máxima: 19.20 Km/h');
         $I->see('SEM ROTA', 'p');
 
@@ -62,14 +62,14 @@ class PublicacaoCest
         $I->see('Publicado por: test', 'h5');
         $I->see($Publicacao->ciclismo->nome_percurso, 'h3');
         $I->seeLink('Apagar Publicação');
-        $I->seeLink('Ver Comentarios');
+        $I->seeLink('Ver Comentários');
     }
 
     public function VerPublicacoesTest(FunctionalTester $I)
     {
         $I->amOnRoute('site/index');
-        $I->seeLink('Feed de noticias');
-        $I->click('Feed de noticias');
+        $I->seeLink('Feed de notícias');
+        $I->click('Feed de notícias');
 
         $I->see('Publicações', 'h1');
         $I->see('Percurso de teste', 'h3');

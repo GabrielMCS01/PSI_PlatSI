@@ -24,30 +24,30 @@ class ComentarioCest
         $I->amOnRoute('publicacao/index'); // Página de Feed de noticias
         $I->see('Publicações', 'h1');
         $I->see('Percurso de teste', 'h3');
-        $I->seeLink('Ver Comentarios');
-        $I->click('Ver Comentarios');
+        $I->seeLink('Ver Comentários');
+        $I->click('Ver Comentários');
 
         // Página de comentários da publicação
-        $I->see('Comentarios', 'h1');
-        $I->seeLink('Criar Comentario');
-        $I->click('Criar Comentario');
+        $I->see('Comentários', 'h1');
+        $I->seeLink('Criar Comentário');
+        $I->click('Criar Comentário');
 
         // Página para adicionar novo comentário
-        $I->see('Adicionar novo comentario', 'h1');
+        $I->see('Adicionar novo comentário', 'h1');
 
         // Preenche o formulário e clica no botão para criar
-        $I->fillField('Content', 'Comentario de teste Funcional');
+        $I->fillField('Comentário', 'Comentário de teste Funcional');
         $I->click('pubcomentario-button');
 
         // Verifica se o comentário foi criado
         $I->SeeRecord('common\models\Comentario', [
-            'content' => 'Comentario de teste Funcional',
+            'content' => 'Comentário de teste Funcional',
             'user_id' => 2,
             'publicacao_id' => 2
         ]);
 
         // Retorna á pagina de comentários
-        $I->see('Comentarios', 'h1');
+        $I->see('Comentários', 'h1');
     }
 
     public function DeleteComentarioTest(FunctionalTester $I)
@@ -58,14 +58,14 @@ class ComentarioCest
         $I->amOnRoute('publicacao/index'); // Página de Feed de noticias
         $I->see('Publicações', 'h1');
         $I->see('Percurso de teste', 'h3');
-        $I->seeLink('Ver Comentarios');
-        $I->click('Ver Comentarios', '#1');
+        $I->seeLink('Ver Comentários');
+        $I->click('Ver Comentários', '#1');
 
         // Página de comentários da publicação
-        $I->see('Comentarios', 'h1');
+        $I->see('Comentários', 'h1');
         $I->see('gabriel', 'h3');
-        $I->seeLink('Editar Comentario');
-        $I->click('Editar Comentario');
+        $I->seeLink('Editar Comentário');
+        $I->click('Editar Comentário');
 
         // Página para ver o comentário
         $I->see('Comentário de gabriel', 'h1');
@@ -73,7 +73,7 @@ class ComentarioCest
         $I->click('Apagar');
 
         // Retorna á pagina de comentários
-        $I->see('Comentarios', 'h1');
+        $I->see('Comentários', 'h1');
 
         // Verifica se o comentário foi criado
         $I->DontSeeRecord('common\models\Comentario', [
@@ -91,14 +91,14 @@ class ComentarioCest
         $I->amOnRoute('publicacao/index'); // Página de Feed de noticias
         $I->see('Publicações', 'h1');
         $I->see('Percurso de teste', 'h3');
-        $I->seeLink('Ver Comentarios');
-        $I->click('Ver Comentarios', '#1');
+        $I->seeLink('Ver Comentários');
+        $I->click('Ver Comentários', '#1');
 
         // Página de comentários da publicação
-        $I->see('Comentarios', 'h1');
+        $I->see('Comentários', 'h1');
         $I->see('iuri', 'h3');
-        $I->seeLink('Editar Comentario');
-        $I->click('Editar Comentario');
+        $I->seeLink('Editar Comentário');
+        $I->click('Editar Comentário');
 
         // Página para ver o comentário
         $I->see('Comentário de iuri', 'h1');
@@ -106,9 +106,9 @@ class ComentarioCest
         $I->click('Atualizar');
 
         // Página para editar o comentário
-        $I->see('Atualizar comentario', 'h1');
+        $I->see('Atualizar comentário', 'h1');
         // Preenche o formulário e clica no botão para guardar as alterações
-        $I->fillField('Content', 'Comentario de teste Funcional');
+        $I->fillField('Comentário', 'Comentário de teste Funcional');
         $I->click('pubcomentario-button');
 
         // Voltar para a página do comentário
@@ -116,7 +116,7 @@ class ComentarioCest
 
         // Verifica se o comentário foi editado
         $I->SeeRecord('common\models\Comentario', [
-            'content' => 'Comentario de teste Funcional (Editado)',
+            'content' => 'Comentário de teste Funcional (Editado)',
             'user_id' => 5,
             'publicacao_id' => 1
         ]);

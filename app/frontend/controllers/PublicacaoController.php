@@ -126,26 +126,42 @@ class PublicacaoController extends Controller
     // Apaga a publicação pelo feed de noticias/ Suas publicações
     public function actionDelete($id)
     {
-        $publicacao = Publicacao::find()->where(['ciclismo_id' => $id])->one();
+        if(Yii::$app->user->isGuest){
+            return $this->goHome();
+        }
 
-        Comentario::deleteAll(['publicacao_id' => $publicacao->id]);
-        Gosto::deleteAll(['publicacao_id' => $publicacao->id]);
+        $publicacao = Publicacao::find()->where(['id' => $id])->one();
 
-        $publicacao->delete();
+        if(Yii::$app->user->can("deletePostModerator", ['publicacao' => $publicacao])) {
+            Comentario::deleteAll(['publicacao_id' => $publicacao->id]);
+            Gosto::deleteAll(['publicacao_id' => $publicacao->id]);
+            $publicacao->delete();
 
-        return $this->redirect(['index']);
+            return $this->redirect(['index']);
+        }else{
+            return $this->goHome();
+        }
     }
 
     // Apaga a publicação pelo histórico de treino
     public function actionDeletec($id){
+
+        if(Yii::$app->user->isGuest){
+            return $this->goHome();
+        }
+
         $publicacao = Publicacao::find()->where(['ciclismo_id' => $id])->one();
 
-        Comentario::deleteAll(['publicacao_id' => $publicacao->id]);
-        Gosto::deleteAll(['publicacao_id' => $publicacao->id]);
+        if(Yii::$app->user->can("deletePostModerator", ['publicacao' => $publicacao])) {
+            Comentario::deleteAll(['publicacao_id' => $publicacao->id]);
+            Gosto::deleteAll(['publicacao_id' => $publicacao->id]);
 
-        $publicacao->delete();
+            $publicacao->delete();
 
-        return $this->redirect(['ciclismo/view', 'id' => $id]);
+            return $this->redirect(['ciclismo/view', 'id' => $id]);
+        }else{
+            return $this->goHome();
+        }
 
     }
     /**
