@@ -5,7 +5,6 @@ namespace frontend\controllers;
 use common\models\Comentario;
 use common\models\Gosto;
 use common\models\Publicacao;
-use app\models\PublicacaoSearch;
 use Yii;
 use yii\data\Pagination;
 use yii\web\Controller;
@@ -39,13 +38,14 @@ class PublicacaoController extends Controller
      * Lists all Publicacao models.
      * @return mixed
      */
-    // Página de feed de noticias que mostra todas as publicações dos utilizadores
+    // Página de feed de notícias que mostra todas as publicações de todos os utilizadores
     public function actionIndex()
     {
         if(Yii::$app->user->isGuest){
             return $this->goHome();
         }
 
+        // Recebe todas as publicações e ordena-as pela mais recente
         $publicacoes = Publicacao::find()->orderBy(['createtime' => SORT_DESC])->all();
 
         $pagination = new Pagination(['defaultPageSize' => 10, 'totalCount' => count($publicacoes),]);
@@ -112,28 +112,8 @@ class PublicacaoController extends Controller
         $model->createtime = Yii::$app->formatter->asDateTime('now', 'yyyy-MM-dd HH-mm-ss');
         $model->save();
 
-
+        // Volta para a página com todas as publicações
         $this->redirect(['index']);
-    }
-
-    /**
-     * Updates an existing Publicacao model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param int $id ID
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    public function actionUpdate($id)
-    {
-        $model = $this->findModel($id);
-
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        }
-
-        return $this->render('update', [
-            'model' => $model,
-        ]);
     }
 
     /**
@@ -143,6 +123,7 @@ class PublicacaoController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
+    // Apaga a publicação pelo feed de noticias/ Suas publicações
     public function actionDelete($id)
     {
         $publicacao = Publicacao::find()->where(['ciclismo_id' => $id])->one();
@@ -154,7 +135,7 @@ class PublicacaoController extends Controller
         return $this->redirect(['index']);
     }
 
-
+    // Apaga a publicação pelo histórico de treino
     public function actionDeletec($id){
         $publicacao = Publicacao::find()->where(['ciclismo_id' => $id])->one();
 
