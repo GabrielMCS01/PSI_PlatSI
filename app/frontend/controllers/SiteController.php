@@ -97,7 +97,7 @@ class SiteController extends Controller
 
         $model = new LoginForm();
 
-        // Recebe os dados inseridos pelo utilizador e inicia sessão
+        // Recebe os dados inseridos pelo utilizador e inicia sessão (POST)
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
             // Se o utilizador tiver acesso á frontend mantém a sessão iniciada e volta á pagina principal
             if($auth->checkAccess(Yii::$app->user->getId(), "frontendAccess")){
@@ -123,7 +123,7 @@ class SiteController extends Controller
      *
      * @return mixed
      */
-    // Termina a sessão que estava iniciada anteriormente
+    // Termina a sessão iniciada anteriormente
     public function actionLogout()
     {
         Yii::$app->user->logout();
@@ -136,11 +136,14 @@ class SiteController extends Controller
      *
      * @return mixed
      */
-    // Página para registar um utilizador/ Cria o utilizador
+    // Carrega a página de registo do utilizador
     public function actionSignup()
     {
         $model = new SignupForm();
+
+        // Caso o pedido seja POST, carregue os dados e consiga fazer registo com sucesso
         if ($model->load(Yii::$app->request->post()) && $model->signup()) {
+            // Notificação na página Inicial de que a conta foi criada com sucesso
             Yii::$app->session->setFlash('success', 'Obrigado por se registar');
             return $this->goHome();
         }

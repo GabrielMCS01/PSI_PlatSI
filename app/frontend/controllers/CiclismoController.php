@@ -69,7 +69,7 @@ class CiclismoController extends Controller
 
         $model = $this->findModel($id);
         if(Yii::$app->user->can('viewActivity', ['activity' => $model])) {
-        // Verifica se existe alguma publicação desta sessão de treino
+        // Verifica se existe alguma publicação desta sessão de treino para alterar o botão de fazer a publicação
             $publicar = true;
             if (Publicacao::find()->where(['ciclismo_id' => $id])->one() != null) {
                 $publicar = false;

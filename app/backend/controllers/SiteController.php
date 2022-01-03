@@ -71,6 +71,7 @@ class SiteController extends Controller
             return $this->goHome();
         }
 
+        // Recebe todos os dados que serão enviados para o menu principal da backend
         $publicacoes = Publicacao::find()->all();
         $gostos = Gosto::find()->all();
         $comentarios = Comentario::find()->all();
@@ -93,14 +94,13 @@ class SiteController extends Controller
             }
         }
 
-        // --------------------------- Número total --------------------------------------
+        // ------------------------------ Número total --------------------------------------
         $numTreinos = sizeof($treinos);
         $numPublicacoes = sizeof($publicacoes);
         $numGostos = sizeof($gostos);
         $numComentarios = sizeof($comentarios);
 
-        // ------ Função que faz o cálculo de todos os campos de cada atributo ---------------
-        // Distancia, Velocidade media e tempo total dos treinos
+        // -------- Foreach que faz o cálculo de todos os campos de cada atributo ------------
         foreach ($treinos as $treino){
             $velMediaTotal += $treino->velocidade_media;
             $distanciaTotal += $treino->distancia;
@@ -117,9 +117,6 @@ class SiteController extends Controller
         // -------------------------- Distância total dos treinos ----------------------------
         $distancia = $distanciaTotal;
 
-        // Tempo tem de ser convertido para Horas, dias, semanas ETC
-        //$tempoTotal
-
         // Retorna a view index com todos os dados para os widgets
         return $this->render('index', ['numUsers' => $numUsers, 'numTreinos' => $numTreinos,
             'velMedia' => $velMedia, 'distancia' => $distancia, 'tempoTotal' => $tempoTotal,
@@ -131,6 +128,7 @@ class SiteController extends Controller
      *
      * @return string|Response
      */
+    // Carrega a página de Login e Faz login dos administradores na backend caso já esteja a enviar os dados (POST)
     public function actionLogin()
     {
         $auth = Yii::$app->authManager;
@@ -142,12 +140,16 @@ class SiteController extends Controller
 
         $model = new LoginForm();
 
+        // Se for POST e se fizer login com sucesso
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
+            // Verifica se o utilizador tem acesso á backend
             if($auth->checkAccess(Yii::$app->user->getId(), "backendAccess")){
                 return $this->goBack();
             }else{
+                // Caso contrário é enviada uma mensagem a avisar que utilizador não tem acesso á backend
                 $message = "Utilizador sem acesso á backend";
                 echo "<script type='text/javascript'>alert('$message');</script>";
+                // Termina a sessão
                 Yii::$app->user->logout();
             }
         }
@@ -164,6 +166,7 @@ class SiteController extends Controller
      *
      * @return Response
      */
+    // Termina a sessão iniciada anteriormente e volta para a página inicial (Login)
     public function actionLogout()
     {
         Yii::$app->user->logout();

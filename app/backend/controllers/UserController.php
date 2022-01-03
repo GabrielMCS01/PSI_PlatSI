@@ -77,12 +77,14 @@ class UserController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
+    // Mostra os dados mais relevantes do utilizador selecionado
     public function actionView($id)
     {
         if(Yii::$app->user->isGuest){
             return $this->goHome();
         }
 
+        // Pesquisa as informações do utilizador selecionado
         $user_info = UserInfo::find()->where(['user_id' => $id])->one();
 
         return $this->render('view', [
@@ -97,28 +99,36 @@ class UserController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
+    // Carrega a página ou atualiza os dados do utilizador dependendo do pedido feito
     public function actionUpdate($id)
     {
         if(Yii::$app->user->isGuest){
             return $this->goHome();
         }
 
+        // Encontra o utilizador pelo ID
         $model = $this->findModel($id);
 
+        // Pesquisa todos os tipos de roles possiveis de serem selecionadas
         $roles = AuthItem::find()->select(['name'])->where(['type' => 1])->all();
+
+        // Pesquisa o nome da role do utilizador selecionado
         $auth_model = AuthAssignment::find()->where(['user_id' => $id])->one();
         $role_name = $auth_model->item_name;
 
+        // Pesquisa os dados extra do utilizador selecionado
         $user_info = UserInfo::find()->where(['user_id' => $id])->one();
 
-        // Receber cada post individualmente (variaveis e atribuir aos devidos models)
+        // Recebe os dados individualmente (variaveis e atribuir aos devidos models)
         if (Yii::$app->request->isPost) {
 
             $user_info->load(Yii::$app->request->post());
             $auth_model->load(Yii::$app->request->post());
 
+            // Escreve o nome da nova role
             $auth_model->item_name = $roles[$auth_model->item_name]->name;
 
+            // Se guardar com sucesso é redirecionado para a página de visualização do utilizador
             if($auth_model->save() && $user_info->save()){
                 return $this->redirect(['view', 'id' => $model->id]);
             }
@@ -136,31 +146,43 @@ class UserController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
+    // Apaga o utilizador selecionado
     public function actionDelete($id)
     {
+        // Recebe o utilizador com o ID
         $user = User::findOne($id);
 
+        // Recebe todos os treinos que este utilizador tenha feito
         $ciclismos = Ciclismo::find()->where(['user_id' => $user->id])->all();
 
+        // Para cada treino é verificado
         foreach ($ciclismos as $ciclismo){
+            // Caso a sessão de treino tenha uma publicação
             if (Publicacao::find()->where(['ciclismo_id' => $ciclismo->id])->one() == true) {
+                // Apaga todos os Comentários, Gostos, e a própria publicação
                 Comentario::deleteAll(['publicacao_id' => $ciclismo->publicacao->id]);
                 Gosto::deleteAll(['publicacao_id' => $ciclismo->publicacao->id]);
                 Publicacao::deleteAll(['ciclismo_id' => $ciclismo->id]);
             }
+            // Apaga a sessão de treino
             $ciclismo->delete();
         }
 
+        // Apaga todos os Comentários, Gostos feitos pelo utilizador e dados do próprio
         Comentario::deleteAll(['user_id' => $user->id]);
         Gosto::deleteAll(['user_id' => $user->id]);
         $user->userinfo->delete();
         $user->delete();
 
+        // Verifica se o utilizador já foi apagado
         $user = User::findOne($id);
 
+        // Caso tenha sido apagado é redirecionado para a página de utilizadores
         if($user == null){
             return $this->redirect(['index']);
         }
+
+        // Caso tenha ocorrido algum erro o user fica na página do utilizador selecionado
         return $this->redirect(['view']);
     }
 

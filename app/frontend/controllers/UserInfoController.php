@@ -87,7 +87,7 @@ class UserInfoController extends Controller
             return $this->goHome();
         }
 
-        // Caso tenha ocorrido alguma erro o user fica na mesma página
+        // Caso tenha ocorrido algum erro o user fica na mesma página
         return $this->actionPerfil();
     }
 
