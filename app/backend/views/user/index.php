@@ -27,12 +27,12 @@ for ($i = 0; $i < count($roles); $i++){
                     <?php
                     $i = 0;
 
-                    // Para cada tipo de utilizador (Adapta-se ao número de utilizadores)
+                    // Para cada tipo de utilizador (role)(Adapta-se ao número de roles existentes)
                     foreach ($dataProvider as $data) { ?>
                         <!-- Destaca o tipo de utilizador !-->
                         <h3 style="text-transform: capitalize;"><strong><?=$tipos_user[$i]?></strong></h3>
                         <?php
-                        // Preenche a grid
+                        // Preenche a gridview com os dados de cada utilizador em cada role
                         echo GridView::widget([
                         'dataProvider' => $data,
                         'filterModel' => $searchModel,

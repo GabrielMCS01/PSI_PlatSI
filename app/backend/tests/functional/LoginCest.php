@@ -3,7 +3,6 @@
 namespace backend\tests\functional;
 
 use backend\tests\FunctionalTester;
-use common\fixtures\UserFixture;
 
 /**
  * Class LoginCest
@@ -13,6 +12,7 @@ class LoginCest
     /**
      * @param FunctionalTester $I
      */
+    // Login Correto de um administrador
     public function LoginAdmin(FunctionalTester $I)
     {
         $I->amOnPage(['/site/index']);

@@ -53,7 +53,7 @@ class UserController extends Controller
 
         // Para cada role preeche no array com dados da devida query á BD
         for($i = 0; $i < count($roles); $i++){
-            // Procura todos os utilizadores
+            // Procura todos os utilizadores para cada tipo de Role
             $dataProvider[$i] = new ActiveDataProvider([
                 'query' => User::find()->innerJoin(['auth_assignment'], 'user.id = auth_assignment.user_id')->where(['auth_assignment.item_name' => $roles[$i]])->orderBy(['user.id' => SORT_ASC]),
                 'pagination' => [
@@ -88,7 +88,6 @@ class UserController extends Controller
         return $this->render('view', [
             'model' => $this->findModel($id), 'user_info' => $user_info
         ]);
-
     }
 
     /**

@@ -18,7 +18,7 @@ class LoginFormTest extends Unit
     /**
      * @return array
      */
-    // Login sem receber quaisquer dados
+    // Login sem receber dados
     public function testLoginNoUser()
     {
         $model = new LoginForm([
@@ -30,7 +30,7 @@ class LoginFormTest extends Unit
         expect_that(Yii::$app->user->isGuest);
     }
 
-    // Login com dados existentes na DB
+    // Login com dados corretos
     public function testLoginCorrect()
     {
         $model = new LoginForm([
