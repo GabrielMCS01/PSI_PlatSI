@@ -66,23 +66,28 @@ class UserController extends ActiveController
     public function actionUpdate($id){
         $user = User::findOne($id);
 
-        // Verifica se o user tem a permissão para fazer atualizações e se está a alterar o seu próprio perfil
+        // Verifica se o user tem a permissão para fazer atualizações e se altera o seu próprio perfil
         if(Yii::$app->user->can('updateProfile', ['user' => $user])) {
             // Recebe os dados enviados e atualiza-os
             // Verificar se o email é válido
             $user->userinfo->primeiro_nome = Yii::$app->request->post('primeiro_nome');
             $user->userinfo->ultimo_nome = Yii::$app->request->post('ultimo_nome');
+            // Formata a string para data
             $date = strtotime(Yii::$app->request->post('data_nascimento'));
             $user->userinfo->data_nascimento = date("Y-m-d", $date);
 
             $response = new ResponseUpdatePerfil();
-            // Guarda as alterações do utilizador e das informações deste
+
+            // Verifica se os novos dados estão válidos
             if($user->validate() && $user->userinfo->validate()) {
+                // Guarda as alterações do utilizador
                 $user->save();
                 $user->userinfo->save();
 
+                // Envia uma resposta de sucesso
                 $response->success = true;
             }else{
+                // Envia uma resposta de erro
                 $response->success = false;
             }
 
@@ -95,16 +100,18 @@ class UserController extends ActiveController
     public function actionDelete($id){
         $user = User::findOne($id);
 
-        // Verifica se o user tem a permissão para apagar perfis e se está a apagar o seu próprio perfil
+        // Verifica se o user tem a permissão o seu próprio perfil
         if(Yii::$app->user->can('deleteProfile', ['user' => $user])) {
             // Apaga os dados da chave estrangeira
             $user->userinfo->delete();
             $user->delete();
 
-            $user = null;
+            // Verifica se o utilizador foi apagado
+            $user = User::findOne($id);
 
             $response = new ResponseDeletePerfil();
 
+            // Se nenhum utilizador foi encontrado, retorna sucesso
             if ($user == null) $response->success = true;
             else $response->success = false;
 

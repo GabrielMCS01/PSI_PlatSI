@@ -15,9 +15,9 @@ use yii\jui\DatePicker;
 // Padrão
 $tipo_user_selected = 1;
 
-// Recebe todos os tipos de utilizadores possiveis de selecionar
-// Recebe qual é o tipo de utilizador que se pretende editar
+// Recebe todos os tipos de utilizadores possiveis de se selecionar
 for ($i = 0; $i < count($roles); $i++){
+    // Seleciona qual o tipo de utilizador que é o utilizador que se pretende editar
     if($roles[$i]->name == $role_name){
         $tipo_user_selected = $i;
     }

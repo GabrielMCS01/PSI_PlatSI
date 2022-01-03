@@ -3,7 +3,6 @@
 use common\utils\Converter;
 use hail812\adminlte\widgets\InfoBox;
 use hail812\adminlte\widgets\SmallBox;
-use yii\helpers\Html;
 
 // Variáveis que veêm do controller
 /* @var $tempoTotal  */
@@ -31,7 +30,6 @@ $this->params['breadcrumbs'] = [['label' => "Informações da aplicação Ciclod
             <?= InfoBox::widget([
                 'text' => 'Quilometros Percorridos',
                 'number' => Converter::distanceConverter($distancia),
-               //  'theme' => 'success',
                 'icon' => 'fas fa-road',
             ]) ?>
         </div>
@@ -39,7 +37,6 @@ $this->params['breadcrumbs'] = [['label' => "Informações da aplicação Ciclod
             <?= InfoBox::widget([
                 'text' => 'Velocidade média',
                 'number' => Converter::velocityConverter($velMedia),
-             //   'theme' => 'gradient-warning',
                 'icon' => 'fas fa-tachometer-alt',
             ]) ?>
         </div>
@@ -51,10 +48,6 @@ $this->params['breadcrumbs'] = [['label' => "Informações da aplicação Ciclod
                 'text' => 'Sessões de treino',
                 'number' => $numTreinos,
                 'icon' => 'fas fa-bicycle',
-                /*'progress' => [
-                    'width' => '70%',
-                    'description' => '70% Increase in 30 Days'
-                ]*/
             ]) ?>
         </div>
         <div class="col-md-4 col-sm-6 col-12">

@@ -41,42 +41,26 @@ class UserController extends Controller
      * Lists all User models.
      * @return mixed
      */
+
     public function actionIndex()
     {
         if(Yii::$app->user->isGuest){
             return $this->goHome();
         }
 
+        // Encontra todos os nomes das roles possiveis de se selecionar
         $roles = AuthItem::find()->select(['name'])->where(['type' => 1])->all();
 
- /*       $users = User::find()->all();
-
-        $i = 0;
-        foreach ($roles as $role){
-            $usersTypes = AuthAssignment::find()->where(['item_name' => $role])->all();
-            $j = 0;
-            foreach ($usersTypes as $userID){
-                foreach ($users as $user){
-                    if($userID->user_id == $user->id){
-                        $data[$j] = $user;
-                        $j++;
-                        break;
-                    }
-                }
-            }
-            $datas[$i] = $data;
-            $i++;
-        }*/
-
+        // Para cada role preeche no array com dados da devida query á BD
         for($i = 0; $i < count($roles); $i++){
+            // Procura todos os utilizadores
             $dataProvider[$i] = new ActiveDataProvider([
-                'query' => User::find()->innerJoin(['auth_assignment'], 'user.id = auth_assignment.user_id')->where(['auth_assignment.item_name' => $roles[$i]])->orderBy(['user.id' => SORT_ASC])  ,
+                'query' => User::find()->innerJoin(['auth_assignment'], 'user.id = auth_assignment.user_id')->where(['auth_assignment.item_name' => $roles[$i]])->orderBy(['user.id' => SORT_ASC]),
                 'pagination' => [
                     'pageSize' => 10
                 ]
             ]);
         }
-
 
         $searchModel = new UserSearch();
 
@@ -105,25 +89,6 @@ class UserController extends Controller
             'model' => $this->findModel($id), 'user_info' => $user_info
         ]);
 
-    }
-
-    /**
-     * Creates a new User model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return mixed
-     */
-    public function actionCreate()
-    {
-
-        $model = new User();
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        }
-
-        return $this->render('create', [
-            'model' => $model,
-        ]);
     }
 
     /**

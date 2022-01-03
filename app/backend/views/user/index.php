@@ -11,8 +11,8 @@ use yii\grid\GridView;
 $this->title = 'Utilizadores';
 $this->params['breadcrumbs'][] = $this->title;
 
-// Insere os nomes das roles no array tipos_users
 for ($i = 0; $i < count($roles); $i++){
+    // Nome de cada role
     $tipos_user[$i] = $roles[$i]->name;
 }
 ?>
@@ -27,11 +27,14 @@ for ($i = 0; $i < count($roles); $i++){
                     <?php
                     $i = 0;
 
-                    foreach ($dataProvider as $datas) { ?>
+                    // Para cada tipo de utilizador (Adapta-se ao número de utilizadores)
+                    foreach ($dataProvider as $data) { ?>
+                        <!-- Destaca o tipo de utilizador !-->
                         <h3 style="text-transform: capitalize;"><strong><?=$tipos_user[$i]?></strong></h3>
                         <?php
+                        // Preenche a grid
                         echo GridView::widget([
-                        'dataProvider' => $datas,
+                        'dataProvider' => $data,
                         'filterModel' => $searchModel,
                         'columns' => [
                             ['class' => 'yii\grid\SerialColumn'],
@@ -39,21 +42,6 @@ for ($i = 0; $i < count($roles); $i++){
                             'id',
                             'username',
                             'email:email',
-                            /*[
-                                'label' => 'Tipo de Utilizador',
-                                'value' => function($data){
-                                    return $data->authassignment->item_name;
-                                },
-                                'filterInputOptions' => ['prompt' => 'Todos os Roles', 'class' => 'form-control', 'id' => null],
-                                'filter' => $tipos_user,
-                            ],*/
-                            //'auth_key',
-                            //'password_hash',
-                            //'password_reset_token',
-                            //'status',
-                            //'created_at',
-                            //'updated_at',
-                            //'verification_token',
 
                             ['class' => 'hail812\adminlte3\yii\grid\ActionColumn'],
                         ],
