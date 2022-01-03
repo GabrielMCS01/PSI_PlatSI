@@ -9,7 +9,7 @@ use yii\grid\GridView;
 /* @var $ciclismos */
 /* @var $pagination */
 
-$this->title = 'Historico';
+$this->title = 'Histórico';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="ciclismo-index">
@@ -22,9 +22,9 @@ $this->params['breadcrumbs'][] = $this->title;
             <h5><?= $ciclismo->data_treino ?></h5>
             <div class="row">
                 <div class="col-lg-6">
-                    <strong>Tempo: </strong><?= Converter::timeConverter($ciclismo->duracao) ?>
+                    <strong>Duração: </strong><?= Converter::timeConverter($ciclismo->duracao) ?>
                     <br>
-                    <strong>Distancia: </strong><?= Converter::distanceConverter($ciclismo->distancia) ?>
+                    <strong>Distância: </strong><?= Converter::distanceConverter($ciclismo->distancia) ?>
                     </ul>
                 </div>
                 <div class="col-lg-6">

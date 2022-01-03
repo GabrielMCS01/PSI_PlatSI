@@ -26,7 +26,7 @@ class RegistoCest
     public function RegistoComCamposVazios(FunctionalTester $I)
     {
         $I->see('Registo', 'h1');
-        $I->see('Preencha os campos seguintes com os seus dados para criar uma nova conta');
+        $I->see('Preencha os seguintes campos com os seus dados para criar uma nova conta');
         $I->submitForm('#form-signup' ,$this->formParams('','','','',''));
         $I->seeValidationError('Username cannot be blank.');
         $I->seeValidationError('Email cannot be blank.');

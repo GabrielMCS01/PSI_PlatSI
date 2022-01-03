@@ -39,9 +39,9 @@ class PerfilCest
         // Preenche o formulário e clica no botão para guardar as alterações
         $I->fillField('Primeiro Nome', 'Iuri');
         $I->wait(2);
-        $I->fillField('Ultimo Nome', 'Teste');
+        $I->fillField('Apelido', 'Teste');
         $I->wait(2);
-        $I->fillField('Data Nascimento', '2001-09-12');
+        $I->fillField('Data de Nascimento', '2001-09-12');
         $I->clickWithLeftButton(null, 50, 20);
         $I->wait(2);
 

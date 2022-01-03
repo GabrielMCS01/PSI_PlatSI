@@ -22,8 +22,8 @@ class GostoCest
     public function CriarEliminarGostoTest(AcceptanceTester $I)
     {
         $I->wait(5);
-        $I->seeLink('Feed de noticias');
-        $I->click('Feed de noticias');
+        $I->seeLink('Feed de notícias');
+        $I->click('Feed de notícias');
 
         $I->wait(2);
         // Página de publicações

@@ -126,9 +126,9 @@ $this->registerJs("
             <br>
             <div class="row">
                 <div class="col-lg-6">
-                    <strong>Tempo: </strong><?= Converter::timeConverter($publicacao->ciclismo->duracao) ?>
+                    <strong>Duração: </strong><?= Converter::timeConverter($publicacao->ciclismo->duracao) ?>
                     <br>
-                    <strong>Distancia: </strong><?= Converter::distanceConverter($publicacao->ciclismo->distancia) ?>
+                    <strong>Distância: </strong><?= Converter::distanceConverter($publicacao->ciclismo->distancia) ?>
                     </ul>
                 </div>
                 <div class="col-lg-6">
@@ -169,7 +169,7 @@ $this->registerJs("
                     <?php } ?>
                 </div>
                 <div class="col-lg-2 text-right">
-                    <?= Html::a('Ver Comentarios', ['comentario/indexpost', 'id' => $publicacao->id], ['class' => 'btn btn-primary', 'data-pjax' => 0]) ?>
+                    <?= Html::a('Ver Comentários', ['comentario/indexpost', 'id' => $publicacao->id], ['class' => 'btn btn-primary', 'data-pjax' => 0]) ?>
                 </div>
             </div>
             <?php Pjax::end(); ?>

@@ -10,7 +10,7 @@ use yii\widgets\Pjax;
 /* @var $comentarios */
 /* @var $pagination */
 
-$this->title = 'Comentarios';
+$this->title = 'Comentários';
 $this->params['breadcrumbs'][] = $this->title;
 
 ?>

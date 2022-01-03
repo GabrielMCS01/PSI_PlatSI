@@ -29,7 +29,7 @@ $this->params['breadcrumbs'] = [['label' => "Informações da aplicação Ciclod
         </div>
         <div class="col-md-4 col-sm-6 col-12">
             <?= InfoBox::widget([
-                'text' => 'Quilometros Percorridos',
+                'text' => 'Quilómetros Percorridos',
                 'number' => Converter::distanceConverter($distancia),
                //  'theme' => 'success',
                 'icon' => 'fas fa-road',

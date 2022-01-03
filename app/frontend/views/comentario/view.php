@@ -9,7 +9,7 @@ use yii\widgets\DetailView;
 /* @var $model common\models\Comentario */
 
 $this->title = "Comentário de " . $model->user->username;
-$this->params['breadcrumbs'][] = ['label' => 'Comentarios', 'url' => ['indexpost', 'id' => $model->publicacao_id]];
+$this->params['breadcrumbs'][] = ['label' => 'Comentários', 'url' => ['indexpost', 'id' => $model->publicacao_id]];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>

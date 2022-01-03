@@ -10,7 +10,7 @@ use yii\helpers\Html;
 /* @var $publicar */
 
 $this->title = $model->nome_percurso;
-$this->params['breadcrumbs'][] = ['label' => 'Historico', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Histórico', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 
@@ -38,9 +38,9 @@ $this->registerJsFile("@web/@mapbox/polyline/src/polyline.js", ['depends' => [\y
                 <br>
             </div>
             <div class="col-lg-3">
-                <strong>Tempo: </strong><?= Converter::timeConverter($model->duracao) ?>
+                <strong>Duração: </strong><?= Converter::timeConverter($model->duracao) ?>
                 <br>
-                <strong>Distancia: </strong><?= Converter::distanceConverter($model->distancia) ?>
+                <strong>Distância: </strong><?= Converter::distanceConverter($model->distancia) ?>
             </div>
             <div class="col-lg-3">
                 <strong>Velocidade Média: </strong> <?= Converter::velocityConverter($model->velocidade_media) ?>
