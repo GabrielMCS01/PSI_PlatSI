@@ -86,7 +86,7 @@ class SiteController extends Controller
      *
      * @return mixed
      */
-    // Login do utilizador/Moderador
+    // Login do Utilizador/Moderador
     public function actionLogin()
     {
         $auth = Yii::$app->authManager;
@@ -96,9 +96,13 @@ class SiteController extends Controller
         }
 
         $model = new LoginForm();
+
+        // Recebe os dados inseridos pelo utilizador e inicia sessão
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
+            // Se o utilizador tiver acesso á frontend mantém a sessão iniciada e volta á pagina principal
             if($auth->checkAccess(Yii::$app->user->getId(), "frontendAccess")){
                 return $this->goBack();
+            // Se o utilizador tiver não tiver acesso á frontend é terminada a sessão e fica na mesma página
             }else{
                 $message = "Utilizador sem acesso á frontend";
                 echo "<script type='text/javascript'>alert('$message');</script>";

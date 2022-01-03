@@ -36,7 +36,6 @@ class UserController extends ActiveController
         $actions['create'] = null;
         $actions['index'] = null;
 
-
         return $actions;
     }
 
@@ -44,9 +43,9 @@ class UserController extends ActiveController
     public function actionView($id){
         $user = User::findOne($id);
 
-        // Verifica se o utilizador que acede é o mesmo que este está a chamar os dados e se tem a permissão
+        // Verifica se o utilizador que acede é o mesmo que este chama os dados e se tem a permissão
         if(Yii::$app->user->can('viewProfile', ['user' => $user])){
-
+            // Preenche a resposta com os dados do perfil
             $response = new ResponsePerfil();
 
             $response->primeiro_nome = $user->userinfo->primeiro_nome;

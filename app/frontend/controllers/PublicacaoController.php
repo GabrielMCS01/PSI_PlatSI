@@ -59,8 +59,8 @@ class PublicacaoController extends Controller
     }
 
     // Página das publicações do utilizador com sessão iniciada
-    public function actionIndexuser(){
-
+    public function actionIndexuser()
+    {
         if(Yii::$app->user->isGuest){
             return $this->goHome();
         }

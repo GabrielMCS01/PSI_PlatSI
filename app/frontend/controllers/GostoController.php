@@ -4,9 +4,10 @@ namespace frontend\controllers;
 
 use common\models\Gosto;
 use Yii;
+use yii\web\Controller;
 use yii\web\Response;
 
-class GostoController extends \yii\web\Controller
+class GostoController extends Controller
 {
     // Função para colocar ou remover gosto
     public function actionGosto($id){
@@ -20,7 +21,7 @@ class GostoController extends \yii\web\Controller
                 $gosto->save(true);
                 Yii::$app->response->format = Response::FORMAT_JSON;
                 return ['success' => true, 'create' => true];
-            // Se encontrar um gosto para o utilizador na publicação faz
+            // Se encontrar um gosto na publicação feito pelo utilizador, remove-o
             }else{
                 $gosto = Gosto::find()->where(['publicacao_id' => $id, 'user_id' => Yii::$app->user->getId()])->one();
                 $gosto->delete();

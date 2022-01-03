@@ -6,8 +6,6 @@ use console\models\PerfilRule;
 use console\models\UserRule;
 use yii\db\Migration;
 
-
-
 /**
  * Class m211102_131509_init_rbac
  */
