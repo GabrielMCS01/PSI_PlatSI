@@ -28,19 +28,13 @@ class LoginCest
         $I->seeValidationError('Password cannot be blank.');
     }
 
-    public function checkWrongPassword(FunctionalTester $I)
+    public function LoginPasswordIncorreta(FunctionalTester $I)
     {
         $I->submitForm('#login-form', $this->formParams('admin', 'wrong'));
         $I->seeValidationError('Palavra-passe Incorreta');
     }
 
-    public function checkInactiveAccount(FunctionalTester $I)
-    {
-        $I->submitForm('#login-form', $this->formParams('test.test', 'Test1234'));
-        $I->seeValidationError('Palavra-passe Incorreta');
-    }
-
-    public function checkValidLogin(FunctionalTester $I)
+    public function LoginCorreto(FunctionalTester $I)
     {
         $I->seeLink('Registo');
         $I->seeLink('Iniciar sessão');
