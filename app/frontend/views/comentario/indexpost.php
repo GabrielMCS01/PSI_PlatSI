@@ -3,7 +3,6 @@
 use yii\bootstrap4\LinkPager;
 use yii\helpers\Html;
 use yii\helpers\HtmlPurifier;
-use yii\widgets\ListView;
 use yii\widgets\Pjax;
 
 /* @var $this yii\web\View */
@@ -31,7 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <p><?= Html::encode($comentario->createtime) ?></p>
 
             <?php
-            //Caso o comentário seja do utilizador ou se o utilizador seja um Moderador, ele pode editar o comentário
+            // Caso o comentário seja do utilizador ou se o utilizador for um Moderador, ele pode editar o comentário
             if (Yii::$app->user->can("deleteCommentModerator", ['comentario' => $comentario])) {
                 echo Html::a("Editar Comentário", ['view', 'id' => $comentario->id], ['class' => 'btn btn-success', 'data-pjax' => 0]);
             }
@@ -41,6 +40,5 @@ $this->params['breadcrumbs'][] = $this->title;
         <?php } ?>
         <?= LinkPager::widget(['pagination' => $pagination]) ?>
         <?php Pjax::end(); ?>
-
     </div>
 <?php

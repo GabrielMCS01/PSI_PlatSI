@@ -3,7 +3,6 @@
 use kartik\dialog\Dialog;
 use yii\helpers\Html;
 use yii\helpers\HtmlPurifier;
-use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Comentario */
@@ -16,7 +15,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="comentario-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
-    <!-- Mostra detalhadamente um comentário-->
+    <!-- Mostra detalhadamente um comentário -->
     <p>
         <?php
         // Caso o comentário seja do próprio utilizador, ele pode editar o comentário

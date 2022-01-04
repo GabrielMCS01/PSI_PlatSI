@@ -30,7 +30,7 @@ class GostoController extends ActiveController
         return $actions;
     }
 
-    //Adiciona um gosto a uma publicação
+    // Adiciona um gosto a uma publicação
     public function actionCreate(){
 
         $gosto = new Gosto();
@@ -45,6 +45,7 @@ class GostoController extends ActiveController
         }
     }
 
+    // Remove um gosto a uma publicação
     public function actionDelete($id){
         $gosto = Gosto::find()->where(['id' => $id])->one();
         if($gosto->delete()){
@@ -54,14 +55,14 @@ class GostoController extends ActiveController
         }
     }
 
-    //Mostra o número de gostos de uma publicacao
+    // Mostra o número de gostos de uma publicacao
     public function actionNumgostospub($publicacaoid){
         $num = count(Gosto::find()->where(['publicacao_id' => $publicacaoid])->all());
 
         return ['publicação_id' => $publicacaoid, 'count' => $num];
     }
 
-    //Mostra o número de gostos de cada publicacao que existe na bd
+    // Mostra o número de gostos de cada publicacao que existe na BD
     public function actionNumgostos(){
         $publicacoes = Publicacao::find()->all();
 
@@ -76,7 +77,7 @@ class GostoController extends ActiveController
         return $array;
     }
 
-    //Mostra o número de gostos de cada publicacao de um utilizador
+    // Mostra o número de gostos de cada publicacao de um utilizador
     public function actionNumgostosuser(){
         $publicacoes = Publicacao::find()->innerJoin(['ciclismo'], 'publicacao.ciclismo_id = ciclismo.id')->where(['ciclismo.user_id' => Yii::$app->user->getId()])->all();
 

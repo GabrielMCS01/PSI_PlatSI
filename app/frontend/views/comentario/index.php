@@ -2,7 +2,6 @@
 
 use yii\bootstrap4\LinkPager;
 use yii\helpers\Html;
-use yii\widgets\ListView;
 use yii\helpers\HtmlPurifier;
 use yii\widgets\Pjax;
 
@@ -39,5 +38,4 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php } ?>
     <?= LinkPager::widget(['pagination' => $pagination]) ?>
     <?php Pjax::end(); ?>
-
 </div>

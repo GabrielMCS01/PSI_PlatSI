@@ -9,7 +9,6 @@ use yii\widgets\DetailView;
 /* @var $role_name */
 /* @var $user_info */
 
-
 $this->title = "Utilizador: $model->username";
 $this->params['breadcrumbs'][] = ['label' => 'User', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;

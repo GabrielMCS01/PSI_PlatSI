@@ -25,16 +25,6 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'velocidade_media') ?>
 
-    <?php // echo $form->field($model, 'velocidade_maxima') ?>
-
-    <?php // echo $form->field($model, 'velocidade_grafico') ?>
-
-    <?php // echo $form->field($model, 'rota') ?>
-
-    <?php // echo $form->field($model, 'data_treino') ?>
-
-    <?php // echo $form->field($model, 'user_id') ?>
-
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
         <?= Html::resetButton('Reset', ['class' => 'btn btn-outline-secondary']) ?>

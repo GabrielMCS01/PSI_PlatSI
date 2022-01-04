@@ -123,7 +123,7 @@ class PublicacaoController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    // Apaga a publicação pelo feed de noticias/ Suas publicações
+    // Apaga a publicação a partir do feed de notícias ou nas suas publicações
     public function actionDelete($id)
     {
         if(Yii::$app->user->isGuest){
@@ -143,7 +143,7 @@ class PublicacaoController extends Controller
         }
     }
 
-    // Apaga a publicação pelo histórico de treino
+    // Apaga a publicação pela página de histórico de treino
     public function actionDeletec($id){
 
         if(Yii::$app->user->isGuest){

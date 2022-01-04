@@ -5,11 +5,9 @@
 /* @var $model \common\models\UserInfo */
 
 use kartik\dialog\Dialog;
-use yii\bootstrap4\BootstrapAsset;
 use yii\bootstrap4\Html;
 use yii\bootstrap4\ActiveForm;
 use yii\jui\DatePicker;
-use kartik\dialog\DialogAsset;
 
 $this->title = 'Perfil';
 $this->params['breadcrumbs'][] = $this->title;

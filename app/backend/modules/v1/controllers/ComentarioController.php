@@ -30,6 +30,7 @@ class ComentarioController extends ActiveController
         return $actions;
     }
 
+    // Cria um comentário numa publicação
     public function actionCreate(){
 
         $model = new Comentario();
@@ -47,6 +48,7 @@ class ComentarioController extends ActiveController
         }
     }
 
+    // Edita um comentário numa publicação
     public function actionUpdate($id){
 
         $comentario = Comentario::find()->where(['id' => $id])->one();
@@ -67,6 +69,7 @@ class ComentarioController extends ActiveController
         }
     }
 
+    // Apaga um comentário numa publicação
     public function actionDelete($id){
 
         $comentario = Comentario::find()->where(['id' => $id])->one();
@@ -83,7 +86,7 @@ class ComentarioController extends ActiveController
 
     }
 
-    //Mostra todos os comentários de uma publicação
+    // Mostra todos os comentários de uma publicação
     public function actionGetcomentpub($publicacaoid){
 
         $comentario = Comentario::find()->where(['publicacao_id' => $publicacaoid])->all();

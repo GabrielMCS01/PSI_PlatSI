@@ -3,7 +3,6 @@
 use common\utils\Converter;
 use yii\bootstrap4\LinkPager;
 use yii\helpers\Html;
-use yii\grid\GridView;
 
 /* @var $this yii\web\View */
 /* @var $ciclismos */
@@ -26,7 +25,6 @@ $this->params['breadcrumbs'][] = $this->title;
                     <strong>Duração: </strong><?= Converter::timeConverter($ciclismo->duracao) ?>
                     <br>
                     <strong>Distância: </strong><?= Converter::distanceConverter($ciclismo->distancia) ?>
-                    </ul>
                 </div>
                 <div class="col-lg-6">
                     <strong>Velocidade Média: </strong> <?= Converter::velocityConverter($ciclismo->velocidade_media) ?>
@@ -38,30 +36,4 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php } ?>
 
     <?= LinkPager::widget(['pagination' => $pagination]) ?>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
-    <?php /*GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
-            'id',
-            'nome_percurso',
-            'duracao',
-            'distancia',
-            'velocidade_media',
-            //'velocidade_maxima',
-            //'velocidade_grafico:ntext',
-            //'rota:ntext',
-            //'data_treino',
-            //'user_id',
-
-            ['class' => 'yii\grid\ActionColumn'],
-        ],
-
-    ]);*/ ?>
-
-    <!-- <div class="jumbotron text-center" style="width: 80%; margin: auto;"> -->
-
 </div>

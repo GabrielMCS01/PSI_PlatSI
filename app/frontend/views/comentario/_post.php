@@ -3,6 +3,8 @@
 use yii\helpers\Html;
 use yii\helpers\HtmlPurifier;
 
+/* @var $model */
+
 ?>
 <div class="post">
     <br>

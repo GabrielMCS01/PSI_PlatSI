@@ -8,7 +8,6 @@ use yii\bootstrap4\LinkPager;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\web\View;
-use yii\widgets\ListView;
 use yii\widgets\Pjax;
 
 /* @var $this yii\web\View */
@@ -156,7 +155,7 @@ $this->registerJs("
                     <h5>Publicado por: <strong><?= $publicacao->ciclismo->user->username ?></strong></h5>
                     <?php Dialog::widget(['overrideYiiConfirm' => true]);
 
-                    //Caso a publicação seja do utilizador ou se o utilizador seja um Moderador, ele pode apagar a publicação
+                    //Caso a publicação seja do utilizador ou se o utilizador for um Moderador, ele pode apagar a publicação
                     if (Yii::$app->user->can("deletePostModerator", ['publicacao' => $publicacao])) {
                         echo Html::a("Apagar Publicação", ['delete', 'id' => $publicacao->id], [
                             'class' => 'btn btn-danger',

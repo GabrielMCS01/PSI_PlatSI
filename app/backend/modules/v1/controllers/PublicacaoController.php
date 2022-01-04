@@ -5,7 +5,6 @@ namespace app\modules\v1\controllers;
 use common\models\Comentario;
 use common\models\Gosto;
 use common\models\Publicacao;
-use phpDocumentor\Reflection\Types\True_;
 use Yii;
 use yii\filters\auth\QueryParamAuth;
 use yii\rest\ActiveController;
@@ -46,14 +45,14 @@ class PublicacaoController extends ActiveController
     }
 
 
-    //Mostra todas as publicações do próprio utilizador
+    // Mostra todas as publicações do próprio utilizador
     public function actionUser(){
         $publicacao = Publicacao::find()->innerJoin(['ciclismo'], 'publicacao.ciclismo_id = ciclismo.id')->where(['ciclismo.user_id' => Yii::$app->user->getId()])->orderBy(['createtime' => SORT_DESC])->all();
 
         return $publicacao;
     }
 
-    //Cria uma publicação
+    // Cria uma publicação
     public function actionCreate(){
         $model = new Publicacao();
 
@@ -68,7 +67,7 @@ class PublicacaoController extends ActiveController
         }
     }
 
-    //Apaga uma publicação, juntamente com todos os seus gostos e comentários
+    // Apaga uma publicação assim como todos os seus gostos e comentários
     public function actionDelete($id){
         $publicacao = Publicacao::find()->where(['id' => $id])->one();
 
