@@ -34,13 +34,9 @@ class m211102_131509_init_rbac extends Migration
         $auth->add($frontendAccess);
 
         // ----------------------- ACTIVITY ------------------------------
-        // add "createActivity" permission
-        $createActivity = $auth->createPermission('createActivity');
-        $createActivity->description = 'Create a Activity';
-        $auth->add($createActivity);
 
         // add "updateActivity" permission
-        $updateActivity = $auth->createPermission('updateActivity');
+            $updateActivity = $auth->createPermission('updateActivity');
         $updateActivity->description = 'Update Activity (User logged)';
         $updateActivity->ruleName = $ruleUser->name;
         $auth->add($updateActivity);
@@ -77,17 +73,6 @@ class m211102_131509_init_rbac extends Migration
         $auth->add($viewProfile);
 
         // ------------------------ POSTS ---------------------------
-        // add "createPost" permission
-        $createPost = $auth->createPermission('createPost');
-        $createPost->description = 'Create Post (User logged)';
-        $auth->add($createPost);
-
-        // add "updatePost" permission
-        $updatePost = $auth->createPermission('updatePost');
-        $updatePost->description = 'Update Post (User logged)';
-        $updatePost->ruleName = $rulePost->name;
-        $auth->add($updatePost);
-
         // add "deletePost" permission
         $deletePost = $auth->createPermission('deletePost');
         $deletePost->description = 'Delete Post (User logged)';
@@ -111,15 +96,12 @@ class m211102_131509_init_rbac extends Migration
         $user = $auth->createRole('user');
         $auth->add($user);
         $auth->addChild($user, $frontendAccess);
-        $auth->addChild($user, $createActivity);
         $auth->addChild($user, $updateActivity);
         $auth->addChild($user, $deleteActivity);
         $auth->addChild($user, $viewActivity);
         $auth->addChild($user, $updateProfile);
         $auth->addChild($user, $deleteProfile);
         $auth->addChild($user, $viewProfile);
-        $auth->addChild($user, $createPost);
-        $auth->addChild($user, $updatePost);
         $auth->addChild($user, $deletePost);
         $auth->addChild($user, $updateComment);
         $auth->addChild($user, $deleteComment);
