@@ -61,7 +61,7 @@ Password: 123456789
 
 'dsn' => 'mysql:host=127.0.0.1;dbname=projectdb',
 
-## Configurar o nome de Utilizar e a palavra-passe caso não seja a padrão - ficheiro common/config/main-local.php
+## Configurar o nome de utilizador e a palavra-passe caso não seja a padrão - ficheiro common/config/main-local.php
 
 # Imagem da instituição
 
