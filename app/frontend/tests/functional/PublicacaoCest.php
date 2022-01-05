@@ -36,13 +36,13 @@ class PublicacaoCest
     {
         $I->amOnRoute('ciclismo/index'); // Página de histórico
         $I->see('Histórico', 'h1');
-        $I->seeLink('Percurso para testes');
-        $I->click('Percurso para testes');
+        $I->seeLink('Percurso de Foz a torres');
+        $I->click('Percurso de Foz a torres');
 
         // Página do treino
-        $I->see('Percurso para testes', 'h1');
-        $I->see('Distância: 4.02 Km');
-        $I->see('Velocidade Máxima: 19.20 Km/h');
+        $I->see('Percurso de Foz a torres', 'h1');
+        $I->see('Distância: 17.42 Km');
+        $I->see('Velocidade Máxima: 30.54 Km/h');
         $I->see('SEM ROTA', 'p');
 
         // Cria publicação

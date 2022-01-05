@@ -21,7 +21,7 @@ INSERT INTO `auth_assignment` (`item_name`,`user_id`,`created_at`) VALUES ('user
 INSERT INTO `user_info` (`primeiro_nome`, `ultimo_nome`, `user_id`) VALUES ('Iuri','Carrasqueiro',5);
 
 INSERT INTO ciclismo (id,nome_percurso,duracao,distancia,velocidade_media,velocidade_maxima,data_treino,user_id) VALUES (1,'Percurso de teste',500,900,10.1,20.4,'2021-12-22 18:30:41',2);
-INSERT INTO ciclismo (id,nome_percurso,duracao,distancia,velocidade_media,velocidade_maxima,data_treino,user_id) VALUES (2,'Percurso para testes',2039,4022,10.5,19.2,'2021-12-21 12:15:32',2);
+INSERT INTO ciclismo (id,nome_percurso,duracao,distancia,velocidade_media,velocidade_maxima,data_treino,user_id) VALUES (2,'Percurso de Foz a torres',4379,17421,14.0958,30.537,'2021-12-12 12:24:38',2);
 INSERT INTO ciclismo (id,nome_percurso,duracao,distancia,velocidade_media,velocidade_maxima,data_treino,user_id) VALUES (3,'Percurso volta',41091,7056,9.5,16.2,'2021-12-24 08:12:42',4);
 INSERT INTO ciclismo (id,nome_percurso,duracao,distancia,velocidade_media,velocidade_maxima,data_treino,user_id) VALUES (4,'Percurso Torres Vedras',6012,900,10.1,20.4,'2021-12-21 14:30:01',5);
 

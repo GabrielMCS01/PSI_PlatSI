@@ -12,10 +12,10 @@ class CiclismoCest
     public function VerTreinos(FunctionalTester $I)
     {
         $I->see('Histórico', 'h1');
-        $I->seeLink('Percurso de teste');
+        $I->seeLink('Percurso de Foz a torres');
         $I->see('2021-12-22 18:30:41', 'h5');
-        $I->seeLink('Percurso para testes');
-        $I->see('Distância: 4.02 Km', 'div');
+        $I->seeLink('Percurso de Foz a torres');
+        $I->see('Distância: 17.42 Km', 'div');
     }
 
     public function VerTreino(FunctionalTester $I)
