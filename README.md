@@ -35,21 +35,21 @@ Executar o ficheiro SQL "Dados"
 
 ## Administrador
 
-### Username: admin
+Username: admin
 
-### Password: adminadmin
+Password: adminadmin
 
 ## Moderador
 
-### Username: moderador
+Username: moderador
 
-### Password: 123456789
+Password: 123456789
 
 ## Utilizador
 
-### Username: test
+Username: test
 
-### Password: 123456789
+Password: 123456789
 
 # Imagem da instituição
 
