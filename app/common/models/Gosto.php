@@ -77,10 +77,12 @@ class Gosto extends \yii\db\ActiveRecord
 
         $id = $this->publicacao->ciclismo->user_id;
 
-        $this->FazPublish($id);
+        // Função utilizada na unidade curricular de SISis
+       // $this->FazPublish($id);
 
     }
 
+    // Função utilizada na unidade curricular de SISis
     public function FazPublish($canal)
     {
         $server = "ciclodias.duckdns.org";
