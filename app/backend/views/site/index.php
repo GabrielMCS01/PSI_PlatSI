@@ -1,35 +1,42 @@
 <?php
 
+use common\utils\Converter;
 use hail812\adminlte\widgets\InfoBox;
-use hail812\adminlte\widgets\Ribbon;
 use hail812\adminlte\widgets\SmallBox;
-use yii\helpers\Html;
+
+// Variáveis que veêm do controller
+/* @var $tempoTotal  */
+/* @var $distancia  */
+/* @var $velMedia  */
+/* @var $numUsers  */
+/* @var $numTreinos  */
+/* @var $numPublicacoes  */
+/* @var $numGostos  */
+/* @var $numComentarios  */
 
 $this->title = Yii::$app->name;
-$this->params['breadcrumbs'] = [['label' => $this->title]];
+$this->params['breadcrumbs'] = [['label' => "Informações da aplicação Ciclodias"]];
 ?>
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-4 col-sm-6 col-12">
             <?= InfoBox::widget([
-                'text' => 'Tempo atividade física',
-                'number' => '10:24:36 H',
+                'text' => 'Tempo de atividade física',
+                'number' => Converter::timeConverter($tempoTotal),
                 'icon' => 'far fa-clock',
             ]) ?>
         </div>
         <div class="col-md-4 col-sm-6 col-12">
             <?= InfoBox::widget([
-                'text' => 'Quilometros Percorridos',
-                'number' => '231 KM',
-               //  'theme' => 'success',
+                'text' => 'Quilómetros Percorridos',
+                'number' => Converter::distanceConverter($distancia),
                 'icon' => 'fas fa-road',
             ]) ?>
         </div>
         <div class="col-md-4 col-sm-6 col-12">
             <?= InfoBox::widget([
                 'text' => 'Velocidade média',
-                'number' => '20,94 Km/h',
-             //   'theme' => 'gradient-warning',
+                'number' => Converter::velocityConverter($velMedia),
                 'icon' => 'fas fa-tachometer-alt',
             ]) ?>
         </div>
@@ -38,13 +45,33 @@ $this->params['breadcrumbs'] = [['label' => $this->title]];
     <div class="row">
         <div class="col-md-4 col-sm-6 col-12">
             <?= InfoBox::widget([
-                'text' => 'Nº de sessões de treino',
-                'number' => '11',
+                'text' => 'Sessões de treino',
+                'number' => $numTreinos,
                 'icon' => 'fas fa-bicycle',
-                /*'progress' => [
-                    'width' => '70%',
-                    'description' => '70% Increase in 30 Days'
-                ]*/
+            ]) ?>
+        </div>
+        <div class="col-md-4 col-sm-6 col-12">
+            <?= InfoBox::widget([
+                'text' => 'Publicações',
+                'number' => $numPublicacoes,
+                'icon' => 'fas fa-blog',
+            ]) ?>
+        </div>
+        <div class="col-md-4 col-sm-6 col-12">
+            <?= InfoBox::widget([
+                'text' => 'Gostos nas publicações',
+                'number' => $numGostos,
+                'icon' => 'fas fa-thumbs-up',
+            ]) ?>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4 col-sm-6 col-12">
+            <?= InfoBox::widget([
+                'text' => 'Comentários nas publicações',
+                'number' => $numComentarios,
+                'icon' => 'fas fa-comments',
             ]) ?>
         </div>
     </div>
@@ -52,12 +79,12 @@ $this->params['breadcrumbs'] = [['label' => $this->title]];
     <div class="row">
         <div class="col-lg-4 col-md-6 col-sm-6 col-12">
             <?= SmallBox::widget([
-                'title' => '2',
+                'title' => $numUsers,
                 'text' => 'Utilizadores Registados',
                 'icon' => 'fas fa-user-plus',
                 'theme' => 'gradient-success',
-                'linkText' => 'Ver os utilizadores',
-                'linkUrl' => 'index.php?r=user%2Findex',
+                'linkText' => 'Ver todos os utilizadores',
+                'linkUrl' => 'user/index',
             ]) ?>
         </div>
     </div>

@@ -9,6 +9,7 @@ use yii\bootstrap4\Breadcrumbs;
 use yii\bootstrap4\Html;
 use yii\bootstrap4\Nav;
 use yii\bootstrap4\NavBar;
+use yii\helpers\Url;
 
 AppAsset::register($this);
 ?>
@@ -19,7 +20,10 @@ AppAsset::register($this);
     <meta charset="<?= Yii::$app->charset ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <?php $this->registerCsrfMetaTags() ?>
+    <link rel="icon" href="<?=Url::to('@web/img/ciclodias.png')?>" type="image/x-icon">
     <title><?= Html::encode($this->title) ?></title>
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css' rel='stylesheet' />
     <?php $this->head() ?>
 </head>
 <body class="d-flex flex-column h-100">
@@ -38,11 +42,16 @@ AppAsset::register($this);
         ['label' => 'Home', 'url' => ['/site/index']],
     ];
     if (Yii::$app->user->isGuest) {
-        $menuItems[] = ['label' => 'Signup', 'url' => ['/site/signup']];
-        $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
+        $menuItems[] = ['label' => 'Registo', 'url' => ['/site/signup']];
+        $menuItems[] = ['label' => 'Iniciar sessão', 'url' => ['/site/login']];
     } else {
-        $menuItems[] = ['label' => 'Histórico'];
-        $menuItems[] = ['label' => 'Perfil'];
+        $menuItems[] = ['label' => 'Histórico', 'url' => ['/ciclismo/index']];
+        $menuItems[] = ['label' => 'Feed de notícias' , 'url' => ['/publicacao/index']];
+        $menuItems[] = ['label' => 'Suas publicações', 'url' => ['/publicacao/indexuser']];
+        if(Yii::$app->user->can("deleteCommentModerator")){
+            $menuItems[] = ['label' => 'Comentários', 'url' => ['/comentario/index']];
+        }
+        $menuItems[] = ['label' => 'Perfil', 'url' => ['/user-info/perfil']];
         $menuItems[] = '<li>'
             . Html::beginForm(['/site/logout'], 'post', ['class' => 'form-inline'])
             . Html::submitButton(

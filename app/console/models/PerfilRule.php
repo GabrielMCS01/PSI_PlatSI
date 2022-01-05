@@ -10,6 +10,7 @@ class PerfilRule extends Rule
 
     public function execute($user, $item, $params)
     {
-        return isset($params['activity']) ? $params['activity']->id == $user : false;
+        // Verifica se o user está a pedir informações do seu perfil
+        return isset($params['user']) ? $params['user']->id == $user : false;
     }
 }

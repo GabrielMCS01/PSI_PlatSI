@@ -1,0 +1,56 @@
+------------------------------------------------------------------------------
+# No ficheiro common/config/test-local.php
+
+# colar esta linha de código dentro de DB
+
+'dsn' => 'mysql:host=127.0.0.1;dbname=projectdb_test',
+------------------------------------------------------------------------------
+
+# Criar a base de dados
+
+Executar o ficheiro SQL "CriarDB_test"
+
+
+# Na pasta APP executar os comandos seguintes:
+
+.\yii_test migrate --migrationPath=@yii/rbac/migrations
+.\yii_test migrate
+
+
+# Criar as tabelas da aplicação
+
+Executar o ficheiro SQL "CriarTabelas_test"
+
+
+# Cria dados de exemplo para serem utilizados nos testes
+
+Executar o ficheiro SQL "Dados_test"
+
+
+# Instalação do selenium para executar os testes de aceitação
+
+npm install selenium-standalone -g
+  selenium-standalone install
+  selenium-standalone start
+
+
+# Build do codecept
+
+./vendor/bin/codecept build
+
+
+# Executar os comandos dos testes (Pasta APP)
+## Unitários
+php vendor/bin/codecept run unit -c frontend
+php vendor/bin/codecept run unit -c common
+
+# Funcionais
+php vendor/bin/codecept run functional -c backend
+php vendor/bin/codecept run functional -c frontend
+
+# Aceitação
+selenium-standalone start
+php vendor/bin/codecept run acceptance -c frontend
+
+
+

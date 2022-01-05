@@ -1,0 +1,11 @@
+suite_namespace: frontend\tests\acceptance
+actor: AcceptanceTester
+modules:
+    enabled:
+        - WebDriver:
+            url: http://localhost/project/app/frontend/web/
+            browser: chrome
+        - Yii2:
+            part: init
+            cleanup: false
+            entryScript: index-test.php

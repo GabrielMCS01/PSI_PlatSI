@@ -18,10 +18,9 @@ $this->title = $name;
     </div>
 
     <p>
-        The above error occurred while the Web server was processing your request.
-    </p>
-    <p>
-        Please contact us if you think this is a server error. Thank you.
+        Ocorreu um erro a carregar a página pretendida, esta poderá estar em baixo ou não existir, o link abaixo
+        redirecionará para a página principal
+        <?= Html::a(', (Menu Principal)', Yii::$app->homeUrl); ?>
     </p>
 
 </div>

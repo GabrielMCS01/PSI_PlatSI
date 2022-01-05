@@ -1,14 +1,19 @@
 <?php
 
-use yii\helpers\Html;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
 /* @var $searchModel common\models\UserSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
+/* @var $roles */
 
-$this->title = 'Users';
+$this->title = 'Utilizadores';
 $this->params['breadcrumbs'][] = $this->title;
+
+for ($i = 0; $i < count($roles); $i++){
+    // Nome de cada role
+    $tipos_user[$i] = $roles[$i]->name;
+}
 ?>
 <div class="container-fluid">
     <div class="row">
@@ -18,22 +23,24 @@ $this->params['breadcrumbs'][] = $this->title;
                     <div class="row mb-2">
                     </div>
 
-                    <?= GridView::widget([
-                        'dataProvider' => $dataProvider,
+                    <?php
+                    $i = 0;
+
+                    // Para cada tipo de utilizador (role)(Adapta-se ao número de roles existentes)
+                    foreach ($dataProvider as $data) { ?>
+                        <!-- Destaca o tipo de utilizador !-->
+                        <h3 style="text-transform: capitalize;"><strong><?=$tipos_user[$i]?></strong></h3>
+                        <?php
+                        // Preenche a gridview com os dados de cada utilizador em cada role
+                        echo GridView::widget([
+                        'dataProvider' => $data,
                         'filterModel' => $searchModel,
                         'columns' => [
                             ['class' => 'yii\grid\SerialColumn'],
 
                             'id',
                             'username',
-                            'auth_key',
-                            'password_hash',
-                            'password_reset_token',
-                            //'email:email',
-                            //'status',
-                            //'created_at',
-                            //'updated_at',
-                            //'verification_token',
+                            'email:email',
 
                             ['class' => 'hail812\adminlte3\yii\grid\ActionColumn'],
                         ],
@@ -41,9 +48,10 @@ $this->params['breadcrumbs'][] = $this->title;
                         'pager' => [
                             'class' => 'yii\bootstrap4\LinkPager',
                         ]
-                    ]); ?>
-
-
+                    ]);?>
+                    <br>
+                    <?php $i++;
+                    }?>
                 </div>
                 <!--.card-body-->
             </div>

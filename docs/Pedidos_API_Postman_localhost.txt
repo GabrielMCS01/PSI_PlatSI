@@ -1,0 +1,178 @@
+// MUDAR O ACCESS TOKEN CONFORME O UTILIZADOR (FAZER LOGIN)
+// Tem de saber apenas o ID do utilizador para fazer aqui os testes
+
+// ----------------------------------------- USER ---------------------------------------------------------
+
+// Criar um utilizador
+http://localhost/PSI_PlatSI/app/backend/web/v1/registo/signup
+
+{
+    "username": "test",
+    "email": "test@gmail.com",
+    "password": "123456789",
+    "primeiro_nome": "Gabriel",
+    "ultimo_nome": "Iuri"
+}
+
+
+// Login do Utilizador
+http://localhost/PSI_PlatSI/app/backend/web/v1/login/login
+
+{
+    "username": "test",
+    "password": "123456789"
+}
+
+
+// Ver o perfil do utilizador
+http://localhost/PSI_PlatSI/app/backend/web/v1/user/2?access-token=fAcKU3fbK7EWurSXQi6rMqzC4hB9JL5L
+
+
+
+// Alterar os dados do utilizador
+http://localhost/PSI_PlatSI/app/backend/web/v1/user/2?access-token=fAcKU3fbK7EWurSXQi6rMqzC4hB9JL5L
+
+{   
+    "username": "testMod",
+    "primeiro_nome": "Iuri",
+    "ultimo_nome": "Gabriel",
+    "data_nascimento": "2021-09-30"
+}
+
+
+// Apagar o Utilizador
+http://localhost/PSI_PlatSI/app/backend/web/v1/user/3?access-token=y9E7HjemIsPkoIPSUiqVGz7nQwfx2uFA
+
+
+
+--------------------------------------------- Ciclismo ----------------------------------------------------
+
+
+// Cria um treino
+// O id do user com o token é atribuido automaticamente ao treino
+http://localhost/PSI_PlatSI/app/backend/web/v1/ciclismo?access-token=fAcKU3fbK7EWurSXQi6rMqzC4hB9JL5L
+
+{
+    "nome_percurso": "Percurso de teste",
+    "duracao": 500,
+    "distancia": 900,
+    "velocidade_media": 10.1,
+    "velocidade_maxima": 20.4
+}
+
+
+// Visualizar todos os treinos do utilizador
+http://localhost/PSI_PlatSI/app/backend/web/v1/ciclismo?access-token=fAcKU3fbK7EWurSXQi6rMqzC4hB9JL5L
+
+
+// Visualizar um treino do utilizador
+http://localhost/PSI_PlatSI/app/backend/web/v1/ciclismo/1?access-token=fAcKU3fbK7EWurSXQi6rMqzC4hB9JL5L
+
+
+// Alterar um treino do utilizador
+http://localhost/PSI_PlatSI/app/backend/web/v1/ciclismo/1?access-token=fAcKU3fbK7EWurSXQi6rMqzC4hB9JL5L
+
+{
+    "nome_percurso": "Percurso testado"
+}
+
+
+// Apagar um treino do utilizador
+http://localhost/PSI_PlatSI/app/backend/web/v1/ciclismo/1?access-token=fAcKU3fbK7EWurSXQi6rMqzC4hB9JL5L
+
+
+------------------------------------------- Publicação ----------------------------------------------------
+
+
+// Cria uma publicação
+// Adicionar mais coisas
+LINK API
+
+PARAMETROS
+
+
+
+// Ver uma publicação
+LINK API
+
+
+// Ver todas as publicações
+LINK API
+
+
+// Editar uma publicação
+LINK API
+
+PARAMETROS
+
+
+
+// Apagar uma publicação
+LINK API
+
+
+-------------------------------------------- Comentário ---------------------------------------------------
+
+
+// Cria um comentário numa publicação
+// Adicionar mais detalhes
+LINK API
+
+PARAMETROS
+
+
+
+// Ver um Comentário
+LINK API
+
+
+// Ver todos os Comentários de uma publicação
+LINK API
+
+
+// Ver todos os Comentários (Moderador)
+LINK API
+
+
+// Editar um Comentário
+LINK API
+
+PARAMETROS
+
+
+
+// Apagar um Comentário
+LINK API
+
+
+-------------------------------------------------- Gosto --------------------------------------------------
+
+
+// Cria um gosto numa publicação
+// O mesmo utilizador só pode ter um like em cada publicação
+// Adicionar mais detalhes
+LINK API
+
+PARAMETROS
+
+
+// Ver Gosto
+LINK API
+
+
+// Ver Todos os gostos da Publicação
+LINK API
+
+
+// Apagar um gosto
+LINK API
+
+
+
+
+
+
+
+
+
+

@@ -6,9 +6,11 @@ use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\User */
+/* @var $role_name */
+/* @var $user_info */
 
-$this->title = "Users: $model->id";
-$this->params['breadcrumbs'][] = ['label' => 'Users', 'url' => ['index']];
+$this->title = "Utilizador: $model->username";
+$this->params['breadcrumbs'][] = ['label' => 'User', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 YiiAsset::register($this);
 ?>
@@ -19,11 +21,11 @@ YiiAsset::register($this);
             <div class="row">
                 <div class="col-md-12">
                     <p>
-                        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-                        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
+                        <?= Html::a('Atualizar', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+                        <?= Html::a('Remover', ['delete', 'id' => $model->id], [
                             'class' => 'btn btn-danger',
                             'data' => [
-                                'confirm' => 'Are you sure you want to delete this item?',
+                                'confirm' => 'Pretende apagar este utilizador?',
                                 'method' => 'post',
                             ],
                         ]) ?>
@@ -33,14 +35,23 @@ YiiAsset::register($this);
                         'attributes' => [
                             'id',
                             'username',
-                            'auth_key',
-                            'password_hash',
-                            'password_reset_token',
+                            [
+                                'label' => 'Primeiro Nome',
+                                'value' => $user_info->primeiro_nome,
+                            ],
+                            [
+                                'label' => 'Ultimo Nome',
+                                'value' => $user_info->ultimo_nome,
+                            ],
+                            [
+                                'label' => 'Data de Nascimento',
+                                'value' => $user_info->data_nascimento,
+                            ],
                             'email:email',
-                            'status',
-                            'created_at',
-                            'updated_at',
-                            'verification_token',
+                            [
+                                'label' => 'Tipo de Utilizador',
+                                'value' => $model->authassignment->item_name,
+                            ],
                         ],
                     ]) ?>
                 </div>

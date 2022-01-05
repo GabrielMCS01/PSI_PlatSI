@@ -1,0 +1,9 @@
+https://forum.yiiframework.com/t/how-to-create-a-pretty-url/79879/5
+
+https://www.yiiframework.com/doc/guide/2.0/en/rest-authentication
+
+https://stackoverflow.com/questions/27474059/yii-override-generic-rest-functions/27496376
+
+https://stackoverflow.com/questions/27648504/yii2-override-generic-create-action-in-rest-activecontroller/50744982#50744982
+
+https://github.com/yiisoft/yii2-app-advanced/blob/master/docs/guide/start-testing.md
