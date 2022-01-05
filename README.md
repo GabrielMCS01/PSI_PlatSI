@@ -12,6 +12,9 @@ O projeto é comum entre várias disciplinas, mas as fases que traçam este proj
 * Gabriel Silva Nº 2201133
 
 # Preparar a aplicação
+
+## Ver Notas Adicionais antes de começar a preparação da aplicação
+
 ## Criar a base de dados e tabelas
 
 Executar o ficheiro SQL "CriarDB"
@@ -19,6 +22,7 @@ Executar o ficheiro SQL "CriarDB"
 ## Na pasta APP executar os comandos seguintes:
 
 .\yii migrate --migrationPath=@yii/rbac/migrations
+
 .\yii migrate
 
 # Criar as tabelas da aplicação
@@ -50,6 +54,14 @@ Password: 123456789
 Username: test
 
 Password: 123456789
+
+# Notas
+
+## Caso seja uma instalação limpa adicionar esta linha no ficheiro common/config/main-local.php
+
+'dsn' => 'mysql:host=127.0.0.1;dbname=projectdb',
+
+## Configurar o nome de Utilizar e a palavra-passe caso não seja a padrão - ficheiro common/config/main-local.php
 
 # Imagem da instituição
 
