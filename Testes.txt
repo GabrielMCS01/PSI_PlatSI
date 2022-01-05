@@ -36,6 +36,20 @@ npm install selenium-standalone -g
   selenium-standalone start
 
 
+# Alterar o url do caminho para a pasta frontend/web (ficheiro frontend/tests/acceptance.suite.yml)
+
+Exemplos
+url: http://localhost/.../app/frontend/web/
+
+
+# Colocar o navegador de Internet utilizado (ficheiro frontend/tests/acceptance.suite.yml)
+
+Exemplos
+browser: chrome OU
+browser: firefox OU
+browser: MicrosoftEdge
+
+
 # Build do codecept
 
 ./vendor/bin/codecept build
