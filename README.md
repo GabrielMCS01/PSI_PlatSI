@@ -13,6 +13,10 @@ O projeto é comum entre várias disciplinas, mas as fases que traçam este proj
 
 # Preparar a aplicação
 
+## Executar o comando na pasta APP
+
+composer install
+
 ## Ver Notas Adicionais antes de começar a preparação da aplicação
 
 ## Criar a base de dados e tabelas

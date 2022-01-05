@@ -1,4 +1,6 @@
 ------------------------------------------------------------------------------
+# LER PRIMEIRO O FICHEIRO README
+
 # No ficheiro common/config/test-local.php
 
 # colar esta linha de código dentro de DB
