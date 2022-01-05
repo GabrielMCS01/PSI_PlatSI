@@ -25,7 +25,7 @@ Executar o ficheiro SQL "CriarDB"
 
 Executar o ficheiro SQL "CriarTabelas"
 
-# Criar o primeiro Admin para utilizar a aplicação
+# Criar os utilizadores e inserir os dados padrão
 
 Executar o ficheiro SQL "Dados"
 
@@ -35,19 +35,22 @@ Executar o ficheiro SQL "Dados"
 
 ## Administrador
 
-Username: admin
-Password: adminadmin 
+### Username: admin
+
+### Password: adminadmin
 
 ## Moderador
 
-Username: moderador
-Password: 123456789 
+### Username: moderador
+
+### Password: 123456789
 
 ## Utilizador
 
-Username: test
-Password: 123456789
+### Username: test
 
-## Imagem da instituição
+### Password: 123456789
+
+# Imagem da instituição
 
 ![IPL](docs/logoipl.png)
