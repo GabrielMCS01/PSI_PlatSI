@@ -62,13 +62,14 @@ class CiclismoController extends ActiveController
         // Se a validação dos dados for TRUE guarda os dados caso contrário emite um erro
         if ($ciclismo->validate()){
             // Compara se a distância do treino é superior que a maior existente na Base de Dados
-            if($bestDistancia < $ciclismo->distancia){
+            $distancia = $ciclismo->distancia;
+            if($bestDistancia < $distancia){
                 $canal = "leaderboard";
                 $msg = "Novo recorde de distancia: " . Converter::distanceConverter($ciclismo->distancia) . " por " . $ciclismo->user->username;
                 Mosquitto::FazPublish($canal, $msg);
             }
             // Compara se a duração do treino é superior que a maior existente na Base de Dados
-            if($bestTempo < $ciclismo->duracao){
+            if($bestTempo    < $ciclismo->duracao){
                 $canal = "leaderboard";
                 $msg = "Novo recorde de duração: " . Converter::timeConverter($ciclismo->duracao) . " por " . $ciclismo->user->username;
                 Mosquitto::FazPublish($canal, $msg);
