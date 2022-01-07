@@ -43,7 +43,6 @@ class RegistoController extends ActiveController
             $response->success = true;
             return $response;
         }
-
         // É enviada uma resposta informando que houve erros a fazer o registo do utilizador
         $response->success = false;
         return $response;

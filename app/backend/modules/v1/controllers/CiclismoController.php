@@ -3,13 +3,9 @@
 namespace app\modules\v1\controllers;
 
 use app\modules\v1\models\ResponseCiclismo;
-use app\modules\v1\models\ResponseDefault;
-use app\modules\v1\models\ResponseDeleteCiclismo;
-use app\modules\v1\models\ResponseUpdateCiclismo;
 use common\models\Ciclismo;
 use common\utils\Converter;
 use common\utils\Mosquitto;
-use common\utils\phpMQTT;
 use Yii;
 use yii\filters\auth\QueryParamAuth;
 use yii\rest\ActiveController;

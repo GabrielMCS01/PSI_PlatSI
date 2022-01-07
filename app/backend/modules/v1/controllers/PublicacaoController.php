@@ -38,53 +38,97 @@ class PublicacaoController extends ActiveController
     }
 
     // Mostra todas as publicações
-    public function actionIndex(){
+    public function actionIndex()
+    {
 
         //Vai buscar todas as publicações, ordenando-as por ordem descendente
         $publicacao = Publicacao::find()->orderBy(['createtime' => SORT_DESC])->all();
 
 
-        $return = new ResponsePublicaçao();
-        $return->success = true;
-        $
-        return $publicacao;
+        $response = new ResponsePublicaçao();
+        $response->success = true;
+        $response->publicacao = $publicacao;
+        return $response;
+    }
+
+    //Mostra uma publicação
+    public function actionView($id)
+    {
+        $publicacao = Publicacao::findOne($id);
+
+        if ($publicacao == null) {
+            $response = new ResponsePublicaçao();
+            $response->success = false;
+            $response->mensagem = "Não existe uma publicação com esse ID";
+        }
+
+        $response = new ResponsePublicaçao();
+        $response->success = true;
+        $response->publicacao = $publicacao;
+
+        return $response;
     }
 
 
     // Mostra todas as publicações do próprio utilizador
-    public function actionUser(){
+    public function actionUser()
+    {
         $publicacao = Publicacao::find()->innerJoin(['ciclismo'], 'publicacao.ciclismo_id = ciclismo.id')->where(['ciclismo.user_id' => Yii::$app->user->getId()])->orderBy(['createtime' => SORT_DESC])->all();
 
-        return $publicacao;
+        if ($publicacao == null) {
+            $response = new ResponsePublicaçao();
+            $response->success = false;
+            $response->mensagem = "Esse utilizador não tem publicações";
+            return $response;
+        }
+
+        $response = new ResponsePublicaçao();
+        $response->success = true;
+        $response->publicacao = $publicacao;
+
+        return $response;
     }
 
     // Cria uma publicação
-    public function actionCreate(){
+    public function actionCreate()
+    {
         $model = new Publicacao();
 
         $model->ciclismo_id = Yii::$app->request->post('ciclismo_id');
         $model->createtime = Yii::$app->formatter->asDateTime('now', 'yyyy-MM-dd HH-mm-ss');
 
-        if($model->validate()) {
+        if ($model->validate()) {
             $model->save();
-            return $model;
-        }else{
-            return $model;
+            $response = new ResponsePublicaçao();
+            $response->success = true;
+            $response->publicacao = $model;
+            return $response;
+        } else {
+            $response = new ResponsePublicaçao();
+            $response->success = false;
+            $response->mensagem = "Erro ao criar a publicação";
+            return $response;
         }
     }
 
     // Apaga uma publicação assim como todos os seus gostos e comentários
-    public function actionDelete($id){
+    public function actionDelete($id)
+    {
         $publicacao = Publicacao::find()->where(['id' => $id])->one();
 
-        if(Yii::$app->user->can("deletePostModerator", ['publicacao' => $publicacao])) {
+        if (Yii::$app->user->can("deletePostModerator", ['publicacao' => $publicacao])) {
             Comentario::deleteAll(['publicacao_id' => $publicacao->id]);
             Gosto::deleteAll(['publicacao_id' => $publicacao->id]);
 
             if ($publicacao->delete()) {
-                return true;
+                $response = new ResponsePublicaçao();
+                $response->success = true;
+                return $response;
             } else {
-                return false;
+                $response = new ResponsePublicaçao();
+                $response->success = false;
+                $response->mensagem = "Erro ao apagar a publicação";
+                return $response;
             }
         }
     }
