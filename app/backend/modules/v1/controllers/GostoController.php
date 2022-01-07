@@ -123,6 +123,7 @@ class GostoController extends ActiveController
 
         $publicacoes = Publicacao::find()->innerJoin(['ciclismo'], 'publicacao.ciclismo_id = ciclismo.id')->where(['ciclismo.user_id' => Yii::$app->user->getId()])->all();
 
+        $array = null;
         $i = 0;
         foreach ($publicacoes as $publicacao){
             $subarray['publicacao_id'] = $publicacao->id;
