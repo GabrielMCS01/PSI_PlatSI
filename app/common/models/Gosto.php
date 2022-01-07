@@ -2,6 +2,7 @@
 
 namespace common\models;
 
+use common\utils\Mosquitto;
 use common\utils\phpMQTT;
 use Yii;
 
@@ -77,27 +78,9 @@ class Gosto extends \yii\db\ActiveRecord
 
         $id = $this->publicacao->ciclismo->user_id;
 
-        // Função utilizada na unidade curricular de SISis
-       // $this->FazPublish($id);
+        $msg = "Um utilizador gostou de uma das suas publicações";
+
+        Mosquitto::FazPublish($id, $msg);
 
     }
-
-    // Função utilizada na unidade curricular de SISis
-    public function FazPublish($canal)
-    {
-        $server = "ciclodias.duckdns.org";
-        $msg = "Um utilizador gostou da sua publicação";
-        $port = 1883;
-        $username = "ciclodias";
-        $password = "serverciclodias2021";
-        $client_id = "phpMQTT-publisher"; // unique!
-        $mqtt = new phpMQTT($server, $port, $client_id);
-        if ($mqtt->connect(true, NULL, $username, $password)) {
-            $mqtt->publish($canal, $msg, 0);
-            $mqtt->close();
-        } else {
-            file_put_contents("debug.output", "Time out!");
-        }
-    }
-
 }

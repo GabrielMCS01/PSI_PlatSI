@@ -6,6 +6,7 @@ use app\modules\v1\models\ResponseDeleteCiclismo;
 use app\modules\v1\models\ResponseUpdateCiclismo;
 use common\models\Ciclismo;
 use common\utils\Converter;
+use common\utils\Mosquitto;
 use common\utils\phpMQTT;
 use Yii;
 use yii\filters\auth\QueryParamAuth;
@@ -62,18 +63,21 @@ class CiclismoController extends ActiveController
         if ($ciclismo->validate()){
             // Compara se a distância do treino é superior que a maior existente na Base de Dados
             if($bestDistancia < $ciclismo->distancia){
+                $canal = "leaderboard";
                 $msg = "Novo recorde de distancia: " . Converter::distanceConverter($ciclismo->distancia) . " por " . $ciclismo->user->username;
-                $this->FazPublish($msg);
+                Mosquitto::FazPublish($canal, $msg);
             }
             // Compara se a duração do treino é superior que a maior existente na Base de Dados
             if($bestTempo < $ciclismo->duracao){
+                $canal = "leaderboard";
                 $msg = "Novo recorde de duração: " . Converter::timeConverter($ciclismo->duracao) . " por " . $ciclismo->user->username;
-                $this->FazPublish($msg);
+                Mosquitto::FazPublish($canal, $msg);
             }
             // Compara se a velocidade média do treino é superior que a maior existente na Base de Dados
             if($bestVelocidade < $ciclismo->velocidade_media){
+                $canal = "leaderboard";
                 $msg = "Novo recorde de velocidade média: " . Converter::velocityConverter($ciclismo->velocidade_media) . " por " . $ciclismo->user->username;
-                $this->FazPublish($msg);
+                Mosquitto::FazPublish($canal, $msg);
             }
             $ciclismo->save();
             return $ciclismo;
