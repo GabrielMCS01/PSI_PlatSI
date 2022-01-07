@@ -58,15 +58,19 @@ class LoginController extends ActiveController
 
                 return $login;
             }else{
-                $message = "Utilizador sem acesso á aplicação";
+                $response = new ResponseLogin();
+                $response->success = false;
+                $response->mensagem = "Utilizador sem acesso á aplicação";
             }
         }
         else{
-            $message = "Utilizador inválido";
+            $response = new ResponseLogin();
+            $response->success = false;
+            $response->mensagem = "Utilizador inválido";
         }
 
         // Retorna a mensagem de erro
-        return $message;
+        return $response;
     }
 
 

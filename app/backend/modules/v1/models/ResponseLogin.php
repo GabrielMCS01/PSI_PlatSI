@@ -10,5 +10,6 @@ class ResponseLogin
     public $id;
     public $primeiro_nome;
     public $ultimo_nome;
+    public $mensagem;
 
 }
