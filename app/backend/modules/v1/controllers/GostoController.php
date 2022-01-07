@@ -26,6 +26,7 @@ class GostoController extends ActiveController
     {
         $actions = parent::actions();
         unset($actions['create']);
+        unset($actions['delete']);
         $actions['update'] = null;
         $actions['index'] = null;
         $actions['view'] = null;

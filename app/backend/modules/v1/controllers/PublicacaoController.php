@@ -2,6 +2,7 @@
 
 namespace app\modules\v1\controllers;
 
+use app\modules\v1\models\ResponsePublicaçao;
 use common\models\Comentario;
 use common\models\Gosto;
 use common\models\Publicacao;
@@ -43,7 +44,9 @@ class PublicacaoController extends ActiveController
         $publicacao = Publicacao::find()->orderBy(['createtime' => SORT_DESC])->all();
 
 
-        
+        $return = new ResponsePublicaçao();
+        $return->success = true;
+        $
         return $publicacao;
     }
 
