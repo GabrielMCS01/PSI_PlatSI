@@ -1,5 +1,3 @@
-// MUDAR O ACCESS TOKEN CONFORME O UTILIZADOR (FAZER LOGIN)
-
 // Iniciar o Localhost
 .\yii serve --docroot="backend/web/"
 
@@ -32,7 +30,6 @@ curl --location --request POST 'http://localhost:8080/v1/login/login' \
 
 curl --location --request GET 'http://localhost:8080/v1/user/6?access-token=3KOEbLdQDXSH5hai3--icX9ASULUAJWj' \
 --header 'Content-Type: application/json' \
---header 'Authorization: Bearer jp_oGqy6OXOfgoxVjb4x_1Y02OJVuUc2' \
 --data-raw ''
 
 
@@ -40,7 +37,6 @@ curl --location --request GET 'http://localhost:8080/v1/user/6?access-token=3KOE
 
 curl --location --request PUT 'http://localhost:8080/v1/user/6?access-token=3KOEbLdQDXSH5hai3--icX9ASULUAJWj' \
 --header 'Content-Type: application/json' \
---header 'Authorization: Bearer jp_oGqy6OXOfgoxVjb4x_1Y02OJVuUc2' \
 --data-raw '{   
     "username": "luisMod",
     "primeiro_nome": "Torres",
@@ -53,7 +49,6 @@ curl --location --request PUT 'http://localhost:8080/v1/user/6?access-token=3KOE
 
 curl --location --request DELETE 'http://localhost:8080/v1/user/6?access-token=3KOEbLdQDXSH5hai3--icX9ASULUAJWj' \
 --header 'Content-Type: application/json' \
---header 'Authorization: Bearer jp_oGqy6OXOfgoxVjb4x_1Y02OJVuUc2' \
 --data-raw ''
 
 
@@ -63,43 +58,45 @@ curl --location --request DELETE 'http://localhost:8080/v1/user/6?access-token=3
 // Cria um treino
 // O id do user com o token é atribuido automaticamente ao treino
 
-curl --location --request POST 'http://localhost/PSI_PlatSI/app/backend/web/v1/ciclismo?access-token=fAcKU3fbK7EWurSXQi6rMqzC4hB9JL5L' \
+curl --location --request POST 'http://localhost:8080/v1/ciclismo?access-token=IL4wPHi0LMCGPs5Jc3dzt7xRQjSOKbKG' \
 --header 'Content-Type: application/json' \
 --data-raw '{
-    "nome_percurso": "Percurso de teste",
-    "duracao": 500,
-    "distancia": 900,
-    "velocidade_media": 10.1,
-    "velocidade_maxima": 20.4
+    "nome_percurso": "Percurso API",
+    "duracao": 1029,
+    "distancia": 4292,
+    "velocidade_media": 7.45,
+    "velocidade_maxima": 20.4,
+    "rota": null,
+    "velocidade_grafico": null
 }'
 
 
 // Visualizar todos os treinos do utilizador
 
-curl --location --request GET 'http://localhost/PSI_PlatSI/app/backend/web/v1/ciclismo?access-token=fAcKU3fbK7EWurSXQi6rMqzC4hB9JL5L' \
+curl --location --request GET 'http://localhost:8080/v1/ciclismo?access-token=IL4wPHi0LMCGPs5Jc3dzt7xRQjSOKbKG' \
 --header 'Content-Type: application/json' \
 --data-raw ''
 
 
 // Visualizar um treino do utilizador
 
-curl --location --request GET 'http://localhost/PSI_PlatSI/app/backend/web/v1/ciclismo/1?access-token=fAcKU3fbK7EWurSXQi6rMqzC4hB9JL5L' \
+curl --location --request GET 'http://localhost:8080/v1/ciclismo/6?access-token=IL4wPHi0LMCGPs5Jc3dzt7xRQjSOKbKG' \
 --header 'Content-Type: application/json' \
 --data-raw ''
 
 
 // Alterar um treino do utilizador
 
-curl --location --request PUT 'http://localhost/PSI_PlatSI/app/backend/web/v1/ciclismo/1?access-token=fAcKU3fbK7EWurSXQi6rMqzC4hB9JL5L' \
+curl --location --request PUT 'http://localhost:8080/v1/ciclismo/6?access-token=IL4wPHi0LMCGPs5Jc3dzt7xRQjSOKbKG' \
 --header 'Content-Type: application/json' \
 --data-raw '{
-    "nome_percurso": "Percurso testado"
+    "nome_percurso": "Percurso API alterado"
 }'
 
 
 // Apagar um treino do utilizador
 
-curl --location --request DELETE 'http://localhost/PSI_PlatSI/app/backend/web/v1/ciclismo/1?access-token=fAcKU3fbK7EWurSXQi6rMqzC4hB9JL5L' \
+curl --location --request DELETE 'http://localhost:8080/v1/ciclismo/6?access-token=IL4wPHi0LMCGPs5Jc3dzt7xRQjSOKbKG' \
 --header 'Content-Type: application/json' \
 --data-raw ''
 
@@ -108,11 +105,12 @@ curl --location --request DELETE 'http://localhost/PSI_PlatSI/app/backend/web/v1
 
 
 // Cria uma publicação
-// Adicionar mais coisas
-LINK API
 
-PARAMETROS
-
+curl --location --request POST 'http://localhost:8080/v1/publicacao?access-token=IL4wPHi0LMCGPs5Jc3dzt7xRQjSOKbKG' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "ciclismo_id": 5
+}'
 
 
 // Ver uma publicação
