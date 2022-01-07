@@ -220,8 +220,16 @@ curl --location --request GET 'http://localhost:8080/v1/gosto/numgostos?access-t
 --data-raw ''
 
 
+// Ver o numero de gostos das publicações do utilizador
+
+curl --location --request GET 'http://localhost:8080/v1/gosto/numgostosuser?access-token=wpvSoVPduEh99HYs95yZo_0P6tETHEPB' \
+--header 'Content-Type: application/json' \
+--data-raw ''
+
+
 // Apagar um gosto
-LINK API
+
+
 
 
 
