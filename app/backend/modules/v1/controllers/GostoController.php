@@ -98,7 +98,7 @@ class GostoController extends ActiveController
 
         return $response;
     }
-    //----//
+
     // Mostra o número de gostos de cada publicacao que existe na BD
     public function actionNumgostos(){
         $publicacoes = Publicacao::find()->all();
@@ -111,11 +111,16 @@ class GostoController extends ActiveController
             $i++;
         }
 
-        return $array;
+        $response = new ResponseGosto();
+        $response->success = true;
+        $response->gosto = $array;
+
+        return $response;
     }
 
     // Mostra o número de gostos de cada publicacao de um utilizador
     public function actionNumgostosuser(){
+
         $publicacoes = Publicacao::find()->innerJoin(['ciclismo'], 'publicacao.ciclismo_id = ciclismo.id')->where(['ciclismo.user_id' => Yii::$app->user->getId()])->all();
 
         $i = 0;
@@ -126,7 +131,11 @@ class GostoController extends ActiveController
             $i++;
         }
 
-        return $array;
+        $response = new ResponseGosto();
+        $response->success = true;
+        $response->gosto = $array;
+
+        return $response;
     }
 
 }
