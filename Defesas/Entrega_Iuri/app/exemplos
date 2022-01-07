@@ -1,0 +1,240 @@
+# PSI_PlatSI
+
+# Descrição do projeto
+
+No âmbito da unidade curricular de Plataformas de Sistemas de Informação do 3º Semestre do Curso TeSP de Programação de Sistemas de Informação do Instituto Politécnico de Leiria, foi criada a aplicação WEB (Front-end e Back-end) pertencente ao projeto “CicloDias”, que consiste na elaboração de uma aplicação que monitoriza a atividade física do utilizador.
+
+O projeto é comum entre várias disciplinas, mas as fases que traçam este projeto são divididas entre todas, conforme a sua pertinência.
+
+## Membros da Equipa
+
+* Iuri Carrasqueiro Nº 2201127
+* Gabriel Silva Nº 2201133
+
+# Preparar a aplicação
+
+## Ver Notas Adicionais antes de começar a preparação da aplicação
+
+## Criar a base de dados e tabelas
+
+Executar o ficheiro SQL "CriarDB"
+
+## Na pasta APP executar os comandos seguintes:
+
+.\yii migrate --migrationPath=@yii/rbac/migrations
+
+.\yii migrate
+
+# Criar as tabelas da aplicação
+
+Executar o ficheiro SQL "CriarTabelas"
+
+# Criar os utilizadores e inserir os dados padrão
+
+Executar o ficheiro SQL "Dados"
+
+## Com estes passos a aplicação estará pronta a utilizar
+
+# Credenciais de Acesso
+
+## Administrador
+
+Username: admin
+
+Password: adminadmin
+
+## Moderador
+
+Username: moderador
+
+Password: 123456789
+
+## Utilizador
+
+Username: test
+
+Password: 123456789
+
+# Notas
+
+## Caso seja uma instalação limpa adicionar esta linha no ficheiro common/config/main-local.php
+
+'dsn' => 'mysql:host=127.0.0.1;dbname=projectdb',
+
+## Configurar o nome de utilizador e a palavra-passe caso não seja a padrão - ficheiro common/config/main-local.php
+
+# Imagem da instituição
+
+![IPL](docs/logoipl.png)
+
+
+------------------------------------------------------------------------------
+# No ficheiro common/config/test-local.php
+
+# colar esta linha de código dentro de DB
+
+'dsn' => 'mysql:host=127.0.0.1;dbname=projectdb_test',
+------------------------------------------------------------------------------
+
+# Criar a base de dados
+
+Executar o ficheiro SQL "CriarDB_test"
+
+
+# Na pasta APP executar os comandos seguintes:
+
+.\yii_test migrate --migrationPath=@yii/rbac/migrations
+.\yii_test migrate
+
+
+# Criar as tabelas da aplicação
+
+Executar o ficheiro SQL "CriarTabelas_test"
+
+
+# Cria dados de exemplo para serem utilizados nos testes
+
+Executar o ficheiro SQL "Dados_test"
+
+
+# Instalação do selenium para executar os testes de aceitação
+
+npm install selenium-standalone -g
+  selenium-standalone install
+  selenium-standalone start
+
+
+# Alterar o url do caminho para a pasta frontend/web (ficheiro frontend/tests/acceptance.suite.yml)
+
+Exemplos
+url: http://localhost/.../app/frontend/web/
+
+
+# Colocar o navegador de Internet utilizado (ficheiro frontend/tests/acceptance.suite.yml)
+
+Exemplos
+browser: chrome OU
+browser: firefox OU
+browser: MicrosoftEdge
+
+
+# Build do codecept
+
+./vendor/bin/codecept build
+
+
+# Executar os comandos dos testes (Pasta APP)
+## Unitários
+php vendor/bin/codecept run unit -c frontend
+php vendor/bin/codecept run unit -c common
+
+# Funcionais
+php vendor/bin/codecept run functional -c backend
+php vendor/bin/codecept run functional -c frontend
+
+# Aceitação
+selenium-standalone start
+php vendor/bin/codecept run acceptance -c frontend
+
+---------------------------------------------------- Básico -------------------------------------------------------------
+// Pasta para criar o projeto
+cd C:\xampp\htdocs
+
+// Cria o projeto Básico
+composer create-project --prefer-dist yiisoft/yii2-app-basic basic
+
+// Abrir projeto
+
+// Configurar o ficheiro config/main.php e config/console.php
+'authManager' => [
+            'class' => 'yii\rbac\DbManager',
+            // uncomment if you want to cache RBAC items hierarchy
+            // 'cache' => 'cache',
+        ],
+
+---------------------------------------------------- Avançado ----------------------------------------------------------
+// Pasta para criar o projeto
+cd C:\xampp\htdocs
+
+// Cria o projeto Avançado
+composer create-project --prefer-dist yiisoft/yii2-app-advanced advanced
+
+// Inicia o projeto (APP)
+php .\init
+
+// Criar a base de dados (avancado) default ou outro nome e alterar em baixo
+// Modificar o ficheiro na pasta "common/config/main-local.php" para colocar o nome da Base de dados e utilizador
+
+------------------------------ Pretty URL -----------------------------
+// Criar ficheiro .htaccess
+
+RewriteEngine on
+
+RewriteCond %{REQUEST_FILENAME} !-f
+
+RewriteCond %{REQUEST_FILENAME} !-d
+
+RewriteRule . index.php
+
+
+// Colocar este ficheiro na frontend e backend dentro da pasta web
+
+// Descomentar o bloco urlManager na backend e frontend (backend/config/main.php) (frontend/config/main.php)
+-------------------------- Pretty URL ---------------------------------
+
+// Cria a migração
+./yii migrate/create init_rbac
+
+// Configurar o ficheiro common/config/main.php
+'authManager' => [
+            'class' => 'yii\rbac\DbManager',
+            // uncomment if you want to cache RBAC items hierarchy
+            // 'cache' => 'cache',
+        ],
+
+// Criar permissões (RBAC)
+$auth = Yii::$app->authManager;
+
+$frontendAccess = $auth->createPermission('frontendAccess');
+$auth->add($frontendAccess);
+
+$user = $auth->createRole('user');
+$auth->add($user);
+$auth->addChild($user, $frontendAccess);
+
+// Criar o RBAC
+.\yii migrate --migrationPath=@yii/rbac/migrations
+.\yii migrate
+
+
+--------------------------------- Testes ---------------------------------
+// No ficheiro common/config/test-local.php
+
+'dsn' => 'mysql:host=127.0.0.1;dbname=avancado_test',
+
+.\yii_test migrate --migrationPath=@yii/rbac/migrations
+.\yii_test migrate
+
+./vendor/bin/codecept build
+
+// Cria um Unit Test com o nome ExampleTest
+php vendor/bin/codecept generate:test unit ExampleTest
+./vendor/bin/codecept g:cest unit PerfilCest -c frontend
+
+// Cria um Functional Test com o nome ExampleTest
+php vendor/bin/codecept generate:test functional ExampleTest
+./vendor/bin/codecept g:cest functional PerfilCest -c frontend
+
+// Cria um Acceptance Test com o nome First
+php vendor/bin/codecept generate:test acceptance First
+./vendor/bin/codecept g:cest acceptance PerfilCest -c frontend
+
+php vendor/bin/codecept run unit -c frontend
+php vendor/bin/codecept run unit -c common
+php vendor/bin/codecept run functional -c backend
+php vendor/bin/codecept run functional -c frontend
+selenium-standalone start
+php vendor/bin/codecept run acceptance -c frontend
+
+
+

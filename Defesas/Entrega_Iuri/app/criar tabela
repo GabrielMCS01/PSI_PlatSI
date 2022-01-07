@@ -1,0 +1,49 @@
+
+CREATE TABLE `projectdb`.`clientes` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `nome` VARCHAR(50) NOT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
+
+CREATE TABLE `projectdb`.`cupoes` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `codigo` VARCHAR(20) NOT NULL,
+  `codigo_verificacao` INT(3) NOT NULL,
+  `user_id` INT NOT NULL,
+  PRIMARY KEY (`id`),
+  CONSTRAINT `fk_cupoes_1`
+    FOREIGN KEY (`user_id`)
+    REFERENCES `projectdb`.`clientes` (`id`))
+ENGINE = InnoDB;
+
+use projecdb;
+
+INSERT INTO `projectdb`.`clientes`(`id`,`nome`)VALUES (null, 'Iuri');
+INSERT INTO `projectdb`.`clientes`(`id`,`nome`)VALUES (null, 'Gabriel');
+INSERT INTO `projectdb`.`clientes`(`id`,`nome`)VALUES (null, 'Luis');
+
+INSERT INTO `projectdb`.`cupoes` (`id`,`codigo`,`codigo_verificacao`,`user_id`)VALUES(null, 'ABC123NJYGER45321675', '231', 1);
+INSERT INTO `projectdb`.`cupoes` (`id`,`codigo`,`codigo_verificacao`,`user_id`)VALUES(null, 'MNHJ197275GH3A13QSVB', '085', 1);
+INSERT INTO `projectdb`.`cupoes` (`id`,`codigo`,`codigo_verificacao`,`user_id`)VALUES(null, 'MKF12469HJBF218765FR', '018', 1);
+INSERT INTO `projectdb`.`cupoes` (`id`,`codigo`,`codigo_verificacao`,`user_id`)VALUES(null, 'MNHGFCD231876TGHVFDC', '231', 2);
+INSERT INTO `projectdb`.`cupoes` (`id`,`codigo`,`codigo_verificacao`,`user_id`)VALUES(null, '09IJU6GNCXZAQSEDFBYJ', '638', 2);
+INSERT INTO `projectdb`.`cupoes` (`id`,`codigo`,`codigo_verificacao`,`user_id`)VALUES(null, 'LPGMJ6F0G3SAXEDFR6HV', '941', 3);
+
+
+
+CREATE TABLE `projectdb_test`.`clientes` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `nome` VARCHAR(50) NOT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
+
+CREATE TABLE `projectdb_test`.`cupoes` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `codigo` VARCHAR(20) NOT NULL,
+  `codigo_verificacao` INT(3) NOT NULL,
+  `user_id` INT NOT NULL,
+  PRIMARY KEY (`id`),
+  CONSTRAINT `fk_cupoes_1`
+    FOREIGN KEY (`user_id`)
+    REFERENCES `projectdb`.`clientes` (`id`))
+ENGINE = InnoDB;
