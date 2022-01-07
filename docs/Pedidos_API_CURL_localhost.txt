@@ -114,75 +114,106 @@ curl --location --request POST 'http://localhost:8080/v1/publicacao?access-token
 
 
 // Ver uma publicação
-LINK API
+
+curl --location --request GET 'http://localhost:8080/v1/publicacao/3?access-token=IL4wPHi0LMCGPs5Jc3dzt7xRQjSOKbKG' \
+--header 'Content-Type: application/json' \
+--data-raw ''
 
 
-// Ver todas as publicações
-LINK API
+// Ver todas as publicações (Feed de Noticias)
+
+curl --location --request GET 'http://localhost:8080/v1/publicacao/?access-token=IL4wPHi0LMCGPs5Jc3dzt7xRQjSOKbKG' \
+--header 'Content-Type: application/json' \
+--data-raw ''
 
 
-// Editar uma publicação
-LINK API
+// Ver todas as publicações do utilizador
 
-PARAMETROS
-
+curl --location --request GET 'http://localhost:8080/v1/publicacao/user?access-token=IL4wPHi0LMCGPs5Jc3dzt7xRQjSOKbKG' \
+--header 'Content-Type: application/json' \
+--data-raw ''
 
 
 // Apagar uma publicação
-LINK API
+
+curl --location --request DELETE 'http://localhost:8080/v1/publicacao/3?access-token=IL4wPHi0LMCGPs5Jc3dzt7xRQjSOKbKG' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "nome_percurso": "Percurso dos percusos"
+}'
 
 
 -------------------------------------------- Comentário ---------------------------------------------------
 
 
 // Cria um comentário numa publicação
-// Adicionar mais detalhes
-LINK API
 
-PARAMETROS
+curl --location --request POST 'http://localhost:8080/v1/comentario?access-token=IL4wPHi0LMCGPs5Jc3dzt7xRQjSOKbKG' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "publicacao_id": 2,
+    "content": "Comentei"
+}'
 
 
+// Ver todos os Comentários
 
-// Ver um Comentário
-LINK API
+curl --location --request GET 'http://localhost:8080/v1/comentario?access-token=IL4wPHi0LMCGPs5Jc3dzt7xRQjSOKbKG' \
+--header 'Content-Type: application/json' \
+--data-raw ''
 
 
 // Ver todos os Comentários de uma publicação
-LINK API
+
+curl --location --request GET 'http://localhost:8080/v1/comentario/getcomentpub/2?access-token=IL4wPHi0LMCGPs5Jc3dzt7xRQjSOKbKG' \
+--header 'Content-Type: application/json' \
+--data-raw ''
 
 
-// Ver todos os Comentários (Moderador)
-LINK API
+// Ver um Comentário
+
+curl --location --request GET 'http://localhost:8080/v1/comentario/5?access-token=IL4wPHi0LMCGPs5Jc3dzt7xRQjSOKbKG' \
+--header 'Content-Type: application/json' \
+--data-raw ''
 
 
 // Editar um Comentário
-LINK API
 
-PARAMETROS
-
+curl --location --request PUT 'http://localhost:8080/v1/comentario/5?access-token=IL4wPHi0LMCGPs5Jc3dzt7xRQjSOKbKG' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "content": "Comentei outra vez"
+}'
 
 
 // Apagar um Comentário
-LINK API
+
+curl --location --request DELETE 'http://localhost:8080/v1/comentario/5?access-token=IL4wPHi0LMCGPs5Jc3dzt7xRQjSOKbKG' \
+--header 'Content-Type: application/json' \
+--data-raw ''
 
 
 -------------------------------------------------- Gosto --------------------------------------------------
 
+// O mesmo utilizador só pode ter um like em cada publicação
 
 // Cria um gosto numa publicação
-// O mesmo utilizador só pode ter um like em cada publicação
-// Adicionar mais detalhes
-LINK API
 
-PARAMETROS
-
-
-// Ver Gosto
-LINK API
+curl --location --request POST 'http://localhost:8080/v1/gosto?access-token=IL4wPHi0LMCGPs5Jc3dzt7xRQjSOKbKG' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "publicacao_id": 2
+}'
 
 
 // Ver Todos os gostos da Publicação
-LINK API
+
+curl --location --request GET 'http://localhost:8080/v1/gosto/numgostospub/1?access-token=IL4wPHi0LMCGPs5Jc3dzt7xRQjSOKbKG' \
+--header 'Content-Type: application/json' \
+--data-raw ''
+
+
+
 
 
 // Apagar um gosto
