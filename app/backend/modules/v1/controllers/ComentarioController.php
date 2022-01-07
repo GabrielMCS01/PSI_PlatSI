@@ -2,6 +2,8 @@
 
 namespace app\modules\v1\controllers;
 
+use app\modules\v1\models\ResponseComentario;
+use app\modules\v1\models\ResponseDefault;
 use common\models\Comentario;
 use Yii;
 use yii\filters\auth\QueryParamAuth;
@@ -23,6 +25,8 @@ class ComentarioController extends ActiveController
     public function actions()
     {
         $actions = parent::actions();
+        unset($actions['index']);
+        unset($actions['view']);
         unset($actions['delete']);
         unset($actions['create']);
         unset($actions['update']);
@@ -30,8 +34,29 @@ class ComentarioController extends ActiveController
         return $actions;
     }
 
+    //Devolve todos os comentários
+    public function actionIndex()
+    {
+
+        $comentarios = Comentario::find()->all();
+
+        if ($comentarios == null) {
+            $response = new ResponseComentario();
+            $response->success = false;
+            $response->mensagem = "Não existem comentários";
+            return $response;
+        }
+
+        $response = new ResponseComentario();
+        $response->success = true;
+        $response->comentario = $comentarios;
+
+        return $response;
+    }
+
     // Cria um comentário numa publicação
-    public function actionCreate(){
+    public function actionCreate()
+    {
 
         $model = new Comentario();
 
@@ -40,57 +65,131 @@ class ComentarioController extends ActiveController
         $model->createtime = Yii::$app->formatter->asDateTime('now', 'yyyy-MM-dd HH-mm-ss');
         $model->content = Yii::$app->request->post('content');
 
-        if($model->validate()){
+        if ($model->validate()) {
             $model->save();
-            return $model;
-        }else{
-            return $model;
+
+            $response = new ResponseComentario();
+            $response->success = true;
+            $response->comentario = $model;
+            return $response;
+        } else {
+            $response = new ResponseComentario();
+            $response->success = false;
+            $response->mensagem = "Erro a criar o comentário";
+            return $response;
         }
     }
 
+
+    //Devolve um comentário
+    public function actionView($id)
+    {
+        $comentario = Comentario::findOne($id);
+
+        if ($comentario == null) {
+            $response = new ResponseComentario();
+            $response->success = false;
+            $response->mensagem = "Não existe um comentário com esse ID";
+            return $response;
+        }
+
+        $response = new ResponseComentario();
+        $response->success = true;
+        $response->comentario = $comentario;
+        return $response;
+    }
+
     // Edita um comentário numa publicação
-    public function actionUpdate($id){
+    public function actionUpdate($id)
+    {
 
         $comentario = Comentario::find()->where(['id' => $id])->one();
 
-        if(Yii::$app->user->can("UpdateComment", ['comentario' => $comentario])) {
+
+        if ($comentario == null) {
+            $response = new ResponseComentario();
+            $response->success = false;
+            $response->mensagem = "Não existe um comentário com esse ID";
+            return $response;
+        }
+
+        if (Yii::$app->user->can("UpdateComment", ['comentario' => $comentario])) {
             $comentario->content = Yii::$app->request->post('content');
 
             $comentario->content = $comentario->content . ' (Editado)';
 
             if ($comentario->validate()) {
                 $comentario->save();
-                return $comentario;
+
+                $response = new ResponseComentario();
+                $response->success = true;
+                $response->comentario = $comentario;
+                return $response;
             } else {
-                return $comentario;
+                $response = new ResponseComentario();
+                $response->success = false;
+                $response->mensagem = "Erro a editar o comentário";
+                return $response;
             }
-        }else{
-            return "Utilizador não ter permissões para editar este comentário";
+        } else {
+            $response = new ResponseComentario();
+            $response->success = false;
+            $response->mensagem = "Utilizador não tem permissões para editar este comentário";
+            return $response;
         }
     }
+
 
     // Apaga um comentário numa publicação
-    public function actionDelete($id){
-
+    public function actionDelete($id)
+    {
         $comentario = Comentario::find()->where(['id' => $id])->one();
 
-        if(Yii::$app->user->can("deleteCommentModerator", ['comentario' => $comentario])){
-            if($comentario->delete()){
-                return true;
-            }else{
-                return false;
+        if ($comentario == null) {
+            $response = new ResponseComentario();
+            $response->success = false;
+            $response->mensagem = "Não existe um comentário com esse ID";
+            return $response;
+        }
+
+        if (Yii::$app->user->can("deleteCommentModerator", ['comentario' => $comentario])) {
+            if ($comentario->delete()) {
+                $response = new ResponseComentario();
+                $response->success = true;
+                return $response;
+            } else {
+                $response = new ResponseComentario();
+                $response->success = false;
+                $response->mensagem = "Erro a apagar o comentário";
+                return $response;
             }
-        }else{
-            return "Utilizador não ter permissões para remover este comentário";
+        } else {
+            $response = new ResponseComentario();
+            $response->success = false;
+            $response->mensagem = "Utilizador não tem permissões para remover este comentário";
+            return $response;
         }
 
     }
 
-    // Mostra todos os comentários de uma publicação
-    public function actionGetcomentpub($publicacaoid){
+// Mostra todos os comentários de uma publicação
+    public
+    function actionGetcomentpub($publicacaoid)
+    {
 
-        $comentario = Comentario::find()->where(['publicacao_id' => $publicacaoid])->all();
+        $comentarios = Comentario::find()->where(['publicacao_id' => $publicacaoid])->all();
 
-        return $comentario;
+        if ($comentarios == null) {
+            $response = new ResponseComentario();
+            $response->success = false;
+            $response->mensagem = "Essa publicação não tem comentários";
+            return $response;
+        }
+
+        $response = new ResponseComentario();
+        $response->success = true;
+        $response->comentario = $comentarios;
+
+        return $response;
     }
 }

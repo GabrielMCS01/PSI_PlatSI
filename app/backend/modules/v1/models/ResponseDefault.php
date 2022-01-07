@@ -2,7 +2,8 @@
 
 namespace app\modules\v1\models;
 
-class ResponseDeleteCiclismo
+class ResponseDefault
 {
     public $success;
+    public $mensagem;
 }
