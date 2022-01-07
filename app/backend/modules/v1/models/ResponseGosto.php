@@ -2,7 +2,9 @@
 
 namespace app\modules\v1\models;
 
-class ResponseCreateCiclismo
+class ResponseGosto
 {
     public $success;
+    public $mensagem;
+    public $gosto;
 }

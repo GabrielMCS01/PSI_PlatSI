@@ -2,6 +2,7 @@
 
 namespace app\modules\v1\controllers;
 
+use app\modules\v1\models\ResponseGosto;
 use common\models\Gosto;
 use common\models\Publicacao;
 use Yii;
@@ -26,6 +27,8 @@ class GostoController extends ActiveController
         $actions = parent::actions();
         unset($actions['create']);
         $actions['update'] = null;
+        $actions['index'] = null;
+        $actions['view'] = null;
 
         return $actions;
     }
@@ -37,31 +40,65 @@ class GostoController extends ActiveController
         $gosto->user_id = Yii::$app->user->getId();
         $gosto->publicacao_id = Yii::$app->request->post("publicacao_id");
 
+        $verificarGosto = Gosto::find()->where(['user_id' =>  $gosto->user_id, 'publicacao_id' => $gosto->publicacao_id])->one();
+
+        if($verificarGosto != null){
+            $response = new ResponseGosto();
+            $response->success = false;
+            $response->mensagem = "Já existe um gosto desse utilizador nessa publicação";
+            return $response;
+        }
+
         if($gosto->validate()) {
             $gosto->save();
-            return $gosto;
+            $response = new ResponseGosto();
+            $response->success = true;
+            $response->gosto = $gosto;
+            return $response;
         }else{
-            return $gosto;
+            $response = new ResponseGosto();
+            $response->success = false;
+            $response->mensagem = "Erro a adicionar o gosto";
+            return $response;
         }
     }
 
     // Remove um gosto a uma publicação
     public function actionDelete($id){
         $gosto = Gosto::find()->where(['id' => $id])->one();
-        if($gosto->delete()){
-            return true;
-        }else{
-            return false;
+
+        if($gosto == null){
+            $response = new ResponseGosto();
+            $response->success = false;
+            $response->mensagem = "Não existe um gosto com esse ID";
+            return $response;
         }
+
+        if($gosto->delete()){
+            $response = new ResponseGosto();
+            $response->success = true;
+            return $response;
+        }else{
+            $response = new ResponseGosto();
+            $response->success = false;
+            $response->mensagem = "Erro a remover o gosto";
+            return $response;
+        }
+
     }
 
     // Mostra o número de gostos de uma publicacao
     public function actionNumgostospub($publicacaoid){
+
         $num = count(Gosto::find()->where(['publicacao_id' => $publicacaoid])->all());
 
-        return ['publicação_id' => $publicacaoid, 'count' => $num];
-    }
+        $response = new ResponseGosto();
+        $response->success = true;
+        $response->gosto = ['publicação_id' => $publicacaoid, 'count' => $num];
 
+        return $response;
+    }
+    //----//
     // Mostra o número de gostos de cada publicacao que existe na BD
     public function actionNumgostos(){
         $publicacoes = Publicacao::find()->all();
