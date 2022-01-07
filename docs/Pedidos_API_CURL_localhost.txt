@@ -206,14 +206,18 @@ curl --location --request POST 'http://localhost:8080/v1/gosto?access-token=IL4w
 }'
 
 
-// Ver Todos os gostos da Publicação
+// Ver o numero de gostos da Publicação
 
 curl --location --request GET 'http://localhost:8080/v1/gosto/numgostospub/1?access-token=IL4wPHi0LMCGPs5Jc3dzt7xRQjSOKbKG' \
 --header 'Content-Type: application/json' \
 --data-raw ''
 
 
+// Ver o numero de gostos de cada publicação
 
+curl --location --request GET 'http://localhost:8080/v1/gosto/numgostos?access-token=IL4wPHi0LMCGPs5Jc3dzt7xRQjSOKbKG' \
+--header 'Content-Type: application/json' \
+--data-raw ''
 
 
 // Apagar um gosto
