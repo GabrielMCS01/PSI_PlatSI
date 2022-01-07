@@ -30,6 +30,7 @@ class PublicacaoController extends ActiveController
         unset($actions['delete']);
         unset($actions['create']);
         unset($actions['index']);
+        unset($actions['view']);
         $actions['update'] = null;
 
         return $actions;
@@ -41,6 +42,8 @@ class PublicacaoController extends ActiveController
         //Vai buscar todas as publicações, ordenando-as por ordem descendente
         $publicacao = Publicacao::find()->orderBy(['createtime' => SORT_DESC])->all();
 
+
+        
         return $publicacao;
     }
 

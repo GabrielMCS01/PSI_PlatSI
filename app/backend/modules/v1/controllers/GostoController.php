@@ -74,6 +74,13 @@ class GostoController extends ActiveController
             return $response;
         }
 
+        if($gosto->user_id != Yii::$app->user->getId()){
+            $response = new ResponseGosto();
+            $response->success = false;
+            $response->mensagem = "Este utilizador não pode apagar gostos de outros utilizadores";
+            return $response;
+        }
+
         if($gosto->delete()){
             $response = new ResponseGosto();
             $response->success = true;
@@ -123,7 +130,13 @@ class GostoController extends ActiveController
 
         $publicacoes = Publicacao::find()->innerJoin(['ciclismo'], 'publicacao.ciclismo_id = ciclismo.id')->where(['ciclismo.user_id' => Yii::$app->user->getId()])->all();
 
-        $array = null;
+        if($publicacoes == null){
+            $response = new ResponseGosto();
+            $response->success = false;
+            $response->mensagem = "Uitlizador sem publicações";
+            return $response;
+        }
+
         $i = 0;
         foreach ($publicacoes as $publicacao){
             $subarray['publicacao_id'] = $publicacao->id;
