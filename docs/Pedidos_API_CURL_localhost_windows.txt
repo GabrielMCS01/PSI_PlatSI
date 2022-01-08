@@ -38,8 +38,112 @@ curl --location --request DELETE 'http://localhost:8080/v1/user/6?access-token=b
 // Cria um treino
 // O id do user com o token é atribuido automaticamente ao treino
 
+curl --location --request POST 'http://localhost:8080/v1/ciclismo?access-token=IL4wPHi0LMCGPs5Jc3dzt7xRQjSOKbKG' --header 'Content-Type: application/json' --data-raw '{\"nome_percurso\": \"Percurso API\",\"duracao\": 1029,\"distancia\": 4292,\"velocidade_media\": 7.45,\"velocidade_maxima\": 20.4,\"rota\": null,\"velocidade_grafico\": null}'
 
 
+// Visualizar todos os treinos do utilizador
+
+curl --location --request GET 'http://localhost:8080/v1/ciclismo?access-token=IL4wPHi0LMCGPs5Jc3dzt7xRQjSOKbKG' --header 'Content-Type: application/json'
 
 
+// Visualizar um treino do utilizador
 
+curl --location --request GET 'http://localhost:8080/v1/ciclismo/6?access-token=IL4wPHi0LMCGPs5Jc3dzt7xRQjSOKbKG' --header 'Content-Type: application/json'
+
+
+// Alterar um treino do utilizador (Funcionou na DB mas retornou tudo null na resposta)
+
+curl --location --request PUT 'http://localhost:8080/v1/ciclismo/6?access-token=IL4wPHi0LMCGPs5Jc3dzt7xRQjSOKbKG' --header 'Content-Type: application/json' --data-raw '{\"nome_percurso\": \"Percurso API alterado\"}'
+
+
+// Apagar um treino do utilizador
+
+curl --location --request DELETE 'http://localhost:8080/v1/ciclismo/6?access-token=IL4wPHi0LMCGPs5Jc3dzt7xRQjSOKbKG' --header 'Content-Type: application/json'
+
+
+------------------------------------------- Publicação ----------------------------------------------------
+
+// Cria uma publicação
+
+curl --location --request POST 'http://localhost:8080/v1/publicacao?access-token=IL4wPHi0LMCGPs5Jc3dzt7xRQjSOKbKG' --header 'Content-Type: application/json' --data-raw '{\"ciclismo_id\": 5}'
+
+
+// Ver uma publicação
+
+curl --location --request GET 'http://localhost:8080/v1/publicacao/3?access-token=IL4wPHi0LMCGPs5Jc3dzt7xRQjSOKbKG' --header 'Content-Type: application/json'
+
+
+// Ver todas as publicações (Feed de Noticias)
+
+curl --location --request GET 'http://localhost:8080/v1/publicacao/?access-token=IL4wPHi0LMCGPs5Jc3dzt7xRQjSOKbKG' --header 'Content-Type: application/json'
+
+
+// Ver todas as publicações do utilizador
+
+curl --location --request GET 'http://localhost:8080/v1/publicacao/user?access-token=IL4wPHi0LMCGPs5Jc3dzt7xRQjSOKbKG' --header 'Content-Type: application/json'
+
+
+// Apagar uma publicação
+
+curl --location --request DELETE 'http://localhost:8080/v1/publicacao/3?access-token=IL4wPHi0LMCGPs5Jc3dzt7xRQjSOKbKG' --header 'Content-Type: application/json' --data-raw '{\"nome_percurso\": \"Percurso dos percusos\"}'
+
+
+-------------------------------------------- Comentário ---------------------------------------------------
+
+// Cria um comentário numa publicação
+
+curl --location --request POST 'http://localhost:8080/v1/comentario?access-token=IL4wPHi0LMCGPs5Jc3dzt7xRQjSOKbKG' --header 'Content-Type: application/json' --data-raw '{\"publicacao_id\": 2,\"content\": \"Comentei\"}'
+
+
+// Ver todos os Comentários
+
+curl --location --request GET 'http://localhost:8080/v1/comentario?access-token=IL4wPHi0LMCGPs5Jc3dzt7xRQjSOKbKG' --header 'Content-Type: application/json'
+
+
+// Ver todos os Comentários de uma publicação
+
+curl --location --request GET 'http://localhost:8080/v1/comentario/getcomentpub/2?access-token=IL4wPHi0LMCGPs5Jc3dzt7xRQjSOKbKG' --header 'Content-Type: application/json'
+
+
+// Ver um Comentário
+
+curl --location --request GET 'http://localhost:8080/v1/comentario/5?access-token=IL4wPHi0LMCGPs5Jc3dzt7xRQjSOKbKG' --header 'Content-Type: application/json'
+
+
+// Editar um Comentário
+
+curl --location --request PUT 'http://localhost:8080/v1/comentario/5?access-token=IL4wPHi0LMCGPs5Jc3dzt7xRQjSOKbKG' --header 'Content-Type: application/json' --data-raw '{\"content\": \"Comentei outra vez\"}'
+
+
+// Apagar um Comentário
+
+curl --location --request DELETE 'http://localhost:8080/v1/comentario/5?access-token=IL4wPHi0LMCGPs5Jc3dzt7xRQjSOKbKG' --header 'Content-Type: application/json'
+
+
+-------------------------------------------------- Gosto --------------------------------------------------
+
+// O mesmo utilizador só pode ter um like em cada publicação
+
+// Cria um gosto numa publicação
+
+curl --location --request POST 'http://localhost:8080/v1/gosto?access-token=IL4wPHi0LMCGPs5Jc3dzt7xRQjSOKbKG' --header 'Content-Type: application/json' --data-raw '{\"publicacao_id\": 2}'
+
+
+// Ver o numero de gostos da Publicação
+
+curl --location --request GET 'http://localhost:8080/v1/gosto/numgostospub/1?access-token=IL4wPHi0LMCGPs5Jc3dzt7xRQjSOKbKG' --header 'Content-Type: application/json'
+
+
+// Ver o numero de gostos de cada publicação
+
+curl --location --request GET 'http://localhost:8080/v1/gosto/numgostos?access-token=IL4wPHi0LMCGPs5Jc3dzt7xRQjSOKbKG' --header 'Content-Type: application/json'
+
+
+// Ver o numero de gostos das publicações do utilizador
+
+curl --location --request GET 'http://localhost:8080/v1/gosto/numgostosuser?access-token=wpvSoVPduEh99HYs95yZo_0P6tETHEPB' --header 'Content-Type: application/json'
+
+
+// Apagar um gosto
+
+curl --location --request DELETE 'http://localhost:8080/v1/gosto/5?access-token=IL4wPHi0LMCGPs5Jc3dzt7xRQjSOKbKG' --header 'Content-Type: application/json'

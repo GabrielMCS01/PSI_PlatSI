@@ -99,7 +99,6 @@ curl --location --request DELETE 'http://localhost:8080/v1/ciclismo/6?access-tok
 
 ------------------------------------------- Publicação ----------------------------------------------------
 
-
 // Cria uma publicação
 
 curl --location --request POST 'http://localhost:8080/v1/publicacao?access-token=IL4wPHi0LMCGPs5Jc3dzt7xRQjSOKbKG' \
@@ -138,7 +137,6 @@ curl --location --request DELETE 'http://localhost:8080/v1/publicacao/3?access-t
 
 -------------------------------------------- Comentário ---------------------------------------------------
 
-
 // Cria um comentário numa publicação
 
 curl --location --request POST 'http://localhost:8080/v1/comentario?access-token=IL4wPHi0LMCGPs5Jc3dzt7xRQjSOKbKG' \
@@ -165,6 +163,7 @@ curl --location --request GET 'http://localhost:8080/v1/comentario/getcomentpub/
 
 curl --location --request GET 'http://localhost:8080/v1/comentario/5?access-token=IL4wPHi0LMCGPs5Jc3dzt7xRQjSOKbKG' \
 --header 'Content-Type: application/json'
+
 
 // Editar um Comentário
 
