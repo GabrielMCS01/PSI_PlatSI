@@ -225,4 +225,4 @@ curl --location --request DELETE 'http://localhost:8080/v1/gosto/5?access-token=
 
 
 
-
+curl --location --request POST 'http://localhost:8080/v1/registo/signup' --header 'Content-Type: application/json' --data-raw '{"username": "luis","email": "luis@gmail.com","password": "123456789","primeiro_nome": "Luis","ultimo_nome": "Torres"}'
