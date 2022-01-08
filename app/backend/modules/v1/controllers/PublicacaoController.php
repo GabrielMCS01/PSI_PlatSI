@@ -60,6 +60,7 @@ class PublicacaoController extends ActiveController
             $response = new ResponsePublicaçao();
             $response->success = false;
             $response->mensagem = "Não existe uma publicação com esse ID";
+            return $response;
         }
 
         $response = new ResponsePublicaçao();

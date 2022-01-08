@@ -160,6 +160,7 @@ class CiclismoController extends ActiveController
 
                 $response = new ResponseCiclismo();
                 $response->success = true;
+                $response->ciclismo = $treino;
                 return $response;
             }else{
                 $response = new ResponseCiclismo();

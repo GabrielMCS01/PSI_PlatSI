@@ -111,6 +111,15 @@ class UserController extends ActiveController
 
                 // Envia uma resposta de sucesso
                 $response->success = true;
+                $response->primeiro_nome = $user->userinfo->primeiro_nome;
+                $response->ultimo_nome = $user->userinfo->ultimo_nome;
+
+                if ($user->userinfo->data_nascimento == null) {
+                    $response->data_nascimento = "nulo";
+                } else {
+                    $response->data_nascimento = $user->userinfo->data_nascimento;
+                }
+
             } else {
                 // Envia uma resposta de erro
                 $response->success = false;
