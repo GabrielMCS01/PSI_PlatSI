@@ -158,17 +158,17 @@ class CiclismoController extends ActiveController
             if($treino->validate()) {
                 $treino->save();
 
-                $response = new ResponseDefault();
+                $response = new ResponseCiclismo();
                 $response->success = true;
                 return $response;
             }else{
-                $response = new ResponseDefault();
+                $response = new ResponseCiclismo();
                 $response->mensagem = "Erro a editar a sessão de treino";
                 $response->success = false;
                 return $response;
             }
         } else {
-            $response = new ResponseDefault();
+            $response = new ResponseCiclismo();
             $response->success = false;
             $response->mensagem = "O utilizador não tem permissões para atualizar treinos de outros utilizadores";
             return $response;
@@ -193,7 +193,7 @@ class CiclismoController extends ActiveController
 
             $treino = Ciclismo::findOne($id);
 
-            $response = new ResponseDefault();
+            $response = new ResponseCiclismo();
 
             if ($treino == null) {
                 $response->success = true;
@@ -203,7 +203,7 @@ class CiclismoController extends ActiveController
             }
             return $response;
         } else {
-                $response = new ResponseDefault();
+                $response = new ResponseCiclismo();
                 $response->success = false;
                 $response->mensagem = "O utilizador não tem permissões para apagar treinos de outros utilizadores";
                 return $response;
