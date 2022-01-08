@@ -23,7 +23,7 @@ curl --location --request POST 'http://localhost:8080/v1/login/login' --header '
 curl --location --request GET 'http://localhost:8080/v1/user/6?access-token=biP4_7qFX6CTXuZq5yDbQfeXpP6bL-JH' --header 'Content-Type: application/json'
 
 
-// Alterar os dados do utilizador (Funcionou na DB mas retornou tudo null na resposta)
+// Alterar os dados do utilizador
 
 curl --location --request PUT 'http://localhost:8080/v1/user/6?access-token=biP4_7qFX6CTXuZq5yDbQfeXpP6bL-JH' --header 'Content-Type: application/json' --data-raw '{\"username\": \"luisMod\",\"primeiro_nome\": \"Torres\",\"ultimo_nome\": \"Luis\",\"data_nascimento\": \"1991-09-20\"}'
 
@@ -51,7 +51,7 @@ curl --location --request GET 'http://localhost:8080/v1/ciclismo?access-token=IL
 curl --location --request GET 'http://localhost:8080/v1/ciclismo/6?access-token=IL4wPHi0LMCGPs5Jc3dzt7xRQjSOKbKG' --header 'Content-Type: application/json'
 
 
-// Alterar um treino do utilizador (Funcionou na DB mas retornou tudo null na resposta)
+// Alterar um treino do utilizador
 
 curl --location --request PUT 'http://localhost:8080/v1/ciclismo/6?access-token=IL4wPHi0LMCGPs5Jc3dzt7xRQjSOKbKG' --header 'Content-Type: application/json' --data-raw '{\"nome_percurso\": \"Percurso API alterado\"}'
 
