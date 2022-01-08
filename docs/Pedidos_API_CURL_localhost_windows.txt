@@ -61,6 +61,11 @@ curl --location --request PUT 'http://localhost:8080/v1/ciclismo/6?access-token=
 curl --location --request DELETE 'http://localhost:8080/v1/ciclismo/6?access-token=IL4wPHi0LMCGPs5Jc3dzt7xRQjSOKbKG' --header 'Content-Type: application/json'
 
 
+// Sincronizar os treinos do utilizador
+
+curl --location --request POST 'http://localhost:8080/v1/ciclismo/sync?access-token=IL4wPHi0LMCGPs5Jc3dzt7xRQjSOKbKG' --header 'Content-Type: application/json' --data-raw '[{\"nome_percurso\": \"Percurso API Sincronizacao\",\"duracao\": 9323,\"distancia\": 74362,\"velocidade_media\": 40.67,\"velocidade_maxima\": 60.21,\"rota\": null,\"velocidade_grafico\": null}]'
+
+
 ------------------------------------------- Publicação ----------------------------------------------------
 
 // Cria uma publicação

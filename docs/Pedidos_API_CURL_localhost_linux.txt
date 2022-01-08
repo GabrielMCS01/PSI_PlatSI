@@ -97,6 +97,23 @@ curl --location --request DELETE 'http://localhost:8080/v1/ciclismo/6?access-tok
 --header 'Content-Type: application/json'
 
 
+// Sincronização dos treinos
+
+curl --location --request POST 'http://localhost:8080/v1/ciclismo/sync?access-token=IL4wPHi0LMCGPs5Jc3dzt7xRQjSOKbKG' \
+--header 'Content-Type: application/json' \
+--data-raw '[
+    {
+        "nome_percurso": "Percurso API Sincronizacaoo",
+        "duracao": 9323,
+        "distancia": 74362,
+        "velocidade_media": 40.67,
+        "velocidade_maxima": 60.21,
+        "rota": null,
+        "velocidade_grafico": null
+    }
+]'
+
+
 ------------------------------------------- Publicação ----------------------------------------------------
 
 // Cria uma publicação
@@ -116,7 +133,7 @@ curl --location --request GET 'http://localhost:8080/v1/publicacao/3?access-toke
 
 // Ver todas as publicações (Feed de Noticias)
 
-curl --location --request GET 'http://localhost:8080/v1/publicacao/?access-token=IL4wPHi0LMCGPs5Jc3dzt7xRQjSOKbKG' \
+curl --location --request GET 'http://localhost:8080/v1/publicacao?access-token=IL4wPHi0LMCGPs5Jc3dzt7xRQjSOKbKG' \
 --header 'Content-Type: application/json'
 
 

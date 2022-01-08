@@ -238,17 +238,20 @@ class CiclismoController extends ActiveController
 
 
             if ($ciclismo->validate()) {
-                if ($bestDistancia < $ciclismo->distancia) {
+                if ($bestDistancia->distancia < $ciclismo->distancia) {
+                    $canal = "leaderboard";
                     $msg = "Novo recorde de distancia: " . Converter::distanceConverter($ciclismo->distancia) . " por " . $ciclismo->user->username;
-                    $this->FazPublish($msg);
+                    Mosquitto::FazPublish($canal, $msg);
                 }
-                if ($bestTempo < $ciclismo->duracao) {
+                if ($bestTempo->duracao < $ciclismo->duracao) {
+                    $canal = "leaderboard";
                     $msg = "Novo recorde de duração: " . Converter::timeConverter($ciclismo->duracao) . " por " . $ciclismo->user->username;
-                    $this->FazPublish($msg);
+                    Mosquitto::FazPublish($canal, $msg);
                 }
-                if ($bestVelocidade < $ciclismo->velocidade_media) {
+                if ($bestVelocidade->velocidade_media < $ciclismo->velocidade_media) {
+                    $canal = "leaderboard";
                     $msg = "Novo recorde de velocidade média: " . Converter::velocityConverter($ciclismo->velocidade_media) . " por " . $ciclismo->user->username;
-                    $this->FazPublish($msg);
+                    Mosquitto::FazPublish($canal, $msg);
                 }
                 $ciclismo->save();
             }
