@@ -15,6 +15,10 @@ O projeto é comum entre várias disciplinas, mas as fases que traçam este proj
 
 ## Ver Notas Adicionais antes de começar a preparação da aplicação
 
+## Instalar composer
+
+composer install
+
 ## Criar a base de dados e tabelas
 
 Executar o ficheiro SQL "CriarDB"
@@ -52,6 +56,19 @@ Password: 123456789
 ## Utilizador
 
 Username: test
+
+Password: 123456789
+
+## Iuri
+
+Username: iuri
+
+Password: 123456789
+
+
+## Gabriel
+
+Username: gabriel
 
 Password: 123456789
 

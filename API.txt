@@ -1,0 +1,24 @@
+------------------------------------------------------------------------------
+Ficheiro de configuração da API
+
+Ler primeiro o ficheiro README.md
+------------------------------------------------------------------------------
+
+#Iniciar servidor Web (yii serve)
+
+.\yii serve --docroot="backend/web/"
+
+#Iniciar servidor mosquitto
+
+mosquitto
+
+#Executar comandos cURL
+
+ficheiro "Pedidos_API_CURL_localhost_sistemas_UNIX" - sistemas UNIX (Linux, MacOS)
+
+OU
+
+ficheiro "Pedidos_API_CURL_localhost_windows" - sistemas Windows
+
+
+
