@@ -4,8 +4,6 @@ Ficheiro de configuração da API
 Ler primeiro o ficheiro README.md
 ------------------------------------------------------------------------------
 
-#Iniciar servidor mySQL (XAMPP, WAMPP, LAMPP)
-
 #Iniciar servidor Web (yii serve)
 
 .\yii serve --docroot="backend/web/"

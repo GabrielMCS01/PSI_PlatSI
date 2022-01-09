@@ -67,7 +67,7 @@ curl --location --request POST 'http://localhost:8080/v1/ciclismo?access-token=I
     "velocidade_grafico": null
 }'
 
-#Caso os valores de duração, distancia e velocidade média forem alterados para serem os maiores que irão existir na base de dados
+#Caso os valores de duração, distancia e velocidade média forem alterados para serem os maiores valores que irão existir na base de dados
 #os utilizadores recebem um aviso que estes valores são os maiores valores da base de dados
 
 mosquitto_sub -t 'leaderboard' -h localhost
@@ -116,7 +116,7 @@ curl --location --request POST 'http://localhost:8080/v1/ciclismo/sync?access-to
     }
 ]'
 
-#Caso os valores de duração, distancia e velocidade média forem alterados para serem os maiores que irão existir na base de dados
+#Caso os valores de duração, distancia e velocidade média forem alterados para serem os maiores valores que irão existir na base de dados
 #os utilizadores recebem um aviso que estes valores são os maiores valores da base de dados
 
 mosquitto_sub -t 'leaderboard' -h localhost
