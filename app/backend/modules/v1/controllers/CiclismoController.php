@@ -119,7 +119,7 @@ class CiclismoController extends ActiveController
     // Mostra todos os treinos do próprio utilizador
     public function actionIndex()
     {
-        // Recebe todos os treino onde o User_id do user que faz o pedido
+        // Recebe todos os treino utilizador que faz o pedido
         $ciclismos = Ciclismo::find()->where(['user_id' => Yii::$app->user->id])->all();
 
         if($ciclismos == null){
@@ -128,7 +128,6 @@ class CiclismoController extends ActiveController
             $response->mensagem = "Não existem sessões de treino";
             return $response;
         }
-
 
         $response = new ResponseCiclismo();
         $response->success = true;
@@ -142,6 +141,7 @@ class CiclismoController extends ActiveController
     {
         $treino = Ciclismo::findOne($id);
 
+        // Verifica se existe algum treino para alterar
         if($treino == null){
             $response = new ResponseCiclismo();
             $response->success = false;
@@ -154,7 +154,7 @@ class CiclismoController extends ActiveController
             // Recebe os dados enviados e atualiza-os
             $treino->nome_percurso = Yii::$app->request->post('nome_percurso');
 
-            // Guarda as alterações do utilizador e das informações deste
+            // Guarda as alterações do nome do treino
             if($treino->validate()) {
                 $treino->save();
 
@@ -181,6 +181,7 @@ class CiclismoController extends ActiveController
     {
         $treino = Ciclismo::findOne($id);
 
+        // Erro caso não encontre nenhum treino
         if($treino == null){
             $response = new ResponseCiclismo();
             $response->success = false;
@@ -196,8 +197,10 @@ class CiclismoController extends ActiveController
 
             $response = new ResponseCiclismo();
 
+            // Se não encontrar nenhum treino faz
             if ($treino == null) {
                 $response->success = true;
+            // Erro
             } else {
                 $response->success = false;
                 $response->mensagem = "Erro a apagar a sessão de treino";
@@ -218,8 +221,10 @@ class CiclismoController extends ActiveController
     // Permite fazer a sincronização dos treinos da DB local (SQLITE) com a DB da API
     public function actionSync()
     {
+        // Recebe os treinos da DB Local (SQLITE) que faltam sincronizar com a API
         $treinos = Yii::$app->request->post();
 
+        // Para cada treino existente é construido um Objeto do tipo Ciclismo e esse é colocado na Base de dados
         foreach ($treinos as $treino) {
             $ciclismo = new Ciclismo();
 
@@ -233,22 +238,26 @@ class CiclismoController extends ActiveController
             $ciclismo->data_treino = Yii::$app->formatter->asDateTime('now', 'yyyy-MM-dd HH-mm-ss');
             $ciclismo->user_id = Yii::$app->user->getId();
 
+            // Recebe a Melhor Distância, tempo e velocidade média para comparar com os dados do treino que está a ser colocado na DB
             $bestDistancia = Ciclismo::find()->select(['user_id', 'MAX(distancia) as distancia'])->orderBy(['MAX(distancia)' => SORT_DESC])->groupBy(['user_id'])->one();
             $bestTempo = Ciclismo::find()->select(['user_id', 'MAX(duracao) as duracao'])->orderBy(['MAX(duracao)' => SORT_DESC])->groupBy(['user_id'])->one();
             $bestVelocidade = Ciclismo::find()->select(['user_id', 'MAX(velocidade_media) as velocidade_media'])->orderBy(['MAX(velocidade_media)' => SORT_DESC])->groupBy(['user_id'])->one();
 
-
+            // Se os dados do treino forem todos válidos
             if ($ciclismo->validate()) {
+                // Verifica se o recorde anterior de distância foi alcançado no treino atual
                 if ($bestDistancia->distancia < $ciclismo->distancia) {
                     $canal = "leaderboard";
                     $msg = "Novo recorde de distancia: " . Converter::distanceConverter($ciclismo->distancia) . " por " . $ciclismo->user->username;
                     Mosquitto::FazPublish($canal, $msg);
                 }
+                // Verifica se o recorde anterior de duração do treino foi alcançado no treino atual
                 if ($bestTempo->duracao < $ciclismo->duracao) {
                     $canal = "leaderboard";
                     $msg = "Novo recorde de duração: " . Converter::timeConverter($ciclismo->duracao) . " por " . $ciclismo->user->username;
                     Mosquitto::FazPublish($canal, $msg);
                 }
+                // Verifica se o recorde anterior de velocidade média foi alcançado no treino atual
                 if ($bestVelocidade->velocidade_media < $ciclismo->velocidade_media) {
                     $canal = "leaderboard";
                     $msg = "Novo recorde de velocidade média: " . Converter::velocityConverter($ciclismo->velocidade_media) . " por " . $ciclismo->user->username;
@@ -258,6 +267,7 @@ class CiclismoController extends ActiveController
             }
         }
 
+        // Retorna todos os treinos do utilizador, já com os mais recentes
         $ciclismos = Ciclismo::find()->where(['user_id' => Yii::$app->user->id])->all();
 
         $response = new ResponseCiclismo();

@@ -17,7 +17,7 @@ curl --location --request POST 'http://localhost:8080/v1/registo/signup' \
 }'
 
 
-// Login do Utilizador
+// Login do Utilizador - Utilizar o Access-token devolvido neste comando para utilizar nos restantes comandos abaixo (USER)
 
 curl --location --request POST 'http://localhost:8080/v1/login/login' \
 --header 'Content-Type: application/json' \
