@@ -13,7 +13,7 @@ onde será utilizado o luis
 curl --location --request POST 'http://localhost:8080/v1/registo/signup' --header 'Content-Type: application/json' --data-raw '{\"username\": \"luis\",\"email\": \"luis@gmail.com\",\"password\": \"123456789\",\"primeiro_nome\": \"Luis\",\"ultimo_nome\": \"Torres\"}'
 
 
-// Login do Utilizador biP4_7qFX6CTXuZq5yDbQfeXpP6bL-JH
+// Login do Utilizador - Utilizar o Access-token devolvido neste comando para utilizar nos restantes comandos abaixo (USER)
 
 curl --location --request POST 'http://localhost:8080/v1/login/login' --header 'Content-Type: application/json' --data-raw '{\"username\": \"luis\",\"password\": \"123456789\"}'
 

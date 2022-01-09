@@ -3,7 +3,6 @@
 namespace app\modules\v1\controllers;
 
 use app\modules\v1\models\ResponseComentario;
-use app\modules\v1\models\ResponseDefault;
 use common\models\Comentario;
 use Yii;
 use yii\filters\auth\QueryParamAuth;
@@ -34,10 +33,9 @@ class ComentarioController extends ActiveController
         return $actions;
     }
 
-    //Devolve todos os comentários
+    // Devolve todos os comentários
     public function actionIndex()
     {
-
         $comentarios = Comentario::find()->all();
 
         if ($comentarios == null) {
@@ -57,7 +55,7 @@ class ComentarioController extends ActiveController
     // Cria um comentário numa publicação
     public function actionCreate()
     {
-
+        // Cria um objeto do tipo Comentário
         $model = new Comentario();
 
         $model->publicacao_id = Yii::$app->request->post('publicacao_id');
@@ -65,6 +63,7 @@ class ComentarioController extends ActiveController
         $model->createtime = Yii::$app->formatter->asDateTime('now', 'yyyy-MM-dd HH-mm-ss');
         $model->content = Yii::$app->request->post('content');
 
+        // Se os dados do comentário forem válidos cria na DB
         if ($model->validate()) {
             $model->save();
 
@@ -80,8 +79,7 @@ class ComentarioController extends ActiveController
         }
     }
 
-
-    //Devolve um comentário
+    // Devolve um comentário
     public function actionView($id)
     {
         $comentario = Comentario::findOne($id);
@@ -102,9 +100,7 @@ class ComentarioController extends ActiveController
     // Edita um comentário numa publicação
     public function actionUpdate($id)
     {
-
         $comentario = Comentario::find()->where(['id' => $id])->one();
-
 
         if ($comentario == null) {
             $response = new ResponseComentario();
@@ -113,11 +109,14 @@ class ComentarioController extends ActiveController
             return $response;
         }
 
+        // Verifica se o utilizador que edita é o utilizador que criou o comentário
         if (Yii::$app->user->can("UpdateComment", ['comentario' => $comentario])) {
             $comentario->content = Yii::$app->request->post('content');
 
+            // Adiciona ao comentário o texto (editado)
             $comentario->content = $comentario->content . ' (Editado)';
 
+            
             if ($comentario->validate()) {
                 $comentario->save();
 
@@ -169,14 +168,11 @@ class ComentarioController extends ActiveController
             $response->mensagem = "Utilizador não tem permissões para remover este comentário";
             return $response;
         }
-
     }
 
-// Mostra todos os comentários de uma publicação
-    public
-    function actionGetcomentpub($publicacaoid)
+    // Mostra todos os comentários de uma publicação
+    public function actionGetcomentpub($publicacaoid)
     {
-
         $comentarios = Comentario::find()->where(['publicacao_id' => $publicacaoid])->all();
 
         if ($comentarios == null) {

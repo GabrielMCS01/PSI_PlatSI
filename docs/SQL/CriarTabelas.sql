@@ -49,5 +49,3 @@ CREATE TABLE `comentario` (
   CONSTRAINT fk_come_idpost FOREIGN KEY(publicacao_id) REFERENCES publicacao(id),
   constraint fk_come_iduser foreign key(user_id)	references user(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
- /* VELOCIDADE GRAFICO, ROTA - Colocar NOT NULL no final */
