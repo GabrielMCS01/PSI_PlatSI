@@ -3,6 +3,7 @@
 namespace app\modules\v1\controllers;
 
 use app\modules\v1\models\ResponsePublicaçao;
+use common\models\Ciclismo;
 use common\models\Comentario;
 use common\models\Gosto;
 use common\models\Publicacao;
@@ -93,6 +94,15 @@ class PublicacaoController extends ActiveController
     // Cria uma publicação
     public function actionCreate()
     {
+        $ciclismo = Ciclismo::findOne(Yii::$app->request->post('ciclismo_id'));
+
+        if(!Yii::$app->user->can('viewActivity', ['activity' => $ciclismo])){
+            $response = new ResponsePublicaçao();
+            $response->success = false;
+            $response->mensagem = "O utilizador não tem permissões de criar uma publicação com um treino de outro utilizador";
+            return $response;
+        }
+
         $model = new Publicacao();
 
         $model->ciclismo_id = Yii::$app->request->post('ciclismo_id');
@@ -131,6 +141,11 @@ class PublicacaoController extends ActiveController
                 $response->mensagem = "Erro ao apagar a publicação";
                 return $response;
             }
+        }else{
+            $response = new ResponsePublicaçao();
+            $response->success = false;
+            $response->mensagem = "O utilizador não tem permissões de apagar uma publicação de outro utilizador";
+            return $response;
         }
     }
 }

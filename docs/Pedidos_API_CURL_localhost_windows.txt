@@ -90,7 +90,7 @@ curl --location --request GET 'http://localhost:8080/v1/publicacao/user?access-t
 
 // Apagar uma publicação
 
-curl --location --request DELETE 'http://localhost:8080/v1/publicacao/3?access-token=IL4wPHi0LMCGPs5Jc3dzt7xRQjSOKbKG' --header 'Content-Type: application/json' --data-raw '{\"nome_percurso\": \"Percurso dos percusos\"}'
+curl --location --request DELETE 'http://localhost:8080/v1/publicacao/3?access-token=IL4wPHi0LMCGPs5Jc3dzt7xRQjSOKbKG' --header 'Content-Type: application/json'
 
 
 -------------------------------------------- Comentário ---------------------------------------------------
