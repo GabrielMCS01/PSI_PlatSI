@@ -116,7 +116,7 @@ class ComentarioController extends ActiveController
             // Adiciona ao comentário o texto (editado)
             $comentario->content = $comentario->content . ' (Editado)';
 
-            
+            // Se o comentário for válido guarda as alterações
             if ($comentario->validate()) {
                 $comentario->save();
 
@@ -142,6 +142,7 @@ class ComentarioController extends ActiveController
     // Apaga um comentário numa publicação
     public function actionDelete($id)
     {
+        // Pesquisa pelo ID do comentário enviado
         $comentario = Comentario::find()->where(['id' => $id])->one();
 
         if ($comentario == null) {
@@ -151,7 +152,9 @@ class ComentarioController extends ActiveController
             return $response;
         }
 
+        // Faz as verificações se o utilizador é moderador e/ou o comentário é utilizador
         if (Yii::$app->user->can("deleteCommentModerator", ['comentario' => $comentario])) {
+            // Se apagar o comentário com sucesso
             if ($comentario->delete()) {
                 $response = new ResponseComentario();
                 $response->success = true;
@@ -173,6 +176,7 @@ class ComentarioController extends ActiveController
     // Mostra todos os comentários de uma publicação
     public function actionGetcomentpub($publicacaoid)
     {
+        // Recebe todos os comentários onde o ID da publicação é o mesmo que o enviado
         $comentarios = Comentario::find()->where(['publicacao_id' => $publicacaoid])->all();
 
         if ($comentarios == null) {

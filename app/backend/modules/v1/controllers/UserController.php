@@ -46,7 +46,6 @@ class UserController extends ActiveController
     {
         $user = User::findOne($id);
 
-
         if ($user == null) {
             $response = new ResponsePerfil();
 
@@ -63,6 +62,8 @@ class UserController extends ActiveController
             $response->success = true;
             $response->primeiro_nome = $user->userinfo->primeiro_nome;
             $response->ultimo_nome = $user->userinfo->ultimo_nome;
+
+            // Verifica se a data de Nascimento foi enviada vazia ou não
             if ($user->userinfo->data_nascimento == null) {
                 $response->data_nascimento = "nulo";
             } else {
@@ -83,6 +84,7 @@ class UserController extends ActiveController
     {
         $user = User::findOne($id);
 
+        // Caso não encontre nenhum utilizador
         if ($user == null) {
             $response = new ResponsePerfil();
 
@@ -94,7 +96,6 @@ class UserController extends ActiveController
         // Verifica se o user tem a permissão para fazer atualizações e se altera o seu próprio perfil
         if (Yii::$app->user->can('updateProfile', ['user' => $user])) {
             // Recebe os dados enviados e atualiza-os
-            // Verificar se o email é válido
             $user->userinfo->primeiro_nome = Yii::$app->request->post('primeiro_nome');
             $user->userinfo->ultimo_nome = Yii::$app->request->post('ultimo_nome');
             // Formata a string para data
@@ -114,6 +115,7 @@ class UserController extends ActiveController
                 $response->primeiro_nome = $user->userinfo->primeiro_nome;
                 $response->ultimo_nome = $user->userinfo->ultimo_nome;
 
+                // Verifica se a data de Nascimento foi enviada vazia ou não
                 if ($user->userinfo->data_nascimento == null) {
                     $response->data_nascimento = "nulo";
                 } else {
@@ -141,6 +143,7 @@ class UserController extends ActiveController
     {
         $user = User::findOne($id);
 
+        // Caso não encontre nenhum utilizador
         if ($user == null) {
             $response = new ResponsePerfil();
 
@@ -149,9 +152,8 @@ class UserController extends ActiveController
             return $response;
         }
 
-        // Verifica se o user tem a permissão o seu próprio perfil
+        // Verifica se o utilizador tem permissões para apagar o perfil e se está a apagar o próprio
         if (Yii::$app->user->can('deleteProfile', ['user' => $user])) {
-            // Apaga os dados da chave estrangeira
             // Recebe todos os treinos que este utilizador tenha feito
             $ciclismos = Ciclismo::find()->where(['user_id' => $user->id])->all();
 
@@ -173,7 +175,6 @@ class UserController extends ActiveController
             Gosto::deleteAll(['user_id' => $user->id]);
             $user->userinfo->delete();
             $user->delete();
-
 
             // Verifica se o utilizador foi apagado
             $user = User::findOne($id);
