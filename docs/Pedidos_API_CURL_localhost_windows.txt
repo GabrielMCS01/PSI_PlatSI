@@ -3,9 +3,6 @@
 // NESTES TESTES SERÁ UTILIZADO O UTILIZADOR IURI COM ID=5 excepto na secção USER
 onde será utilizado o luis
 
-// Iniciar o Localhost
-.\yii serve --docroot="backend/web/"
-
 // ----------------------------------------- USER --------------------------------------------------------------
 
 // Registo de um utilizador
@@ -18,17 +15,17 @@ curl --location --request POST 'http://localhost:8080/v1/registo/signup' --heade
 curl --location --request POST 'http://localhost:8080/v1/login/login' --header 'Content-Type: application/json' --data-raw '{\"username\": \"luis\",\"password\": \"123456789\"}'
 
 
-// Ver o perfil do utilizador
+// Ver o perfil do utilizador - Alterar o access-token com o token que aparece no login do utilizador
 
 curl --location --request GET 'http://localhost:8080/v1/user/6?access-token=biP4_7qFX6CTXuZq5yDbQfeXpP6bL-JH' --header 'Content-Type: application/json'
 
 
-// Alterar os dados do utilizador
+// Alterar os dados do utilizador - Alterar o access-token com o token que aparece no login do utilizador
 
 curl --location --request PUT 'http://localhost:8080/v1/user/6?access-token=biP4_7qFX6CTXuZq5yDbQfeXpP6bL-JH' --header 'Content-Type: application/json' --data-raw '{\"username\": \"luisMod\",\"primeiro_nome\": \"Torres\",\"ultimo_nome\": \"Luis\",\"data_nascimento\": \"1991-09-20\"}'
 
 
-// Apagar o Utilizador
+// Apagar o Utilizador - Alterar o access-token com o token que aparece no login do utilizador
 
 curl --location --request DELETE 'http://localhost:8080/v1/user/6?access-token=biP4_7qFX6CTXuZq5yDbQfeXpP6bL-JH' --header 'Content-Type: application/json'
 
@@ -39,6 +36,12 @@ curl --location --request DELETE 'http://localhost:8080/v1/user/6?access-token=b
 // O id do user com o token é atribuido automaticamente ao treino
 
 curl --location --request POST 'http://localhost:8080/v1/ciclismo?access-token=IL4wPHi0LMCGPs5Jc3dzt7xRQjSOKbKG' --header 'Content-Type: application/json' --data-raw '{\"nome_percurso\": \"Percurso API\",\"duracao\": 1029,\"distancia\": 4292,\"velocidade_media\": 7.45,\"velocidade_maxima\": 20.4,\"rota\": null,\"velocidade_grafico\": null}'
+
+#Caso os valores de duração, distancia e velocidade média forem alterados para serem os maiores que irão existir na base de dados
+#os utilizadores recebem um aviso que estes valores são os maiores valores da base de dados
+
+mosquitto_sub -t 'leaderboard' -h localhost
+
 
 
 // Visualizar todos os treinos do utilizador
@@ -64,6 +67,11 @@ curl --location --request DELETE 'http://localhost:8080/v1/ciclismo/6?access-tok
 // Sincronizar os treinos do utilizador
 
 curl --location --request POST 'http://localhost:8080/v1/ciclismo/sync?access-token=IL4wPHi0LMCGPs5Jc3dzt7xRQjSOKbKG' --header 'Content-Type: application/json' --data-raw '[{\"nome_percurso\": \"Percurso API Sincronizacao\",\"duracao\": 9323,\"distancia\": 74362,\"velocidade_media\": 40.67,\"velocidade_maxima\": 60.21,\"rota\": null,\"velocidade_grafico\": null}]'
+
+#Caso os valores de duração, distancia e velocidade média forem alterados para serem os maiores que irão existir na base de dados
+#os utilizadores recebem um aviso que estes valores são os maiores valores da base de dados
+
+mosquitto_sub -t 'leaderboard' -h localhost
 
 
 ------------------------------------------- Publicação ----------------------------------------------------
@@ -96,6 +104,14 @@ curl --location --request DELETE 'http://localhost:8080/v1/publicacao/3?access-t
 -------------------------------------------- Comentário ---------------------------------------------------
 
 // Cria um comentário numa publicação
+
+//Pode verificar que o criador desta publicação irá receber um aviso de quando a publicação é comentada
+
+mosquitto_sub -t '4' -h localhost
+
+#Nota: o número 4 corresponde ao id do utilizador que criou da publicação;
+
+
 
 curl --location --request POST 'http://localhost:8080/v1/comentario?access-token=IL4wPHi0LMCGPs5Jc3dzt7xRQjSOKbKG' --header 'Content-Type: application/json' --data-raw '{\"publicacao_id\": 2,\"content\": \"Comentei\"}'
 
@@ -130,6 +146,13 @@ curl --location --request DELETE 'http://localhost:8080/v1/comentario/5?access-t
 // O mesmo utilizador só pode ter um like em cada publicação
 
 // Cria um gosto numa publicação
+
+//Pode verificar que o criador desta publicação irá receber um aviso de quando a publicação é reagida
+
+mosquitto_sub -t '4' -h localhost
+
+#Nota: o número 4 corresponde ao id do utilizador que criou da publicação;
+
 
 curl --location --request POST 'http://localhost:8080/v1/gosto?access-token=IL4wPHi0LMCGPs5Jc3dzt7xRQjSOKbKG' --header 'Content-Type: application/json' --data-raw '{\"publicacao_id\": 2}'
 

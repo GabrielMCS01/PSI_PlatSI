@@ -1,8 +1,6 @@
 // NESTES TESTES SERÁ UTILIZADO O UTILIZADOR IURI COM ID=5 excepto na secção USER
 onde será utilizado o luis
 
-// Iniciar o Localhost
-.\yii serve --docroot="backend/web/"
 
 // ----------------------------------------- USER --------------------------------------------------------------
 
@@ -29,13 +27,13 @@ curl --location --request POST 'http://localhost:8080/v1/login/login' \
 }'
 
 
-// Ver o perfil do utilizador
+// Ver o perfil do utilizador - Alterar o access-token com o token que aparece no login do utilizador
 
 curl --location --request GET 'http://localhost:8080/v1/user/6?access-token=3KOEbLdQDXSH5hai3--icX9ASULUAJWj' \
 --header 'Content-Type: application/json'
 
 
-// Alterar os dados do utilizador
+// Alterar os dados do utilizador - Alterar o access-token com o token que aparece no login do utilizador
 
 curl --location --request PUT 'http://localhost:8080/v1/user/6?access-token=3KOEbLdQDXSH5hai3--icX9ASULUAJWj' \
 --header 'Content-Type: application/json' \
@@ -46,7 +44,7 @@ curl --location --request PUT 'http://localhost:8080/v1/user/6?access-token=3KOE
 }'
 
 
-// Apagar o Utilizador
+// Apagar o Utilizador - Alterar o access-token com o token que aparece no login do utilizador
 
 curl --location --request DELETE 'http://localhost:8080/v1/user/6?access-token=3KOEbLdQDXSH5hai3--icX9ASULUAJWj' \
 --header 'Content-Type: application/json' 
@@ -68,6 +66,11 @@ curl --location --request POST 'http://localhost:8080/v1/ciclismo?access-token=I
     "rota": null,
     "velocidade_grafico": null
 }'
+
+#Caso os valores de duração, distancia e velocidade média forem alterados para serem os maiores que irão existir na base de dados
+#os utilizadores recebem um aviso que estes valores são os maiores valores da base de dados
+
+mosquitto_sub -t 'leaderboard' -h localhost
 
 
 // Visualizar todos os treinos do utilizador
@@ -113,6 +116,11 @@ curl --location --request POST 'http://localhost:8080/v1/ciclismo/sync?access-to
     }
 ]'
 
+#Caso os valores de duração, distancia e velocidade média forem alterados para serem os maiores que irão existir na base de dados
+#os utilizadores recebem um aviso que estes valores são os maiores valores da base de dados
+
+mosquitto_sub -t 'leaderboard' -h localhost
+
 
 ------------------------------------------- Publicação ----------------------------------------------------
 
@@ -153,12 +161,19 @@ curl --location --request DELETE 'http://localhost:8080/v1/publicacao/3?access-t
 
 // Cria um comentário numa publicação
 
+//Pode verificar que o criador desta publicação irá receber um aviso de quando a publicação é comentada
+
+mosquitto_sub -t '4' -h localhost
+
+#Nota: o número 4 corresponde ao id do utilizador que criou da publicação;
+
 curl --location --request POST 'http://localhost:8080/v1/comentario?access-token=IL4wPHi0LMCGPs5Jc3dzt7xRQjSOKbKG' \
 --header 'Content-Type: application/json' \
 --data-raw '{
     "publicacao_id": 2,
     "content": "Comentei"
 }'
+
 
 
 // Ver todos os Comentários
@@ -199,6 +214,13 @@ curl --location --request DELETE 'http://localhost:8080/v1/comentario/5?access-t
 // O mesmo utilizador só pode ter um like em cada publicação
 
 // Cria um gosto numa publicação
+
+//Pode verificar que o criador desta publicação irá receber um aviso de quando a publicação é reagida
+
+mosquitto_sub -t '4' -h localhost
+
+#Nota: o número 4 corresponde ao id do utilizador que criou da publicação;
+
 
 curl --location --request POST 'http://localhost:8080/v1/gosto?access-token=IL4wPHi0LMCGPs5Jc3dzt7xRQjSOKbKG' \
 --header 'Content-Type: application/json' \
