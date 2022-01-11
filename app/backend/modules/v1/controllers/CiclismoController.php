@@ -223,19 +223,19 @@ class CiclismoController extends ActiveController
     public function actionSync()
     {
         // Recebe os treinos da DB Local (SQLITE) que faltam sincronizar com a API
-        $treinos = Json::decode(Yii::$app->request->post("treinos"));
+        $treinos = Yii::$app->request->post("treinos");
 
         // Para cada treino existente é construido um Objeto do tipo Ciclismo e esse é colocado na Base de dados
         foreach ($treinos as $treino) {
             $ciclismo = new Ciclismo();
 
-            $ciclismo->nome_percurso = $treino->nome_percurso;
-            $ciclismo->duracao = $treino->duracao;
-            $ciclismo->distancia = $treino->distancia;
-            $ciclismo->velocidade_media = $treino->velocidade_media;
-            $ciclismo->velocidade_maxima = $treino->velocidade_maxima;
-            $ciclismo->velocidade_grafico = $treino->velocidade_grafico;
-            $ciclismo->rota = $treino->rota;
+            $ciclismo->nome_percurso = $treino["nome_percurso"];
+            $ciclismo->duracao = $treino["duracao"];
+            $ciclismo->distancia = $treino["distancia"];
+            $ciclismo->velocidade_media = $treino["velocidade_media"];
+            $ciclismo->velocidade_maxima = $treino["velocidade_maxima"];
+            $ciclismo->velocidade_grafico = $treino["velocidade_grafico"];
+            $ciclismo->rota = $treino["rota"];
             $ciclismo->data_treino = Yii::$app->formatter->asDateTime('now', 'yyyy-MM-dd HH-mm-ss');
             $ciclismo->user_id = Yii::$app->user->getId();
 
