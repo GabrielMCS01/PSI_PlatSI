@@ -237,7 +237,7 @@ class CiclismoController extends ActiveController
             $ciclismo->velocidade_media = $treino["velocidade_media"];
             $ciclismo->velocidade_maxima = $treino["velocidade_maxima"];
             $ciclismo->velocidade_grafico = $treino["velocidade_grafico"];
-            $ciclismo->rota = $treino["rota"];
+            //$ciclismo->rota = $treino["rota"];
             $ciclismo->data_treino = Yii::$app->formatter->asDateTime('now', 'yyyy-MM-dd HH-mm-ss');
             $ciclismo->user_id = Yii::$app->user->getId();
 
