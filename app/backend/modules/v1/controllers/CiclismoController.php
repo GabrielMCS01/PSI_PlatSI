@@ -222,7 +222,7 @@ class CiclismoController extends ActiveController
     public function actionSync()
     {
         // Recebe os treinos da DB Local (SQLITE) que faltam sincronizar com a API
-        $treinos = Yii::$app->request->post();
+        $treinos = Yii::$app->request->post("treinos");
 
         // Para cada treino existente é construido um Objeto do tipo Ciclismo e esse é colocado na Base de dados
         foreach ($treinos as $treino) {
