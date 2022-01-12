@@ -6,7 +6,7 @@ class Mosquitto
 {
     public static function FazPublish($canal, $mensagem){
 
-        $server = "localhost";
+        $server = "ciclodias.duckdns.org";
         $port = 1883;
         $username = "ciclodias";
         $password = "serverciclodias2021";
