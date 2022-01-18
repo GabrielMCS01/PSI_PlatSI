@@ -108,7 +108,7 @@ class PublicacaoController extends ActiveController
         if(Publicacao::find()->where(['ciclismo_id' => $ciclismo])->one() != null){
             $response = new ResponsePublicaçao();
             $response->success = false;
-            $response->mensagem = "Já existe uma publicação com esse treino";
+            $response->mensagem = "Já existe uma publicação com esse treino - ". $ciclismo;
             return $response;
         }
 
