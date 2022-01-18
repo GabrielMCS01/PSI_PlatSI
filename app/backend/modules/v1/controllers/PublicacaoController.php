@@ -104,6 +104,15 @@ class PublicacaoController extends ActiveController
             return $response;
         }
 
+
+        if(Publicacao::find()->where(['ciclismo_id' => $ciclismo])->one != null){
+            $response = new ResponsePublicaçao();
+            $response->success = false;
+            $response->mensagem = "Já existe uma publicação com esse treino";
+            return $response;
+        }
+
+
         $model = new Publicacao();
 
         $model->ciclismo_id = Yii::$app->request->post('ciclismo_id');
