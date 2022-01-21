@@ -147,10 +147,10 @@ $this->registerJsFile("@web/@mapbox/polyline/src/polyline.js", ['depends' => [\y
         // Quando o mapa carregar faz
         map.on('load', () => {
             // Transforma a string da rota num json de pontos de localização (GeoJSON)
-            var array = polyline.toGeoJSON('<?= $model->rota?>', 6);
+            var array = polyline.toGeoJSON('<?= addslashes($model->rota)?>', 6);
 
             // Vai buscar o ponto central da rota para utilizar como ponto de foco do mapa
-            var getCenter = polyline.decode('<?= $model->rota?>', 6);
+            var getCenter = polyline.decode('<?= addslashes($model->rota)?>', 6);
 
             var index = getCenter.length / 2;
             var centerPoint = getCenter[index.toFixed(0)];
