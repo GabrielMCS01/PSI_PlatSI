@@ -134,7 +134,7 @@ $this->registerJsFile("@web/@mapbox/polyline/src/polyline.js", ['depends' => [\y
 </div>
 <!-- Mostra o mapa com a rota-->
 <script>
-    if ('<?= $model->rota?>' != "") {
+    if ("<?= $model->rota?>" != "") {
         mapboxgl.accessToken = 'pk.eyJ1IjoiaXVyaWNhcnJhcyIsImEiOiJja3V3aDJrZWEwNjhuMm5xd3hqNHRuODdiIn0.Yztl8wZEMrxIlkEVwt1zgw';
         // Cria o objeto MAP
         const map = new mapboxgl.Map({
@@ -147,10 +147,10 @@ $this->registerJsFile("@web/@mapbox/polyline/src/polyline.js", ['depends' => [\y
         // Quando o mapa carregar faz
         map.on('load', () => {
             // Transforma a string da rota num json de pontos de localização (GeoJSON)
-            var array = polyline.toGeoJSON('<?= $model->rota?>', 6);
+            var array = polyline.toGeoJSON("<?= $model->rota?>", 6);
 
             // Vai buscar o ponto central da rota para utilizar como ponto de foco do mapa
-            var getCenter = polyline.decode('<?= $model->rota?>', 6);
+            var getCenter = polyline.decode("<?= $model->rota?>", 6);
 
             var index = getCenter.length / 2;
             var centerPoint = getCenter[index.toFixed(0)];
