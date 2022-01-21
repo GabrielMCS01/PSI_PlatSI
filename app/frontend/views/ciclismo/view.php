@@ -134,7 +134,7 @@ $this->registerJsFile("@web/@mapbox/polyline/src/polyline.js", ['depends' => [\y
 </div>
 <!-- Mostra o mapa com a rota-->
 <script>
-    if (escapeRegex("<?= $model->rota?>") != "") {
+    if (escapeRegex(<?= $model->rota?>) != "") {
         mapboxgl.accessToken = 'pk.eyJ1IjoiaXVyaWNhcnJhcyIsImEiOiJja3V3aDJrZWEwNjhuMm5xd3hqNHRuODdiIn0.Yztl8wZEMrxIlkEVwt1zgw';
         // Cria o objeto MAP
         const map = new mapboxgl.Map({
