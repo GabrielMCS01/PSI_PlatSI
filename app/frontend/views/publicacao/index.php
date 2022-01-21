@@ -84,7 +84,7 @@ $this->registerJs("
                     //Altera o id map de cada div
                     var divElts = document.getElementById("map");
                     divElts.setAttribute('id', "map" + <?=$publicacao->id?>);
-                    if ('<?= $publicacao->ciclismo->rota?>' != "") {
+                    if ('<?= addslashes($publicacao->ciclismo->rota)?>' != "") {
 
                         mapboxgl.accessToken = 'pk.eyJ1IjoiaXVyaWNhcnJhcyIsImEiOiJja3V3aDJrZWEwNjhuMm5xd3hqNHRuODdiIn0.Yztl8wZEMrxIlkEVwt1zgw';
 
@@ -96,10 +96,10 @@ $this->registerJs("
                             zoom: 14
                         }).on('load', () => {
                             //Transforma a string da rota num json de pontos de localização (GeoJSON)
-                            var geoJSON = polyline.toGeoJSON('<?= $publicacao->ciclismo->rota?>', 6);
+                            var geoJSON = polyline.toGeoJSON('<?= addslashes($publicacao->ciclismo->rota)?>', 6);
 
                             //Vai buscar o ponto central da rota para utilizar como ponto de foco do mapa
-                            var getCenter = polyline.decode('<?= $publicacao->ciclismo->rota?>', 6);
+                            var getCenter = polyline.decode('<?= addslashes($publicacao->ciclismo->rota)?>', 6);
 
                             var index = getCenter.length / 2;
                             var centerPoint = getCenter[index.toFixed(0)];
