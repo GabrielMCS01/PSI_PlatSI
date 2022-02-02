@@ -8,6 +8,7 @@ use common\utils\Converter;
 use common\utils\Mosquitto;
 use Yii;
 use yii\filters\auth\QueryParamAuth;
+use yii\helpers\Json;
 use yii\rest\ActiveController;
 
 /**
@@ -222,8 +223,10 @@ class CiclismoController extends ActiveController
     public function actionSync()
     {
         // Recebe os treinos da DB Local (SQLITE) que faltam sincronizar com a API
-        $treinos = Yii::$app->request->post();
+        $treinos = Yii::$app->request->post("treinos");
 
+
+        $treinos = Json::decode($treinos, true);
         // Para cada treino existente é construido um Objeto do tipo Ciclismo e esse é colocado na Base de dados
         foreach ($treinos as $treino) {
             $ciclismo = new Ciclismo();

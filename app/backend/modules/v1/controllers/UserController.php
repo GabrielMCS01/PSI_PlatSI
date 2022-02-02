@@ -46,6 +46,7 @@ class UserController extends ActiveController
     {
         $user = User::findOne($id);
 
+
         if ($user == null) {
             $response = new ResponsePerfil();
 
