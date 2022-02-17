@@ -1,4 +1,6 @@
 ------------------------------------------------------------------------------
+# LER PRIMEIRO O FICHEIRO README
+
 # No ficheiro common/config/test-local.php
 
 # colar esta linha de código dentro de DB
@@ -67,4 +69,8 @@ selenium-standalone start
 php vendor/bin/codecept run acceptance -c frontend
 
 
+# Caso dê um erro: Script cannot be loaded because running scripts is disabled on this system
+# Execute este comando e confirme com (y), depois já pode executar o comando que pretendia 
+
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
 
