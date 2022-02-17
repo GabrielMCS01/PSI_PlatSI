@@ -19,10 +19,6 @@ composer install
 
 ## Ver Notas Adicionais antes de começar a preparação da aplicação
 
-## Instalar composer
-
-composer install
-
 ## Criar a base de dados e tabelas
 
 Executar o ficheiro SQL "CriarDB"
