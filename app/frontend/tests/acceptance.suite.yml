@@ -3,7 +3,7 @@ actor: AcceptanceTester
 modules:
     enabled:
         - WebDriver:
-            url: http://localhost/project/app/frontend/web/
+            url: http://localhost/ciclodias/app/frontend/web/
             browser: chrome
         - Yii2:
             part: init
